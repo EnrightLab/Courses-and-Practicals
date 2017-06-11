@@ -10,7 +10,7 @@ For our course data, the read architecture is as follows:
 
 | 5' adpt |           genomic RNA            | 3' adpt |
 |---------|----------------------------------|---------|
-| . | . | . |
+|.........|..................................|.........|
 
 
 ![](images_1/read_geometry.png)
