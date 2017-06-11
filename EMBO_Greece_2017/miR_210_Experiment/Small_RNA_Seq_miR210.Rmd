@@ -20,9 +20,9 @@ opts_chunk$set(dev="png",
 
 
 
-#Analysis of course sRNA-Seq data
+# Analysis of course sRNA-Seq data
 
-##Experiment Overview
+## Experiment Overview
 This set of sequencing data is from the libraries prepared by participants. We have matched microRNA and mRNA samples to sequence in Breast Cancer MCF7 Human Cells. The experiment here was to overexpress miR-210 to explore the effect on mRNAs. Control samples used a non mouse microRNA from c.elegans (cel-miR-67) TCACAACCTCCTAGAAA
 
 
