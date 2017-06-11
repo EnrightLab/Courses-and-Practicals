@@ -54,7 +54,7 @@ First, lets see the total numbers of counts obtained for each sample. We will us
 barplot(apply(mircounts,2,sum),col=as.factor(samplenames),las=2)
 </pre>
 
-![](images/barplot.jpg)
+![](images_2/barplot.jpg)
 
 Some of the samples look dramatically different to their replicates. We should investigate further by comparing samples to each other.
 
@@ -64,7 +64,7 @@ First we'll do a pairwise plot of the log2 counts between all samples
 pairs(log2(mircounts+1),main="Pair-wise sample to sample counts")
 </pre>
 
-![](images/pairs.jpg)
+![](images_2/pairs.jpg)
 
 Does anything look fishy about the data to you ?. Let's look at how the samples correlate with each other. Obviously replicates should be very highly correlated with a standard Pearson correlation test.
 
@@ -74,7 +74,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 </pre>
 
-![](images2/bhl-pca1.png)
+![](images_2/bhl-pca1.png)
 
 <pre class="com">X11()
 heatmap.2(cor(mircounts),trace="none",col=hmcol,main="Sample Correlation")
@@ -93,7 +93,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 </pre>
 
-![](images2/bhl-pca2.png)
+![](images_2/bhl-pca2.png)
 
 Clearly we need to normalise the data to control for differences in global RNA levels across samples.
 
@@ -119,7 +119,7 @@ Now we will plot the dispersion information and fit.
 plotDispEsts(cds)
 </pre>
 
-![](images/dispersion.jpg)
+![](images_2/dispersion.jpg)
 
 * * *
 
@@ -135,7 +135,7 @@ postnorm=apply(counts(cds,normalized=TRUE),2,sum)
 barplot(postnorm,col=as.factor(samplenames),las=2,names=samplenames)
 </pre>
 
-![](images/barplots.jpg)
+![](images_2/barplots.jpg)
 
 Lets do another Principal components analysis on the normalised data
 
@@ -201,7 +201,7 @@ par(mfrow=c(1,1))
 
 </pre>
 
-![](images2/bhl-volcano.png)
+![](images_2/bhl-volcano.png)
 
 <pre class="com"># Choose significant miRs for each contrast by log fold change and adj. P-value
 sig1 = rownames(res1[(abs(res1$log2FoldChange) > 4) & (res1$padj < 0.00001) & !is.na(res1$padj),])
@@ -219,7 +219,7 @@ X11()
 heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",labCol=samplenames,margin=c(5,10))
 </pre>
 
-![](images2/bhl-heatmap1.png)
+![](images_2/bhl-heatmap1.png)
 
 We can also make a more simplified heatmap of expression for 20 most significant hits from each comparison.
 
@@ -231,4 +231,4 @@ heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",m
 
 </pre>
 
-![](images2/bhl-heatmap2.png)
+![](images_2/bhl-heatmap2.png)
