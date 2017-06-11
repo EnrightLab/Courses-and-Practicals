@@ -11,6 +11,8 @@ For our course data, the read architecture is as follows:
 | 5' adpt | genomic RNA | 3' adpt |
 | . | . |
 
+![](images_1/read_geometry.png)
+
 Since miRNAs are shorter than the average length of a Solexa read (35-80nt), we will usually sequence through a microRNA sequence into the 3' adapter sequence. This needs to be detected and cleaned from our reads before they can be mapped. Additionally, each sequence will need to be sorted according to which barcode is present at the 5' end of the read into appropriate sample files.
 
 Usually small RNA sequencing results in millions of reads for processing. The vast majority of tools for dealing with this kind of data require large amounts of memory and significant computing resources. However, on this course we will be testing a new ultra-fast read processor from the Enright lab, called **Reaper** which will be available in BioConductor shortly.
@@ -303,7 +305,7 @@ We will now use a web-utility to map cleaned and filtered reads against miRBase 
 
 Click [here](http://www.ebi.ac.uk/research/enright/software/chimira) To use Chimira
 
-For this web-server, choose each of the **.clean.uniq** fastq files that were produced by reaper. Make sure you choose **Human** as the reference species
+For this web-server, choose each of the **.clean.uniq** fastq files that were produced by reaper. Make sure you choose **Human** as the reference species.
 
 * * *
 
