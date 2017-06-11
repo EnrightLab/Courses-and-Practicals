@@ -9,7 +9,7 @@ It is important for next-gen sequence analysis to know the exact architecture of
 For our course data, the read architecture is as follows:
 
 
-[](images_1/read_geometry.png)
+![](images_1/read_geometry.png)
 
 
 
