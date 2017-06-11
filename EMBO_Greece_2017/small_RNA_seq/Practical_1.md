@@ -41,7 +41,7 @@ The first line is the identifier (starting with @), the second the sequence. The
 
 This is the standard _ascii_ table that was used to encode these numbers:
 
-<pre class="res"> <tt>0 nul    1 soh    2 stx    3 etx    4 eot    5 enq    6 ack    7 bel
+<pre class="res">0 nul    1 soh    2 stx    3 etx    4 eot    5 enq    6 ack    7 bel
        8 bs     9 ht    10 nl    11 vt    12 np    13 cr    14 so    15 si
       16 dle   17 dc1   18 dc2   19 dc3   20 dc4   21 nak   22 syn   23 etb
       24 can   25 em    26 sub   27 esc   28 fs    29 gs    30 rs    31 us
@@ -56,15 +56,15 @@ This is the standard _ascii_ table that was used to encode these numbers:
       96  `    97  a    98  b    99  c   100  d   101  e   102  f   103  g
      104  h   105  i   106  j   107  k   108  l   109  m   110  n   111  o
      112  p   113  q   114  r   115  s   116  t   117  u   118  v   119  w
-     120  x   121  y   122  z</tt> 
+     120  x   121  y   122  z 
 
 </pre>
 
 From this table, we can see that the very frequent quality score "b" actually represents a numerical value of 98\. One small detail: since the first 0-32 ascii codes represent strange things (e.g. bell, new line, backspace) we cannot use them for encoding. Thus, in order to encode real quality scores (0-40) we first need to shift the quality scores to avoid these strange characters. Unfortunately, there are two current standards, one which shifts the quality scores by adding 33, another by adding 64\. The file we'll be using has been shifted by 64. This means that "b" actually represents the quality score of 34 (98 - 64).
 
-<pre> <tt>Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows
+<pre>Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows
 where each symbol represents a unique Phred score.
- <tt>0      !        1      "        2      #        3      $        4      %        5      &        6      '
+0      !        1      "        2      #        3      $        4      %        5      &        6      '
      7      (        8      )        9      *       10      +       11      ,       12      -       13      .       14      /
     15      0       16      1       17      2       18      3       19      4       20      5       21      6       22      7
     23      8       24      9       25      :       26      ;       27      <       28      =       29      >       30      ?
@@ -75,9 +75,8 @@ where each symbol represents a unique Phred score.
     63      `       64      a       65      b       66      c       67      d       68      e       69      f       70      g
     71      h       72      i       73      j       74      k       75      l       76      m       77      n       78      o
     79      p       80      q       81      r       82      s       83      t       84      u       85      v       86      w
-    87      x       88      y       89      z</tt></tt> </pre>
+    87      x       88      y       89      z</pre>
 
-<tt>
 
 * * *
 
@@ -120,7 +119,6 @@ pdata
 
 You should see the following table loaded into R:
 
-<tt>
 
 <pre class="res">	"filename"		    "3p-ad"                      "tabu" "samplename"
 1     lane1Brain2_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA	Brain
@@ -137,7 +135,6 @@ You should see the following table loaded into R:
 12    lane1Liver9_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA	Liver
 </pre>
 
-</tt>
 
 Next we will start the Reaper algorithm. It will perform the following functions on all the lanes we have provided:
 
@@ -157,7 +154,6 @@ reaper(pdata,"no-bc",c("do"="100000"));
 # reaper(pdata,"no-bc"); We comment it out here
 </pre>
 
-<tt>
 
 <pre class="res" style="background-color:#000000;color:#FFFFFF;">[1] "Starting Reaper for file: lane1Brain2_sequence.fastq.gz"
                           fastq                            geom 
@@ -176,7 +172,6 @@ lint   total removed reads (per 10K), sum of columns to the left
 
 </pre>
 
-</tt>
 
 Cleaning many millions of reads will take some time, the method processes around 2M-4M reads per minute.
 
