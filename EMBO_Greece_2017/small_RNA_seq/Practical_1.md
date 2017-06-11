@@ -31,10 +31,10 @@ The quality score is usually given by a _Phred_ score, which is related logarith
 
 Getting back to our fastq file, the first few lines look like this:
 
-<pre class="res"> <tt>@GAII06_0003:3:1:1040:19544#0/1
+<pre class="res">@GAII06_0003:3:1:1040:19544#0/1
 CCAAAGTGCTGGAATCACAGGCGTGAGCTACCTCGCCTGGCCTGAATTATT
 +
-bb__Zbb^^^]Z_]]aT]`^TbbYb^_`T_cc`aac^Y\`b`\`L]_]\YX</tt> 
+bb__Zbb^^^]Z_]]aT]`^TbbYb^_`T_cc`aac^Y\`b`\`L]_]\YX 
 </pre>
 
 The first line is the identifier (starting with @), the second the sequence. The third is an extra spacer line (which sometimes also has the identifier repeated). The fourth are _ascii_ encoded quality scores, where each _letter_ represents a different number.
@@ -311,4 +311,3 @@ For this web-server, choose each of the **.clean.uniq** fastq files that were pr
 
 We now have raw counts of reads on microRNAs ready for QC and differential analysis.
 
-</tt>
