@@ -7,7 +7,7 @@ First we should change directory to where the data is
 <pre class="com">setwd("/home/train/Desktop/course_miseq")
 </pre>
 
-If you need the raw data for this practical, it is available [here](data)
+If you need the raw data for this practical, it is available [http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data](here)
 
 <pre class="com">library("DESeq2")
 library("gplots")
@@ -31,7 +31,6 @@ head(mircounts)
 
 </pre>
 
-<tt>
 
 <pre class="res">                Brain_1 Brain_2 Brain_3 Heart_4 Heart_5 Heart_6 Heart_7 Heart_8 Liver_9 Liver_10 Liver_11 Liver_12
 hsa-miR-1          1167    1911    1190  179717  129698  114090  164659    1253     375      554      345      348
@@ -42,7 +41,6 @@ hsa-miR-148a-3p    2079    2053    1646    6637    4126    4034    6276    1697 
 hsa-miR-21-5p      8279    8322    7029   14414    9933   11397   14733    6732   58983    28787    32407    26526
 </pre>
 
-</tt>
 
 * * *
 
