@@ -1,3 +1,12 @@
+```{r setup, results='hide',message=F, warning=F, echo=F}
+require(knitr)
+opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment')
+opts_chunk$set(dev="png", 
+               dev.args=list(type="cairo"),
+               dpi=300)
+
+```
+
 ---
 title: "Analysis of HPV count data - Transcript level"
 author: "Anton Enright"
@@ -9,14 +18,6 @@ output:
 ---
 
 
-```{r setup, results='hide',message=F, warning=F, echo=F}
-require(knitr)
-opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment')
-opts_chunk$set(dev="png", 
-               dev.args=list(type="cairo"),
-               dpi=300)
-
-```
 
 
 #Analysis of course sRNA-Seq data
