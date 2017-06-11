@@ -7,7 +7,7 @@ First we should change directory to where the data is
 <pre class="com">setwd("/home/train/Desktop/course_miseq")
 </pre>
 
-If you need the raw data for this practical, it is available [here](data)
+If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
 
 <pre class="com">library("DESeq2")
 library("gplots")
@@ -31,7 +31,6 @@ head(mircounts)
 
 </pre>
 
-<tt>
 
 <pre class="res">                Brain_1 Brain_2 Brain_3 Heart_4 Heart_5 Heart_6 Heart_7 Heart_8 Liver_9 Liver_10 Liver_11 Liver_12
 hsa-miR-1          1167    1911    1190  179717  129698  114090  164659    1253     375      554      345      348
@@ -42,7 +41,6 @@ hsa-miR-148a-3p    2079    2053    1646    6637    4126    4034    6276    1697 
 hsa-miR-21-5p      8279    8322    7029   14414    9933   11397   14733    6732   58983    28787    32407    26526
 </pre>
 
-</tt>
 
 * * *
 
@@ -54,7 +52,7 @@ First, lets see the total numbers of counts obtained for each sample. We will us
 barplot(apply(mircounts,2,sum),col=as.factor(samplenames),las=2)
 </pre>
 
-![](images/barplot.jpg)
+![](images_2/barplot.jpg)
 
 Some of the samples look dramatically different to their replicates. We should investigate further by comparing samples to each other.
 
@@ -64,7 +62,7 @@ First we'll do a pairwise plot of the log2 counts between all samples
 pairs(log2(mircounts+1),main="Pair-wise sample to sample counts")
 </pre>
 
-![](images/pairs.jpg)
+![](images_2/pairs.jpg)
 
 Does anything look fishy about the data to you ?. Let's look at how the samples correlate with each other. Obviously replicates should be very highly correlated with a standard Pearson correlation test.
 
@@ -74,7 +72,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 </pre>
 
-![](images2/bhl-pca1.png)
+![](images_2/bhl-pca1.png)
 
 <pre class="com">X11()
 heatmap.2(cor(mircounts),trace="none",col=hmcol,main="Sample Correlation")
@@ -93,7 +91,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 </pre>
 
-![](images2/bhl-pca2.png)
+![](images_2/bhl-pca2.png)
 
 Clearly we need to normalise the data to control for differences in global RNA levels across samples.
 
@@ -119,7 +117,7 @@ Now we will plot the dispersion information and fit.
 plotDispEsts(cds)
 </pre>
 
-![](images/dispersion.jpg)
+![](images_2/dispersion.jpg)
 
 * * *
 
@@ -135,7 +133,7 @@ postnorm=apply(counts(cds,normalized=TRUE),2,sum)
 barplot(postnorm,col=as.factor(samplenames),las=2,names=samplenames)
 </pre>
 
-![](images/barplots.jpg)
+![](images_2/barplots.jpg)
 
 Lets do another Principal components analysis on the normalised data
 
@@ -201,7 +199,7 @@ par(mfrow=c(1,1))
 
 </pre>
 
-![](images2/bhl-volcano.png)
+![](images_2/bhl-volcano.png)
 
 <pre class="com"># Choose significant miRs for each contrast by log fold change and adj. P-value
 sig1 = rownames(res1[(abs(res1$log2FoldChange) > 4) & (res1$padj < 0.00001) & !is.na(res1$padj),])
@@ -219,7 +217,7 @@ X11()
 heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",labCol=samplenames,margin=c(5,10))
 </pre>
 
-![](images2/bhl-heatmap1.png)
+![](images_2/bhl-heatmap1.png)
 
 We can also make a more simplified heatmap of expression for 20 most significant hits from each comparison.
 
@@ -231,4 +229,4 @@ heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",m
 
 </pre>
 
-![](images2/bhl-heatmap2.png)
+![](images_2/bhl-heatmap2.png)

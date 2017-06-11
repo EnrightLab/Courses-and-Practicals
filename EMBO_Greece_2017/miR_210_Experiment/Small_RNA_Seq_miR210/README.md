@@ -19,9 +19,10 @@ opts_chunk$set(dev="png",
 ```
 
 
-#Analysis of course sRNA-Seq data
 
-##Experiment Overview
+# Analysis of course sRNA-Seq data
+
+## Experiment Overview
 This set of sequencing data is from the libraries prepared by participants. We have matched microRNA and mRNA samples to sequence in Breast Cancer MCF7 Human Cells. The experiment here was to overexpress miR-210 to explore the effect on mRNAs. Control samples used a non mouse microRNA from c.elegans (cel-miR-67) TCACAACCTCCTAGAAA
 
 
@@ -35,7 +36,7 @@ filename|group|samplename|treatment|fullname|3p-ad|
 20127_1#6.converted.fastq.gz|6|6B|Scr|miRNA16_SCR_GR6|TGGAATTCTCGGGTGCCAA
 
 ## Raw Data
-The raw data is available here
+The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
 
 ```{r cars}
 library(RColorBrewer)
@@ -61,7 +62,7 @@ groups=as.factor(pdata$group)
 conds=as.factor(pdata$treatment)
 ```
 
-##Count loading & Normalisation
+## Count loading & Normalisation
 We are now ready to create a DESeq object from the counts table. We are only looking at one condition, tretment of the samples with estradiol. We use the design formula “~ treatment”. We are going to estimate coefficients for the treatment conditions (Scrambled Control versus miR210 Overexpression)
 
 ```{r}
@@ -95,7 +96,7 @@ X11()
 plotDispEsts(dds)
 ```
 
-##Post Normalisation QC
+## Post Normalisation QC
 Now we can normalise and plot the counts again.
 
 ```{r}
@@ -109,7 +110,7 @@ barplot(apply(normcounts,2,sum), las=2,col=cond_colours,main="Normalised Counts"
 legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 ```
 
-##Variance Stabilising the Counts
+## Variance Stabilising the Counts
 We will use an alternative to straight log2 transformation, instead we will use the VST transformation from the DESeq2 package to do something similar to the log transformation but in a way that stabilises the variance for low counts.
 
 ```{r}
@@ -151,7 +152,7 @@ text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.4)
 legend("topright",levels(groups),fill=group_colours[levels(groups)],cex=0.4)
 ```
 
-##Analysis of treatment effects
+## Analysis of treatment effects
 We can look at the differences between treatments.
 
 ```{r}
@@ -167,7 +168,7 @@ text(ctrl_median[1:10],m210_median[1:10],labels=names(ctrl_median[1:10]),cex=0.4
 legend("topleft",c("scrambled","miR-210"),fill=c("green","red"),cex=0.7)
 ```
 
-##Statistical Analysis - Differential Expression
+## Statistical Analysis - Differential Expression
 The function nbinomWaldTest fits a negative binomial generalized linear model to each gene and then calculates the significance of the estimated coeffients. We contrast the control and the overexpressed miR210 samples.
 
 ```{r}
@@ -195,7 +196,7 @@ abline(v=-lfc_threshold,lty=3)
 abline(v=lfc_threshold,lty=3) 
 ```
 
-##Final Results
+## Final Results
 Lets make a heatmap for the significant miRs so we can see their expression across replicates.
 
 ```{r}
