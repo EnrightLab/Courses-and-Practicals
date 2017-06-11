@@ -63,9 +63,10 @@ This is the standard _ascii_ table that was used to encode these numbers:
 
 From this table, we can see that the very frequent quality score "b" actually represents a numerical value of 98\. One small detail: since the first 0-32 ascii codes represent strange things (e.g. bell, new line, backspace) we cannot use them for encoding. Thus, in order to encode real quality scores (0-40) we first need to shift the quality scores to avoid these strange characters. Unfortunately, there are two current standards, one which shifts the quality scores by adding 33, another by adding 64\. The file we'll be using has been shifted by 64. This means that "b" actually represents the quality score of 34 (98 - 64).
 
-<pre>Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows
+Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows
+<pre>
 where each symbol represents a unique Phred score.
-0      !        1      "        2      #        3      $        4      %        5      &        6      '
+     0      !        1      "        2      #        3      $        4      %        5      &        6      '
      7      (        8      )        9      *       10      +       11      ,       12      -       13      .       14      /
     15      0       16      1       17      2       18      3       19      4       20      5       21      6       22      7
     23      8       24      9       25      :       26      ;       27      <       28      =       29      >       30      ?
@@ -76,7 +77,8 @@ where each symbol represents a unique Phred score.
     63      `       64      a       65      b       66      c       67      d       68      e       69      f       70      g
     71      h       72      i       73      j       74      k       75      l       76      m       77      n       78      o
     79      p       80      q       81      r       82      s       83      t       84      u       85      v       86      w
-    87      x       88      y       89      z</pre>
+    87      x       88      y       89      z
+</pre>
 
 
 * * *
