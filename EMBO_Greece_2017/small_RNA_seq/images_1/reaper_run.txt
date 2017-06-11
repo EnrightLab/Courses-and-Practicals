@@ -1,0 +1,16 @@
+[1] "Starting Reaper for file: lane1Brain2_sequence.fastq.gz"
+                          fastq                            geom 
+"lane1Brain2_sequence.fastq.gz"                         "no-bc" 
+                           meta                        basename 
+                "metadata1.txt"                             "1" 
+Passing to reaper: dummy-internal --R -fastq lane1Brain2_sequence.fastq.gz -geom no-bc -meta metadata1.txt -basename 1
+
+---
+mRpm   million reads per minute
+mNpm   million nucleotides per minute
+mCps   million alignment cells per second
+lint   total removed reads (per 10K), sum of columns to the left
+25K reads per dot, 1M reads per line  seconds  mr mRpm mNpm mCps {error qc  low  len  NNN tabu nobc cflr  cfl lint   OK} per 10K
+........................................   26   1  2.4  115   59    0    0    0    0    0    0    0    0    0    0 10000
+
+
