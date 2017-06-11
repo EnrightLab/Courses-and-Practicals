@@ -12,9 +12,9 @@ For our course data, the read architecture is as follows:
 |---------|----------------------------------|---------|
 |.........|..................................|.........|
 
-
+<!--
 ![](images_1/read_geometry.png)
-
+-->
 
 
 
