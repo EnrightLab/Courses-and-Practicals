@@ -7,7 +7,7 @@ First we should change directory to where the data is
 <pre class="com">setwd("/home/train/Desktop/course_miseq")
 </pre>
 
-If you need the raw data for this practical, it is available [http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data](here)
+If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
 
 <pre class="com">library("DESeq2")
 library("gplots")
