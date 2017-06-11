@@ -24,6 +24,7 @@ Most sequencing results can be obtained in a format called _fastq_, reflecting t
 The quality score is usually given by a _Phred_ score, which is related logarithmically to the probability of making an error when base calling. The following table describes this:
 
 | Phred score | Probability that the base is incorrect | Precision of the base |
+| --- | --- | --- |
 | 10 | 1 in 10 | 90 % |
 | 20 | 1 in 100 | 99 % |
 | 30 | 1 in 1000 | 99.9 % |
@@ -63,9 +64,8 @@ This is the standard _ascii_ table that was used to encode these numbers:
 
 From this table, we can see that the very frequent quality score "b" actually represents a numerical value of 98\. One small detail: since the first 0-32 ascii codes represent strange things (e.g. bell, new line, backspace) we cannot use them for encoding. Thus, in order to encode real quality scores (0-40) we first need to shift the quality scores to avoid these strange characters. Unfortunately, there are two current standards, one which shifts the quality scores by adding 33, another by adding 64\. The file we'll be using has been shifted by 64. This means that "b" actually represents the quality score of 34 (98 - 64).
 
-Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows
+Some _ascii_ characters are unprintable so the entire table is shifted by 33 giving a final lookup table as follows, where each symbol represents a unique Phred score:
 <pre>
-where each symbol represents a unique Phred score.
      0      !        1      "        2      #        3      $        4      %        5      &        6      '
      7      (        8      )        9      *       10      +       11      ,       12      -       13      .       14      /
     15      0       16      1       17      2       18      3       19      4       20      5       21      6       22      7
@@ -197,7 +197,7 @@ You should get one plot back for each lane processed.
 
 ![](images_1/reaper_image1.jpg)
 
-Here is a list of files generated during the Reaper run
+Here is a list of files generated during the Reaper run:
 
 <pre class="res">10.lane.clean.gz
 10.lane.clean.uniq.gz
