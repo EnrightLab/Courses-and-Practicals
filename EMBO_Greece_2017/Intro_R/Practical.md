@@ -184,7 +184,7 @@ We now know that flowerdata contains 150 rows and 5 columns. We can use the squa
 
 flowerdata[11,]          # row number 11
 
-flowerdata[,2]            # column number 2
+flowerdata[,2]           # column number 2
 </pre>
 
 We can use different plots to look at the data:
@@ -259,4 +259,4 @@ barplot(genomes$Average.transcript.length, names.arg=rownames(genomes), col="lig
     </pre>
 
 5.  What percentage of genes has splice variants?
-6.  Use function cor.test to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use "genomes[-1,]" instead of "genomes")
+6.  Use function `cor.test` to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use "`genomes[-1,]`" instead of "`genomes`")
