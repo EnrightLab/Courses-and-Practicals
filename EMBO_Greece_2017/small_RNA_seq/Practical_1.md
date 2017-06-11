@@ -8,10 +8,14 @@ It is important for next-gen sequence analysis to know the exact architecture of
 
 For our course data, the read architecture is as follows:
 
+
+[](images_1/read_geometry.png)
+
+
+
+
 | 5' adpt | genomic RNA | 3' adpt |
 | . | . |
-
-![](images_1/read_geometry.png)
 
 Since miRNAs are shorter than the average length of a Solexa read (35-80nt), we will usually sequence through a microRNA sequence into the 3' adapter sequence. This needs to be detected and cleaned from our reads before they can be mapped. Additionally, each sequence will need to be sorted according to which barcode is present at the 5' end of the read into appropriate sample files.
 
