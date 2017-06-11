@@ -197,7 +197,7 @@ dev.off()
 
 You should get one plot back for each lane processed.
 
-![](images1/reaper_image1.jpg)
+![](images_1/reaper_image1.jpg)
 
 Here is a list of files generated during the Reaper run
 
