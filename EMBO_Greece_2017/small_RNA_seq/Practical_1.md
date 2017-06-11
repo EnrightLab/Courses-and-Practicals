@@ -83,9 +83,9 @@ Some _ascii_ characters are unprintable so the entire table is shifted by 33 giv
 
 * * *
 
-The module is available [here](data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
+The module is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/solexa/data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
-The fastq files, pdata file and mircounts file are also [available](data/course_miseq.tar.gz) but preinstalled on these machines.
+The fastq files, pdata file and mircounts file are also [available](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/solexa/data/course_miseq.tar.gz) but preinstalled on these machines.
 
 <pre class="com">library(Reaper)
 library(gplots)
