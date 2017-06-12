@@ -2,9 +2,12 @@
 title: "Small RNA Seq - Practical 1"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
-always_allow_html: yes
-output:
-github_document:
+output: 
+  html_document: 
+    highlight: textmate
+    keep_md: yes
+    self_contained: no
+    theme: flatly
     toc: yes
 ---
 

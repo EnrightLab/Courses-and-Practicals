@@ -1,19 +1,19 @@
 ---
-title: "Small RNA Seq - Practical 1"
+title: "Small RNA Seq - Practical 2"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
-always_allow_html: yes
-output:
-  html_document:
-  toc: true
-  self_contained: false
-  keep_md: true
+output: 
+  html_document: 
+    highlight: textmate
+    keep_md: yes
+    self_contained: no
+    theme: flatly
+    toc: yes
 ---
-
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
+opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data',fig.path='Figs/')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                dpi=150,warn=-1)
