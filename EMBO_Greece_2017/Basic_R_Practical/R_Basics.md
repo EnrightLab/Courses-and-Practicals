@@ -1,1 +1,0 @@
-# Basic R Practical
