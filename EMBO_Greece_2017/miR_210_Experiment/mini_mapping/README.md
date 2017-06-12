@@ -1,7 +1,10 @@
-# RNA Course - Small non-coding RNAs
+Mini-mapping Practical
+================
+Anton Enright & Dimitrios Vitsios
+'12 June, 2017'
 
-# Basic Mapping Practical
-
+Basic Mapping Practical
+-------
 
 ## Raw Data
 
