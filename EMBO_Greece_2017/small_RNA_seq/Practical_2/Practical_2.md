@@ -1,3 +1,8 @@
+Small RNA Seq - Practical 1
+================
+Anton Enright & Dimitrios Vitsios
+'12 June, 2017'
+
 -   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
 -   [Initial count analysis](#initial-count-analysis)
     -   [Using DESeq to normalise the smallRNA count data](#using-deseq-to-normalise-the-smallrna-count-data)
@@ -62,7 +67,7 @@ First, lets see the total numbers of counts obtained for each sample. We will us
 barplot(apply(mircounts,2,sum),col=as.factor(samplenames),las=2)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-4-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 Some of the samples look dramatically different to their replicates. We should investigate further by comparing samples to each other.
 
@@ -72,7 +77,7 @@ First we'll do a pairwise plot of the log2 counts between all samples
 pairs(log2(mircounts+1),main="Pair-wise sample to sample counts")
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-5-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 Does anything look fishy about the data to you ?. Let's look at how the samples correlate with each other. Obviously replicates should be very highly correlated with a standard Pearson correlation test.
 
@@ -82,13 +87,13 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-6-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ``` r
 heatmap.2(cor(mircounts),trace="none",col=hmcol,main="Sample Correlation")
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-7-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 Due to the sample-swap error we need to relabel the swapped samples
 
@@ -104,7 +109,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-9-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 Clearly we need to normalise the data to control for differences in global RNA levels across samples.
 
@@ -140,7 +145,7 @@ Now we will plot the dispersion information and fit.
 plotDispEsts(cds)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-11-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 Post Normalisation Analysis
 ---------------------------
@@ -155,7 +160,7 @@ postnorm=apply(counts(cds,normalized=TRUE),2,sum)
 barplot(postnorm,col=as.factor(samplenames),las=2,names=samplenames)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-12-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
 Lets do another Principal components analysis on the normalised data
 
@@ -165,7 +170,7 @@ plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to S
 text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-13-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Now we can use the negative-binomial test for each pairwise comparison of interest.
 
@@ -249,7 +254,7 @@ legend("topleft","Heart",cex=0.5)
 legend("topright","Liver",cex=0.5)
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-15-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 ``` r
 par(mfrow=c(1,1))
@@ -275,7 +280,7 @@ hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",labCol=samplenames,margin=c(5,10))
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-16-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-16-1.png)
 
 We can also make a more simplified heatmap of expression for 20 most significant hits from each comparison.
 
@@ -285,4 +290,4 @@ siglist=unique(c(rownames(res1[1:20,]),rownames(res2[1:20,]),rownames(res3[1:20,
 heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",margin=c(5,10))
 ```
 
-![](Practical_2_files/figure-markdown_github+backtick_code_blocks+autolink_bare_uris/unnamed-chunk-17-1.png)
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-17-1.png)

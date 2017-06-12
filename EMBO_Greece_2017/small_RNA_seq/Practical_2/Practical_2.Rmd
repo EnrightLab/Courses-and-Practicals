@@ -4,8 +4,7 @@ author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
-   md_document:
-    variant: markdown_github+backtick_code_blocks+autolink_bare_uris
+   github_document:
     toc: yes
 ---
 
@@ -29,7 +28,7 @@ setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/
 
 If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
 
-```{r,message=FALSE}
+```{r,message=FALSE,tidy=FALSE}
 library("DESeq2")
 library("gplots")
 library("RColorBrewer")
