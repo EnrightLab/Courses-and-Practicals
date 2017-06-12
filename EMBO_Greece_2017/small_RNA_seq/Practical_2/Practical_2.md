@@ -1,13 +1,7 @@
-Small RNA Seq - Practical 1
+Small RNA Seq - Practical 2
 ================
 Anton Enright & Dimitrios Vitsios
 '12 June, 2017'
-
--   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
--   [Initial count analysis](#initial-count-analysis)
-    -   [Using DESeq to normalise the smallRNA count data](#using-deseq-to-normalise-the-smallrna-count-data)
-    -   [Post Normalisation Analysis](#post-normalisation-analysis)
-    -   [Analysis of Significant Hits across all samples](#analysis-of-significant-hits-across-all-samples)
 
 Differential Expression of smallRNA counts with DESeq2
 ======================================================
@@ -43,20 +37,20 @@ colnames(mircounts) = paste(samplenames, seq(1:12), sep="_")
 head(mircounts)
 ```
 
-    ##                 Brain_1 Brain_2 Brain_3 Heart_4 Heart_5 Heart_6 Heart_7
-    ## hsa-miR-1          1167    1911    1190  179717  129698  114090  164659
-    ## hsa-miR-122-5p      145     349     156     295      95     187     155
-    ## hsa-miR-9-5p      86907   98965   74695     444     124     296     239
-    ## hsa-miR-143-3p    27598   23711   21600   78973   66404   68549   96678
-    ## hsa-miR-148a-3p    2079    2053    1646    6637    4126    4034    6276
-    ## hsa-miR-21-5p      8279    8322    7029   14414    9933   11397   14733
-    ##                 Heart_8 Liver_9 Liver_10 Liver_11 Liver_12
-    ## hsa-miR-1          1253     375      554      345      348
-    ## hsa-miR-122-5p      183  157280    73426   145594    63610
-    ## hsa-miR-9-5p      84410     136      256      134      137
-    ## hsa-miR-143-3p    24126   16411     8800    10078     7491
-    ## hsa-miR-148a-3p    1697   73860    40933    52708    32330
-    ## hsa-miR-21-5p      6732   58983    28787    32407    26526
+               ##                 Brain_1 Brain_2 Brain_3 Heart_4 Heart_5 Heart_6 Heart_7
+               ## hsa-miR-1          1167    1911    1190  179717  129698  114090  164659
+               ## hsa-miR-122-5p      145     349     156     295      95     187     155
+               ## hsa-miR-9-5p      86907   98965   74695     444     124     296     239
+               ## hsa-miR-143-3p    27598   23711   21600   78973   66404   68549   96678
+               ## hsa-miR-148a-3p    2079    2053    1646    6637    4126    4034    6276
+               ## hsa-miR-21-5p      8279    8322    7029   14414    9933   11397   14733
+               ##                 Heart_8 Liver_9 Liver_10 Liver_11 Liver_12
+               ## hsa-miR-1          1253     375      554      345      348
+               ## hsa-miR-122-5p      183  157280    73426   145594    63610
+               ## hsa-miR-9-5p      84410     136      256      134      137
+               ## hsa-miR-143-3p    24126   16411     8800    10078     7491
+               ## hsa-miR-148a-3p    1697   73860    40933    52708    32330
+               ## hsa-miR-21-5p      6732   58983    28787    32407    26526
 
 Initial count analysis
 ======================
@@ -129,11 +123,11 @@ cds <- estimateSizeFactors(cds)
 cds <- estimateDispersions(cds)
 ```
 
-    ## gene-wise dispersion estimates
+               ## gene-wise dispersion estimates
 
-    ## mean-dispersion relationship
+               ## mean-dispersion relationship
 
-    ## final dispersion estimates
+               ## final dispersion estimates
 
 ``` r
 cds <- nbinomWaldTest(cds)
@@ -188,35 +182,35 @@ res3<-res3[order(res3$padj),]
 head(res1,50)
 ```
 
-    ## log2 fold change (MAP): tissue Brain vs Heart 
-    ## Wald test p-value: tissue Brain vs Heart 
-    ## DataFrame with 50 rows and 6 columns
-    ##                   baseMean log2FoldChange      lfcSE      stat
-    ##                  <numeric>      <numeric>  <numeric> <numeric>
-    ## hsa-miR-128      9917.6289       4.716466 0.11809294  39.93859
-    ## hsa-miR-378a-3p 12118.3791      -6.247371 0.09553713 -65.39207
-    ## hsa-miR-499a-5p  7258.3710      -7.021495 0.07591700 -92.48910
-    ## hsa-miR-133a     4807.4627      -7.940650 0.16459842 -48.24256
-    ## hsa-miR-378d      928.9525      -6.269205 0.15571567 -40.26059
-    ## ...                    ...            ...        ...       ...
-    ## hsa-miR-136-3p   162.83485       3.245716  0.1623744  19.98908
-    ## hsa-miR-452-5p    75.61569      -4.610875  0.2325850 -19.82447
-    ## hsa-miR-9-3p     227.13253       6.624428  0.3393934  19.51844
-    ## hsa-miR-30b-5p   711.24239      -2.521038  0.1292027 -19.51226
-    ## hsa-miR-744-5p   252.02968       2.541499  0.1316901  19.29909
-    ##                       pvalue         padj
-    ##                    <numeric>    <numeric>
-    ## hsa-miR-128                0            0
-    ## hsa-miR-378a-3p            0            0
-    ## hsa-miR-499a-5p            0            0
-    ## hsa-miR-133a               0            0
-    ## hsa-miR-378d               0            0
-    ## ...                      ...          ...
-    ## hsa-miR-136-3p  6.854389e-89 1.068391e-87
-    ## hsa-miR-452-5p  1.830961e-87 2.793189e-86
-    ## hsa-miR-9-3p    7.654455e-85 1.143384e-83
-    ## hsa-miR-30b-5p  8.637456e-85 1.263889e-83
-    ## hsa-miR-744-5p  5.466404e-83 7.838824e-82
+               ## log2 fold change (MAP): tissue Brain vs Heart 
+               ## Wald test p-value: tissue Brain vs Heart 
+               ## DataFrame with 50 rows and 6 columns
+               ##                   baseMean log2FoldChange      lfcSE      stat
+               ##                  <numeric>      <numeric>  <numeric> <numeric>
+               ## hsa-miR-128      9917.6289       4.716466 0.11809294  39.93859
+               ## hsa-miR-378a-3p 12118.3791      -6.247371 0.09553713 -65.39207
+               ## hsa-miR-499a-5p  7258.3710      -7.021495 0.07591700 -92.48910
+               ## hsa-miR-133a     4807.4627      -7.940650 0.16459842 -48.24256
+               ## hsa-miR-378d      928.9525      -6.269205 0.15571567 -40.26059
+               ## ...                    ...            ...        ...       ...
+               ## hsa-miR-136-3p   162.83485       3.245716  0.1623744  19.98908
+               ## hsa-miR-452-5p    75.61569      -4.610875  0.2325850 -19.82447
+               ## hsa-miR-9-3p     227.13253       6.624428  0.3393934  19.51844
+               ## hsa-miR-30b-5p   711.24239      -2.521038  0.1292027 -19.51226
+               ## hsa-miR-744-5p   252.02968       2.541499  0.1316901  19.29909
+               ##                       pvalue         padj
+               ##                    <numeric>    <numeric>
+               ## hsa-miR-128                0            0
+               ## hsa-miR-378a-3p            0            0
+               ## hsa-miR-499a-5p            0            0
+               ## hsa-miR-133a               0            0
+               ## hsa-miR-378d               0            0
+               ## ...                      ...          ...
+               ## hsa-miR-136-3p  6.854389e-89 1.068391e-87
+               ## hsa-miR-452-5p  1.830961e-87 2.793189e-86
+               ## hsa-miR-9-3p    7.654455e-85 1.143384e-83
+               ## hsa-miR-30b-5p  8.637456e-85 1.263889e-83
+               ## hsa-miR-744-5p  5.466404e-83 7.838824e-82
 
     log2 fold change (MAP): tissue Brain vs Heart 
     Wald test p-value: tissue Brain vs Heart 

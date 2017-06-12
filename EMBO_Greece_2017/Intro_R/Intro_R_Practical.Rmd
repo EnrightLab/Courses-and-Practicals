@@ -2,21 +2,18 @@
 title: "Introduction to R"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
-output: 
-  html_document: 
-    highlight: textmate
-    keep_md: yes
-    self_contained: no
-    theme: flatly
-    toc: yes
+always_allow_html: yes
+output:
+  github_document:
+  toc: true
 ---
-
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
 opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/Intro_R')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
+               comment='           ##',
                dpi=300)
 ```
 

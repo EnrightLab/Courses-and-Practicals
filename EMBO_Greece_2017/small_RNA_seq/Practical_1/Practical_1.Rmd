@@ -2,13 +2,10 @@
 title: "Small RNA Seq - Practical 1"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
-output: 
-  html_document: 
-    highlight: textmate
-    keep_md: yes
-    self_contained: no
-    theme: flatly
-    toc: yes
+always_allow_html: yes
+output:
+  github_document:
+  toc: true
 ---
 
 
@@ -17,6 +14,7 @@ require(knitr)
 opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
+               comment='           ##',
                dpi=300)
 
 ```

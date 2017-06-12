@@ -1,11 +1,11 @@
 ---
-title: "Small RNA Seq - Practical 1"
+title: "Small RNA Seq - Practical 2"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
-   github_document:
-    toc: yes
+  github_document:
+  toc: true
 ---
 
 
@@ -14,7 +14,8 @@ require(knitr)
 opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
-               dpi=300,warn=-1)
+               comment='           ##',
+               dpi=300)
 ```
 
 # Differential Expression of smallRNA counts with DESeq2
@@ -28,7 +29,7 @@ setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/
 
 If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
 
-```{r,message=FALSE,tidy=FALSE}
+```{r,message=FALSE}
 library("DESeq2")
 library("gplots")
 library("RColorBrewer")
