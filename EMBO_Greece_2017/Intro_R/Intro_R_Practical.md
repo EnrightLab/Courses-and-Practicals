@@ -1,7 +1,7 @@
 Introduction to R
 ================
 Anton Enright & Dimitrios Vitsios
-'11 June, 2017'
+'12 June, 2017'
 
 -   [Introduction to R](#introduction-to-r)
     -   [About R](#about-r)
