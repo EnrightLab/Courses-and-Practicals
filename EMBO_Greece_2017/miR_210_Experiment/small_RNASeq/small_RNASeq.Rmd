@@ -77,7 +77,7 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 
 We are ready to normalise the data, but first we should look at the number of sequenced reads per sample.
 
-```{r, results="hold", message=F}
+```{r, results="hold", message=F, warning=F}
 cond_colours = brewer.pal(length(unique(conds)),"Accent")[as.factor(conds)]
 names(cond_colours)=conds
 

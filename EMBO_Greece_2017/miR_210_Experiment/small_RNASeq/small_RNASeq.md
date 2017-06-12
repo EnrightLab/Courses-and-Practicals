@@ -77,11 +77,6 @@ We are ready to normalise the data, but first we should look at the number of se
 
 ``` r
 cond_colours = brewer.pal(length(unique(conds)),"Accent")[as.factor(conds)]
-```
-
-               ## Warning in brewer.pal(length(unique(conds)), "Accent"): minimal value for n is 3, returning requested palette with 3 different levels
-
-``` r
 names(cond_colours)=conds
 
 group_colours = brewer.pal(3,"Accent")[as.factor(pdata$group)]

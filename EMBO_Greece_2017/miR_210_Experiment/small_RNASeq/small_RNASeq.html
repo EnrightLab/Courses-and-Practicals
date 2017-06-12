@@ -129,9 +129,8 @@ conds=<span class="kw">as.factor</span>(pdata$treatment)</code></pre>
 
 dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> mircounts, <span class="dt">colData =</span> coldata, <span class="dt">design =</span> ~<span class="st"> </span>treatment)</code></pre>
 <p>We are ready to normalise the data, but first we should look at the number of sequenced reads per sample.</p>
-<pre class="sourceCode r"><code class="sourceCode r">cond_colours =<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">unique</span>(conds)),<span class="st">&quot;Accent&quot;</span>)[<span class="kw">as.factor</span>(conds)]</code></pre>
-<pre><code>           ## Warning in brewer.pal(length(unique(conds)), &quot;Accent&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(cond_colours)=conds
+<pre class="sourceCode r"><code class="sourceCode r">cond_colours =<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">unique</span>(conds)),<span class="st">&quot;Accent&quot;</span>)[<span class="kw">as.factor</span>(conds)]
+<span class="kw">names</span>(cond_colours)=conds
 
 group_colours =<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Accent&quot;</span>)[<span class="kw">as.factor</span>(pdata$group)]
 <span class="kw">names</span>(group_colours)=pdata$group
