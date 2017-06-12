@@ -24,7 +24,7 @@ In this web page, sections like the following contain commands that you can copy
 
 
 ```r
-setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
+setwd("/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
 print("Hello Anton!")
 ```
 
