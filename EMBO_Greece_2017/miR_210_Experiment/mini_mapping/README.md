@@ -23,6 +23,7 @@ cd ~/Desktop/mapping_practical
 ## Commonly used assembly and transcriptome analysis tools
 
 | Method | Known Transcriptome | de novo Assembly | Ab initio Assembly |
+|--------|---------------------|------------------|--------------------|
 | Cufflinks | Yes | Yes | No |
 | Trinity | No | No | Yes |
 | Scripture | Yes | Yes | No |
