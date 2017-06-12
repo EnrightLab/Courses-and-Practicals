@@ -114,7 +114,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/")
+setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 list.files()
 ```
 
@@ -125,10 +125,7 @@ list.files()
     ##  [9] "lane1Liver12x2_sequence.fastq.gz" "lane1Liver4_sequence.fastq.gz"   
     ## [11] "lane1Liver7_sequence.fastq.gz"    "lane1Liver9_sequence.fastq.gz"   
     ## [13] "mircounts.txt"                    "pdata.txt"                       
-    ## [15] "Practical_1"                      "Practical_1_files"               
-    ## [17] "Practical_1.Rmd"                  "Practical_2"                     
-    ## [19] "Reaper_1.5.tar.gz"                "reaper.pdf"                      
-    ## [21] "reaperlog.txt"
+    ## [15] "Reaper_1.5.tar.gz"
 
 Hopefully, you will see a compressed FASTQ txt file for each of the 4 lanes
 
