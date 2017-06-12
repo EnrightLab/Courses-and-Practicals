@@ -3,9 +3,6 @@ Introduction to R
 Anton Enright & Dimitrios Vitsios
 '12 June, 2017'
 
-Introduction to R
-=================
-
 About R
 -------
 

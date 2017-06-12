@@ -17,8 +17,6 @@ opts_chunk$set(dev="png",
                dpi=300)
 ```
 
-#Introduction to R
-
 ##About R
 R is a free software environment for statistical computing. R is a free tool that you can download
 and use on a variety of platforms and environments. The [R project](http://www.r-project.org) R Webpage is a good place to learn more about R.
