@@ -67,74 +67,74 @@ body {
 <p>First we will load required modules and change to our working directory</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">'/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq'</span>)
 <span class="kw">library</span>(DESeq2)</code></pre>
-<pre><code>## Loading required package: S4Vectors
+<pre><code>           ## Loading required package: S4Vectors
 
-## Loading required package: stats4
+           ## Loading required package: stats4
 
-## Loading required package: BiocGenerics
+           ## Loading required package: BiocGenerics
 
-## Loading required package: parallel
+           ## Loading required package: parallel
 
-## 
-## Attaching package: 'BiocGenerics'
+           ## 
+           ## Attaching package: 'BiocGenerics'
 
-## The following objects are masked from 'package:parallel':
-## 
-##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-##     parLapplyLB, parRapply, parSapply, parSapplyLB
+           ## The following objects are masked from 'package:parallel':
+           ## 
+           ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+           ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+           ##     parLapplyLB, parRapply, parSapply, parSapplyLB
 
-## The following objects are masked from 'package:stats':
-## 
-##     IQR, mad, xtabs
+           ## The following objects are masked from 'package:stats':
+           ## 
+           ##     IQR, mad, xtabs
 
-## The following objects are masked from 'package:base':
-## 
-##     anyDuplicated, append, as.data.frame, cbind, colnames,
-##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
-##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
-##     sort, table, tapply, union, unique, unsplit, which, which.max,
-##     which.min
+           ## The following objects are masked from 'package:base':
+           ## 
+           ##     anyDuplicated, append, as.data.frame, cbind, colnames,
+           ##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+           ##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
+           ##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+           ##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
+           ##     sort, table, tapply, union, unique, unsplit, which, which.max,
+           ##     which.min
 
-## 
-## Attaching package: 'S4Vectors'
+           ## 
+           ## Attaching package: 'S4Vectors'
 
-## The following objects are masked from 'package:base':
-## 
-##     colMeans, colSums, expand.grid, rowMeans, rowSums
+           ## The following objects are masked from 'package:base':
+           ## 
+           ##     colMeans, colSums, expand.grid, rowMeans, rowSums
 
-## Loading required package: IRanges
+           ## Loading required package: IRanges
 
-## Loading required package: GenomicRanges
+           ## Loading required package: GenomicRanges
 
-## Loading required package: GenomeInfoDb
+           ## Loading required package: GenomeInfoDb
 
-## Loading required package: SummarizedExperiment
+           ## Loading required package: SummarizedExperiment
 
-## Loading required package: Biobase
+           ## Loading required package: Biobase
 
-## Welcome to Bioconductor
-## 
-##     Vignettes contain introductory material; view with
-##     'browseVignettes()'. To cite Bioconductor, see
-##     'citation(&quot;Biobase&quot;)', and for packages 'citation(&quot;pkgname&quot;)'.</code></pre>
+           ## Welcome to Bioconductor
+           ## 
+           ##     Vignettes contain introductory material; view with
+           ##     'browseVignettes()'. To cite Bioconductor, see
+           ##     'citation(&quot;Biobase&quot;)', and for packages 'citation(&quot;pkgname&quot;)'.</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gplots)</code></pre>
-<pre><code>## 
-## Attaching package: 'gplots'
+<pre><code>           ## 
+           ## Attaching package: 'gplots'
 
-## The following object is masked from 'package:IRanges':
-## 
-##     space
+           ## The following object is masked from 'package:IRanges':
+           ## 
+           ##     space
 
-## The following object is masked from 'package:S4Vectors':
-## 
-##     space
+           ## The following object is masked from 'package:S4Vectors':
+           ## 
+           ##     space
 
-## The following object is masked from 'package:stats':
-## 
-##     lowess</code></pre>
+           ## The following object is masked from 'package:stats':
+           ## 
+           ##     lowess</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RColorBrewer)</code></pre>
 <p>Let’s make a colour palette (100 colours) for nice heatmaps (Green to Blue)</p>
 <pre class="sourceCode r"><code class="sourceCode r">hmcol =<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">'GnBu'</span>))(<span class="dv">100</span>)</code></pre>
@@ -161,11 +161,11 @@ typecols=<span class="kw">rainbow</span>(<span class="dv">44</span>)[names$V4]
 dds =<span class="st"> </span><span class="kw">estimateSizeFactors</span>(ddsHTSeq)
 <span class="co"># Data Dispersion</span>
 dds =<span class="st"> </span><span class="kw">estimateDispersions</span>(dds)</code></pre>
-<pre><code>## gene-wise dispersion estimates
+<pre><code>           ## gene-wise dispersion estimates
 
-## mean-dispersion relationship
+           ## mean-dispersion relationship
 
-## final dispersion estimates</code></pre>
+           ## final dispersion estimates</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># New Neg. Binomial test</span>
 dds =<span class="st"> </span><span class="kw">nbinomWaldTest</span>(dds)
 
@@ -202,35 +202,35 @@ pca =<span class="st"> </span><span class="kw">princomp</span>(<span class="kw">
 res=res[<span class="kw">order</span>(res$padj),]
 
 res</code></pre>
-<pre><code>## log2 fold change (MAP): condition ctrl vs mir210 
-## Wald test p-value: condition ctrl vs mir210 
-## DataFrame with 60504 rows and 6 columns
-##                  baseMean log2FoldChange     lfcSE      stat       pvalue
-##                 &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;    &lt;numeric&gt;
-## ENSG00000163637  1649.288      1.3101731 0.1758733  7.449527 9.367572e-14
-## ENSG00000143376  8882.666      1.0529237 0.1494022  7.047578 1.820582e-12
-## ENSG00000112308 19819.711      0.9725061 0.1418489  6.855931 7.084958e-12
-## ENSG00000151892  5132.390      1.0296019 0.1507585  6.829479 8.522371e-12
-## ENSG00000107951  3626.723      1.1855819 0.1748262  6.781491 1.189423e-11
-## ...                   ...            ...       ...       ...          ...
-## ENSG00000283117 0.0000000             NA        NA        NA           NA
-## ENSG00000283118 0.0000000             NA        NA        NA           NA
-## ENSG00000283122 0.2762513    -0.03270588 0.1333785 -0.245211    0.8062931
-## ENSG00000283123 0.0000000             NA        NA        NA           NA
-## ENSG00000283125 0.0000000             NA        NA        NA           NA
-##                         padj
-##                    &lt;numeric&gt;
-## ENSG00000163637 6.668774e-10
-## ENSG00000143376 6.480361e-09
-## ENSG00000112308 1.516769e-08
-## ENSG00000151892 1.516769e-08
-## ENSG00000107951 1.693500e-08
-## ...                      ...
-## ENSG00000283117           NA
-## ENSG00000283118           NA
-## ENSG00000283122           NA
-## ENSG00000283123           NA
-## ENSG00000283125           NA</code></pre>
+<pre><code>           ## log2 fold change (MAP): condition ctrl vs mir210 
+           ## Wald test p-value: condition ctrl vs mir210 
+           ## DataFrame with 60504 rows and 6 columns
+           ##                  baseMean log2FoldChange     lfcSE      stat       pvalue
+           ##                 &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;    &lt;numeric&gt;
+           ## ENSG00000163637  1649.288      1.3101731 0.1758733  7.449527 9.367572e-14
+           ## ENSG00000143376  8882.666      1.0529237 0.1494022  7.047578 1.820582e-12
+           ## ENSG00000112308 19819.711      0.9725061 0.1418489  6.855931 7.084958e-12
+           ## ENSG00000151892  5132.390      1.0296019 0.1507585  6.829479 8.522371e-12
+           ## ENSG00000107951  3626.723      1.1855819 0.1748262  6.781491 1.189423e-11
+           ## ...                   ...            ...       ...       ...          ...
+           ## ENSG00000283117 0.0000000             NA        NA        NA           NA
+           ## ENSG00000283118 0.0000000             NA        NA        NA           NA
+           ## ENSG00000283122 0.2762513    -0.03270588 0.1333785 -0.245211    0.8062931
+           ## ENSG00000283123 0.0000000             NA        NA        NA           NA
+           ## ENSG00000283125 0.0000000             NA        NA        NA           NA
+           ##                         padj
+           ##                    &lt;numeric&gt;
+           ## ENSG00000163637 6.668774e-10
+           ## ENSG00000143376 6.480361e-09
+           ## ENSG00000112308 1.516769e-08
+           ## ENSG00000151892 1.516769e-08
+           ## ENSG00000107951 1.693500e-08
+           ## ...                      ...
+           ## ENSG00000283117           NA
+           ## ENSG00000283118           NA
+           ## ENSG00000283122           NA
+           ## ENSG00000283123           NA
+           ## ENSG00000283125           NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">hits=(<span class="kw">rownames</span>(res[((res$padj &lt;=<span class="st"> </span><span class="fl">0.05</span>) &amp;<span class="st"> </span>(<span class="kw">abs</span>(res$log2FoldChange) &gt;=<span class="st"> </span><span class="dv">1</span>) &amp;<span class="st"> </span>(!<span class="kw">is.na</span>(res$padj))),]))</code></pre>
 <h2 id="analysis-of-sample-median-data">Analysis of Sample Median Data</h2>
 <p>Sometimes it is useful to compute the median of each sample so we can make some different plots (e.g. pairwise plots).</p>

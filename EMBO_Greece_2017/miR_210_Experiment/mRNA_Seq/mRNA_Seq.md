@@ -49,78 +49,78 @@ setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017
 library(DESeq2)
 ```
 
-    ## Loading required package: S4Vectors
+               ## Loading required package: S4Vectors
 
-    ## Loading required package: stats4
+               ## Loading required package: stats4
 
-    ## Loading required package: BiocGenerics
+               ## Loading required package: BiocGenerics
 
-    ## Loading required package: parallel
+               ## Loading required package: parallel
 
-    ## 
-    ## Attaching package: 'BiocGenerics'
+               ## 
+               ## Attaching package: 'BiocGenerics'
 
-    ## The following objects are masked from 'package:parallel':
-    ## 
-    ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-    ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-    ##     parLapplyLB, parRapply, parSapply, parSapplyLB
+               ## The following objects are masked from 'package:parallel':
+               ## 
+               ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+               ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+               ##     parLapplyLB, parRapply, parSapply, parSapplyLB
 
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     IQR, mad, xtabs
+               ## The following objects are masked from 'package:stats':
+               ## 
+               ##     IQR, mad, xtabs
 
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     anyDuplicated, append, as.data.frame, cbind, colnames,
-    ##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-    ##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
-    ##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-    ##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
-    ##     sort, table, tapply, union, unique, unsplit, which, which.max,
-    ##     which.min
+               ## The following objects are masked from 'package:base':
+               ## 
+               ##     anyDuplicated, append, as.data.frame, cbind, colnames,
+               ##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+               ##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
+               ##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+               ##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
+               ##     sort, table, tapply, union, unique, unsplit, which, which.max,
+               ##     which.min
 
-    ## 
-    ## Attaching package: 'S4Vectors'
+               ## 
+               ## Attaching package: 'S4Vectors'
 
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     colMeans, colSums, expand.grid, rowMeans, rowSums
+               ## The following objects are masked from 'package:base':
+               ## 
+               ##     colMeans, colSums, expand.grid, rowMeans, rowSums
 
-    ## Loading required package: IRanges
+               ## Loading required package: IRanges
 
-    ## Loading required package: GenomicRanges
+               ## Loading required package: GenomicRanges
 
-    ## Loading required package: GenomeInfoDb
+               ## Loading required package: GenomeInfoDb
 
-    ## Loading required package: SummarizedExperiment
+               ## Loading required package: SummarizedExperiment
 
-    ## Loading required package: Biobase
+               ## Loading required package: Biobase
 
-    ## Welcome to Bioconductor
-    ## 
-    ##     Vignettes contain introductory material; view with
-    ##     'browseVignettes()'. To cite Bioconductor, see
-    ##     'citation("Biobase")', and for packages 'citation("pkgname")'.
+               ## Welcome to Bioconductor
+               ## 
+               ##     Vignettes contain introductory material; view with
+               ##     'browseVignettes()'. To cite Bioconductor, see
+               ##     'citation("Biobase")', and for packages 'citation("pkgname")'.
 
 ``` r
 library(gplots)
 ```
 
-    ## 
-    ## Attaching package: 'gplots'
+               ## 
+               ## Attaching package: 'gplots'
 
-    ## The following object is masked from 'package:IRanges':
-    ## 
-    ##     space
+               ## The following object is masked from 'package:IRanges':
+               ## 
+               ##     space
 
-    ## The following object is masked from 'package:S4Vectors':
-    ## 
-    ##     space
+               ## The following object is masked from 'package:S4Vectors':
+               ## 
+               ##     space
 
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     lowess
+               ## The following object is masked from 'package:stats':
+               ## 
+               ##     lowess
 
 ``` r
 library(RColorBrewer)
@@ -170,11 +170,11 @@ dds = estimateSizeFactors(ddsHTSeq)
 dds = estimateDispersions(dds)
 ```
 
-    ## gene-wise dispersion estimates
+               ## gene-wise dispersion estimates
 
-    ## mean-dispersion relationship
+               ## mean-dispersion relationship
 
-    ## final dispersion estimates
+               ## final dispersion estimates
 
 ``` r
 # New Neg. Binomial test
@@ -248,35 +248,35 @@ res=res[order(res$padj),]
 res
 ```
 
-    ## log2 fold change (MAP): condition ctrl vs mir210 
-    ## Wald test p-value: condition ctrl vs mir210 
-    ## DataFrame with 60504 rows and 6 columns
-    ##                  baseMean log2FoldChange     lfcSE      stat       pvalue
-    ##                 <numeric>      <numeric> <numeric> <numeric>    <numeric>
-    ## ENSG00000163637  1649.288      1.3101731 0.1758733  7.449527 9.367572e-14
-    ## ENSG00000143376  8882.666      1.0529237 0.1494022  7.047578 1.820582e-12
-    ## ENSG00000112308 19819.711      0.9725061 0.1418489  6.855931 7.084958e-12
-    ## ENSG00000151892  5132.390      1.0296019 0.1507585  6.829479 8.522371e-12
-    ## ENSG00000107951  3626.723      1.1855819 0.1748262  6.781491 1.189423e-11
-    ## ...                   ...            ...       ...       ...          ...
-    ## ENSG00000283117 0.0000000             NA        NA        NA           NA
-    ## ENSG00000283118 0.0000000             NA        NA        NA           NA
-    ## ENSG00000283122 0.2762513    -0.03270588 0.1333785 -0.245211    0.8062931
-    ## ENSG00000283123 0.0000000             NA        NA        NA           NA
-    ## ENSG00000283125 0.0000000             NA        NA        NA           NA
-    ##                         padj
-    ##                    <numeric>
-    ## ENSG00000163637 6.668774e-10
-    ## ENSG00000143376 6.480361e-09
-    ## ENSG00000112308 1.516769e-08
-    ## ENSG00000151892 1.516769e-08
-    ## ENSG00000107951 1.693500e-08
-    ## ...                      ...
-    ## ENSG00000283117           NA
-    ## ENSG00000283118           NA
-    ## ENSG00000283122           NA
-    ## ENSG00000283123           NA
-    ## ENSG00000283125           NA
+               ## log2 fold change (MAP): condition ctrl vs mir210 
+               ## Wald test p-value: condition ctrl vs mir210 
+               ## DataFrame with 60504 rows and 6 columns
+               ##                  baseMean log2FoldChange     lfcSE      stat       pvalue
+               ##                 <numeric>      <numeric> <numeric> <numeric>    <numeric>
+               ## ENSG00000163637  1649.288      1.3101731 0.1758733  7.449527 9.367572e-14
+               ## ENSG00000143376  8882.666      1.0529237 0.1494022  7.047578 1.820582e-12
+               ## ENSG00000112308 19819.711      0.9725061 0.1418489  6.855931 7.084958e-12
+               ## ENSG00000151892  5132.390      1.0296019 0.1507585  6.829479 8.522371e-12
+               ## ENSG00000107951  3626.723      1.1855819 0.1748262  6.781491 1.189423e-11
+               ## ...                   ...            ...       ...       ...          ...
+               ## ENSG00000283117 0.0000000             NA        NA        NA           NA
+               ## ENSG00000283118 0.0000000             NA        NA        NA           NA
+               ## ENSG00000283122 0.2762513    -0.03270588 0.1333785 -0.245211    0.8062931
+               ## ENSG00000283123 0.0000000             NA        NA        NA           NA
+               ## ENSG00000283125 0.0000000             NA        NA        NA           NA
+               ##                         padj
+               ##                    <numeric>
+               ## ENSG00000163637 6.668774e-10
+               ## ENSG00000143376 6.480361e-09
+               ## ENSG00000112308 1.516769e-08
+               ## ENSG00000151892 1.516769e-08
+               ## ENSG00000107951 1.693500e-08
+               ## ...                      ...
+               ## ENSG00000283117           NA
+               ## ENSG00000283118           NA
+               ## ENSG00000283122           NA
+               ## ENSG00000283123           NA
+               ## ENSG00000283125           NA
 
 ``` r
 hits=(rownames(res[((res$padj <= 0.05) & (abs(res$log2FoldChange) >= 1) & (!is.na(res$padj))),]))
