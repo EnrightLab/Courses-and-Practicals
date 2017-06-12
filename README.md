@@ -4,6 +4,7 @@ Courses-and-Practicals
 ![embl](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/embl.png "EMBL")
 ![cambridge](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/cambridge.jpg "Cambridge")
 
+_Enright Laboratory - EMBL, European Bioinformatics Institute & Department of Pathology, Cambridge University._
 
 Repository for New Courses and Practicals
 -----------------------------------------
