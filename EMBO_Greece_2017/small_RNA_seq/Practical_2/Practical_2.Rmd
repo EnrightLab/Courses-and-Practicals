@@ -16,7 +16,7 @@ require(knitr)
 opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
-               dpi=300,warn=-1)
+               dpi=150,warn=-1)
 ```
 
 # Differential Expression of smallRNA counts with DESeq2
