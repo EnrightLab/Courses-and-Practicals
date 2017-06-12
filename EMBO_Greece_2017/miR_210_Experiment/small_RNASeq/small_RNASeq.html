@@ -130,7 +130,7 @@ conds=<span class="kw">as.factor</span>(pdata$treatment)</code></pre>
 dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> mircounts, <span class="dt">colData =</span> coldata, <span class="dt">design =</span> ~<span class="st"> </span>treatment)</code></pre>
 <p>We are ready to normalise the data, but first we should look at the number of sequenced reads per sample.</p>
 <pre class="sourceCode r"><code class="sourceCode r">cond_colours =<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">unique</span>(conds)),<span class="st">&quot;Accent&quot;</span>)[<span class="kw">as.factor</span>(conds)]</code></pre>
-<pre><code>## Warning in brewer.pal(length(unique(conds)), &quot;Accent&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
+<pre><code>           ## Warning in brewer.pal(length(unique(conds)), &quot;Accent&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(cond_colours)=conds
 
 group_colours =<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">3</span>,<span class="st">&quot;Accent&quot;</span>)[<span class="kw">as.factor</span>(pdata$group)]
@@ -206,7 +206,7 @@ res &lt;-<span class="st"> </span>res[<span class="kw">order</span>(res$padj),]
 sig =<span class="st"> </span><span class="kw">rownames</span>(res[(<span class="kw">abs</span>(res$log2FoldChange) &gt;<span class="st"> </span>lfc_threshold) &amp;<span class="st"> </span>(res$padj &lt;<span class="st"> </span>p_threshold) &amp;<span class="st"> </span>!<span class="kw">is.na</span>(res$padj),])
 
 sig</code></pre>
-<pre><code>## [1] &quot;scrambled&quot;      &quot;hsa-mir-210-3p&quot;</code></pre>
+<pre><code>           ## [1] &quot;scrambled&quot;      &quot;hsa-mir-210-3p&quot;</code></pre>
 <p>We can visualise the differentially expressed genes with a Volcano Plot, we’re plotting the log2 Fold-change of each gene (x-axis) against the -log10 of its p-value (y-axis).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(res$log2FoldChange,-<span class="kw">log</span>(res$padj,<span class="dv">10</span>),<span class="dt">ylab=</span><span class="st">&quot;-log10(Adjusted P)&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Log2 FoldChange&quot;</span>,<span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Volcano Plot&quot;</span>,<span class="st">&quot;ctrl v mir210&quot;</span>),<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="fl">0.4</span>)      
 <span class="kw">text</span>(res[sig,]$log2FoldChange,-<span class="kw">log</span>(res[sig,]$padj,<span class="dv">10</span>),<span class="dt">labels=</span><span class="kw">rownames</span>(res[sig,]),<span class="dt">pos=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="fl">0.6</span>)
