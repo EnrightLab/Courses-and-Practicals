@@ -4,9 +4,10 @@ author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  html_document:
+  toc: true
+  self_contained: false
+  keep_md: true
 ---
 
 
