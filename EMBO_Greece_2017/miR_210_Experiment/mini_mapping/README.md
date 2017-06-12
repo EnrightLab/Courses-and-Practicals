@@ -8,7 +8,7 @@ Basic Mapping Practical
 
 ## Raw Data
 
-You can download the raw data for this practical [here](data)
+You can download the raw data for this practical [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mapping/data)
 
 ## Initial Setup
 
