@@ -22,7 +22,7 @@ opts_chunk$set(dev="png",
 
 First we should change directory to where the data is
 
-```{r,tidy=TRUE, tidy.opts=list(highlight=TRUE)}
+```{r,tidy=TRUE,results="as.is"}
 setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 ```
 
