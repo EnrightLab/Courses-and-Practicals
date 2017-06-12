@@ -1,6 +1,6 @@
 mRNA-Seq analysis
 ================
-Anton Enright
+Anton Enright & Dimitrios Vitsios
 '12 June, 2017'
 
 -   mRNA Analysis

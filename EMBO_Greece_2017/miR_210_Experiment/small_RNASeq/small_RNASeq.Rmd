@@ -1,6 +1,6 @@
 ---
 title: "Analysis of HPV count data - Transcript level"
-author: "Anton Enright"
+author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:

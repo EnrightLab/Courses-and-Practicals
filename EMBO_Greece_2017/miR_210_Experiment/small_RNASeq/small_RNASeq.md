@@ -1,6 +1,6 @@
 Analysis of HPV count data - Transcript level
 ================
-Anton Enright
+Anton Enright & Dimitrios Vitsios
 '12 June, 2017'
 
 -   Analysis of course sRNA-Seq data
