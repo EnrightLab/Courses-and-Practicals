@@ -18,8 +18,9 @@ It is important for next-gen sequence analysis to know the exact architecture of
 
 For our course data, the read architecture is as follows:
 
-| **5' adpt** | genomic RNA | **3' adpt** |
-|-------------|-------------|-------------|
+| **5' adpt**          | genomic RNA                                | **3' adpt**         |
+|----------------------|--------------------------------------------|---------------------|
+| &lt;5p----------&gt; | **NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN** | &lt;---------3p&gt; |
 
 Since miRNAs are shorter than the average length of a Solexa read (35-80nt), we will usually sequence through a microRNA sequence into the 3' adapter sequence. This needs to be detected and cleaned from our reads before they can be mapped. Additionally, each sequence will need to be sorted according to which barcode is present at the 5' end of the read into appropriate sample files.
 
@@ -98,16 +99,6 @@ The fastq files, pdata file and mircounts file are also [available](course_miseq
 ``` r
 library(Reaper)
 library(gplots)
-```
-
-    ## 
-    ## Attaching package: 'gplots'
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     lowess
-
-``` r
 library(RColorBrewer)
 ```
 
@@ -118,14 +109,69 @@ setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/
 list.files()
 ```
 
-    ##  [1] "lane1Brain2_sequence.fastq.gz"    "lane1Brain5_sequence.fastq.gz"   
-    ##  [3] "lane1Brain6_sequence.fastq.gz"    "lane1Heart1_sequence.fastq.gz"   
-    ##  [5] "lane1Heart11_sequence.fastq.gz"   "lane1heart3_sequence.fastq.gz"   
-    ##  [7] "lane1Heart8_sequence.fastq.gz"    "lane1Liver10_sequence.fastq.gz"  
-    ##  [9] "lane1Liver12x2_sequence.fastq.gz" "lane1Liver4_sequence.fastq.gz"   
-    ## [11] "lane1Liver7_sequence.fastq.gz"    "lane1Liver9_sequence.fastq.gz"   
-    ## [13] "mircounts.txt"                    "pdata.txt"                       
-    ## [15] "Reaper_1.5.tar.gz"
+    ##   [1] "1.lane.clean.gz"                  "1.lane.clean.uniq.gz"            
+    ##   [3] "1.lane.report.clean.len"          "1.lane.report.clean.nt"          
+    ##   [5] "1.lane.report.input.nt"           "1.lane.report.input.q"           
+    ##   [7] "1.lint.gz"                        "1.sumstat"                       
+    ##   [9] "10.lane.clean.gz"                 "10.lane.clean.uniq.gz"           
+    ##  [11] "10.lane.report.clean.len"         "10.lane.report.clean.nt"         
+    ##  [13] "10.lane.report.input.nt"          "10.lane.report.input.q"          
+    ##  [15] "10.lint.gz"                       "10.sumstat"                      
+    ##  [17] "11.lane.clean.gz"                 "11.lane.clean.uniq.gz"           
+    ##  [19] "11.lane.report.clean.len"         "11.lane.report.clean.nt"         
+    ##  [21] "11.lane.report.input.nt"          "11.lane.report.input.q"          
+    ##  [23] "11.lint.gz"                       "11.sumstat"                      
+    ##  [25] "12.lane.clean.gz"                 "12.lane.clean.uniq.gz"           
+    ##  [27] "12.lane.report.clean.len"         "12.lane.report.clean.nt"         
+    ##  [29] "12.lane.report.input.nt"          "12.lane.report.input.q"          
+    ##  [31] "12.lint.gz"                       "12.sumstat"                      
+    ##  [33] "2.lane.clean.gz"                  "2.lane.clean.uniq.gz"            
+    ##  [35] "2.lane.report.clean.len"          "2.lane.report.clean.nt"          
+    ##  [37] "2.lane.report.input.nt"           "2.lane.report.input.q"           
+    ##  [39] "2.lint.gz"                        "2.sumstat"                       
+    ##  [41] "3.lane.clean.gz"                  "3.lane.clean.uniq.gz"            
+    ##  [43] "3.lane.report.clean.len"          "3.lane.report.clean.nt"          
+    ##  [45] "3.lane.report.input.nt"           "3.lane.report.input.q"           
+    ##  [47] "3.lint.gz"                        "3.sumstat"                       
+    ##  [49] "4.lane.clean.gz"                  "4.lane.clean.uniq.gz"            
+    ##  [51] "4.lane.report.clean.len"          "4.lane.report.clean.nt"          
+    ##  [53] "4.lane.report.input.nt"           "4.lane.report.input.q"           
+    ##  [55] "4.lint.gz"                        "4.sumstat"                       
+    ##  [57] "5.lane.clean.gz"                  "5.lane.clean.uniq.gz"            
+    ##  [59] "5.lane.report.clean.len"          "5.lane.report.clean.nt"          
+    ##  [61] "5.lane.report.input.nt"           "5.lane.report.input.q"           
+    ##  [63] "5.lint.gz"                        "5.sumstat"                       
+    ##  [65] "6.lane.clean.gz"                  "6.lane.clean.uniq.gz"            
+    ##  [67] "6.lane.report.clean.len"          "6.lane.report.clean.nt"          
+    ##  [69] "6.lane.report.input.nt"           "6.lane.report.input.q"           
+    ##  [71] "6.lint.gz"                        "6.sumstat"                       
+    ##  [73] "7.lane.clean.gz"                  "7.lane.clean.uniq.gz"            
+    ##  [75] "7.lane.report.clean.len"          "7.lane.report.clean.nt"          
+    ##  [77] "7.lane.report.input.nt"           "7.lane.report.input.q"           
+    ##  [79] "7.lint.gz"                        "7.sumstat"                       
+    ##  [81] "8.lane.clean.gz"                  "8.lane.clean.uniq.gz"            
+    ##  [83] "8.lane.report.clean.len"          "8.lane.report.clean.nt"          
+    ##  [85] "8.lane.report.input.nt"           "8.lane.report.input.q"           
+    ##  [87] "8.lint.gz"                        "8.sumstat"                       
+    ##  [89] "9.lane.clean.gz"                  "9.lane.clean.uniq.gz"            
+    ##  [91] "9.lane.report.clean.len"          "9.lane.report.clean.nt"          
+    ##  [93] "9.lane.report.input.nt"           "9.lane.report.input.q"           
+    ##  [95] "9.lint.gz"                        "9.sumstat"                       
+    ##  [97] "clean.sh"                         "lane1Brain2_sequence.fastq.gz"   
+    ##  [99] "lane1Brain5_sequence.fastq.gz"    "lane1Brain6_sequence.fastq.gz"   
+    ## [101] "lane1Heart1_sequence.fastq.gz"    "lane1Heart11_sequence.fastq.gz"  
+    ## [103] "lane1heart3_sequence.fastq.gz"    "lane1Heart8_sequence.fastq.gz"   
+    ## [105] "lane1Liver10_sequence.fastq.gz"   "lane1Liver12x2_sequence.fastq.gz"
+    ## [107] "lane1Liver4_sequence.fastq.gz"    "lane1Liver7_sequence.fastq.gz"   
+    ## [109] "lane1Liver9_sequence.fastq.gz"    "metadata1.txt"                   
+    ## [111] "metadata10.txt"                   "metadata11.txt"                  
+    ## [113] "metadata12.txt"                   "metadata2.txt"                   
+    ## [115] "metadata3.txt"                    "metadata4.txt"                   
+    ## [117] "metadata5.txt"                    "metadata6.txt"                   
+    ## [119] "metadata7.txt"                    "metadata8.txt"                   
+    ## [121] "metadata9.txt"                    "mircounts.txt"                   
+    ## [123] "pdata.txt"                        "Reaper_1.5.tar.gz"               
+    ## [125] "reaper.pdf"                       "reaperlog.txt"
 
 Hopefully, you will see a compressed FASTQ txt file for each of the 4 lanes
 
@@ -180,116 +226,13 @@ Next we will start the Reaper algorithm. It will perform the following functions
 
 Reaper is started by passing it our samples table and telling it which "mode" to run in, in this case the mode is set to: **no-bc**.
 
-    ## [1] "Starting Reaper for file: lane1Brain2_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Brain2_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata1.txt"                             "1" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Brain2_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Brain5_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Brain5_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata2.txt"                             "2" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Brain5_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Brain6_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Brain6_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata3.txt"                             "3" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Brain6_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Heart1_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Heart1_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata4.txt"                             "4" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Heart1_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Heart11_sequence.fastq.gz"
-    ##                            fastq                             geom 
-    ## "lane1Heart11_sequence.fastq.gz"                          "no-bc" 
-    ##                             meta                         basename 
-    ##                  "metadata5.txt"                              "5" 
-    ##                               do 
-    ##                          "10000" 
-    ## [1] "Starting Tally for file lane1Heart11_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1heart3_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1heart3_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata6.txt"                             "6" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1heart3_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Heart8_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Heart8_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                 "metadata7.txt"                             "7" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Heart8_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Liver10_sequence.fastq.gz"
-    ##                            fastq                             geom 
-    ## "lane1Liver10_sequence.fastq.gz"                          "no-bc" 
-    ##                             meta                         basename 
-    ##                  "metadata8.txt"                              "8" 
-    ##                               do 
-    ##                          "10000" 
-    ## [1] "Starting Tally for file lane1Liver10_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Liver12x2_sequence.fastq.gz"
-    ##                              fastq                               geom 
-    ## "lane1Liver12x2_sequence.fastq.gz"                            "no-bc" 
-    ##                               meta                           basename 
-    ##                    "metadata9.txt"                                "9" 
-    ##                                 do 
-    ##                            "10000" 
-    ## [1] "Starting Tally for file lane1Liver12x2_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Liver4_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Liver4_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                "metadata10.txt"                            "10" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Liver4_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Liver7_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Liver7_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                "metadata11.txt"                            "11" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Liver7_sequence.fastq.gz and barcode: lane"
-    ## [1] "Starting Reaper for file: lane1Liver9_sequence.fastq.gz"
-    ##                           fastq                            geom 
-    ## "lane1Liver9_sequence.fastq.gz"                         "no-bc" 
-    ##                            meta                        basename 
-    ##                "metadata12.txt"                            "12" 
-    ##                              do 
-    ##                         "10000" 
-    ## [1] "Starting Tally for file lane1Liver9_sequence.fastq.gz and barcode: lane"
-    ## [1] "Results for file lane1Brain2_sequence.fastq.gz start with 1.lane"
-    ## [1] "Results for file lane1Brain5_sequence.fastq.gz start with 2.lane"
-    ## [1] "Results for file lane1Brain6_sequence.fastq.gz start with 3.lane"
-    ## [1] "Results for file lane1Heart1_sequence.fastq.gz start with 4.lane"
-    ## [1] "Results for file lane1Heart11_sequence.fastq.gz start with 5.lane"
-    ## [1] "Results for file lane1heart3_sequence.fastq.gz start with 6.lane"
-    ## [1] "Results for file lane1Heart8_sequence.fastq.gz start with 7.lane"
-    ## [1] "Results for file lane1Liver10_sequence.fastq.gz start with 8.lane"
-    ## [1] "Results for file lane1Liver12x2_sequence.fastq.gz start with 9.lane"
-    ## [1] "Results for file lane1Liver4_sequence.fastq.gz start with 10.lane"
-    ## [1] "Results for file lane1Liver7_sequence.fastq.gz start with 11.lane"
-    ## [1] "Results for file lane1Liver9_sequence.fastq.gz start with 12.lane"
+``` r
+# For the sake of time we'll only run on the first 100000 reads
+reaper(pdata,"no-bc",c("do"="10000"));
 
-    ## [1] 0
+# This is the command to do all reads
+# reaper(pdata,"no-bc"); We comment it out here
+```
 
 Cleaning many millions of reads will take some time, the method processes around 2M-4M reads per minute.
 
@@ -316,53 +259,20 @@ Let's take a look at the Quality Control Metrics generated
 reaperQC(pdata)
 ```
 
+![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-1.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-2.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-3.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-4.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-5.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-6.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-7.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-8.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-9.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-10.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-11.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-12.png)
+
     ## [1] "Processing Reaper Results for: lane1Brain2_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-1.png)
-
     ## [1] "Processing Reaper Results for: lane1Brain5_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-2.png)
-
     ## [1] "Processing Reaper Results for: lane1Brain6_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-3.png)
-
     ## [1] "Processing Reaper Results for: lane1Heart1_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-4.png)
-
     ## [1] "Processing Reaper Results for: lane1Heart11_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-5.png)
-
     ## [1] "Processing Reaper Results for: lane1heart3_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-6.png)
-
     ## [1] "Processing Reaper Results for: lane1Heart8_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-7.png)
-
     ## [1] "Processing Reaper Results for: lane1Liver10_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-8.png)
-
     ## [1] "Processing Reaper Results for: lane1Liver12x2_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-9.png)
-
     ## [1] "Processing Reaper Results for: lane1Liver4_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-10.png)
-
     ## [1] "Processing Reaper Results for: lane1Liver7_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-11.png)
-
     ## [1] "Processing Reaper Results for: lane1Liver9_sequence.fastq.gz  lane"
-
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-12.png)
 
 SmallRNA Read Quality Control
 -----------------------------
@@ -372,36 +282,21 @@ Lets also make a nice PDF of the results and explore the QC metrics for the data
 ``` r
 pdf("reaper.pdf",width=12)
 reaperQC(pdata)
-```
-
-    ## [1] "Processing Reaper Results for: lane1Brain2_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Brain5_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Brain6_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Heart1_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Heart11_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1heart3_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Heart8_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Liver10_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Liver12x2_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Liver4_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Liver7_sequence.fastq.gz  lane"
-
-    ## [1] "Processing Reaper Results for: lane1Liver9_sequence.fastq.gz  lane"
-
-``` r
 dev.off()
 ```
 
+    ## [1] "Processing Reaper Results for: lane1Brain2_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Brain5_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Brain6_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Heart1_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Heart11_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1heart3_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Heart8_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Liver10_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Liver12x2_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Liver4_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Liver7_sequence.fastq.gz  lane"
+    ## [1] "Processing Reaper Results for: lane1Liver9_sequence.fastq.gz  lane"
     ## png 
     ##   2
 

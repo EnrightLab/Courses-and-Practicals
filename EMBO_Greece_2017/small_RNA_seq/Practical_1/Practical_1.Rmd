@@ -4,6 +4,8 @@ author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
+ html_document:
+    keep_md: yes 
  github_document:
     toc: yes
 ---
@@ -28,6 +30,7 @@ For our course data, the read architecture is as follows:
 
 | **5' adpt** | genomic RNA | **3' adpt** |
 |-------------|-------------|-------------|
+|<5p---------->|**NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN**|<---------3p>|
 
 Since miRNAs are shorter than the average length of a Solexa read (35-80nt), we will usually sequence through a microRNA sequence into the 3' adapter sequence. This needs to be detected and cleaned from our reads before they can be mapped. Additionally, each sequence will need to be sorted according to which barcode is present at the 5' end of the read into appropriate sample files.
 
@@ -107,7 +110,7 @@ The module is available [here](Reaper_1.5.tar.gz) If you want to install this in
 
 The fastq files, pdata file and mircounts file are also [available](course_miseq.tar.gz) but preinstalled on these machines.
 
-```{r}
+```{r,message=FALSE}
 library(Reaper)
 library(gplots)
 library(RColorBrewer)
@@ -147,7 +150,7 @@ Next we will start the Reaper algorithm. It will perform the following functions
 
 Reaper is started by passing it our samples table and telling it which "mode" to run in, in this case the mode is set to: **no-bc**.
 
-```{r, echo=F}
+```{r,results="hide"}
 # For the sake of time we'll only run on the first 100000 reads
 reaper(pdata,"no-bc",c("do"="10000"));
 
@@ -179,7 +182,7 @@ Reaper is designed to be fast and memory-efficient so it should run on any machi
 
 Let's take a look at the Quality Control Metrics generated
 
-```{r}
+```{r,message=FALSE,results="hold"}
 reaperQC(pdata)
 ```
 
@@ -187,7 +190,7 @@ reaperQC(pdata)
 
 Lets also make a nice PDF of the results and explore the QC metrics for the data
  
-```{r}
+```{r,message=FALSE,warning=FALSE,results="hold"}
 pdf("reaper.pdf",width=12)
 reaperQC(pdata)
 dev.off()
