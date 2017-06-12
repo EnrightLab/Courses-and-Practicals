@@ -1,6 +1,9 @@
 Courses-and-Practicals
 ======================
 
+[logo]: images/embl.png "Logo Title Text 2"
+[logo]: images/cambridge.jpg "Logo Title Text 2"
+
 Repository for New Courses and Practicals
 -----------------------------------------
 
