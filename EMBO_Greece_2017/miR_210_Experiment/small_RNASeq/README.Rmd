@@ -76,7 +76,7 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 
 We are ready to normalise the data, but first we should look at the number of sequenced reads per sample.
 
-```{r, results="hold"}
+```{r, results="hold", message=F}
 cond_colours = brewer.pal(length(unique(conds)),"Accent")[as.factor(conds)]
 names(cond_colours)=conds
 
@@ -89,7 +89,7 @@ legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 
 We can also estimate the dispersion of the data.
 
-```{r, results="hold"}
+```{r, results="hold", message=F}
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 

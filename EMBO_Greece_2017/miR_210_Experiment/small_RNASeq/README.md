@@ -98,15 +98,7 @@ We can also estimate the dispersion of the data.
 ``` r
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
-```
 
-    ## gene-wise dispersion estimates
-
-    ## mean-dispersion relationship
-
-    ## final dispersion estimates
-
-``` r
 plotDispEsts(dds)
 ```
 
