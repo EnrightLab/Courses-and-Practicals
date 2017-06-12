@@ -38,7 +38,7 @@ filename|group|samplename|treatment|fullname|3p-ad|
 ## Raw Data
 The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
 
-```{r cars}
+```{r cars, message=FALSE, results="hold"}
 setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
 library(RColorBrewer)
 library(gplots)
@@ -55,7 +55,7 @@ mircounts <- read.table("data/mircounts.txt",header=TRUE,row.names=1)
 
 As well as the pdata, which contains information on each sample.
 
-```{r}
+```{r, results="hold"}
 pdata <- read.table("data/pdata.txt",header=TRUE,row.names=1,sep="\t")
 colnames(mircounts)=rownames(pdata)
 
@@ -66,7 +66,7 @@ conds=as.factor(pdata$treatment)
 ## Count loading & Normalisation
 We are now ready to create a DESeq object from the counts table. We are only looking at one condition, tretment of the samples with estradiol. We use the design formula “~ treatment”. We are going to estimate coefficients for the treatment conditions (Scrambled Control versus miR210 Overexpression)
 
-```{r}
+```{r, results="hold"}
 coldata = as.data.frame(t(t(conds)))
 rownames(coldata)=colnames(mircounts)
 colnames(coldata)='treatment'
@@ -76,7 +76,7 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 
 We are ready to normalise the data, but first we should look at the number of sequenced reads per sample.
 
-```{r}
+```{r, results="hold"}
 cond_colours = brewer.pal(length(unique(conds)),"Accent")[as.factor(conds)]
 names(cond_colours)=conds
 
@@ -89,7 +89,7 @@ legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 
 We can also estimate the dispersion of the data.
 
-```{r}
+```{r, results="hold"}
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 
@@ -99,7 +99,7 @@ plotDispEsts(dds)
 ## Post Normalisation QC
 Now we can normalise and plot the counts again.
 
-```{r}
+```{r, results="hold"}
 normcounts <- counts(dds, normalized=TRUE)
 rawcounts=counts(dds,normalized=FALSE)
 log2counts=log2(normcounts+1)
@@ -113,7 +113,7 @@ legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 ## Variance Stabilising the Counts
 We will use an alternative to straight log2 transformation, instead we will use the VST transformation from the DESeq2 package to do something similar to the log transformation but in a way that stabilises the variance for low counts.
 
-```{r}
+```{r, results="hold"}
 vsd <- varianceStabilizingTransformation(dds)
 vstcounts <- assay(vsd)
 vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
@@ -121,24 +121,21 @@ vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
 
 As an additional QC step we can calculate the sample-to-sample Pearson correlations and plot them in a heatmap.
 
-```{r}
-
+```{r, results="hold"}
 heatmap.2(cor(rawcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (Raw Counts)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
-```{r}
-
+```{r, results="hold"}
 heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
-```{r}
-
+```{r, results="hold"}
 heatmap.2(cor(log2counts),trace="none",col=hmcol,main="Sample to Sample Correlation (Log2)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
 We can also perform PCA to see if the miR-210 overexpression explains a significant fraction of the variance
 
-```{r}
+```{r, results="hold"}
 pca <- princomp(vstcounts)
 
 
@@ -171,7 +168,7 @@ legend("topleft",c("scrambled","miR-210"),fill=c("green","red"),cex=0.7)
 ## Statistical Analysis - Differential Expression
 The function nbinomWaldTest fits a negative binomial generalized linear model to each gene and then calculates the significance of the estimated coeffients. We contrast the control and the overexpressed miR210 samples.
 
-```{r}
+```{r, results="hold"}
 p_threshold=0.05
 lfc_threshold=1
 

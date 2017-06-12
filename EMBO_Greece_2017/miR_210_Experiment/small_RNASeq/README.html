@@ -109,72 +109,9 @@ body {
 <p>The raw data is available <a href="http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data">here</a>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">'/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/'</span>)
 <span class="kw">library</span>(RColorBrewer)
-<span class="kw">library</span>(gplots)</code></pre>
-<pre><code>## 
-## Attaching package: 'gplots'
-
-## The following object is masked from 'package:stats':
-## 
-##     lowess</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DESeq2)</code></pre>
-<pre><code>## Loading required package: S4Vectors
-
-## Loading required package: stats4
-
-## Loading required package: BiocGenerics
-
-## Loading required package: parallel
-
-## 
-## Attaching package: 'BiocGenerics'
-
-## The following objects are masked from 'package:parallel':
-## 
-##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-##     parLapplyLB, parRapply, parSapply, parSapplyLB
-
-## The following objects are masked from 'package:stats':
-## 
-##     IQR, mad, xtabs
-
-## The following objects are masked from 'package:base':
-## 
-##     anyDuplicated, append, as.data.frame, cbind, colnames,
-##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
-##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
-##     sort, table, tapply, union, unique, unsplit, which, which.max,
-##     which.min
-
-## 
-## Attaching package: 'S4Vectors'
-
-## The following object is masked from 'package:gplots':
-## 
-##     space
-
-## The following objects are masked from 'package:base':
-## 
-##     colMeans, colSums, expand.grid, rowMeans, rowSums
-
-## Loading required package: IRanges
-
-## Loading required package: GenomicRanges
-
-## Loading required package: GenomeInfoDb
-
-## Loading required package: SummarizedExperiment
-
-## Loading required package: Biobase
-
-## Welcome to Bioconductor
-## 
-##     Vignettes contain introductory material; view with
-##     'browseVignettes()'. To cite Bioconductor, see
-##     'citation(&quot;Biobase&quot;)', and for packages 'citation(&quot;pkgname&quot;)'.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">hmcol =<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;GnBu&quot;</span>))(<span class="dv">100</span>)</code></pre>
+<span class="kw">library</span>(gplots)
+<span class="kw">library</span>(DESeq2)
+hmcol =<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;GnBu&quot;</span>))(<span class="dv">100</span>)</code></pre>
 <p>We can now load the count data</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#setwd(&quot;/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/data&quot;)</span>
 mircounts &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/mircounts.txt&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>,<span class="dt">row.names=</span><span class="dv">1</span>)</code></pre>
