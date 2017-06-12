@@ -1,22 +1,21 @@
 ---
-title: "Small RNA Seq - Practical 2"
+title: "Small RNA Seq - Practical 1"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
-output: 
-  html_document: 
-    highlight: textmate
-    keep_md: yes
-    self_contained: no
-    theme: flatly
+always_allow_html: yes
+output:
+   md_document:
+    variant: markdown_github+backtick_code_blocks+autolink_bare_uris
     toc: yes
 ---
 
+
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data',fig.path='Figs/')
+opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
-               dpi=150,warn=-1)
+               dpi=300,warn=-1)
 ```
 
 # Differential Expression of smallRNA counts with DESeq2
