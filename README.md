@@ -1,8 +1,8 @@
 Courses-and-Practicals
 ======================
 
-[logo]: images/embl.png "Logo Title Text 2"
-[logo]: images/cambridge.jpg "Logo Title Text 2"
+[logo]: https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/embl.jpg "Cambridge University"
+[logo]: https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/cambridge.jpg "EMBL - EBI"
 
 Repository for New Courses and Practicals
 -----------------------------------------
