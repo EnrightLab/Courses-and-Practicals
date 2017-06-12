@@ -1,8 +1,8 @@
 Courses-and-Practicals
 ======================
 
-![embl](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/embl.png)
-![cambridge](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/cambridge.jpg)
+![embl](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/embl.png {height=50px})
+![cambridge](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/cambridge.jpg {height=50px})
 
 
 Repository for New Courses and Practicals
