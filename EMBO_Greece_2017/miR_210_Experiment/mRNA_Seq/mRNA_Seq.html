@@ -52,7 +52,7 @@ body {
 </ul>
 <h1 id="mrna-analysis">mRNA Analysis</h1>
 <h2 id="raw-data">Raw Data</h2>
-<p>The raw data is <a href="data">here</a></p>
+<p>The raw data is <a href="http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data">here</a></p>
 <h2 id="experimental-design">Experimental Design</h2>
 <p>This experiment explores the effect of miR-210 Overexpression in MCF7 breast cancer cells (Human). 4 Lanes of mRNA-Seq data are used with 2 controls (overexpression of a C.elegans miR cel-mir-67) and 2 samples over-expressing miR-210.</p>
 <p>This is the <em>pdata.txt</em> file:</p>
@@ -66,76 +66,9 @@ body {
 -->
 <p>First we will load required modules and change to our working directory</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">'/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq'</span>)
-<span class="kw">library</span>(DESeq2)</code></pre>
-<pre><code>           ## Loading required package: S4Vectors
-
-           ## Loading required package: stats4
-
-           ## Loading required package: BiocGenerics
-
-           ## Loading required package: parallel
-
-           ## 
-           ## Attaching package: 'BiocGenerics'
-
-           ## The following objects are masked from 'package:parallel':
-           ## 
-           ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-           ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-           ##     parLapplyLB, parRapply, parSapply, parSapplyLB
-
-           ## The following objects are masked from 'package:stats':
-           ## 
-           ##     IQR, mad, xtabs
-
-           ## The following objects are masked from 'package:base':
-           ## 
-           ##     anyDuplicated, append, as.data.frame, cbind, colnames,
-           ##     do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-           ##     grepl, intersect, is.unsorted, lapply, lengths, Map, mapply,
-           ##     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-           ##     Position, rank, rbind, Reduce, rownames, sapply, setdiff,
-           ##     sort, table, tapply, union, unique, unsplit, which, which.max,
-           ##     which.min
-
-           ## 
-           ## Attaching package: 'S4Vectors'
-
-           ## The following objects are masked from 'package:base':
-           ## 
-           ##     colMeans, colSums, expand.grid, rowMeans, rowSums
-
-           ## Loading required package: IRanges
-
-           ## Loading required package: GenomicRanges
-
-           ## Loading required package: GenomeInfoDb
-
-           ## Loading required package: SummarizedExperiment
-
-           ## Loading required package: Biobase
-
-           ## Welcome to Bioconductor
-           ## 
-           ##     Vignettes contain introductory material; view with
-           ##     'browseVignettes()'. To cite Bioconductor, see
-           ##     'citation(&quot;Biobase&quot;)', and for packages 'citation(&quot;pkgname&quot;)'.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gplots)</code></pre>
-<pre><code>           ## 
-           ## Attaching package: 'gplots'
-
-           ## The following object is masked from 'package:IRanges':
-           ## 
-           ##     space
-
-           ## The following object is masked from 'package:S4Vectors':
-           ## 
-           ##     space
-
-           ## The following object is masked from 'package:stats':
-           ## 
-           ##     lowess</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RColorBrewer)</code></pre>
+<span class="kw">library</span>(DESeq2)
+<span class="kw">library</span>(gplots)
+<span class="kw">library</span>(RColorBrewer)</code></pre>
 <p>Let’s make a colour palette (100 colours) for nice heatmaps (Green to Blue)</p>
 <pre class="sourceCode r"><code class="sourceCode r">hmcol =<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">'GnBu'</span>))(<span class="dv">100</span>)</code></pre>
 <h2 id="reading-in-annotation-and-count-data">Reading in Annotation and Count Data</h2>
@@ -152,8 +85,9 @@ typecols=<span class="kw">rainbow</span>(<span class="dv">44</span>)[names$V4]
 <span class="kw">names</span>(typecols)=<span class="kw">rownames</span>(names)</code></pre>
 <p>Next we’ll read in the actual raw counts derived from HTSeq. The DESeq2 function has an option <em>DESeqDataSetFromHTSeqCount</em> that reads in counts from HTSeq output files. We just need to provide it with a directory and an appopropriate <em>pdata.txt</em> file.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ddsHTSeq =<span class="st"> </span><span class="kw">DESeqDataSetFromHTSeqCount</span>(<span class="dt">sampleTable =</span> pdata, <span class="dt">directory =</span> <span class="st">'.'</span>, <span class="dt">design=</span> ~<span class="st"> </span>condition)
+
 <span class="co"># Restrict to protein coding and lincRNA ?</span>
-<span class="co">#ddsHTSeq=ddsHTSeq[(names[rownames(ddsHTSeq),V4] == protein_coding) | (names[rownames(ddsHTSeq),V4] == lincRNA),]</span>
+<span class="co">#ddsHTSeq=ddsHTSeq[(names[rownames(ddsHTSeq),'V4'] == protein_coding) | (names[rownames(ddsHTSeq),'V4'] == lincRNA),]</span>
 
 <span class="kw">colData</span>(ddsHTSeq)$condition =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">colData</span>(ddsHTSeq)$condition,<span class="dt">levels=</span><span class="kw">levels</span>(pdata$condition))</code></pre>
 <h2 id="data-normalisation">Data Normalisation</h2>

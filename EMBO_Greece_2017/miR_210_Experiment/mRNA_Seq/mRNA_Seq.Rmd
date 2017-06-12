@@ -25,7 +25,7 @@ opts_chunk$set(dev="png",
 
 
 ## Raw Data
-The raw data is <a href="data">here</a>
+The raw data is [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data)
 
 ## Experimental Design
 
@@ -43,7 +43,7 @@ This is the <em>pdata.txt</em> file:
 -->
 
 First we will load required modules and change to our working directory
-```{r}
+```{r, message=F}
 setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
 library(DESeq2)
 library(gplots)
@@ -65,7 +65,7 @@ We’ll now read in the experimental design file (pdata.txt) and the a containin
 We will also create a vector containing condition names for each sample.
 Finally, we will make a vector of colours that correspond to each condition for nicer plots later on. We’ll also make colours corresponding to each class (<em>biotype</em>) of gene.
 
-```{r}
+```{r, results="hold"}
 pdata=read.table('data/pdata.txt',header=TRUE)
 
 conds=as.vector(pdata$condition) 
@@ -82,17 +82,18 @@ Next we’ll read in the actual raw counts derived from HTSeq.
 The DESeq2 function has an option <em>DESeqDataSetFromHTSeqCount</em> that reads in counts from HTSeq output files. We just need to provide it with a directory and an appopropriate <em>pdata.txt</em> file.
 
 
-```{r}
+```{r, results="hold"}
 ddsHTSeq = DESeqDataSetFromHTSeqCount(sampleTable = pdata, directory = '.', design= ~ condition)
+
 # Restrict to protein coding and lincRNA ?
-#ddsHTSeq=ddsHTSeq[(names[rownames(ddsHTSeq),V4] == protein_coding) | (names[rownames(ddsHTSeq),V4] == lincRNA),]
+#ddsHTSeq=ddsHTSeq[(names[rownames(ddsHTSeq),'V4'] == protein_coding) | (names[rownames(ddsHTSeq),'V4'] == lincRNA),]
 
 colData(ddsHTSeq)$condition = factor(colData(ddsHTSeq)$condition,levels=levels(pdata$condition))
 ```
 
 ## Data Normalisation
 
-```{r}
+```{r, results="hold"}
 # Data Normalisation
 dds = estimateSizeFactors(ddsHTSeq)
 # Data Dispersion
@@ -111,7 +112,7 @@ plotDispEsts(dds,main='Dispersion Plot')
 
 ## Post-Normalisation QC
 
-```{r}
+```{r, results="hold"}
 par(mfrow=c(3,1))
 barplot(colSums(counts(dds, normalized=F)), col=condcols[as.factor(conds)], las=2,cex.names=0.4,main='Pre Normalised Counts')
 plot(1, type='n', axes=F, xlab='', ylab='')
@@ -123,7 +124,7 @@ barplot(colSums(counts(dds, normalized=T)), col=condcols[as.factor(conds)], las=
 
 Regularised log transformation and variance stabilising transformation, these function are usesful to visualise the data. See the DESeq2 manual for more information.
 
-```{r}
+```{r, results="hold"}
 vsd = varianceStabilizingTransformation(dds)
 vstMat = assay(vsd)
 counts_table=data.frame(counts_table,vstMat)
@@ -137,7 +138,7 @@ heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabili
 
 
 ### Sample to Sample PCA
-```{r}
+```{r, results="hold"}
 # Sample PCA
 
 pca = princomp(assay(vsd))
@@ -153,7 +154,7 @@ Now we will perform the statistical tests.
 
 For the test we are looking for how many genes are significantly changed with an Absolute Log Fold Change of at least 1 and an Adjusted P-Value of less than 0.05.
 Lets see how many genes we find.
-```{r}
+```{r, results="hold"}
 res = results(dds, contrast=c('condition', 'ctrl', 'mir210'))
 res=res[order(res$padj),]
 
@@ -167,7 +168,7 @@ hits=(rownames(res[((res$padj <= 0.05) & (abs(res$log2FoldChange) >= 1) & (!is.n
 ## Analysis of Sample Median Data
 
 Sometimes it is useful to compute the median of each sample so we can make some different plots (e.g. pairwise plots).
-```{r}
+```{r, results="hold"}
 ctr_median=apply(vstMat[,3:4],1,median)
 m210_median=apply(vstMat[,1:2],1,median)
 
@@ -177,7 +178,7 @@ text(ctr_median[hits],m210_median[hits],cex=0.4,pos=4,labels=names[hits,'V2'])
 abline(a=0,b=1,lty=2,col='red',lwd=2,cex=0.4)
 ```
 
-```{r}
+```{r, results="hold"}
 plot(ctr_median,m210_median,pch=19,main=paste('ctrl vs m210 Biotype'),col='darkblue',cex=0.4)
 points(ctr_median[hits],m210_median[hits],pch=19,col=typecols[hits],cex=0.4)
 points(ctr_median,m210_median,pch=19,col=typecols,cex=0.2)
@@ -193,7 +194,7 @@ Now we will construct a Volcano Plot to highlight each gene’s Significance ver
 
 ### Volcano Plot of Significance and Fold Change
 
-```{r}
+```{r, results="hold"}
 plot(res$log2FoldChange,-log(res$padj,10),ylab='-log10(Adjusted P)',xlab="Log2 FoldChange", main=paste('Volcano Plot Ctrl v miR210_oe'),pch=19,cex=0.2)      
 text(res[hits,]$log2FoldChange,-log(res[hits,]$padj,10),labels=names[rownames(res[hits,]),'V2'],pos=3,cex=0.4)
 points(res[hits,'log2FoldChange'],-log(res[hits,'padj'],10),pch=19,cex=0.4,col=typecols[hits])
@@ -217,7 +218,7 @@ heatmap.2(vstMat[hits,],trace='none',col=hmcol,labRow=names[hits,'V2'],cexRow=0.
 
 Let’s write the results out to a txt table file called <strong>FullCountsandStats.txt</strong>.
 
-```{r}
+```{r, results="hold"}
 fullresults=merge(names,counts_table,by.x=0,by.y=0)
 fullresults=merge(fullresults,as.matrix(res),by.x=1,by.y=0)
 fullresults=fullresults[order(fullresults$log2FoldChange,decreasing=T),]
