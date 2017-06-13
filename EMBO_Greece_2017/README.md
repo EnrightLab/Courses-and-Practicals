@@ -6,6 +6,14 @@ Small RNA Computational Biology
 
 **Instructors: Anton Enright & Dimitrios Vitsios**
 
+|Anton Enright (aje@ebi.ac.uk)|Dimitrios Vitsios (dvitsios@ebi.ac.uk)               |
+|---------------------------|------------------------------------|
+|![Anton](/images/anton.jpg)|![Dimitrios](/images/dimitrios.jpg) |
+ 
+
+
+
+
 ***
 _EMBL - European Bioinformatics Institute,_
 _Wellcome Trust Genome Campus,_

@@ -1,7 +1,7 @@
 mRNA-Seq analysis
 ================
 Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+'13 June, 2017'
 
 -   mRNA Analysis
     -   Raw Data
@@ -34,14 +34,13 @@ This experiment explores the effect of miR-210 Overexpression in MCF7 breast can
 
 This is the <em>pdata.txt</em> file:
 
-<!--
-|SampleName|fileName|condition|
-|----------|---------|------------|
-| m210\_1 | hisat.merged\_1\_16.fq.27197.bam.counts.merged|mir210|
-| m210\_2 |hisat.merged\_1\_24.fq.27197.bam.counts.merged|mir210|
-|cont\_1 | hisat.merged\_1\_32.fq.27197.bam.counts.merged|ctrl|
-|cont\_2 |hisat.merged\_1\_40.fq.27197.bam.counts.merged|ctrl|
--->
+| SampleName | fileName                                       | condition |
+|------------|------------------------------------------------|-----------|
+| m210\_1    | hisat.merged\_1\_16.fq.27197.bam.counts.merged | mir210    |
+| m210\_2    | hisat.merged\_1\_24.fq.27197.bam.counts.merged | mir210    |
+| cont\_1    | hisat.merged\_1\_32.fq.27197.bam.counts.merged | ctrl      |
+| cont\_2    | hisat.merged\_1\_40.fq.27197.bam.counts.merged | ctrl      |
+
 First we will load required modules and change to our working directory
 
 ``` r

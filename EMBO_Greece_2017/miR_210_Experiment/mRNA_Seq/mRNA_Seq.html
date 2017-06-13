@@ -26,7 +26,7 @@ body {
 <body>
 
 <h1 id="mrna-seq-analysis">mRNA-Seq analysis</h1>
-<p>Anton Enright &amp; Dimitrios Vitsios<br />'12 June, 2017'</p>
+<p>Anton Enright &amp; Dimitrios Vitsios<br />'13 June, 2017'</p>
 <ul>
 <li><p>mRNA Analysis</p>
 <ul>
@@ -56,14 +56,37 @@ body {
 <h2 id="experimental-design">Experimental Design</h2>
 <p>This experiment explores the effect of miR-210 Overexpression in MCF7 breast cancer cells (Human). 4 Lanes of mRNA-Seq data are used with 2 controls (overexpression of a C.elegans miR cel-mir-67) and 2 samples over-expressing miR-210.</p>
 <p>This is the <em>pdata.txt</em> file:</p>
-<!--
-|SampleName|fileName|condition|
-|----------|---------|------------|
-| m210\_1 | hisat.merged\_1\_16.fq.27197.bam.counts.merged|mir210|
-| m210\_2 |hisat.merged\_1\_24.fq.27197.bam.counts.merged|mir210|
-|cont\_1 | hisat.merged\_1\_32.fq.27197.bam.counts.merged|ctrl|
-|cont\_2 |hisat.merged\_1\_40.fq.27197.bam.counts.merged|ctrl|
--->
+<table>
+<thead>
+<tr class="header">
+<th align="left">SampleName</th>
+<th align="left">fileName</th>
+<th align="left">condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">m210_1</td>
+<td align="left">hisat.merged_1_16.fq.27197.bam.counts.merged</td>
+<td align="left">mir210</td>
+</tr>
+<tr class="even">
+<td align="left">m210_2</td>
+<td align="left">hisat.merged_1_24.fq.27197.bam.counts.merged</td>
+<td align="left">mir210</td>
+</tr>
+<tr class="odd">
+<td align="left">cont_1</td>
+<td align="left">hisat.merged_1_32.fq.27197.bam.counts.merged</td>
+<td align="left">ctrl</td>
+</tr>
+<tr class="even">
+<td align="left">cont_2</td>
+<td align="left">hisat.merged_1_40.fq.27197.bam.counts.merged</td>
+<td align="left">ctrl</td>
+</tr>
+</tbody>
+</table>
 <p>First we will load required modules and change to our working directory</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">'/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq'</span>)
 <span class="kw">library</span>(DESeq2)
