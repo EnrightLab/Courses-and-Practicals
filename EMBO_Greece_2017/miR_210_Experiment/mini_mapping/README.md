@@ -6,6 +6,18 @@ Anton Enright & Dimitrios Vitsios
 Basic Mapping Practical
 -------
 
+For any RNASeq experiment there must be a _mapping_ and a _quatification_ to turn mapped reads into counts on genomic features.
+
+## Pre-requisites
+
+For most mapping tools you will need:
+* A genome (usually in FASTA format) - [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is a great place for this.
+* An annotation file (usually in GTF format) - Again, [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is ideal for this.
+* An indexed version of the genome - the command needed varies by method, but the index needs to be built only once.
+* A mapping tool (in this case hisat2)
+* A quantification tool (in this case htseq-count) to turn mapped reads to counts on features.
+
+
 ## Raw Data
 
 You can download the raw data for this practical [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mapping/data)
@@ -141,3 +153,5 @@ ls  *.counts
 ```
 less mir210_lane1.bam.counts
 ```
+
+Typically we would now switch to R/BioConductor to load these count files directly into DESeq2 for a negative binomial analysis of count statistics. This will happen in the next practical.
