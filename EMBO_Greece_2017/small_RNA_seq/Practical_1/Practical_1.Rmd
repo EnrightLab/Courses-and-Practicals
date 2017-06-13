@@ -105,7 +105,7 @@ Some _ascii_ characters are unprintable so the entire table is shifted by 33 giv
 
 ##Adapter Stripping for smallRNAs using _Reaper_
 
-The module is available [here](Reaper_1.5.tar.gz) If you want to install this in your own R at home.
+The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
 Lets install the module manually. Please open up a new terminal window.
 ```{}
@@ -127,7 +127,7 @@ gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/includ
 gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c trint.c -o trint.o
 ```
 
-The fastq files, pdata file and mircounts file are also [available](course_miseq.tar.gz) but preinstalled on these machines.
+The fastq files, pdata file and mircounts file are also [available](../data/) but preinstalled on these machines.
 
 ```{r,message=FALSE}
 library(Reaper)
