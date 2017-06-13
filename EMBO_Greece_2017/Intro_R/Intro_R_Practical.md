@@ -1,7 +1,7 @@
 Introduction to R
 ================
 Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+'13 June, 2017'
 
 About R
 -------
@@ -20,13 +20,13 @@ This is the R terminal where we will type commands for both R and Bioconductor.
 In this web page, sections like the following contain commands that you can copy and paste into the R terminal. The output you should expect to get from R will be presented like this (below).
 
 ``` r
-setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
+setwd("/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
 print("Hello Anton!")
 ```
 
                ## [1] "Hello Anton!"
 
-To get help in R just type a question mark before the name of the command, for example, for the plot&lt; function:
+To get help in R just type a question mark before the name of the command, for example, for the plot\< function:
 
 ``` r
 ?plot
@@ -59,7 +59,7 @@ Simple operations are easy to calculate in R, including multiplication, division
                ## [1] 4
                ## [1] 14.3
 
-To save one of these results, we can assign it to a variable, using the "&lt;-" symbol. We can then use these variables in further operations.
+To save one of these results, we can assign it to a variable, using the "\<-" symbol. We can then use these variables in further operations.
 
 ``` r
 x <- 2+1
@@ -294,7 +294,7 @@ This will send any image that is produced after the <i>pdf</i> function into a f
 </H3>
 Lets load in some external data from a text file.
 
-The file [genomes.txt](%22./genomes.txt%22) should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
+The file [genomes.txt](genomes.txt) should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
 
 ``` r
 genomes <- read.table("genomes.txt", row.names=1, header=TRUE)
@@ -451,4 +451,4 @@ for (species in rownames(genomes)) {
 
 What percentage of genes has splice variants?
 
-Use the function cor.test to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use **"genomes\[-1,\]"** instead of **"genomes"**)
+Use the function cor.test to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use **"genomes[-1,]"** instead of **"genomes"**)

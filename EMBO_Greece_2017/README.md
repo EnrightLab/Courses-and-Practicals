@@ -1,5 +1,6 @@
 Small RNA Computational Biology
 ===============================
+![EMBO](/images/embo.png)
 
 2017 EMBO Bioinformatics and Genome Analysis, Thessaloniki, Greece.
 -------------------------------------------------------------------
@@ -38,3 +39,19 @@ List of Practicals:
 7.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer)
 
 8.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+
+
+
+***
+
+Useful resources:
+
+* [Enright Lab](http://www.ebi.ac.uk/research/enright)
+* [R Cran](https://cran.r-project.org/)
+* [R Studio](www.rstudio.com/)
+* [BioConductor](www.bioconductor.org)
+* [DESeq2 Manual](http://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+* [ChimiRa Webserver](http://wwwdev.ebi.ac.uk/enright-dev/chimira/)
+* [miRnovo Webserver](http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/)
+* [miRBase](http://www.mirbase.org)
+* [Legacy Course Material, pre 2017](http://wwwdev.ebi.ac.uk/enright-srv/courses)
