@@ -13,6 +13,7 @@ Anton Enright & Dimitrios Vitsios
         -   [Sample to Sample Correlation](#sample-to-sample-correlation)
         -   [Sample to Sample PCA](#sample-to-sample-pca)
     -   [Statistical Analysis](#statistical-analysis)
+        -   [Creating a list of Statistical Hits from the results Table](#creating-a-list-of-statistical-hits-from-the-results-table)
     -   [Analysis of Sample Median Data](#analysis-of-sample-median-data)
     -   [Post-Statistical QC](#post-statistical-qc)
         -   [Volcano Plot of Significance and Fold Change](#volcano-plot-of-significance-and-fold-change)
@@ -150,8 +151,6 @@ heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabili
 ### Sample to Sample PCA
 
 ``` r
-# Sample PCA
-
 pca = princomp(assay(vsd))
 plot(pca$loadings, main='PCA Variance Stabilised', col='black', bg=condcols[pdata$condition],  pch=21, cex=1)
 text(pca$loadings, conds, pos=3, cex=0.8)
@@ -202,6 +201,8 @@ res
                ## ENSG00000283122           NA
                ## ENSG00000283123           NA
                ## ENSG00000283125           NA
+
+### Creating a list of Statistical Hits from the results Table
 
 ``` r
 hits=(rownames(res[((res$padj <= 0.05) & (abs(res$log2FoldChange) >= 1) & (!is.na(res$padj))),]))

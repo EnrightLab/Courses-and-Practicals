@@ -90,7 +90,7 @@ colData(ddsHTSeq)$condition = factor(colData(ddsHTSeq)$condition,levels=levels(p
 
 ## Data Normalisation
 
-```{r, results="hold"}
+```{r, results="hide"}
 # Data Normalisation
 dds = estimateSizeFactors(ddsHTSeq)
 # Data Dispersion
@@ -136,8 +136,6 @@ heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabili
 
 ### Sample to Sample PCA
 ```{r, results="hold"}
-# Sample PCA
-
 pca = princomp(assay(vsd))
 plot(pca$loadings, main='PCA Variance Stabilised', col='black', bg=condcols[pdata$condition],  pch=21, cex=1)
 text(pca$loadings, conds, pos=3, cex=0.8)
@@ -158,6 +156,7 @@ res=res[order(res$padj),]
 res
 ```
 
+### Creating a list of Statistical Hits from the results Table
 ```{r}
 hits=(rownames(res[((res$padj <= 0.05) & (abs(res$log2FoldChange) >= 1) & (!is.na(res$padj))),]))
 ```
