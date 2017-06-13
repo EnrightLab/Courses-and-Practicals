@@ -15,7 +15,7 @@ Differential Expression of smallRNA counts with DESeq2
 First we should change directory to where the data is
 
 ``` r
-setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
+setwd("~/Desktop/course_data/solexa")
 ```
 
 If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
