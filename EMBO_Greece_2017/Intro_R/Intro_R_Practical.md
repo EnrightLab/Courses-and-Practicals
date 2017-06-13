@@ -20,13 +20,13 @@ This is the R terminal where we will type commands for both R and Bioconductor.
 In this web page, sections like the following contain commands that you can copy and paste into the R terminal. The output you should expect to get from R will be presented like this (below).
 
 ``` r
-setwd("/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
+setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/Intro_R")
 print("Hello Anton!")
 ```
 
                ## [1] "Hello Anton!"
 
-To get help in R just type a question mark before the name of the command, for example, for the plot\< function:
+To get help in R just type a question mark before the name of the command, for example, for the plot&lt; function:
 
 ``` r
 ?plot
@@ -59,7 +59,7 @@ Simple operations are easy to calculate in R, including multiplication, division
                ## [1] 4
                ## [1] 14.3
 
-To save one of these results, we can assign it to a variable, using the "\<-" symbol. We can then use these variables in further operations.
+To save one of these results, we can assign it to a variable, using the "&lt;-" symbol. We can then use these variables in further operations.
 
 ``` r
 x <- 2+1
@@ -451,4 +451,4 @@ for (species in rownames(genomes)) {
 
 What percentage of genes has splice variants?
 
-Use the function cor.test to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use **"genomes[-1,]"** instead of **"genomes"**)
+Use the function cor.test to test whether there is correlation between genome size and intron length. What happens when we eliminate the cat genome? (hint, use **"genomes\[-1,\]"** instead of **"genomes"**)

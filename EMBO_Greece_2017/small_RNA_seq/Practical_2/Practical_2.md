@@ -1,7 +1,7 @@
 Small RNA Seq - Practical 2
 ================
 Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+'13 June, 2017'
 
 Differential Expression of smallRNA counts with DESeq2
 ======================================================
@@ -9,7 +9,7 @@ Differential Expression of smallRNA counts with DESeq2
 First we should change directory to where the data is
 
 ``` r
-setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
+setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 ```
 
 If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)

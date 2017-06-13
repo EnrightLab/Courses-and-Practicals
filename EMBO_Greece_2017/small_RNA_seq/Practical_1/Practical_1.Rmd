@@ -11,7 +11,7 @@ output:
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
+opts_knit$set(root.dir = '~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',
@@ -138,7 +138,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ```{r}
-setwd("/Users/aje/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
+setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 list.files()
 ```
 
