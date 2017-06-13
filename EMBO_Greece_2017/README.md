@@ -1,5 +1,6 @@
 Small RNA Computational Biology
 ===============================
+![EMBO](/images/embo.png)
 
 2017 EMBO Bioinformatics and Genome Analysis, Thessaloniki, Greece.
 -------------------------------------------------------------------
