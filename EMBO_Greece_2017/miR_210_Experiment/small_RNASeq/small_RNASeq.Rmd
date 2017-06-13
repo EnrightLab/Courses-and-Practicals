@@ -48,7 +48,6 @@ hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 
 We can now load the count data
 ```{r}
-#setwd("/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/data")
 mircounts <- read.table("data/mircounts.txt",header=TRUE,row.names=1)
 ```
 
