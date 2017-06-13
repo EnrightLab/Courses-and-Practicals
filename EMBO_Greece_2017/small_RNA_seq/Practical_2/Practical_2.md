@@ -121,15 +121,6 @@ colnames(conds)="tissue"
 cds <- DESeqDataSetFromMatrix(countData = mircounts, colData = conds, design = ~ tissue)
 cds <- estimateSizeFactors(cds)
 cds <- estimateDispersions(cds)
-```
-
-               ## gene-wise dispersion estimates
-
-               ## mean-dispersion relationship
-
-               ## final dispersion estimates
-
-``` r
 cds <- nbinomWaldTest(cds)
 ```
 

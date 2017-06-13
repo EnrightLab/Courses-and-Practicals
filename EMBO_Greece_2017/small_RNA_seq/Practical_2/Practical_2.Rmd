@@ -102,7 +102,7 @@ Clearly we need to normalise the data to control for differences in global RNA l
 
 DESeq is a statistical tool for analysis of count-based data such as from RNAseq. Microarrays and similar platforms produce 'continuous' data measurements, e.g. flourescence associated with a probe. However for count data the variance of results increases dramatically as you get low counts. For example, once a gene is lowly enough expressed that you only find small numbers of reads mapping to it you get very high variance as it is impossible to have half a count. For this reason it is imperative that count based sequencing data be normalised and statistically assessed with tools that take this into account. Tools like DESeq apply negative binomial statistics and try to flatten the variance across low and high counts.
 
-```{r,results="hold",message=F,warning=F}
+```{r,results="hide",message=F,warning=F}
 # First we tell DESeq which samples correspond to which tissues.
 conds = data.frame(samplenames)
 colnames(conds)="tissue"
