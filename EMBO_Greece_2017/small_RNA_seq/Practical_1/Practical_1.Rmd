@@ -107,6 +107,26 @@ Some _ascii_ characters are unprintable so the entire table is shifted by 33 giv
 
 The module is available [here](Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
+Lets install the module manually. Please open up a new terminal window.
+```{}
+cd /BGA2017/Course_material/Jun14
+
+/BGA2017/R-3.4.0/bin/R CMD install Reaper_1.5.tar.gz 
+```
+
+This will install the module into R manually.
+
+```{}
+* installing to library \u2018/home/aje/R/x86_64-pc-linux-gnu-library/3.4\u2019
+* installing *source* package \u2018Reaper\u2019 ...
+** libs
+gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c reaper.c -o reaper.o
+gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c sw.c -o sw.o
+gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c slib.c -o slib.o
+gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c table.c -o table.o
+gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c trint.c -o trint.o
+```
+
 The fastq files, pdata file and mircounts file are also [available](course_miseq.tar.gz) but preinstalled on these machines.
 
 ```{r,message=FALSE}
