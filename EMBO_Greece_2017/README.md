@@ -29,6 +29,7 @@ Cambridge, UK._
 ***
 
 List of Practicals:
+------------------
 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md)
 
