@@ -1,17 +1,17 @@
 ---
-title: "Analysis of HPV count data - Transcript level"
+title: "Small RNA Seq - miR-210 Practical"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
- github_document:
-    toc: yes
+  github_document:
+  toc: true
 ---
 
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
+opts_knit$set(root.dir = '~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',
@@ -19,9 +19,7 @@ opts_chunk$set(dev="png",
 
 ```
 
-
-
-# Analysis of course sRNA-Seq data
+# Analysis of an sRNA-Seq data for miR-210 over-expression
 
 ## Experiment Overview
 This set of sequencing data is from the libraries prepared by participants. We have matched microRNA and mRNA samples to sequence in Breast Cancer MCF7 Human Cells. The experiment here was to overexpress miR-210 to explore the effect on mRNAs. Control samples used a non mouse microRNA from c.elegans (cel-miR-67) TCACAACCTCCTAGAAA
@@ -40,7 +38,7 @@ filename|group|samplename|treatment|fullname|3p-ad|
 The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
 
 ```{r cars, message=FALSE, results="hold"}
-setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
+setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
 library(RColorBrewer)
 library(gplots)
 library(DESeq2)

@@ -1,20 +1,10 @@
-Analysis of HPV count data - Transcript level
+Small RNA Seq - miR-210 Practical
 ================
 Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+'13 June, 2017'
 
--   Analysis of course sRNA-Seq data
-    -   Experiment Overview
-    -   Raw Data
-    -   Count loading & Normalisation
-    -   Post Normalisation QC
-    -   Variance Stabilising the Counts
-    -   Analysis of treatment effects
-    -   Statistical Analysis - Differential Expression
-    -   Final Results
-
-Analysis of course sRNA-Seq data
-================================
+Analysis of an sRNA-Seq data for miR-210 over-expression
+========================================================
 
 Experiment Overview
 -------------------
@@ -36,7 +26,7 @@ Raw Data
 The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
 
 ``` r
-setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
+setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
 library(RColorBrewer)
 library(gplots)
 library(DESeq2)

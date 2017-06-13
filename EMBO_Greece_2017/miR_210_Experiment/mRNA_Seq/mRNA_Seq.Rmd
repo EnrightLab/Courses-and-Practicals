@@ -1,11 +1,11 @@
 ---
-title: "mRNA-Seq analysis"
+title: "mRNA Seq - miR210 Practical"
 author: "Anton Enright & Dimitrios Vitsios"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
- github_document:
-    toc: yes
+  github_document:
+  toc: true
 ---
 
 
