@@ -45,7 +45,7 @@ This is the <em>pdata.txt</em> file:
 First we will load required modules and change to our working directory
 
 ``` r
-setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
+setwd('~/Desktop/course_data/mir210_mRNA')
 library(DESeq2)
 library(gplots)
 library(RColorBrewer)
