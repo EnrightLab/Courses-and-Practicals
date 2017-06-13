@@ -3,6 +3,12 @@ Small RNA Seq - Practical 2
 Anton Enright & Dimitrios Vitsios
 '13 June, 2017'
 
+-   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
+-   [Initial count analysis](#initial-count-analysis)
+    -   [Using DESeq to normalise the smallRNA count data](#using-deseq-to-normalise-the-smallrna-count-data)
+    -   [Post Normalisation Analysis](#post-normalisation-analysis)
+    -   [Analysis of Significant Hits across all samples](#analysis-of-significant-hits-across-all-samples)
+
 Differential Expression of smallRNA counts with DESeq2
 ======================================================
 
@@ -16,15 +22,6 @@ If you need the raw data for this practical, it is available [here](http://wwwde
 
 ``` r
 library("DESeq2")
-```
-
-               ## Warning: package 'S4Vectors' was built under R version 3.3.3
-
-               ## Warning: package 'IRanges' was built under R version 3.3.3
-
-               ## Warning: package 'GenomicRanges' was built under R version 3.3.3
-
-``` r
 library("gplots")
 library("RColorBrewer")
 

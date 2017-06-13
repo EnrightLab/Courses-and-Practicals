@@ -5,7 +5,7 @@ date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
   github_document:
-  toc: true
+    toc: true
 ---
 
 

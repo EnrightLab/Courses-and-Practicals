@@ -3,6 +3,14 @@ Introduction to R
 Anton Enright & Dimitrios Vitsios
 '13 June, 2017'
 
+-   [About R](#about-r)
+-   [Getting Started](#getting-started)
+-   [Assignment and Operations](#assignment-and-operations)
+-   [Object types in R](#object-types-in-r)
+-   [Questioning the numbers](#questioning-the-numbers)
+-   [Basic Plotting and Graphing](#basic-plotting-and-graphing)
+-   [Exercises](#exercises)
+
 About R
 -------
 

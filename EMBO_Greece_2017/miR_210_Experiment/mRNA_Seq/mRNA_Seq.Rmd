@@ -5,13 +5,13 @@ date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
   github_document:
-  toc: true
+    toc: true
 ---
 
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq/')
+opts_knit$set(root.dir = '~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq/')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',
@@ -43,7 +43,7 @@ This is the <em>pdata.txt</em> file:
 
 First we will load required modules and change to our working directory
 ```{r, message=F}
-setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
+setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
 library(DESeq2)
 library(gplots)
 library(RColorBrewer)
