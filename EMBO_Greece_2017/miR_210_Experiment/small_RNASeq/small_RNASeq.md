@@ -36,7 +36,7 @@ Raw Data
 The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
 
 ``` r
-setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/small_RNASeq/')
+setwd('~/Desktop/course_data/mir210_smallRNA')
 library(RColorBrewer)
 library(gplots)
 library(DESeq2)
