@@ -3,6 +3,16 @@ Small RNA Seq - miR-210 Practical
 Anton Enright & Dimitrios Vitsios
 '13 June, 2017'
 
+-   [Analysis of an sRNA-Seq data for miR-210 over-expression](#analysis-of-an-srna-seq-data-for-mir-210-over-expression)
+    -   [Experiment Overview](#experiment-overview)
+    -   [Raw Data](#raw-data)
+    -   [Count loading & Normalisation](#count-loading-normalisation)
+    -   [Post Normalisation QC](#post-normalisation-qc)
+    -   [Variance Stabilising the Counts](#variance-stabilising-the-counts)
+    -   [Analysis of treatment effects](#analysis-of-treatment-effects)
+    -   [Statistical Analysis - Differential Expression](#statistical-analysis---differential-expression)
+    -   [Final Results](#final-results)
+
 Analysis of an sRNA-Seq data for miR-210 over-expression
 ========================================================
 
