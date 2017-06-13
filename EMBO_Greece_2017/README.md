@@ -12,17 +12,14 @@ Small RNA Computational Biology
 |![Anton](/images/anton.jpg)|![Dimitrios](/images/dimitrios.jpg) |
  
 
-
-
-
 ***
-_EMBL - European Bioinformatics Institute,_  
-_Wellcome Trust Genome Campus,  
-_Hinxton, Cambridge, CB10 1SA, UK._  
+_EMBL - European Bioinformatics Institute,  
+Wellcome Trust Genome Campus,  
+Hinxton, Cambridge, CB10 1SA, UK._  
 
-_Department of Pathology,_  
-_Tennis Court Road,_  
-_Cambridge, UK_  
+_Department of Pathology,  
+Tennis Court Road,  
+Cambridge, UK._  
 ***
 
 List of Practicals:
