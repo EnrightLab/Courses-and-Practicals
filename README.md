@@ -1,12 +1,14 @@
 Courses-and-Practicals
 ======================
 
-[logo]: images/embl.png "Logo Title Text 2"
-[logo]: images/cambridge.jpg "Logo Title Text 2"
+![embl](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/embl.png "EMBL")
+![cambridge](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/images/cambridge.jpg "Cambridge")
+
+_Enright Laboratory - EMBL, European Bioinformatics Institute & Department of Pathology, Cambridge University._
 
 Repository for New Courses and Practicals
 -----------------------------------------
 
-Our practicals from teaching courses are kept here. Older practicals are always available [here]("http://wwwdev.ebi.ac.uk/enright-srv/courses")
+Our practicals from teaching courses are kept here. Older practicals are always available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses)
 
-* [EMBO - Bioinformatics & Genome Analysis - Jun 2017 - Thessaloniki, Greece]("./EMBO_Greece_2017/")
+* [EMBO - Bioinformatics & Genome Analysis - Jun 2017 - Thessaloniki, Greece](EMBO_Greece_2017/)
