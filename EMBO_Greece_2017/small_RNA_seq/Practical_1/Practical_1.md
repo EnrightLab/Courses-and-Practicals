@@ -12,9 +12,9 @@ It is important for next-gen sequence analysis to know the exact architecture of
 
 For our course data, the read architecture is as follows:
 
-| **5' adpt**          | genomic RNA                                | **3' adpt**         |
-|----------------------|--------------------------------------------|---------------------|
-| &lt;5p----------&gt; | **NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN** | &lt;---------3p&gt; |
+| **5' adpt**      | genomic RNA                                | **3' adpt**     |
+|------------------|--------------------------------------------|-----------------|
+| \<5p----------\> | **NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN** | \<---------3p\> |
 
 Since miRNAs are shorter than the average length of a Solexa read (35-80nt), we will usually sequence through a microRNA sequence into the 3' adapter sequence. This needs to be detected and cleaned from our reads before they can be mapped. Additionally, each sequence will need to be sorted according to which barcode is present at the 5' end of the read into appropriate sample files.
 
@@ -86,7 +86,7 @@ Some *ascii* characters are unprintable so the entire table is shifted by 33 giv
 Adapter Stripping for smallRNAs using *Reaper*
 ----------------------------------------------
 
-The module is available [here](Reaper_1.5.tar.gz) If you want to install this in your own R at home.
+The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
 Lets install the module manually. Please open up a new terminal window.
 
@@ -105,7 +105,7 @@ This will install the module into R manually.
     gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c table.c -o table.o
     gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c trint.c -o trint.o
 
-The fastq files, pdata file and mircounts file are also [available](course_miseq.tar.gz) but preinstalled on these machines.
+The fastq files, pdata file and mircounts file are also [available](../data/) but preinstalled on these machines.
 
 ``` r
 library(Reaper)
@@ -120,69 +120,14 @@ setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 list.files()
 ```
 
-               ##   [1] "1.lane.clean.gz"                  "1.lane.clean.uniq.gz"            
-               ##   [3] "1.lane.report.clean.len"          "1.lane.report.clean.nt"          
-               ##   [5] "1.lane.report.input.nt"           "1.lane.report.input.q"           
-               ##   [7] "1.lint.gz"                        "1.sumstat"                       
-               ##   [9] "10.lane.clean.gz"                 "10.lane.clean.uniq.gz"           
-               ##  [11] "10.lane.report.clean.len"         "10.lane.report.clean.nt"         
-               ##  [13] "10.lane.report.input.nt"          "10.lane.report.input.q"          
-               ##  [15] "10.lint.gz"                       "10.sumstat"                      
-               ##  [17] "11.lane.clean.gz"                 "11.lane.clean.uniq.gz"           
-               ##  [19] "11.lane.report.clean.len"         "11.lane.report.clean.nt"         
-               ##  [21] "11.lane.report.input.nt"          "11.lane.report.input.q"          
-               ##  [23] "11.lint.gz"                       "11.sumstat"                      
-               ##  [25] "12.lane.clean.gz"                 "12.lane.clean.uniq.gz"           
-               ##  [27] "12.lane.report.clean.len"         "12.lane.report.clean.nt"         
-               ##  [29] "12.lane.report.input.nt"          "12.lane.report.input.q"          
-               ##  [31] "12.lint.gz"                       "12.sumstat"                      
-               ##  [33] "2.lane.clean.gz"                  "2.lane.clean.uniq.gz"            
-               ##  [35] "2.lane.report.clean.len"          "2.lane.report.clean.nt"          
-               ##  [37] "2.lane.report.input.nt"           "2.lane.report.input.q"           
-               ##  [39] "2.lint.gz"                        "2.sumstat"                       
-               ##  [41] "3.lane.clean.gz"                  "3.lane.clean.uniq.gz"            
-               ##  [43] "3.lane.report.clean.len"          "3.lane.report.clean.nt"          
-               ##  [45] "3.lane.report.input.nt"           "3.lane.report.input.q"           
-               ##  [47] "3.lint.gz"                        "3.sumstat"                       
-               ##  [49] "4.lane.clean.gz"                  "4.lane.clean.uniq.gz"            
-               ##  [51] "4.lane.report.clean.len"          "4.lane.report.clean.nt"          
-               ##  [53] "4.lane.report.input.nt"           "4.lane.report.input.q"           
-               ##  [55] "4.lint.gz"                        "4.sumstat"                       
-               ##  [57] "5.lane.clean.gz"                  "5.lane.clean.uniq.gz"            
-               ##  [59] "5.lane.report.clean.len"          "5.lane.report.clean.nt"          
-               ##  [61] "5.lane.report.input.nt"           "5.lane.report.input.q"           
-               ##  [63] "5.lint.gz"                        "5.sumstat"                       
-               ##  [65] "6.lane.clean.gz"                  "6.lane.clean.uniq.gz"            
-               ##  [67] "6.lane.report.clean.len"          "6.lane.report.clean.nt"          
-               ##  [69] "6.lane.report.input.nt"           "6.lane.report.input.q"           
-               ##  [71] "6.lint.gz"                        "6.sumstat"                       
-               ##  [73] "7.lane.clean.gz"                  "7.lane.clean.uniq.gz"            
-               ##  [75] "7.lane.report.clean.len"          "7.lane.report.clean.nt"          
-               ##  [77] "7.lane.report.input.nt"           "7.lane.report.input.q"           
-               ##  [79] "7.lint.gz"                        "7.sumstat"                       
-               ##  [81] "8.lane.clean.gz"                  "8.lane.clean.uniq.gz"            
-               ##  [83] "8.lane.report.clean.len"          "8.lane.report.clean.nt"          
-               ##  [85] "8.lane.report.input.nt"           "8.lane.report.input.q"           
-               ##  [87] "8.lint.gz"                        "8.sumstat"                       
-               ##  [89] "9.lane.clean.gz"                  "9.lane.clean.uniq.gz"            
-               ##  [91] "9.lane.report.clean.len"          "9.lane.report.clean.nt"          
-               ##  [93] "9.lane.report.input.nt"           "9.lane.report.input.q"           
-               ##  [95] "9.lint.gz"                        "9.sumstat"                       
-               ##  [97] "clean.sh"                         "lane1Brain2_sequence.fastq.gz"   
-               ##  [99] "lane1Brain5_sequence.fastq.gz"    "lane1Brain6_sequence.fastq.gz"   
-               ## [101] "lane1Heart1_sequence.fastq.gz"    "lane1Heart11_sequence.fastq.gz"  
-               ## [103] "lane1heart3_sequence.fastq.gz"    "lane1Heart8_sequence.fastq.gz"   
-               ## [105] "lane1Liver10_sequence.fastq.gz"   "lane1Liver12x2_sequence.fastq.gz"
-               ## [107] "lane1Liver4_sequence.fastq.gz"    "lane1Liver7_sequence.fastq.gz"   
-               ## [109] "lane1Liver9_sequence.fastq.gz"    "metadata1.txt"                   
-               ## [111] "metadata10.txt"                   "metadata11.txt"                  
-               ## [113] "metadata12.txt"                   "metadata2.txt"                   
-               ## [115] "metadata3.txt"                    "metadata4.txt"                   
-               ## [117] "metadata5.txt"                    "metadata6.txt"                   
-               ## [119] "metadata7.txt"                    "metadata8.txt"                   
-               ## [121] "metadata9.txt"                    "mircounts.txt"                   
-               ## [123] "pdata.txt"                        "Reaper_1.5.tar.gz"               
-               ## [125] "reaper.pdf"                       "reaperlog.txt"
+               ##  [1] "clean.sh"                         "lane1Brain2_sequence.fastq.gz"   
+               ##  [3] "lane1Brain5_sequence.fastq.gz"    "lane1Brain6_sequence.fastq.gz"   
+               ##  [5] "lane1Heart1_sequence.fastq.gz"    "lane1Heart11_sequence.fastq.gz"  
+               ##  [7] "lane1heart3_sequence.fastq.gz"    "lane1Heart8_sequence.fastq.gz"   
+               ##  [9] "lane1Liver10_sequence.fastq.gz"   "lane1Liver12x2_sequence.fastq.gz"
+               ## [11] "lane1Liver4_sequence.fastq.gz"    "lane1Liver7_sequence.fastq.gz"   
+               ## [13] "lane1Liver9_sequence.fastq.gz"    "mircounts.txt"                   
+               ## [15] "pdata.txt"                        "Reaper_1.5.tar.gz"
 
 Hopefully, you will see a compressed FASTQ txt file for each of the 4 lanes
 
