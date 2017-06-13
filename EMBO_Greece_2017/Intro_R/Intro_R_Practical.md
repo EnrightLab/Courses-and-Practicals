@@ -294,7 +294,7 @@ This will send any image that is produced after the <i>pdf</i> function into a f
 </H3>
 Lets load in some external data from a text file.
 
-The file [genomes.txt]("genomes.txt") should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
+The file [genomes.txt](genomes.txt) should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
 
 ``` r
 genomes <- read.table("genomes.txt", row.names=1, header=TRUE)
