@@ -53,3 +53,4 @@ Useful resources:
 * [ChimiRa Webserver](http://wwwdev.ebi.ac.uk/enright-dev/chimira/)
 * [miRnovo Webserver](http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/)
 * [miRBase](http://www.mirbase.org)
+* [Legacy Course Material, pre 2017](http://wwwdev.ebi.ac.uk/enright-srv/courses)
