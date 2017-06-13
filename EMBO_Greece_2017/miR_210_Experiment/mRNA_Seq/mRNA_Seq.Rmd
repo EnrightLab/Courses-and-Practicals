@@ -22,8 +22,6 @@ opts_chunk$set(dev="png",
 
 #mRNA Analysis 
 
-
-
 ## Raw Data
 The raw data is [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data)
 

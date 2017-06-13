@@ -1,23 +1,23 @@
-mRNA-Seq analysis
+mRNA Seq - miR210 Practical
 ================
 Anton Enright & Dimitrios Vitsios
 '13 June, 2017'
 
--   mRNA Analysis
-    -   Raw Data
-    -   Experimental Design
-    -   Reading in Annotation and Count Data
-    -   Data Normalisation
-    -   Post-Normalisation QC
-        -   Stabilising the Variance (VST) instead of log2
-        -   Sample to Sample Correlation
-        -   Sample to Sample PCA
-    -   Statistical Analysis
-    -   Analysis of Sample Median Data
-    -   Post-Statistical QC
-        -   Volcano Plot of Significance and Fold Change
-        -   Heatmap of Signficant Hits
-    -   Output Final Results
+-   [mRNA Analysis](#mrna-analysis)
+    -   [Raw Data](#raw-data)
+    -   [Experimental Design](#experimental-design)
+    -   [Reading in Annotation and Count Data](#reading-in-annotation-and-count-data)
+    -   [Data Normalisation](#data-normalisation)
+    -   [Post-Normalisation QC](#post-normalisation-qc)
+        -   [Stabilising the Variance (VST) instead of log2](#stabilising-the-variance-vst-instead-of-log2)
+        -   [Sample to Sample Correlation](#sample-to-sample-correlation)
+        -   [Sample to Sample PCA](#sample-to-sample-pca)
+    -   [Statistical Analysis](#statistical-analysis)
+    -   [Analysis of Sample Median Data](#analysis-of-sample-median-data)
+    -   [Post-Statistical QC](#post-statistical-qc)
+        -   [Volcano Plot of Significance and Fold Change](#volcano-plot-of-significance-and-fold-change)
+        -   [Heatmap of Signficant Hits](#heatmap-of-signficant-hits)
+    -   [Output Final Results](#output-final-results)
 
 mRNA Analysis
 =============
@@ -44,7 +44,7 @@ This is the <em>pdata.txt</em> file:
 First we will load required modules and change to our working directory
 
 ``` r
-setwd('/Users/dvitsios/Desktop/EMBO_2017/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
+setwd('~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq')
 library(DESeq2)
 library(gplots)
 library(RColorBrewer)
