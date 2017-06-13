@@ -14,10 +14,14 @@ You can download the raw data for this practical [here](http://wwwdev.ebi.ac.uk/
 
 We have made a simple test with only Chromosome 22 and 400k reads on your machines
 
-We will open a terminal and change to the practical folder on your desktop
+We will open a terminal and change to the practical folder on your desktop. 
+We will also add the paths to the programs we will be using **hisat2** and **htseq-count**.
 
 ```
-cd ~/Desktop/mapping_practical
+cd ~/Desktop/course_data/mir210_mapping/
+
+export PATH={$PATH}:/BGA2017/hisat2-2.1.0/:/BGA2017/hisat2-2.1.0/:/BGA2017/anaconda2/bin:/BGA2017/samtools-1.4.1/bin/
+
 ```
 
 ## Commonly used assembly and transcriptome analysis tools
@@ -65,7 +69,22 @@ hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh38.dna
 We also need to assemble a list of known spice sites for HiSat2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
 
 ```
-./hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
+hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
+```
+
+This will produce the following output file containing coordinates for all splice. sites on Chr 22.
+```
+22	16062315	16062810	+
+22	16100647	16101275	-
+22	16101473	16118791	-
+22	16118912	16124741	-
+22	16151820	16162396	-
+22	16157341	16164481	+
+22	16159388	16162396	-
+22	16162387	16164481	+
+22	16162486	16186810	-
+22	16164568	16171951	+
+22	16171606	16171951	+
 ```
 
 The two samples (Lanes 1-4, 2 replicates) are represented by single end sequencing files.
@@ -112,4 +131,13 @@ htseq-count -f bam control_lane2.bam  Homo_sapiens.GRCh37.75.dna.chromosome.22.g
 6160 SAM alignments  processed.
 ```
 
-The Final counts tables can be loaded directly into DESeq2 in R/BioConductor the counts are in the files with **.counts** extensions
+The Final counts tables can be loaded directly into DESeq2 in R/BioConductor the counts are in the files with **.counts** extensions.
+
+Lets take a look:
+```
+ls  *.counts
+```
+
+```
+less mir210_lane1.bam.counts
+```
