@@ -46,13 +46,13 @@ hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 We can now load the count data
 
 ``` r
-mircounts <- read.table("data/mircounts.txt",header=TRUE,row.names=1)
+mircounts <- read.table("mircounts.txt",header=TRUE,row.names=1)
 ```
 
 As well as the pdata, which contains information on each sample.
 
 ``` r
-pdata <- read.table("data/pdata.txt",header=TRUE,row.names=1,sep="\t")
+pdata <- read.table("pdata.txt",header=TRUE,row.names=1,sep="\t")
 colnames(mircounts)=rownames(pdata)
 
 groups=as.factor(pdata$group)

@@ -62,10 +62,10 @@ Reading in Annotation and Count Data
 We’ll now read in the experimental design file (pdata.txt) and the a containing gene names (gene\_names.txt). We will also create a vector containing condition names for each sample. Finally, we will make a vector of colours that correspond to each condition for nicer plots later on. We’ll also make colours corresponding to each class (<em>biotype</em>) of gene.
 
 ``` r
-pdata=read.table('data/pdata.txt',header=TRUE)
+pdata=read.table('pdata.txt',header=TRUE)
 
 conds=as.vector(pdata$condition) 
-names=read.table('data/gene_names.txt',header=FALSE,row.names=1)
+names=read.table('gene_names.txt',header=FALSE,row.names=1)
 
 condcols=brewer.pal(n = length(unique(conds))+2, name = 'Dark2')
 names(condcols)=unique(conds)
