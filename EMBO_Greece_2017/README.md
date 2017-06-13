@@ -36,7 +36,7 @@ List of Practicals:
 5.  [Mini mapping practical using HiSat2](miR_210_Experiment/mini_mapping/)
 6.  [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
 
-7.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer)
+7.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
 8.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
 
