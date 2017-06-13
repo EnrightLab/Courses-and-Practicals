@@ -23,7 +23,7 @@ opts_chunk$set(dev="png",
 
 First we should change directory to where the data is
 
-```{r,tidy=TRUE}
+```{r}
 setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
 ```
 

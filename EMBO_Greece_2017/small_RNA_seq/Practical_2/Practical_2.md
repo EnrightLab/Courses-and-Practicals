@@ -16,6 +16,15 @@ If you need the raw data for this practical, it is available [here](http://wwwde
 
 ``` r
 library("DESeq2")
+```
+
+               ## Warning: package 'S4Vectors' was built under R version 3.3.3
+
+               ## Warning: package 'IRanges' was built under R version 3.3.3
+
+               ## Warning: package 'GenomicRanges' was built under R version 3.3.3
+
+``` r
 library("gplots")
 library("RColorBrewer")
 
