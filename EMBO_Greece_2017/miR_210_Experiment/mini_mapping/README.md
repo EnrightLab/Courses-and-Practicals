@@ -75,7 +75,7 @@ To actually build a new bowtie index you can use the bowtie2-build command
 We will actually only build Chromosome 22 instead of the whole Human Genome.
 
 ```
-hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh38.dna.22
+hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh37.dna.22
 ```
 
 We also need to assemble a list of known spice sites for HiSat2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
@@ -109,10 +109,10 @@ The two samples (Lanes 1-4, 2 replicates) are represented by single end sequenci
 We will launch HiSat2 on each of the files (HiSat can also process sets of paired end files). We also need to let TopHat know the type of sequencing (unstranded). We provide the splice site information and the HiSat Index. The -p 4 option asks for four processors per run, for bigger machines you can increase this for faster runs when aligning more reads.
 
 ```
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U mir210_lane1.fq.gz | samtools view -bS - > mir210_lane1.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U mir210_lane2.fq.gz | samtools view -bS - > mir210_lane2.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U control_lane1.fq.gz | samtools view -bS - > control_lane1.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U control_lane2.fq.gz | samtools view -bS - > control_lane2.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U mir210_lane1.fq.gz | samtools view -bS - > mir210_lane1.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U mir210_lane2.fq.gz | samtools view -bS - > mir210_lane2.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U control_lane1.fq.gz | samtools view -bS - > control_lane1.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U control_lane2.fq.gz | samtools view -bS - > control_lane2.bam
 ```
 
 ```
