@@ -54,8 +54,8 @@ Useful resources:
 
 * [Enright Lab](http://www.ebi.ac.uk/research/enright)
 * [R Cran](https://cran.r-project.org/)
-* [R Studio](www.rstudio.com/)
-* [BioConductor](www.bioconductor.org)
+* [R Studio](http://www.rstudio.com/)
+* [BioConductor](http://www.bioconductor.org)
 * [DESeq2 Manual](http://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 * [ChimiRa Webserver](http://wwwdev.ebi.ac.uk/enright-dev/chimira/)
 * [miRnovo Webserver](http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/)
