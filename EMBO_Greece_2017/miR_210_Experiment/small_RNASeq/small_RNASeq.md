@@ -84,7 +84,7 @@ names(group_colours)=pdata$group
 barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts")
 legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 ```
-
+<!--
 ![](small_RNASeq_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 We can also estimate the dispersion of the data.
@@ -228,3 +228,5 @@ heatmap.2(vstcounts[sig,],trace="none",col=hmcol,main="Significant miRs",cexRow=
 ```
 
 ![](small_RNASeq_files/figure-markdown_github/unnamed-chunk-15-1.png)
+
+-->
