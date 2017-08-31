@@ -8,9 +8,8 @@ Small RNA Computational Biology
 **Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznkik**
 
 |Jack Monahan (monahanj@ebi.ac.uk)|Yuvia Perez Rico (yuvia.perez-rico@curie.fr)|Jan Provaznik (jan.provaznik@embl.de)|
-|---------------------------|------------------------------------|
-|![Jack](https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png)|![Yuvia](/https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png) | ![Jan](https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png)|
- 
+|---------------------------|------------------------------------|------------------------------------|
+|Picture|Picture|Picture|
 
 ***
 
