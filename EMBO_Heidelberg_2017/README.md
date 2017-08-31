@@ -2,7 +2,7 @@ Small RNA Computational Biology
 ===============================
 ![EMBO](/images/embo.png)
 
-2017 EMBO Bioinformatics and Genome Analysis, Thessaloniki, Greece.
+2017 EMBL - MicroRNA Profiling
 -------------------------------------------------------------------
 
 **Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznkik**
