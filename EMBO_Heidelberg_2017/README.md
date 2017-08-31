@@ -5,7 +5,7 @@ Small RNA Computational Biology
 2017 EMBL - MicroRNA Profiling
 -------------------------------------------------------------------
 
-**Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznkik**
+**Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznik**
 
 |Jack Monahan (monahanj@ebi.ac.uk)|Yuvia Perez Rico (yuvia.perez-rico@curie.fr)|Jan Provaznik (jan.provaznik@embl.de)|
 |---------------------------|------------------------------------|------------------------------------|
