@@ -5,11 +5,11 @@ Small RNA Computational Biology
 2017 EMBO Bioinformatics and Genome Analysis, Thessaloniki, Greece.
 -------------------------------------------------------------------
 
-**Instructors: Anton Enright & Dimitrios Vitsios**
+**Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznkik**
 
-|Anton Enright (aje@ebi.ac.uk)|Dimitrios Vitsios (dvitsios@ebi.ac.uk)               |
+|Jack Monahan (monahanj@ebi.ac.uk)|Yuvia Perez Rico (yuvia.perez-rico@curie.fr)|Jan Provaznik (jan.provaznik@embl.de)|
 |---------------------------|------------------------------------|
-|![Anton](/images/anton.jpg)|![Dimitrios](/images/dimitrios.jpg) |
+|![Jack](https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png)|![Yuvia](/https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png) | ![Jan](https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png)|
  
 
 ***
