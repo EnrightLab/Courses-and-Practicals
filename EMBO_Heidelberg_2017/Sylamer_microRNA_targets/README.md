@@ -10,7 +10,7 @@ MicroRNA Target Analysis from Expression Data
 
 The Sylamer tool is widely used for analysis of miRNA effects from large-scale gene-expression data. However it requires the user to prepare both lists of genes which have changed in an experiment and also a set of annotated 3'UTR sequences within which to search for signals.
 
-In order to simplify the process we have created a new tool called SylArray. This tool automates the entire process and simply requires the user to submit a list of sorted gene-iden tifiers or probe identifiers from a microarray experiment.
+In order to simplify the process we have created a new tool called SylArray. This tool automates the entire process and simply requires the user to submit a list of sorted gene-identifiers or probe identifiers from a microarray experiment.
 
 For a detailed description of the method, please see the [Sylamer](http://www.ncbi.nlm.nih.gov/sites/entrez?holding=&db=PubMed&cmd=search&term=18978784) and [SylArray](http://www.ncbi.nlm.nih.gov/sites/entrez?holding=&db=PubMed&cmd=search&term=20871108) papers.
 
