@@ -1,7 +1,8 @@
 Introduction to R
 ================
-Anton Enright & Dimitrios Vitsios
-'13 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September 2017
 
 -   [About R](#about-r)
 -   [Getting Started](#getting-started)
