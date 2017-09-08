@@ -1,7 +1,8 @@
 Small RNA Seq - miR-210 Practical
 ================
-Anton Enright & Dimitrios Vitsios
-'13 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September 2017
 
 -   [Analysis of an sRNA-Seq data for miR-210 over-expression](#analysis-of-an-srna-seq-data-for-mir-210-over-expression)
     -   [Experiment Overview](#experiment-overview)
