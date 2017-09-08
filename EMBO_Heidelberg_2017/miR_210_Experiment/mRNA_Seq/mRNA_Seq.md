@@ -1,7 +1,8 @@
 mRNA Seq - miR210 Practical
 ================
-Anton Enright & Dimitrios Vitsios
-'13 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September 2017
 
 -   [mRNA Analysis](#mrna-analysis)
     -   [Raw Data](#raw-data)
