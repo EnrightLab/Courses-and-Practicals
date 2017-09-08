@@ -1,7 +1,8 @@
 Mini-mapping Practical
 ================
-Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September 2017
 
 Basic Mapping Practical
 -------
