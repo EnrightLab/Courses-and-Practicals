@@ -14,7 +14,7 @@ For any RNASeq experiment there must be a _mapping_ and a _quatification_ to tur
 For most mapping tools you will need:
 * A genome (usually in FASTA format) - [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is a great place for this.
 * An annotation file (usually in GTF format) - again, [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is ideal for this.
-  * If you are using at mouse or human tissue you could also use [Gencode.](https://www.gencodegenes.org)
+  * If you are using at mouse or human tissue you could also look at [Gencode.](https://www.gencodegenes.org)
 * An indexed version of the genome - the command needed varies by method, but the index needs to be built only once.
 * A mapping tool (in this case HISAT2)
 * A quantification tool (in this case htseq-count) to turn mapped reads to counts on features.
