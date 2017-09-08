@@ -15,7 +15,7 @@ Anton Enright & Dimitrios Vitsios
 About R
 -------
 
-R is a free software environment for statistical computing. R is a free tool that you can download and use on a variety of platforms and environments. The [R project](http://www.r-project.org) Webpage is a good place to learn more about R.
+R is a free software environment for statistical computing. R is a free tool that you can download and use on a variety of platforms and environments. The [R project](http://www.r-project.org) webpage is a good place to learn more about R.
 
 In this session we will focus on learning the basics of R so that we will be able to use BioConductor properly in the next session. R contains a vast collection of resources and tools many of which are beyond the scope of this session.
 
