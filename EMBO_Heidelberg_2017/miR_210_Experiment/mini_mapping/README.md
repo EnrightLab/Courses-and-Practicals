@@ -61,7 +61,7 @@ Many of these tools require you to perform your own mapping using a mapping algo
 *   SOAP
 *   STAR
 *   HiSat
-*   Kallisto
+*   Kallisto
 *   Salmon
 
 We used HiSat2 and HTSeq-count to map the sequence data from 2 samples to the reference genome in a splice-aware manner and used the Ensembl Reference Transcriptome to quantitate read levels across transcripts. HiSat2 shatters reads into fragments and to map them to the genome and splice sites.
