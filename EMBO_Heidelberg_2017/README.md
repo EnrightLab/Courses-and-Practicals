@@ -1,6 +1,6 @@
 Small RNA Computational Biology
 ===============================
-![EMBO](/images/embo.png)
+![EMBO](/images/embl.png)
 
 2017 EMBL - MicroRNA Profiling
 -------------------------------------------------------------------
