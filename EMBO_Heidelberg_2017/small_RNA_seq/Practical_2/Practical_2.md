@@ -2,7 +2,7 @@ Small RNA Seq - Practical 2
 ================
 Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 
-12 September, 2017
+12 September 2017
 
 -   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
 -   [Initial count analysis](#initial-count-analysis)
