@@ -114,6 +114,9 @@ This will install the module into R manually.
 
 The fastq files, pdata file and mircounts file are also [available](../data/) but preinstalled on these machines.
 
+<br>
+Launch RStudio and load libraries
+
 ``` r
 library(Reaper)
 library(gplots)
@@ -424,8 +427,11 @@ Mapping Cleaned Reads to MicroRNAs
 
 We will now use a web-utility to map cleaned and filtered reads against miRBase known mature miRNA sequences. This server will take each cleaned unique read and compare it to precursor sequences downloaded from miRBase. In the case of mismatches, a read will still be assigned if it has less than two mismatches assuming both sequences are each others best hit. The system supports compressed (GZ or ZIP) files as well as FASTQ text files.
 
-Click [here](http://www.ebi.ac.uk/research/enright/software/chimira) To use Chimira
+Click [here](http://www.ebi.ac.uk/research/enright/software/chimira) to use Chimira.
 
 For this web-server, choose each of the **.clean.uniq** fastq files that were produced by reaper. Make sure you choose **Human** as the reference species.
 
 We now have raw counts of reads on microRNAs ready for QC and differential analysis.
+
+More details on Chimira are available [here.](https://www.ncbi.nlm.nih.gov/pubmed/26093149)
+This utility can also be used to identify epitranscriptomic modifications to miRNAs.
