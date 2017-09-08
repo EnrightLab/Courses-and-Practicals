@@ -140,7 +140,7 @@ heatmap.2(cor(rawcounts),trace="none",col=hmcol,main="Sample to Sample Correlati
 heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
-![](small_RNASeq_files/figure-markdown_github/unnamed-chunk-9-1.png){ height=50% }
+![](small_RNASeq_files/figure-markdown_github/unnamed-chunk-9-1.png){ height=150% }
 
 ``` r
 heatmap.2(cor(log2counts),trace="none",col=hmcol,main="Sample to Sample Correlation (Log2)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
