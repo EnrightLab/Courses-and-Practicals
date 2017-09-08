@@ -21,7 +21,7 @@ For most mapping tools you will need:
 
 
 ## Raw Data
-Download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mapping/data) and put the files in a directory called 'mir210_mapping' in your main course_data directory.
+The data should be preinstalled. Otherwise download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mapping/data) and put the files in a directory called 'mir210_mapping' in your main course_data directory.
 
 
 ## Initial Setup
