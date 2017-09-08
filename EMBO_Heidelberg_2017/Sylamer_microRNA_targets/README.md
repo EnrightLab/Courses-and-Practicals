@@ -1,7 +1,8 @@
 Sylamer Analysis for microRNA Target Detection
 ================
-Anton Enright & Dimitrios Vitsios
-'12 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September 2017
 
 
 MicroRNA Target Analysis from Expression Data
