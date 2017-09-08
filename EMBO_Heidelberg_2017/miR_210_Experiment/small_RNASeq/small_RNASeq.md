@@ -34,7 +34,10 @@ This set of sequencing data is from libraries prepared in a previous course. We 
 Raw Data
 --------
 
-The raw data is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data).
+Download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/course_counts/data) and put the files in a directory called 'mir210_smallRNA' in your main course_data directory.
+
+
+Launch RStudio
 
 ``` r
 setwd('~/Desktop/course_data/mir210_smallRNA')
