@@ -9,7 +9,7 @@ Small RNA Computational Biology
 
 |Jack Monahan (monahanj@ebi.ac.uk)|Yuvia Perez Rico (yuvia.perez-rico@curie.fr)|Jan Provaznik (jan.provaznik@embl.de)|
 |---------------------------|------------------------------------|------------------------------------|
-|Picture|Picture|Picture|
+|<img src="../images/picture_jack.png" align="left" width="150">|Picture|Picture|
 
 ***
 
