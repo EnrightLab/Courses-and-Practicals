@@ -73,6 +73,7 @@ Each run could require > 4Gb of RAM. Total run-time can be anything from 1 hour 
 
 You can download the Latest Human Genome build (90) from Ensembl. This is available [here](http://www.ensembl.org/info/data/ftp/index.html).
 
+<br>
 To build a new index you will need to use the hisat2-build command
 
 We will only build an index for Chromosome 22 instead of the whole Human Genome.
