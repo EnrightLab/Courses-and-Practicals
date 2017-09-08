@@ -20,7 +20,7 @@ Analysis of an sRNA-Seq data for miR-210 over-expression
 Experiment Overview
 -------------------
 
-This set of sequencing data is from the libraries prepared by participants. We have matched microRNA and mRNA samples to sequence in Breast Cancer MCF7 Human Cells. The experiment here was to overexpress miR-210 to explore the effect on mRNAs. Control samples used a non mouse microRNA from c.elegans (cel-miR-67) TCACAACCTCCTAGAAA
+This set of sequencing data is from libraries prepared in a previous course. We have matched microRNA and mRNA samples from   MCF7 Human Breast Cancer Cells. The experiment here was to overexpress miR-210 to explore the effect on mRNAs. Control samples used a non-mouse microRNA from c.elegans (cel-miR-67) TCACAACCTCCTAGAAA
 
 | filename                       | group | samplename | treatment | fullname          | 3p-ad               |
 |--------------------------------|-------|------------|-----------|-------------------|---------------------|
