@@ -11,8 +11,9 @@ reads and uses machine learning to look at the patterns of read distributions. T
 <br>
 <img src="mirnovo.jpg" width="600"><br>
 <BR><BR>
-<p>We will <a href="data">download</a> an example dataset to run through the  <a href="http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/">miRNovo server</a>.</p>
-mirNovo will be published in Nucleic Acids Research later this month.
+<p>We will <a href="data">download</a> an example dataset to run through the  <a href="http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/">miRNovo server</a>.
+ <br>
+mirNovo will be published in Nucleic Acids Research later this month.</p>
 
 <br>
 <p>Here are some example predicted microRNAs and hairpins obtained</p>
