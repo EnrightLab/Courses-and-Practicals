@@ -13,7 +13,8 @@ Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 Differential Expression of smallRNA counts with DESeq2
 ======================================================
 
-First we should change directory to where the data is
+Launch RStudio and change directory to where the data is
+
 
 ``` r
 setwd("~/Desktop/course_data/solexa")
