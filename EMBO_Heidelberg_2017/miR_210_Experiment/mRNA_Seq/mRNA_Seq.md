@@ -26,8 +26,7 @@ mRNA Analysis
 
 Raw Data
 --------
-
-The raw data is [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data)
+Download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data) and put the files in a directory called 'mir210_mRNA' in your course_data directory.
 
 Experimental Design
 -------------------
