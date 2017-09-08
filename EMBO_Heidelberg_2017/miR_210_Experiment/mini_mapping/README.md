@@ -14,8 +14,9 @@ For any RNASeq experiment there must be a _mapping_ and a _quatification_ to tur
 For most mapping tools you will need:
 * A genome (usually in FASTA format) - [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is a great place for this.
 * An annotation file (usually in GTF format) - Again, [Ensembl](http://www.ensembl.org/info/data/ftp/index.html) is ideal for this.
+  * If you are using at mouse or human tissue you could also use [Gencode](https://www.gencodegenes.org)
 * An indexed version of the genome - the command needed varies by method, but the index needs to be built only once.
-* A mapping tool (in this case hisat2)
+* A mapping tool (in this case HISAT2)
 * A quantification tool (in this case htseq-count) to turn mapped reads to counts on features.
 
 
@@ -60,33 +61,33 @@ Many of these tools require you to perform your own mapping using a mapping algo
 *   MAQ
 *   SOAP
 *   STAR
-*   HiSat
+*   HISAT2
 *   Kallisto
 *   Salmon
 
-We used HiSat2 and HTSeq-count to map the sequence data from 2 samples to the reference genome in a splice-aware manner and used the Ensembl Reference Transcriptome to quantitate read levels across transcripts. HiSat2 shatters reads into fragments and to map them to the genome and splice sites.
+We used HISAT2 and HTSeq-count to map the sequence data from 2 samples to the reference genome in a splice-aware manner and used the Ensembl Reference Transcriptome to quantitate read levels across transcripts. HISAT2 shatters reads into fragments and to map them to the genome and splice sites.
 
 * * *
 
 Each run could require > 4Gb of RAM. Total run-time can be anything from 1 hour to 24 hours per sample.
 
-You can download the Latest Human Genome build (84) from Ensembl. This is available [here](http://www.ensembl.org/info/data/ftp/index.html).
+You can download the Latest Human Genome build (90) from Ensembl. This is available [here](http://www.ensembl.org/info/data/ftp/index.html).
 
-To actually build a new bowtie index you can use the bowtie2-build command
+To build a new index you will need to use the hisat2-build command
 
-We will actually only build Chromosome 22 instead of the whole Human Genome.
+We will only build an index for Chromosome 22 instead of the whole Human Genome.
 
 ```
 hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh37.dna.22
 ```
 
-We also need to assemble a list of known spice sites for HiSat2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
+We also need to assemble a list of known spice sites for HISAT2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
 
 ```
 hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
 ```
 
-This will produce the following output file containing coordinates for all splice. sites on Chr 22.
+This will produce the following output file containing coordinates for all splice sites on Chr22.
 ```
 22	16062315	16062810	+
 22	16100647	16101275	-
@@ -101,14 +102,14 @@ This will produce the following output file containing coordinates for all splic
 22	16171606	16171951	+
 ```
 
-The two samples (Lanes 1-4, 2 replicates) are represented by single end sequencing files.
+The two samples (Lanes 1-4, 2 replicates) are represented by single-end sequencing files.
 
 *   mir210_lane1.fq.gz
 *   mir210_lane2.fq.gz
 *   control_lane1.fq.gz
 *   control_lane2.fq.gz
 
-We will launch HiSat2 on each of the files (HiSat can also process sets of paired end files). We also need to let TopHat know the type of sequencing (unstranded). We provide the splice site information and the HiSat Index. The -p 4 option asks for four processors per run, for bigger machines you can increase this for faster runs when aligning more reads.
+We will launch HISAT2 on each of the files (HISAT2 can also process sets of paired end files). By default HISAT2 assumes the sequencing was unstranded. We provide the splice site information and the HISAT2 Index. The -p 4 option asks for four processors per run, for bigger machines you can increase this for faster runs when aligning more reads.
 
 ```
 hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U mir210_lane1.fq.gz | samtools view -bS - > mir210_lane1.bam
@@ -127,7 +128,7 @@ hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRC
 86.52% overall alignment rate
 ```
 
-Now we can run HTSeq-Count on the tophat results to produce count tables
+Now we can run HTSeq-Count on the results to produce count tables
 
 **[http://www-huber.embl.de/users/anders/HTSeq/doc/overview.html](http://www-huber.embl.de/users/anders/HTSeq/doc/overview.html)**
 
@@ -145,7 +146,7 @@ htseq-count -f bam control_lane2.bam  Homo_sapiens.GRCh37.75.dna.chromosome.22.g
 6160 SAM alignments  processed.
 ```
 
-The Final counts tables can be loaded directly into DESeq2 in R/BioConductor the counts are in the files with **.counts** extensions.
+The Final counts tables can be loaded directly into DESeq2 in R/BioConductor. The counts are in the files with **.counts** extensions.
 
 Lets take a look:
 ```
