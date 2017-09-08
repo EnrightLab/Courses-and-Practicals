@@ -52,16 +52,17 @@ Many of these tools require you to perform your own mapping using a mapping algo
 
 ## Commonly used mapping tools
 
-*   BowTie
+*   Bowtie2
 *   GMAP/GSNAP
 *   BLAT
 *   novoalign
 *   BWA
 *   MAQ
 *   SOAP
-*   Star
-*   HiSat
-*   Callisto
+*   STAR
+*   HiSat
+*   Kallisto
+*   Salmon
 
 We used HiSat2 and HTSeq-count to map the sequence data from 2 samples to the reference genome in a splice-aware manner and used the Ensembl Reference Transcriptome to quantitate read levels across transcripts. HiSat2 shatters reads into fragments and to map them to the genome and splice sites.
 
