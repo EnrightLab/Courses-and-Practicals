@@ -61,7 +61,7 @@ Many of these tools require you to perform your own mapping using a mapping algo
 *   MAQ
 *   SOAP
 *   **STAR**
-*   HISAT2
+*   **HISAT2**
 *   **Kallisto**
 *   Salmon
 
