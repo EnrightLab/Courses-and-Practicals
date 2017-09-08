@@ -9,6 +9,7 @@ Anton Enright & Dimitrios Vitsios
 -   [Object types in R](#object-types-in-r)
 -   [Questioning the numbers](#questioning-the-numbers)
 -   [Basic Plotting and Graphing](#basic-plotting-and-graphing)
+-   [Loading Data From a Text File](#loading-data-from-a-text-file)
 -   [Exercises](#exercises)
 
 About R
@@ -298,8 +299,9 @@ In order to save some of these results as a PDF file, we can do the following:
 
 This will send any image that is produced after the <i>pdf</i> function into a file, closing that file when *dev.off()* is called.
 
-\#\#Loading Data From a Text File
-</H3>
+Loading Data From a Text File
+-----------------------------
+
 Lets load in some external data from a text file.
 
 The file [genomes.txt](genomes.txt) should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
