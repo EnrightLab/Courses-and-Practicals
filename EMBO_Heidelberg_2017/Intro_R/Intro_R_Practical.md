@@ -29,10 +29,10 @@ In this web page, sections like the following contain commands that you can copy
 
 ``` r
 setwd("~/Desktop/course_data/intro/")
-print("Hello Anton!")
+print("Hello Jack!")
 ```
 
-               ## [1] "Hello Anton!"
+               ## [1] "Hello Jack!"
 
 To get help in R just type a question mark before the name of the command, for example, for the plot&lt; function:
 
@@ -67,7 +67,7 @@ Simple operations are easy to calculate in R, including multiplication, division
                ## [1] 4
                ## [1] 14.3
 
-To save one of these results, we can assign it to a variable, using the "&lt;-" symbol. We can then use these variables in further operations.
+To save one of these results, we can assign it to a variable, using the "&lt;-"  or "=" symbols. We can then use these variables in further operations.
 
 ``` r
 x <- 2+1
@@ -79,7 +79,7 @@ x + y
 
                ## [1] 17.3
 
-One of R's benefits is that it can deal with many numbers at once. In order to tell R that we want to treat a series of numbers as one object, we can use the c command to "combine" objects into a list.
+One of R's benefits is that it can deal with many numbers at once. In order to tell R that we want to treat a series of numbers as one object, we can use the c command to "combine" objects into a vector.
 
 ``` r
 bubba <- c(1,2,3,4,10,59)
@@ -142,12 +142,12 @@ bubba[5]        # The Fifth Element, of bubba
 Using the **c** command we can also store text (between quotes):
 
 ``` r
-names <- c("Tom", "Anton", "James")
+names <- c("Jack", "Yuvia", "Jan")
 
 names[2]
 ```
 
-               ## [1] "Anton"
+               ## [1] "Yuvia"
 
 You now have a list of numbers and are ready to explore. In the sections that follow we will examine the basic operations in R that will allow you to do some of the analyses required in the next practical.
 
