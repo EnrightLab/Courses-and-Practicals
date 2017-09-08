@@ -1,7 +1,8 @@
 Small RNA Seq - Practical 1
 ================
-Anton Enright & Dimitrios Vitsios
-'13 June, 2017'
+Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+
+12 September, 2017
 
 -   [Analysis of smallRNA Seq datasets](#analysis-of-smallrna-seq-datasets)
     -   [The Fastq file format](#the-fastq-file-format)
