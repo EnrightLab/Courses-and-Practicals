@@ -97,9 +97,9 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 
 Lets install the module manually. Please open up a new terminal window.
 
-    cd /BGA2017/Course_material/June14
+    cd ~/Downloads
 
-    /BGA2017/R-3.4.0/bin/R CMD INSTALL Reaper_1.5.tar.gz 
+    R CMD INSTALL Reaper_1.5.tar.gz 
 
 This will install the module into R manually.
 
