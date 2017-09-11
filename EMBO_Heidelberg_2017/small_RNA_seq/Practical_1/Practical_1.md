@@ -95,11 +95,9 @@ Adapter Stripping for smallRNAs using *Reaper*
 
 The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
-Lets install the module manually. Please open up a new terminal window.
+Lets install the module manually in RStudio. Please open up a new terminal window.
 
-    cd ~/Downloads
-
-    R CMD INSTALL Reaper_1.5.tar.gz 
+    install.packages(file.path("~/Downloads/Reaper_1.5.tar.gz", repos=NULL, type='source') 
 
 This will install the module into R manually.
 
