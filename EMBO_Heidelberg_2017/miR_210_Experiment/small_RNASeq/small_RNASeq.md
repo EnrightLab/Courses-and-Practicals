@@ -40,7 +40,7 @@ The data should be preinstalled. Otherwise download the [raw data](http://wwwdev
 Launch RStudio
 
 ``` r
-setwd('~/Desktop/course_data/mir210_smallRNA')
+setwd('/data/mir210_smallRNA')
 library(RColorBrewer)
 library(gplots)
 library(DESeq2)
