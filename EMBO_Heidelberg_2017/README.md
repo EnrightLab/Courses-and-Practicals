@@ -38,7 +38,7 @@ List of Practicals:
 
 3. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
    * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
-   * [Mini mapping practical using HiSat2](miR_210_Experiment/mini_mapping/)
+   * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
 
 4.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
