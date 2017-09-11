@@ -76,7 +76,6 @@ Some of the samples look dramatically different to their replicates. We should i
 First we'll do a pairwise plot of the log2 counts between all samples
 
 ``` r
-X11()
 pairs(log2(mircounts+1),main="Pair-wise sample to sample counts")
 ```
 
