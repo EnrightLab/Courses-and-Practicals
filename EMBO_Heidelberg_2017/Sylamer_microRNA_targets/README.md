@@ -90,7 +90,7 @@ It should have downloaded to the Downloads folder:
 
 ```
 cd ~/Downloads
- /BGA2017/Oracle_java/jre/jre1.8.0_131/bin/javaws webstart.jnlp 
+javaws webstart.jnlp 
 ```
 
 ## Data Analysis and Interpretation
