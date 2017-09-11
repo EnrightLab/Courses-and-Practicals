@@ -32,9 +32,8 @@ We will open a terminal and change to the practical folder on your desktop.
 We will also add the paths to the programs we will be using **hisat2** and **htseq-count**.
 
 ```
-cd ~/Desktop/course_data/mir210_mapping/
+cd ~/data/mir210_mapping/
 
-export PATH={$PATH}:/BGA2017/hisat2-2.1.0/:/BGA2017/anaconda2/bin:/BGA2017/samtools-1.4.1/bin/
 
 ```
 
