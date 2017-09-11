@@ -124,7 +124,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("~/data/solexa")
+setwd("/data/solexa")
 list.files()
 ```            
 
