@@ -17,7 +17,7 @@ Launch RStudio and change directory to where the data is
 
 
 ``` r
-setwd("~/data/solexa")
+setwd("/data/solexa")
 ```
 
 If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
