@@ -30,7 +30,7 @@ This is the R terminal where we will type commands for both R and Bioconductor.
 In this web page, sections like the following contain commands that you can copy and paste into the R terminal. The output you should expect to get from R will be presented like this (below).
 
 ``` r
-setwd("~/Desktop/course_data/intro/")
+setwd("~/data/intro/")
 print("Hello Jack!")
 ```
 
