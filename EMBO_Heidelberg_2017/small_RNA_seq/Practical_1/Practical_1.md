@@ -97,7 +97,7 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 
 Lets install the module manually in RStudio. Please open up a new terminal window.
 
-    install.packages(file.path("~/Downloads/Reaper_1.5.tar.gz", repos=NULL, type='source') 
+    install.packages("~/Downloads/Reaper_1.5.tar.gz", repos=NULL, type='source') 
 
 This will install the module into R manually.
 
@@ -124,7 +124,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("~/Desktop/course_data/solexa")
+setwd("~/data/solexa")
 list.files()
 ```            
 
