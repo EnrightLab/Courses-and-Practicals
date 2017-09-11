@@ -21,7 +21,7 @@ Before we start, we need to setup Java to allow us to run webstart applications.
 
 Open a Terminal and type:
 ```
-/BGA2017/Oracle_java/jre/jre1.8.0_131/bin/ControlPanel 
+/g/software/bin/ControlPanel 
 ```
 
 This opens the java control panel
