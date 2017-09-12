@@ -120,13 +120,14 @@ hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRC
 
 ```
 [samopen] SAM header is present: 194 sequences.
-3260345 reads; of these:
-  3260345 (100.00%) were unpaired; of these:
-    439505 (13.48%) aligned 0 times
-    2302177 (70.61%) aligned exactly 1 time
-    518663 (15.91%) aligned >1 times
-86.52% overall alignment rate
+3243206 reads; of these:
+  3243206 (100.00%) were unpaired; of these:
+    3112883 (95.98%) aligned 0 times
+    104048 (3.21%) aligned exactly 1 time
+    26275 (0.81%) aligned >1 times
+4.02% overall alignment rate
 ```
+Only 4% aligns because we are only using chr22. You would hope/expect more to align to the whole transcriptome.
 
 Now we can run HTSeq-Count on the results to produce count tables
 
