@@ -84,7 +84,7 @@ hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh37.dna
 We also need to assemble a list of known spice sites for HISAT2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
 
 ```
-python hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
+hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
 ```
 
 This will produce the following output file containing coordinates for all splice sites on Chr22.
