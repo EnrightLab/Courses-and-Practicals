@@ -100,7 +100,9 @@ heatmap.2(cor(mircounts),trace="none",col=hmcol,main="Sample Correlation")
 Due to the sample-swap error we need to relabel the swapped samples
 
 ``` r
-samplenames <- c("Brain", "Brain", "Brain", "Heart", "Heart", "Heart", "Heart", "Brain", "Liver", "Liver", "Liver" ,"Liver")
+samplenames[8] =  "Brain"
+colnames(mircounts)[8] =  "Brain_4"
+
 ```
 
 Let's double check things are now fixed
