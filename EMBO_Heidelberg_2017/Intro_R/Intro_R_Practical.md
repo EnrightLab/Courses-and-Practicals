@@ -375,7 +375,7 @@ genomes["mouse",]
 
 ``` r
 
-``` r
+
 genomes[6,]
 ```
 
