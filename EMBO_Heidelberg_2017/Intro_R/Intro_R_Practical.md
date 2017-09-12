@@ -374,6 +374,20 @@ genomes["mouse",]
                ## mouse     3750716    17745067            8903
 
 ``` r
+
+``` r
+genomes[6,]
+```
+
+               ##       Genome.length Genes Transcripts Coding  Exons Introns
+               ## mouse    2716965481 31804       31804  23497 217952  186148
+               ##       Transcripts.length Coding.length Exons.length Introns.length
+               ## mouse           59754111      34549583     59754111      873541323
+               ##       UTR5.length UTR3.length MultiTransGenes
+               ## mouse     3750716    17745067            8903
+
+``` r
+
 summary(genomes)
 ```
 
