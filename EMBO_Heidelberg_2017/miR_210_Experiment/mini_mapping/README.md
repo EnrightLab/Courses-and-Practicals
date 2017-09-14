@@ -23,8 +23,6 @@ For most mapping tools you will need:
 ## Raw Data
 The data should be preinstalled. Otherwise download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mapping/data) and put the files in a directory called 'mir210_mapping' in your main course_data directory.
 
-**Can you download mir210_lane2.fq.gz and put it in the directory /data/mir210_mapping/**
-
 ## Initial Setup
 
 We have made a simple test with only Chromosome 22 and 400k reads on your machines
