@@ -2,7 +2,7 @@ Sylamer Analysis for microRNA Target Detection
 ================
 Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 
-12 September 2017
+14th September 2017
 
 
 MicroRNA Target Analysis from Expression Data
@@ -99,7 +99,8 @@ We should now finally get the Sylamer output for our experiment
 
 ## Analyse the miR-210 Data
 
-You should go and upload the sorted genelist we obtained from the mRNA sequencing experiment earlier.
+You should go and upload the sorted genelist (data/mir210_mRNA/FullCountsandStats.txt) we obtained from the mRNA sequencing experiment earlier.
+
 
 The identifier types are:
 **human >> ensembl >> ensembl_gene_id**
