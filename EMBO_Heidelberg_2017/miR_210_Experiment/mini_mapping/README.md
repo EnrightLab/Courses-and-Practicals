@@ -2,7 +2,7 @@ Mini-mapping Practical
 ================
 Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 
-12 September 2017
+14th September 2017
 
 Basic Mapping Practical
 -------
