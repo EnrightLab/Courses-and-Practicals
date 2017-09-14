@@ -2,7 +2,7 @@ mRNA Seq - miR210 Practical
 ================
 Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 
-12 September 2017
+14th September 2017
 
 -   [mRNA Analysis](#mrna-analysis)
     -   [Raw Data](#raw-data)
