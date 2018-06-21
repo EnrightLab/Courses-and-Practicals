@@ -10,7 +10,7 @@ Wellcome Trust Advanced Courses - RNA Transcriptomics
 
 |Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Adrien Leger (aleg@ebi.ac.uk)|
 |---------------------------|------------------------------------|------------------------------------|
-|<img src="../images/jack_picture.png" height="150">|||
+|<img src="../images/anton.jpg" height="150">|<img src="../images/jack_picture.png" height="150">|<img src="../images/adrien.jpg" height="150">|
 
 ***
 
