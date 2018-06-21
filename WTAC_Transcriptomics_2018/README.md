@@ -1,6 +1,8 @@
 Wellcome Trust Advanced Courses - RNA Transcriptomics
 ===============================
 ![WTAC](/images/acsc_logo.png)
+![Wellcome](/images/wellcome_logo.png)
+
 ![Cambridge](/images/cambridge.jpg)
 
 2018 WTAC - RNA Transcriptomics, Hinxton, Cambridge, UK
@@ -10,11 +12,10 @@ Wellcome Trust Advanced Courses - RNA Transcriptomics
 
 |Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Adrien Leger (aleg@ebi.ac.uk)|
 |---------------------------|------------------------------------|------------------------------------|
-|<img src="../images/anton.jpg" height="150">|<img src="../images/jack_picture.png" height="150">|<img src="../images/adrien.jpg" height="150">|
+|<img src="../images/anton.jpg" height="150">|<img src="../images/jack_picture.png" height="150">|<img src="../images/adrien.jpeg" height="150">|
 
 ***
 
-<img src="../images/wellcome_logo.png" align="right" width="150">
 <img src="../images/cambridge.jpg" align="right" width="150">
 
 _Department of Pathology,  
