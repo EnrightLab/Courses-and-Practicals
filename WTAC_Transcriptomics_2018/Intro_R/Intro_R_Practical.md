@@ -1,8 +1,7 @@
 Introduction to R
 ================
-Jack Monahan, Yuvia Perez Rico and Jan Provaznik
-
-12 September 2017
+Anton Enright & Dimitrios Vitsios
+'21 June, 2018'
 
 -   [About R](#about-r)
 -   [Getting Started](#getting-started)
@@ -10,13 +9,12 @@ Jack Monahan, Yuvia Perez Rico and Jan Provaznik
 -   [Object types in R](#object-types-in-r)
 -   [Questioning the numbers](#questioning-the-numbers)
 -   [Basic Plotting and Graphing](#basic-plotting-and-graphing)
--   [Loading Data From a Text File](#loading-data-from-a-text-file)
 -   [Exercises](#exercises)
 
 About R
 -------
 
-R is a free software environment for statistical computing. R is a free tool that you can download and use on a variety of platforms and environments. The [R project](http://www.r-project.org) webpage is a good place to learn more about R.
+R is a free software environment for statistical computing. R is a free tool that you can download and use on a variety of platforms and environments. The [R project](http://www.r-project.org) R Webpage is a good place to learn more about R.
 
 In this session we will focus on learning the basics of R so that we will be able to use BioConductor properly in the next session. R contains a vast collection of resources and tools many of which are beyond the scope of this session.
 
@@ -30,11 +28,11 @@ This is the R terminal where we will type commands for both R and Bioconductor.
 In this web page, sections like the following contain commands that you can copy and paste into the R terminal. The output you should expect to get from R will be presented like this (below).
 
 ``` r
-setwd("/data/intro/")
-print("Hello Jack!")
+setwd("~/Desktop/course_data/Intro")
+print("Hello Anton!")
 ```
 
-               ## [1] "Hello Jack!"
+               ## [1] "Hello Anton!"
 
 To get help in R just type a question mark before the name of the command, for example, for the plot&lt; function:
 
@@ -69,7 +67,7 @@ Simple operations are easy to calculate in R, including multiplication, division
                ## [1] 4
                ## [1] 14.3
 
-To save one of these results, we can assign it to a variable, using the "&lt;-"  or "=" symbols. We can then use these variables in further operations.
+To save one of these results, we can assign it to a variable, using the "&lt;-" symbol. We can then use these variables in further operations.
 
 ``` r
 x <- 2+1
@@ -81,7 +79,7 @@ x + y
 
                ## [1] 17.3
 
-One of R's benefits is that it can deal with many numbers at once. In order to tell R that we want to treat a series of numbers as one object, we can use the c command to "combine" objects into a vector.
+One of R's benefits is that it can deal with many numbers at once. In order to tell R that we want to treat a series of numbers as one object, we can use the c command to "combine" objects into a list.
 
 ``` r
 bubba <- c(1,2,3,4,10,59)
@@ -144,12 +142,12 @@ bubba[5]        # The Fifth Element, of bubba
 Using the **c** command we can also store text (between quotes):
 
 ``` r
-names <- c("Jack", "Yuvia", "Jan")
+names <- c("Tom", "Anton", "James")
 
 names[2]
 ```
 
-               ## [1] "Yuvia"
+               ## [1] "Anton"
 
 You now have a list of numbers and are ready to explore. In the sections that follow we will examine the basic operations in R that will allow you to do some of the analyses required in the next practical.
 
@@ -300,9 +298,8 @@ In order to save some of these results as a PDF file, we can do the following:
 
 This will send any image that is produced after the <i>pdf</i> function into a file, closing that file when *dev.off()* is called.
 
-Loading Data From a Text File
------------------------------
-
+\#\#Loading Data From a Text File
+</H3>
 Lets load in some external data from a text file.
 
 The file [genomes.txt](genomes.txt) should already be inside the course\_material folder on your desktop. We can then load this file into R with the following:
@@ -374,20 +371,6 @@ genomes["mouse",]
                ## mouse     3750716    17745067            8903
 
 ``` r
-
-
-genomes[6,]
-```
-
-               ##       Genome.length Genes Transcripts Coding  Exons Introns
-               ## mouse    2716965481 31804       31804  23497 217952  186148
-               ##       Transcripts.length Coding.length Exons.length Introns.length
-               ## mouse           59754111      34549583     59754111      873541323
-               ##       UTR5.length UTR3.length MultiTransGenes
-               ## mouse     3750716    17745067            8903
-
-``` r
-
 summary(genomes)
 ```
 
