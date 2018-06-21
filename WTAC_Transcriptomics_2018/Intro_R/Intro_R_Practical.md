@@ -1,6 +1,6 @@
 Introduction to R
 ================
-Anton Enright & Dimitrios Vitsios
+Anton Enright & Jack Monahan
 '21 June, 2018'
 
 -   [About R](#about-r)
@@ -412,7 +412,7 @@ A data frame can be considered as a simple table. How do we add a new column? Le
 ``` r
 genomes$Average.transcript.length <- genomes$Transcripts.length/genomes$Transcripts
 
-barplot(genomes$Average.transcript.length, names.arg=rownames(genomes), col="lightblue")
+barplot(genomes$Average.transcript.length, names.arg=rownames(genomes), col="lightblue",las=2)
 ```
 
 ![](Intro_R_Practical_files/figure-markdown_github/unnamed-chunk-22-1.png)

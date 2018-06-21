@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R"
-author: "Anton Enright & Dimitrios Vitsios"
+author: "Anton Enright & Jack Monahan"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
@@ -280,7 +280,7 @@ We can then plot the results with a simple barplot function.
 ```{r}
 genomes$Average.transcript.length <- genomes$Transcripts.length/genomes$Transcripts
 
-barplot(genomes$Average.transcript.length, names.arg=rownames(genomes), col="lightblue")
+barplot(genomes$Average.transcript.length, names.arg=rownames(genomes), col="lightblue",las=2)
 ```
 
 ##Exercises
