@@ -1,24 +1,20 @@
-Small RNA Computational Biology
+Wellcome Trust Advanced Courses - RNA Transcriptomics
 ===============================
-![EMBO](/images/embl.png)
+![WTAC](/images/acsc_logo.png)
+![Cambridge](/images/cambridge.jpg)
 
-2017 EMBL - MicroRNA Profiling
+2018 WTAC - RNA Transcriptomics, Hinxton, Cambridge, UK
 -------------------------------------------------------------------
 
-**Instructors: Jack Monahan, Yuvia Perez Rico and Jan Provaznik**
+**Instructors: Anton Enright, Jack Monahan, Adrien Leger**
 
-|Jack Monahan (monahanj@ebi.ac.uk)|Yuvia Perez Rico (yuvia.perez-rico@curie.fr)|Jan Provaznik (jan.provaznik@embl.de)|
+|Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Adrien Leger (aleg@ebi.ac.uk)|
 |---------------------------|------------------------------------|------------------------------------|
-|<img src="../images/jack_picture.png" height="150">|
+|<img src="../images/jack_picture.png" height="150">|||
 
 ***
 
-<img src="../images/embl.png" align="right" width="150">
-
-_EMBL - European Bioinformatics Institute,  
-Wellcome Trust Genome Campus,  
-Hinxton, Cambridge, CB10 1SA, UK._  
-
+<img src="../images/wellcome_logo.png" align="right" width="150">
 <img src="../images/cambridge.jpg" align="right" width="150">
 
 _Department of Pathology,  
