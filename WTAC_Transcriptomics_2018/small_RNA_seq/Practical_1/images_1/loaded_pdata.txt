@@ -1,0 +1,26 @@
+1     lane1Brain2_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+2     lane1Brain5_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+3     lane1Brain6_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+4    lane1Heart11_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+5     lane1Heart1_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+6     lane1heart3_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+7     lane1Heart8_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+8    lane1Liver10_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+9  lane1Liver12x2_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+10    lane1Liver4_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+11    lane1Liver7_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+12    lane1Liver9_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
+   samplename
+1       Brain
+2       Brain
+3       Brain
+4       Heart
+5       Heart
+6       Heart
+7       Heart
+8       Liver
+9       Liver
+10      Liver
+11      Liver
+12      Liver
+
