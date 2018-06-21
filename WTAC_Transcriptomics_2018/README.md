@@ -1,8 +1,8 @@
 Wellcome Trust Advanced Courses - RNA Transcriptomics
 ===============================
 ![WTAC](/images/acsc_logo.png)
-![Wellcome](/images/wellcome_logo.png)
 
+![Wellcome](/images/wellcome_logo.png)
 ![Cambridge](/images/cambridge.jpg)
 
 2018 WTAC - RNA Transcriptomics, Hinxton, Cambridge, UK
