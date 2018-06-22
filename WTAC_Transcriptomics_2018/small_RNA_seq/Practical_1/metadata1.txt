@@ -1,0 +1,2 @@
+genotype	3p-ad	tabu	barcode	5p-si
+wt	AGATCGGAAGAGCACACGTCTG	NA	lane	

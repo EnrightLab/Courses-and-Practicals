@@ -11,7 +11,7 @@ output:
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data')
+opts_knit$set(root.dir = '~/Desktop/course_data/smallrna')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',
@@ -109,15 +109,14 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 
 Lets install the module manually. Please open up a new terminal window.
 ```{}
-cd /BGA2017/Course_material/Jun14
-
-/BGA2017/R-3.4.0/bin/R CMD install Reaper_1.5.tar.gz 
+cd ~/Desktop/course_data/smallrna
+R CMD install Reaper_1.5.tar.gz 
 ```
 
 This will install the module into R manually.
 
 ```{}
-* installing to library \u2018/home/aje/R/x86_64-pc-linux-gnu-library/3.4\u2019
+* installing to library \u2018/home/user/R/x86_64-pc-linux-gnu-library/3.4\u2019
 * installing *source* package \u2018Reaper\u2019 ...
 ** libs
 gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c reaper.c -o reaper.o
@@ -138,7 +137,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ```{r}
-setwd("~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/small_RNA_seq/data")
+setwd("~/Desktop/course_data/smallrna")
 list.files()
 ```
 
@@ -181,12 +180,12 @@ reaper(pdata,"no-bc",c("do"="10000"));
 Cleaning many millions of reads will take some time, the method processes around 2M-4M reads per minute.
 
 ```{}
-[1] "Starting Reaper for file: lane1Brain2_sequence.fastq.gz"
-                          fastq                            geom 
-"lane1Brain2_sequence.fastq.gz"                         "no-bc" 
-                           meta                        basename 
-                "metadata1.txt"                             "1" 
-Passing to reaper: dummy-internal --R -fastq lane1Brain2_sequence.fastq.gz -geom no-bc -meta metadata1.txt -basename 1
+[1] "Starting Reaper for file: A638S1.R1.fastq.gz"
+               fastq                 geom                 meta             basename 
+"A638S1.R1.fastq.gz"              "no-bc"      "metadata1.txt"                  "1" 
+                  do 
+             "10000" 
+Passing to reaper: dummy-internal --R -fastq A638S1.R1.fastq.gz -geom no-bc -meta metadata1.txt -basename 1 -do 10000
 
 ---
 mRpm   million reads per minute
@@ -194,7 +193,6 @@ mNpm   million nucleotides per minute
 mCps   million alignment cells per second
 lint   total removed reads (per 10K), sum of columns to the left
 25K reads per dot, 1M reads per line  seconds  mr mRpm mNpm mCps {error qc  low  len  NNN tabu nobc cflr  cfl lint   OK} per 10K
-........................................   26   1  2.4  115   59    0    0    0    0    0    0    0    0    0    0 10000
 ```
 
 Reaper is designed to be fast and memory-efficient so it should run on any machine with 500MB of RAM or more. The time taken to complete the run depends on how fast the processors in your machine are.
@@ -220,102 +218,59 @@ You should get one plot back for each lane processed.
 Here is a list of files generated during the Reaper run
 
 ```{}
-10.lane.clean.gz
-10.lane.clean.uniq.gz
-10.lane.report.clean.len
-10.lane.report.clean.nt
-10.lane.report.input.nt
-10.lane.report.input.q
-10.lint.gz
-10.sumstat
-11.lane.clean.gz
-11.lane.clean.uniq.gz
-11.lane.report.clean.len
-11.lane.report.clean.nt
-11.lane.report.input.nt
-11.lane.report.input.q
-11.lint.gz
-11.sumstat
-12.lane.clean.gz
-12.lane.clean.uniq.gz
-12.lane.report.clean.len
-12.lane.report.clean.nt
-12.lane.report.input.nt
-12.lane.report.input.q
-12.lint.gz
-12.sumstat
-1.lane.clean.gz
-1.lane.clean.uniq.gz
-1.lane.report.clean.len
-1.lane.report.clean.nt
 1.lane.report.input.nt
+1.lane.report.clean.nt
+1.lane.report.clean.len
 1.lane.report.input.q
-1.lint.gz
 1.sumstat
-2.lane.clean.gz
-2.lane.clean.uniq.gz
-2.lane.report.clean.len
-2.lane.report.clean.nt
+1.lane.clean.gz
+1.lint.gz
+1.lane.clean.uniq.gz
+metadata2.txt
 2.lane.report.input.nt
+2.lane.report.clean.nt
+2.lane.report.clean.len
 2.lane.report.input.q
-2.lint.gz
 2.sumstat
-3.lane.clean.gz
-3.lane.clean.uniq.gz
-3.lane.report.clean.len
-3.lane.report.clean.nt
+2.lane.clean.gz
+2.lint.gz
+2.lane.clean.uniq.gz
+metadata3.txt
 3.lane.report.input.nt
+3.lane.report.clean.nt
+3.lane.report.clean.len
 3.lane.report.input.q
-3.lint.gz
 3.sumstat
-4.lane.clean.gz
-4.lane.clean.uniq.gz
-4.lane.report.clean.len
-4.lane.report.clean.nt
+3.lane.clean.gz
+3.lint.gz
+3.lane.clean.uniq.gz
+metadata4.txt
 4.lane.report.input.nt
+4.lane.report.clean.nt
+4.lane.report.clean.len
 4.lane.report.input.q
-4.lint.gz
 4.sumstat
-5.lane.clean.gz
-5.lane.clean.uniq.gz
-5.lane.report.clean.len
-5.lane.report.clean.nt
+4.lane.clean.gz
+4.lint.gz
+4.lane.clean.uniq.gz
+metadata5.txt
 5.lane.report.input.nt
+5.lane.report.clean.nt
+5.lane.report.clean.len
 5.lane.report.input.q
-5.lint.gz
 5.sumstat
-6.lane.clean.gz
-6.lane.clean.uniq.gz
-6.lane.report.clean.len
-6.lane.report.clean.nt
+5.lane.clean.gz
+5.lint.gz
+5.lane.clean.uniq.gz
+metadata6.txt
 6.lane.report.input.nt
+6.lane.report.clean.nt
+6.lane.report.clean.len
 6.lane.report.input.q
-6.lint.gz
 6.sumstat
-7.lane.clean.gz
-7.lane.clean.uniq.gz
-7.lane.report.clean.len
-7.lane.report.clean.nt
-7.lane.report.input.nt
-7.lane.report.input.q
-7.lint.gz
-7.sumstat
-8.lane.clean.gz
-8.lane.clean.uniq.gz
-8.lane.report.clean.len
-8.lane.report.clean.nt
-8.lane.report.input.nt
-8.lane.report.input.q
-8.lint.gz
-8.sumstat
-9.lane.clean.gz
-9.lane.clean.uniq.gz
-9.lane.report.clean.len
-9.lane.report.clean.nt
-9.lane.report.input.nt
-9.lane.report.input.q
-9.lint.gz
-9.sumstat
+6.lane.clean.gz
+6.lint.gz
+6.lane.clean.uniq.gz
 ```
 
 ##Mapping Cleaned Reads to MicroRNAs

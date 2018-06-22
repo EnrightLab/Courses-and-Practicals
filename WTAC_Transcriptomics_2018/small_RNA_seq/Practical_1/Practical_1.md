@@ -1,8 +1,7 @@
 Small RNA Seq - Practical 1
 ================
-Jack Monahan, Yuvia Perez Rico and Jan Provaznik
-
-12 September, 2017
+Anton Enright & Dimitrios Vitsios
+'22 June, 2018'
 
 -   [Analysis of smallRNA Seq datasets](#analysis-of-smallrna-seq-datasets)
     -   [The Fastq file format](#the-fastq-file-format)
@@ -50,7 +49,7 @@ Getting back to our fastq file, the first few lines look like this:
     +
     bb__Zbb^^^]Z_]]aT]`^TbbYb^_`T_cc`aac^Y\`b`\`L]_]\YX</tt> 
 
-The first line is the identifier (starting with <*@*>), the second the sequence. The third is an extra spacer line (which sometimes also has the identifier repeated). The fourth are *ascii* encoded quality scores, where each *letter* represents a different number.
+The first line is the identifier (starting with \*@\*), the second the sequence. The third is an extra spacer line (which sometimes also has the identifier repeated). The fourth are *ascii* encoded quality scores, where each *letter* represents a different number.
 
 This is the standard *ascii* table that was used to encode these numbers:
 
@@ -95,13 +94,14 @@ Adapter Stripping for smallRNAs using *Reaper*
 
 The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install this in your own R at home.
 
-Lets install the module manually in RStudio. Please open up a new terminal window.
+Lets install the module manually. Please open up a new terminal window.
 
-    install.packages("~/Downloads/Reaper_1.5.tar.gz", repos=NULL, type='source') 
+    cd ~/Desktop/course_data/smallrna
+    R CMD install Reaper_1.5.tar.gz 
 
 This will install the module into R manually.
 
-    * installing to library \u2018/home/aje/R/x86_64-pc-linux-gnu-library/3.4\u2019
+    * installing to library \u2018/home/user/R/x86_64-pc-linux-gnu-library/3.4\u2019
     * installing *source* package \u2018Reaper\u2019 ...
     ** libs
     gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c reaper.c -o reaper.o
@@ -110,10 +110,7 @@ This will install the module into R manually.
     gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c table.c -o table.o
     gcc -std=gnu99 -I/BGA2017/R-3.4.0/lib64/R/include -DNDEBUG   -I/usr/local/include  -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 -DBUILD_R_BINDINGS -fpic  -g -O2  -c trint.c -o trint.o
 
-The fastq files, pdata file and mircounts file are also [available](../data/) but should be preinstalled on these machines.
-
-<br>
-Launch RStudio and load libraries
+The fastq files, pdata file and mircounts file are also [available](../data/) but preinstalled on these machines.
 
 ``` r
 library(Reaper)
@@ -124,18 +121,14 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("/data/solexa")
+setwd("~/Desktop/course_data/smallrna")
 list.files()
-```            
+```
 
-              ## [1] "clean.sh"                         "lane1Brain2_sequence.fastq.gz"  
-              ## [3] "lane1Brain5_sequence.fastq.gz"    "lane1Brain6_sequence.fastq.gz" 
-              ##  [5] "lane1Heart1_sequence.fastq.gz"    "lane1Heart11_sequence.fastq.gz"  
-              ##  [7] "lane1heart3_sequence.fastq.gz"    "lane1Heart8_sequence.fastq.gz"   
-              ##  [9] "lane1Liver10_sequence.fastq.gz"   "lane1Liver12x2_sequence.fastq.gz"
-              ## [11] "lane1Liver4_sequence.fastq.gz"    "lane1Liver7_sequence.fastq.gz"   
-              ## [13] "lane1Liver9_sequence.fastq.gz"    "mircounts.txt"                   
-              ## [15] "pdata.txt"                        "Reaper_1.5.tar.gz" 
+               ##  [1] "A638S1.R1.fastq.gz" "A638S2.R1.fastq.gz" "A638S3.R1.fastq.gz"
+               ##  [4] "A638S4.R1.fastq.gz" "A638S5.R1.fastq.gz" "A638S6.R1.fastq.gz"
+               ##  [7] "clean.sh"           "mircounts.txt"      "pdata.txt"         
+               ## [10] "Reaper_1.5.tar.gz"
 
 Hopefully, you will see a compressed FASTQ txt file for each of the 4 lanes
 
@@ -152,32 +145,13 @@ pdata <- read.table("pdata.txt",header=TRUE,check.names=FALSE)
 pdata
 ```
 
-               ##                            filename                        3p-ad tabu
-               ## 1     lane1Brain2_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 2     lane1Brain5_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 3     lane1Brain6_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 4    lane1Heart11_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 5     lane1Heart1_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 6     lane1heart3_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 7     lane1Heart8_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 8    lane1Liver10_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 9  lane1Liver12x2_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 10    lane1Liver4_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 11    lane1Liver7_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ## 12    lane1Liver9_sequence.fastq.gz AGATCGGAAGAGCACACGTCTGAACTCC   NA
-               ##    samplename
-               ## 1       Brain
-               ## 2       Brain
-               ## 3       Brain
-               ## 4       Heart
-               ## 5       Heart
-               ## 6       Heart
-               ## 7       Heart
-               ## 8       Liver
-               ## 9       Liver
-               ## 10      Liver
-               ## 11      Liver
-               ## 12      Liver
+               ##   samplename           filename genotype                  3p-ad tabu
+               ## 1        mt1 A638S4.R1.fastq.gz      mut AGATCGGAAGAGCACACGTCTG   NA
+               ## 2        mt2 A638S5.R1.fastq.gz      mut AGATCGGAAGAGCACACGTCTG   NA
+               ## 3        mt3 A638S6.R1.fastq.gz      mut AGATCGGAAGAGCACACGTCTG   NA
+               ## 4        wt1 A638S1.R1.fastq.gz       wt AGATCGGAAGAGCACACGTCTG   NA
+               ## 5        wt2 A638S2.R1.fastq.gz       wt AGATCGGAAGAGCACACGTCTG   NA
+               ## 6        wt3 A638S3.R1.fastq.gz       wt AGATCGGAAGAGCACACGTCTG   NA
 
 Next we will start the Reaper algorithm. It will perform the following functions on all the lanes we have provided:
 
@@ -200,12 +174,12 @@ reaper(pdata,"no-bc",c("do"="10000"));
 
 Cleaning many millions of reads will take some time, the method processes around 2M-4M reads per minute.
 
-    [1] "Starting Reaper for file: lane1Brain2_sequence.fastq.gz"
-                              fastq                            geom 
-    "lane1Brain2_sequence.fastq.gz"                         "no-bc" 
-                               meta                        basename 
-                    "metadata1.txt"                             "1" 
-    Passing to reaper: dummy-internal --R -fastq lane1Brain2_sequence.fastq.gz -geom no-bc -meta metadata1.txt -basename 1
+    [1] "Starting Reaper for file: A638S1.R1.fastq.gz"
+                   fastq                 geom                 meta             basename 
+    "A638S1.R1.fastq.gz"              "no-bc"      "metadata1.txt"                  "1" 
+                      do 
+                 "10000" 
+    Passing to reaper: dummy-internal --R -fastq A638S1.R1.fastq.gz -geom no-bc -meta metadata1.txt -basename 1 -do 10000
 
     ---
     mRpm   million reads per minute
@@ -213,7 +187,6 @@ Cleaning many millions of reads will take some time, the method processes around
     mCps   million alignment cells per second
     lint   total removed reads (per 10K), sum of columns to the left
     25K reads per dot, 1M reads per line  seconds  mr mRpm mNpm mCps {error qc  low  len  NNN tabu nobc cflr  cfl lint   OK} per 10K
-    ........................................   26   1  2.4  115   59    0    0    0    0    0    0    0    0    0    0 10000
 
 Reaper is designed to be fast and memory-efficient so it should run on any machine with 500MB of RAM or more. The time taken to complete the run depends on how fast the processors in your machine are.
 
@@ -223,20 +196,14 @@ Let's take a look at the Quality Control Metrics generated
 reaperQC(pdata)
 ```
 
-![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-1.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-2.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-3.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-4.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-5.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-6.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-7.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-8.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-9.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-10.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-11.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-12.png)
+![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-1.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-2.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-3.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-4.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-5.png)![](Practical_1_files/figure-markdown_github/unnamed-chunk-5-6.png)
 
-               ## [1] "Processing Reaper Results for: lane1Brain2_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Brain5_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Brain6_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart1_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart11_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1heart3_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart8_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver10_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver12x2_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver4_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver7_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver9_sequence.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S1.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S2.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S3.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S4.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S5.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S6.R1.fastq.gz  lane"
 
 SmallRNA Read Quality Control
 -----------------------------
@@ -249,18 +216,12 @@ reaperQC(pdata)
 dev.off()
 ```
 
-               ## [1] "Processing Reaper Results for: lane1Brain2_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Brain5_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Brain6_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart1_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart11_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1heart3_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Heart8_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver10_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver12x2_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver4_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver7_sequence.fastq.gz  lane"
-               ## [1] "Processing Reaper Results for: lane1Liver9_sequence.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S1.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S2.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S3.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S4.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S5.R1.fastq.gz  lane"
+               ## [1] "Processing Reaper Results for: A638S6.R1.fastq.gz  lane"
                ## png 
                ##   2
 
@@ -268,113 +229,67 @@ You should get one plot back for each lane processed.
 
 Here is a list of files generated during the Reaper run
 
-    10.lane.clean.gz
-    10.lane.clean.uniq.gz
-    10.lane.report.clean.len
-    10.lane.report.clean.nt
-    10.lane.report.input.nt
-    10.lane.report.input.q
-    10.lint.gz
-    10.sumstat
-    11.lane.clean.gz
-    11.lane.clean.uniq.gz
-    11.lane.report.clean.len
-    11.lane.report.clean.nt
-    11.lane.report.input.nt
-    11.lane.report.input.q
-    11.lint.gz
-    11.sumstat
-    12.lane.clean.gz
-    12.lane.clean.uniq.gz
-    12.lane.report.clean.len
-    12.lane.report.clean.nt
-    12.lane.report.input.nt
-    12.lane.report.input.q
-    12.lint.gz
-    12.sumstat
-    1.lane.clean.gz
-    1.lane.clean.uniq.gz
-    1.lane.report.clean.len
-    1.lane.report.clean.nt
     1.lane.report.input.nt
+    1.lane.report.clean.nt
+    1.lane.report.clean.len
     1.lane.report.input.q
-    1.lint.gz
     1.sumstat
-    2.lane.clean.gz
-    2.lane.clean.uniq.gz
-    2.lane.report.clean.len
-    2.lane.report.clean.nt
+    1.lane.clean.gz
+    1.lint.gz
+    1.lane.clean.uniq.gz
+    metadata2.txt
     2.lane.report.input.nt
+    2.lane.report.clean.nt
+    2.lane.report.clean.len
     2.lane.report.input.q
-    2.lint.gz
     2.sumstat
-    3.lane.clean.gz
-    3.lane.clean.uniq.gz
-    3.lane.report.clean.len
-    3.lane.report.clean.nt
+    2.lane.clean.gz
+    2.lint.gz
+    2.lane.clean.uniq.gz
+    metadata3.txt
     3.lane.report.input.nt
+    3.lane.report.clean.nt
+    3.lane.report.clean.len
     3.lane.report.input.q
-    3.lint.gz
     3.sumstat
-    4.lane.clean.gz
-    4.lane.clean.uniq.gz
-    4.lane.report.clean.len
-    4.lane.report.clean.nt
+    3.lane.clean.gz
+    3.lint.gz
+    3.lane.clean.uniq.gz
+    metadata4.txt
     4.lane.report.input.nt
+    4.lane.report.clean.nt
+    4.lane.report.clean.len
     4.lane.report.input.q
-    4.lint.gz
     4.sumstat
-    5.lane.clean.gz
-    5.lane.clean.uniq.gz
-    5.lane.report.clean.len
-    5.lane.report.clean.nt
+    4.lane.clean.gz
+    4.lint.gz
+    4.lane.clean.uniq.gz
+    metadata5.txt
     5.lane.report.input.nt
+    5.lane.report.clean.nt
+    5.lane.report.clean.len
     5.lane.report.input.q
-    5.lint.gz
     5.sumstat
-    6.lane.clean.gz
-    6.lane.clean.uniq.gz
-    6.lane.report.clean.len
-    6.lane.report.clean.nt
+    5.lane.clean.gz
+    5.lint.gz
+    5.lane.clean.uniq.gz
+    metadata6.txt
     6.lane.report.input.nt
+    6.lane.report.clean.nt
+    6.lane.report.clean.len
     6.lane.report.input.q
-    6.lint.gz
     6.sumstat
-    7.lane.clean.gz
-    7.lane.clean.uniq.gz
-    7.lane.report.clean.len
-    7.lane.report.clean.nt
-    7.lane.report.input.nt
-    7.lane.report.input.q
-    7.lint.gz
-    7.sumstat
-    8.lane.clean.gz
-    8.lane.clean.uniq.gz
-    8.lane.report.clean.len
-    8.lane.report.clean.nt
-    8.lane.report.input.nt
-    8.lane.report.input.q
-    8.lint.gz
-    8.sumstat
-    9.lane.clean.gz
-    9.lane.clean.uniq.gz
-    9.lane.report.clean.len
-    9.lane.report.clean.nt
-    9.lane.report.input.nt
-    9.lane.report.input.q
-    9.lint.gz
-    9.sumstat
+    6.lane.clean.gz
+    6.lint.gz
+    6.lane.clean.uniq.gz
 
 Mapping Cleaned Reads to MicroRNAs
 ----------------------------------
 
 We will now use a web-utility to map cleaned and filtered reads against miRBase known mature miRNA sequences. This server will take each cleaned unique read and compare it to precursor sequences downloaded from miRBase. In the case of mismatches, a read will still be assigned if it has less than two mismatches assuming both sequences are each others best hit. The system supports compressed (GZ or ZIP) files as well as FASTQ text files.
 
-Click [here](http://www.ebi.ac.uk/research/enright/software/chimira) to use Chimira.
+Click [here](http://www.ebi.ac.uk/research/enright/software/chimira) To use Chimira
 
 For this web-server, choose each of the **.clean.uniq** fastq files that were produced by reaper. Make sure you choose **Human** as the reference species.
 
 We now have raw counts of reads on microRNAs ready for QC and differential analysis.
-
-More details on Chimira are available [here.](https://www.ncbi.nlm.nih.gov/pubmed/26093149)
-This utility can also be used to identify epitranscriptomic modifications to miRNAs.

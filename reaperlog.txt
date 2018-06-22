@@ -1,0 +1,17 @@
+
+Start Fri Jun 22 14:44:46 2018 
+
+Start Fri Jun 22 14:47:05 2018 
+
+Start Fri Jun 22 14:49:29 2018 
+[reaper] R is calling
+End
+
+
+Start Fri Jun 22 14:51:01 2018 
+[reaper] R is calling
+[reaper] only using columns 3p-ad and tabu
+[reaper] scanned line 1 sinsert3p [NA] barcode3p [NA] adaptor3p [AGATCGGAAGAGCACACGTCTG] cat3p [NA] barcode5p [NA] sinsert5p [] tabu [NA]
+cannae open file <A638S1.R1.fastq.gz> in mode <r>
+End
+
