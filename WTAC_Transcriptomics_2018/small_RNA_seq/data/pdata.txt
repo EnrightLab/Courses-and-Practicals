@@ -1,13 +1,7 @@
-"filename"	"3p-ad"	"tabu"	"samplename"
-lane1Brain2_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Brain
-lane1Brain5_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Brain
-lane1Brain6_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Brain
-lane1Heart11_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Heart
-lane1Heart1_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Heart
-lane1heart3_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Heart
-lane1Heart8_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Heart
-lane1Liver10_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Liver
-lane1Liver12x2_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Liver
-lane1Liver4_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Liver
-lane1Liver7_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Liver
-lane1Liver9_sequence.fastq.gz	AGATCGGAAGAGCACACGTCTGAACTCC	NA	Liver
+Name  FileName  Genotype
+mt1 A638S4.R1.fastq.gz  mut
+mt2 A638S5.R1.fastq.gz  mut
+mt3 A638S6.R1.fastq.gz  mut
+wt1 A638S1.R1.fastq.gz  wt
+wt2 A638S2.R1.fastq.gz  wt
+wt3 A638S3.R1.fastq.gz  wt
