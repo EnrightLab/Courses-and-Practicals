@@ -1,288 +1,324 @@
 Small RNA Seq - Practical 2
 ================
-Jack Monahan, Yuvia Perez Rico and Jan Provaznik
-
-12 September 2017
+Anton Enright & Dimitrios Vitsios
+'22 June, 2018'
 
 -   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
--   [Initial count analysis](#initial-count-analysis)
-    -   [Using DESeq to normalise the smallRNA count data](#using-deseq-to-normalise-the-smallrna-count-data)
-    -   [Post Normalisation Analysis](#post-normalisation-analysis)
-    -   [Analysis of Significant Hits across all samples](#analysis-of-significant-hits-across-all-samples)
+-   [Experiment Setup](#experiment-setup)
+    -   [Preparation](#preparation)
+-   [Mouse Analysis](#mouse-analysis)
+    -   [Count Loading](#count-loading)
+    -   [Count Preparation & Normalisation](#count-preparation-normalisation)
+    -   [Post Normalisation QC](#post-normalisation-qc)
+    -   [Initial Biological Analysis of the data](#initial-biological-analysis-of-the-data)
+    -   [Statistical Analysis](#statistical-analysis)
+    -   [Scatter Plot](#scatter-plot)
+    -   [Result output to text file](#result-output-to-text-file)
 
 Differential Expression of smallRNA counts with DESeq2
 ======================================================
 
-Launch RStudio and change directory to where the data is
-
+First we should change directory to where the data is
 
 ``` r
-setwd("/data/solexa")
+setwd("~/Desktop/course_data/smallrna")
 ```
 
-If you need the raw data for this practical, it is available [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/miseqdeseq/data)
+Experiment Setup
+================
+
+All data were pre-processed using *minion* to identify and check adapters, *reaper* to trim adapter sequences followed by *tally* to deduplicate reads while maintaining depth information. Subsequent to this all reads passed through the *ChimiRa* pipeline against all miRBase (Release 22) precursor sequences for Mouse. Reads were summed across paired end sequences for the same read pair. Finally reads are loaded into R for final analysis.
+
+This is the sample description file used for the analyses below.
+
+| **Name** | **File**           | **Barcodes** | **3p\_ad**       |
+|----------|--------------------|--------------|------------------|
+| wt1      | A638S1.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+| wt2      | A638S2.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+| wt3      | A638S3.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+| mt1      | A638S4.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+| mt2      | A638S5.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+| mt3      | A638S6.R1.fastq.gz | no\_barcode  | AGATCGGAAGAGCACA |
+
+Preparation
+-----------
+
+We first load the R/BioConductor libraries that we need.
 
 ``` r
-library("DESeq2")
-library("gplots")
-library("RColorBrewer")
-
-# Make a color scheme for heatmaps
+library(RColorBrewer)
+library(gplots)
+library(DESeq2)
+library(reshape2)
+library(ggplot2)
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
+spectral <- colorRampPalette(rev(brewer.pal(11, "Spectral")), space="Lab")(100)
 ```
 
-We will load in the counts obtained from BLAST of cleaned reads against miRBase mature human sequences
+Mouse Analysis
+==============
+
+Count Loading
+-------------
+
+We can now load all the count data
 
 ``` r
 mircounts <- read.table("mircounts.txt",header=TRUE,row.names=1)
-
-# We want to remove the last line of the mircounts file
-mircounts <- mircounts[-nrow(mircounts),]
-
-# We need to tell R which samples were from which tissues
-samplenames <- c("Brain", "Brain", "Brain", "Heart", "Heart", "Heart", "Heart", "Heart", "Liver", "Liver", "Liver", "Liver")
-colnames(mircounts) = paste(samplenames, seq(1:12), sep="_")
-head(mircounts)
+mircounts=mircounts[-nrow(mircounts),]
 ```
 
-               ##                 Brain_1 Brain_2 Brain_3 Heart_4 Heart_5 Heart_6 Heart_7
-               ## hsa-miR-1          1167    1911    1190  179717  129698  114090  164659
-               ## hsa-miR-122-5p      145     349     156     295      95     187     155
-               ## hsa-miR-9-5p      86907   98965   74695     444     124     296     239
-               ## hsa-miR-143-3p    27598   23711   21600   78973   66404   68549   96678
-               ## hsa-miR-148a-3p    2079    2053    1646    6637    4126    4034    6276
-               ## hsa-miR-21-5p      8279    8322    7029   14414    9933   11397   14733
-               ##                 Heart_8 Liver_9 Liver_10 Liver_11 Liver_12
-               ## hsa-miR-1          1253     375      554      345      348
-               ## hsa-miR-122-5p      183  157280    73426   145594    63610
-               ## hsa-miR-9-5p      84410     136      256      134      137
-               ## hsa-miR-143-3p    24126   16411     8800    10078     7491
-               ## hsa-miR-148a-3p    1697   73860    40933    52708    32330
-               ## hsa-miR-21-5p      6732   58983    28787    32407    26526
-
-Initial count analysis
-======================
-
-First, lets see the total numbers of counts obtained for each sample. We will use the **apply** function to quickly sweep across the table and compute the column sums.
+As well as the pdata, which contains information on each sample.
 
 ``` r
-barplot(apply(mircounts,2,sum),col=as.factor(samplenames),las=2)
+pdata <- read.table("pdata.txt",header=TRUE,row.names=1)
+colnames(mircounts)=rownames(pdata)
+conds=as.factor(as.character(pdata$genotype))
 ```
 
-![](Practical_2_files/figure-markdown_github/unnamed-chunk-4-1.png)
+Count Preparation & Normalisation
+---------------------------------
 
-Some of the samples look dramatically different to their replicates. We should investigate further by comparing samples to each other.
-
-First we'll do a pairwise plot of the log2 counts between all samples
+We are now ready to create a DESeq object from the counts table.
 
 ``` r
-pairs(log2(mircounts+1),main="Pair-wise sample to sample counts")
+#Lets Load the Counts First
+coldata = as.data.frame(t(t(conds)))
+rownames(coldata)=colnames(mircounts)
+colnames(coldata)='treatment'
+dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design = ~ treatment)
 ```
 
-![](Practical_2_files/figure-markdown_github/unnamed-chunk-5-1.png)
-
-Does anything look fishy about the data to you ?. Let's look at how the samples correlate with each other. Obviously replicates should be very highly correlated with a standard Pearson correlation test.
+We are ready to normalise the data, but first we should look at the number of sequenced reads per sample. There are some stark differences across the samples.
 
 ``` r
-pca <- princomp(mircounts)
-plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to Sample")
-text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
+cond_colours = c("#E41A1C","#377EB8")[as.factor(conds)]
+names(cond_colours)=conds
+
+group_colours = brewer.pal(length(rownames(pdata)),"Accent")[as.factor(rownames(pdata))]
+names(group_colours)=rownames(pdata)
+
+barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
+legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
+We will also estimate the negative binomial dispersion of the data.
+
 ``` r
-heatmap.2(cor(mircounts),trace="none",col=hmcol,main="Sample Correlation")
+dds <- estimateSizeFactors(dds)
+dds <- estimateDispersions(dds)
+```
+
+               ## gene-wise dispersion estimates
+
+               ## mean-dispersion relationship
+
+               ## final dispersion estimates
+
+``` r
+plotDispEsts(dds)
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-Due to the sample-swap error we need to relabel the swapped samples
+Post Normalisation QC
+---------------------
+
+Now we can normalise and plot the counts again. The data look much improved.
 
 ``` r
-samplenames[8] =  "Brain"
-colnames(mircounts)[8] =  "Brain_4"
+normcounts <- counts(dds, normalized=TRUE)
+rawcounts=counts(dds,normalized=FALSE)
+log2counts=log2(normcounts+1)
 
+
+barplot(apply(normcounts,2,sum), las=2,col=cond_colours,main="Post-Normalised Counts",cex.names=0.4)
+legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
 ```
 
-Let's double check things are now fixed
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+We will apply the Variance Stabilising Transformation (VST) it's better than log2 for counts.
 
 ``` r
-pca <- princomp(mircounts)
-plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to Sample")
-text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
+vsd <- varianceStabilizingTransformation(dds)
+vstcounts <- assay(vsd)
+vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
 ```
 
-![](Practical_2_files/figure-markdown_github/unnamed-chunk-9-1.png)
-
-Clearly we need to normalise the data to control for differences in global RNA levels across samples.
-
-Using DESeq to normalise the smallRNA count data
-------------------------------------------------
-
-DESeq is a statistical tool for analysis of count-based data such as from RNAseq. Microarrays and similar platforms produce 'continuous' data measurements, e.g. flourescence associated with a probe. However for count data the variance of results increases dramatically as you get low counts. For example, once a gene is lowly enough expressed that you only find small numbers of reads mapping to it you get very high variance as it is impossible to have half a count. For this reason it is imperative that count based sequencing data be normalised and statistically assessed with tools that take this into account. Tools like DESeq apply negative binomial statistics and try to flatten the variance across low and high counts.
+As an additional QC step we can calculate the sample-to-sample Pearson correlations and plot them in a heatmap.
 
 ``` r
-# First we tell DESeq which samples correspond to which tissues.
-conds = data.frame(samplenames)
-colnames(conds)="tissue"
-
-# Now we build a DESeq Count dataset and normalize it.
-cds <- DESeqDataSetFromMatrix(countData = mircounts, colData = conds, design = ~ tissue)
-cds <- estimateSizeFactors(cds)
-cds <- estimateDispersions(cds)
-cds <- nbinomWaldTest(cds)
+heatmap.2(cor(rawcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (Raw Counts)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
-Now we will plot the dispersion information and fit.
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 ``` r
-plotDispEsts(cds)
+heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours,margins=c(9,7))
+```
+
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-10-2.png)
+
+PCA of the first two Principal Components.
+
+``` r
+pca2=prcomp(t(vstcounts),center=TRUE)
+
+plot(pca2$x, col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)")
+text(pca2$x, as.vector(colnames(mircounts)), pos=3, cex=0.4)
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
-Post Normalisation Analysis
----------------------------
+We see a nice separation between the wildtype and scrambled samples.
 
-Lets see what effect our normalisation had
+Let's now look at the other principal components
 
 ``` r
-par(mfrow=c(2,1))
-prenorm=apply(mircounts,2,sum)
-barplot(prenorm,col=as.factor(samplenames),las=2,names=samplenames)
-postnorm=apply(counts(cds,normalized=TRUE),2,sum)
-barplot(postnorm,col=as.factor(samplenames),las=2,names=samplenames)
+par(mfrow=c(1,3))
+plot(pca2$x, col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)")
+text(pca2$x, as.vector(colnames(mircounts)), pos=3, cex=0.4)
+plot(pca2$x[,1],pca2$x[,3], col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)",ylab="PC3",xlab="PC1")
+text(pca2$x[,1],pca2$x[,3], as.vector(colnames(mircounts)), pos=3, cex=0.4)
+plot(pca2$x[,2],pca2$x[,3], col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)",ylab="PC3",xlab="PC2")
+text(pca2$x[,2],pca2$x[,3], as.vector(colnames(mircounts)), pos=3, cex=0.4)
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
-Lets do another Principal components analysis on the normalised data
+Initial Biological Analysis of the data
+---------------------------------------
+
+Here are the top10 microRNAs.
 
 ``` r
-pca <- princomp(counts(cds,normalized=T))
-plot(pca$loadings, col=as.factor(samplenames),  pch=19, cex=2, main="Sample to Sample PCA")
-text(pca$loadings, as.vector(colnames(mircounts)), pos=3, cex=0.8)
+top10=apply(mircounts,1,sum)[1:10]
+top10[11]=sum(apply(mircounts,1,sum)[11:nrow(mircounts)])
+names(top10)[11]="other"
+pie(top10,col=brewer.pal(11,"Set3"),main="Top10 microRNAs")
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
-Now we can use the negative-binomial test for each pairwise comparison of interest.
+This is the expression of the top10 microRNAs sample to sample.
 
 ``` r
-res1 =  results( cds, contrast=c("tissue","Brain", "Heart"))
-res2 =  results( cds, contrast=c("tissue","Brain", "Liver"))
-res3 =  results( cds, contrast=c("tissue","Heart", "Liver"))
-
-# Sort each result on Adjusted P-Value
-res1<-res1[order(res1$padj),]
-res2<-res2[order(res2$padj),]
-res3<-res3[order(res3$padj),]
-
-# Look at the first comparison
-head(res1,50)
+heatmap.2(vstcounts[names(top10)[1:10],],col=hmcol,trace="none",cexCol=0.4,cexRow=0.6,ColSideColors=cond_colours)
 ```
 
-               ## log2 fold change (MAP): tissue Brain vs Heart 
-               ## Wald test p-value: tissue Brain vs Heart 
-               ## DataFrame with 50 rows and 6 columns
-               ##                   baseMean log2FoldChange      lfcSE      stat
-               ##                  <numeric>      <numeric>  <numeric> <numeric>
-               ## hsa-miR-128      9917.6289       4.716466 0.11809294  39.93859
-               ## hsa-miR-378a-3p 12118.3791      -6.247371 0.09553713 -65.39207
-               ## hsa-miR-499a-5p  7258.3710      -7.021495 0.07591700 -92.48910
-               ## hsa-miR-133a     4807.4627      -7.940650 0.16459842 -48.24256
-               ## hsa-miR-378d      928.9525      -6.269205 0.15571567 -40.26059
-               ## ...                    ...            ...        ...       ...
-               ## hsa-miR-136-3p   162.83485       3.245716  0.1623744  19.98908
-               ## hsa-miR-452-5p    75.61569      -4.610875  0.2325850 -19.82447
-               ## hsa-miR-9-3p     227.13253       6.624428  0.3393934  19.51844
-               ## hsa-miR-30b-5p   711.24239      -2.521038  0.1292027 -19.51226
-               ## hsa-miR-744-5p   252.02968       2.541499  0.1316901  19.29909
-               ##                       pvalue         padj
-               ##                    <numeric>    <numeric>
-               ## hsa-miR-128                0            0
-               ## hsa-miR-378a-3p            0            0
-               ## hsa-miR-499a-5p            0            0
-               ## hsa-miR-133a               0            0
-               ## hsa-miR-378d               0            0
-               ## ...                      ...          ...
-               ## hsa-miR-136-3p  6.854389e-89 1.068391e-87
-               ## hsa-miR-452-5p  1.830961e-87 2.793189e-86
-               ## hsa-miR-9-3p    7.654455e-85 1.143384e-83
-               ## hsa-miR-30b-5p  8.637456e-85 1.263889e-83
-               ## hsa-miR-744-5p  5.466404e-83 7.838824e-82
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
-    log2 fold change (MAP): tissue Brain vs Heart 
-    Wald test p-value: tissue Brain vs Heart 
-    DataFrame with 50 rows and 6 columns
-                      baseMean log2FoldChange      lfcSE      stat       pvalue         padj
-                     <numeric>      <numeric>  <numeric> <numeric>    <numeric>    <numeric>hsa-miR-128      9917.6289       4.716332 0.11968367  39.40664            0            0
-    hsa-miR-378a-3p 12118.3791      -6.247263 0.09765315 -63.97401            0            0
-    hsa-miR-499a-5p  7258.3710      -7.021408 0.07956721 -88.24500            0            0
-    hsa-miR-133a     4807.4627      -7.940515 0.16499010 -48.12722            0            0
-    hsa-miR-378d      928.9525      -6.269041 0.15687156 -39.96289            0            0
-    ...                    ...            ...        ...       ...          ...          ...
-    hsa-miR-136-3p    162.8349       3.245689 0.16159117  20.08581 9.821032e-90 1.603390e-88
-    hsa-miR-9-3p      227.1325       6.624195 0.33683195  19.66617 4.203540e-86 6.716720e-85
-    hsa-miR-27b-3p  20353.5151      -1.448201 0.07405947 -19.55457 3.771937e-85 5.901510e-84
-    hsa-miR-30b-5p    711.2424      -2.521019 0.12998167 -19.39519 8.474115e-84 1.298788e-82
-    hsa-miR-744-5p    252.0297       2.541474 0.13180332  19.28232 7.560116e-83 1.135529e-81
-
-Lets make some volcanoplots of each comparison
+This is the expression of the miR-29 families of microRNAs sample to sample.
 
 ``` r
-par(mfrow=c(1,3))
-plot(res1$log2FoldChange,-log(res1$padj,10),main="Volcano Plot Brain vs Heart")
-text(res1[1:20,]$log2FoldChange,-log(res1[1:20,]$padj,10),labels=rownames(res1[1:20,]),cex=0.7,pos=1)
-legend("topleft","Brain",cex=0.5)
-legend("topright","Heart",cex=0.5)
-
-plot(res2$log2FoldChange,-log(res2$padj,10),main="Volcano Plot Brain vs Liver")
-text(res2[1:20,]$log2FoldChange,-log(res2[1:20,]$padj,10),labels=rownames(res2[1:20,]),cex=0.7,pos=1)
-legend("topleft","Brain",cex=0.5)
-legend("topright","Liver",cex=0.5)
-
-plot(res3$log2FoldChange,-log(res3$padj,10),main="Volcano Plot Heart vs Liver")
-text(res3[1:20,]$log2FoldChange,-log(res3[1:20,]$padj,10),labels=rownames(res3[1:20,]),cex=0.7,pos=1)
-legend("topleft","Heart",cex=0.5)
-legend("topright","Liver",cex=0.5)
+heatmap.2(vstcounts[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],],col=hmcol,trace="none",cexCol=0.4,cexRow=0.6,ColSideColors=cond_colours)
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 ``` r
-par(mfrow=c(1,1))
-```
-
-Analysis of Significant Hits across all samples
------------------------------------------------
-
-Let's choose significant miRs for each contrast by log fold change and adj. P-value. Then we merge into a single list of significant hits and make a heatmap.
-
-``` r
-sig1 = rownames(res1[(abs(res1$log2FoldChange) > 4) & (res1$padj < 0.00001) & !is.na(res1$padj),])
-sig2 = rownames(res2[(abs(res2$log2FoldChange) > 4) & (res2$padj < 0.00001) & !is.na(res2$padj),])
-sig3 = rownames(res3[(abs(res3$log2FoldChange) > 4) & (res3$padj < 0.00001) & !is.na(res3$padj),])
-
-# Merge to one list
-siglist = unique(c(sig1,sig2,sig3))
-
-# Generate Nice heatmap colours
-hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
-
-# Heatmap of significant hits
-heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",labCol=samplenames,margin=c(5,10))
+barplot(t(vstcounts[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],]),beside=T,las=2,cex.names=0.5,col=cond_colours,main="miR-29 levels (VST)")
+legend("topright",rownames(pdata),fill=cond_colours,cex=0.4)
 ```
 
 ![](Practical_2_files/figure-markdown_github/unnamed-chunk-16-1.png)
 
-We can also make a more simplified heatmap of expression for 20 most significant hits from each comparison.
+Statistical Analysis
+--------------------
+
+Run the statistical contrast on the count data
 
 ``` r
-siglist=unique(c(rownames(res1[1:20,]),rownames(res2[1:20,]),rownames(res3[1:20,])))
+p_threshold=0.05
+lfc_threshold=0.75
 
-heatmap.2(log2(counts(cds[siglist,],normalized=TRUE)+1),col=hmcol,trace="none",margin=c(5,10))
+cds <- nbinomWaldTest(dds)
+
+res=results(cds,contrast=c("treatment","wt","mut"))
+res <- res[order(res$padj),]
+res
 ```
 
-![](Practical_2_files/figure-markdown_github/unnamed-chunk-17-1.png)
+               ## log2 fold change (MAP): treatment wt vs mut 
+               ## Wald test p-value: treatment wt vs mut 
+               ## DataFrame with 1471 rows and 6 columns
+               ##                      baseMean log2FoldChange     lfcSE        stat
+               ##                     <numeric>      <numeric> <numeric>   <numeric>
+               ## mmu-mir-708-5p      370.21877      -3.880212 0.5208669   -7.449528
+               ## mmu-mir-219-2-3p   2508.84257      -3.586149 0.6161118   -5.820615
+               ## mmu-mir-204-5p      595.61606       3.605966 0.6224714    5.792982
+               ## mmu-mir-219-2-5p     89.54399      -2.535594 0.4502091   -5.632036
+               ## mmu-mir-10b-5p   632527.44731      -2.852560 0.5180408   -5.506439
+               ## ...                       ...            ...       ...         ...
+               ## mmu-mir-875-3p     0.12715984    -0.42370466  1.021558 -0.41476320
+               ## mmu-mir-882-5p     0.22104968    -0.42370466  1.021558 -0.41476320
+               ## mmu-mir-489-5p     0.08632002     0.05517826  1.021749  0.05400371
+               ## mmu-mir-804-3p     0.21019972     0.26690316  1.024176  0.26060278
+               ## mmu-mir-142-5p     0.12715984    -0.42370466  1.021558 -0.41476320
+               ##                        pvalue         padj
+               ##                     <numeric>    <numeric>
+               ## mmu-mir-708-5p   9.367487e-14 8.814805e-11
+               ## mmu-mir-219-2-3p 5.863146e-09 2.168921e-06
+               ## mmu-mir-204-5p   6.914734e-09 2.168921e-06
+               ## mmu-mir-219-2-5p 1.780944e-08 4.189672e-06
+               ## mmu-mir-10b-5p   3.661657e-08 6.891239e-06
+               ## ...                       ...          ...
+               ## mmu-mir-875-3p      0.6783153           NA
+               ## mmu-mir-882-5p      0.6783153           NA
+               ## mmu-mir-489-5p      0.9569322           NA
+               ## mmu-mir-804-3p      0.7943988           NA
+               ## mmu-mir-142-5p      0.6783153           NA
+
+``` r
+sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
+```
+
+Volcanoplots of Significant Hits
+
+``` r
+plot(res$log2FoldChange,-log(res$padj,10),ylab="-log10(Adjusted P)",xlab="Log2 FoldChange",main=paste("Volcano Plot","WT v Scr\nmir-29 in green\nsig. in red"),pch=19,cex=0.4)      
+points(res[sig,"log2FoldChange"],-log(res[sig,"padj"],10),pch=19,cex=0.4,col="red")
+text(res[sig[1:10],"log2FoldChange"],-log(res[sig[1:10],"padj"],10),pch=19,cex=0.4,pos=2,labels = rownames(res[sig[1:10],]))
+points(res[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],"log2FoldChange"],-log(res[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],"padj"],10),pch=19,cex=0.6,col="green")
+text(res[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],"log2FoldChange"],-log(res[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],"padj"],10),pch=19,cex=0.4,pos=2,labels =rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))])
+abline(h=-log10(p_threshold),lty=3)
+abline(v=-lfc_threshold,lty=3)
+abline(v=lfc_threshold,lty=3)   
+```
+
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-18-1.png)
+
+Scatter Plot
+------------
+
+``` r
+wt_median = apply(vstcounts[,pdata$genotype == "wt"],1,median)
+mt_median = apply(vstcounts[,pdata$genotype == "mut"],1,median)
+plot(wt_median,mt_median,cex=0.4,pch=19,col="darkblue")
+points(wt_median[grep("mir-29[a-z]",rownames(vstcounts))],mt_median[grep("mir-29[a-z]",rownames(vstcounts))],cex=0.4,pch=19,col="green")
+points(wt_median[sig],mt_median[sig],cex=1,col="red")
+text(wt_median[grep("mir-29[a-z]",rownames(vstcounts))],mt_median[grep("mir-29[a-z]",rownames(vstcounts))],cex=0.4,pos=3,labels=rownames(vstcounts)[grep("mir-29[a-z]",rownames(vstcounts))])
+abline(a=0,b=1,lty=2,col="red")
+```
+
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-19-1.png)
+
+Heatmap of significant hits.
+
+``` r
+heatmap.2(vstcounts[sig,],trace="none",ColSideColors = cond_colours,col=hmcol,margins=c(5,5),cexRow=0.5,cexCol=0.6,labCol=paste(rownames(pdata),pdata$SampleName,sep="\n"),main="Significant Hits Heatmap (VST)")
+```
+
+![](Practical_2_files/figure-markdown_github/unnamed-chunk-20-1.png)
+
+Result output to text file
+--------------------------
+
+Let's output the final results table with normalised expression values and stats listed
+
+``` r
+write.table(cbind(as.matrix(counts(dds,normalized=T)[rownames(res),]),as.matrix(res)),"mouse_results.txt",quote=F,sep="\t")
+```
