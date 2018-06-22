@@ -1,6 +1,6 @@
 ---
 title: "Small RNA Seq - Practical 2"
-author: "Anton Enright & Dimitrios Vitsios"
+author: "Anton Enright & Jack Monahan"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:

@@ -1,6 +1,6 @@
 Small RNA Seq - Practical 1
 ================
-Anton Enright & Dimitrios Vitsios
+Anton Enright & Jack Monahan
 '22 June, 2018'
 
 -   [Analysis of smallRNA Seq datasets](#analysis-of-smallrna-seq-datasets)
@@ -12,7 +12,7 @@ Anton Enright & Dimitrios Vitsios
 Analysis of smallRNA Seq datasets
 =================================
 
-In this practical we will be taking 8 samples of Solexa Sequencing data from the course samples that were prepared for small-RNA sequencing from total RNA.
+In this practical we will be taking 6 samples of Illumina small RNA Sequencing data from the Bitetti *et al* paper from Alena Shkumatava's lab. In this experiment we have smallRNAs harvested from 3 wildtype samples and 3 scrambled lncRNA binding site samples in mouse ESCs. We are looking for differential expression of miR-29 family microRNAs which should be binding to the site and being modified.
 
 It is important for next-gen sequence analysis to know the exact architecture of your sequencing reads including the 5' sequencing adapters and the sequences of barcoding tags and which samples each refers to
 
