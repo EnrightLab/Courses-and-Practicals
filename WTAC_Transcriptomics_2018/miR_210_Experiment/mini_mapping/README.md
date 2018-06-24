@@ -31,7 +31,7 @@ We will open a terminal and change to the practical folder on your desktop.
 We will also add the paths to the programs we will be using **hisat2** and **htseq-count**.
 
 ```
-cd ~/Desktop/mapping_practical/
+cd ~/Desktop/course_data/mapping_practical/
 
 ```
 
