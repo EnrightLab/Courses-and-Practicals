@@ -11,7 +11,7 @@ output:
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '~/Desktop/Courses-and-Practicals/EMBO_Greece_2017/miR_210_Experiment/mRNA_Seq/')
+opts_knit$set(root.dir = '~/Desktop/course_data/wtac_mrna_2016')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',

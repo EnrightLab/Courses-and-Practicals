@@ -1,8 +1,7 @@
 mRNA Seq - miR210 Practical
 ================
-Jack Monahan, Yuvia Perez Rico and Jan Provaznik
-
-14th September 2017
+Anton Enright & Dimitrios Vitsios
+'24 June, 2018'
 
 -   [mRNA Analysis](#mrna-analysis)
     -   [Raw Data](#raw-data)
@@ -26,7 +25,8 @@ mRNA Analysis
 
 Raw Data
 --------
-The data should be preinstalled. Otherwise download the [raw data](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data) and put the files in a directory called 'mir210_mRNA' in your main course_data directory.
+
+The raw data is [here](http://wwwdev.ebi.ac.uk/enright-srv/courses/rna_cambridge_2017/mrna_seq/data)
 
 Experimental Design
 -------------------
@@ -45,8 +45,21 @@ This is the <em>pdata.txt</em> file:
 First we will load required modules and change to our working directory
 
 ``` r
-setwd('/data/mir210_mRNA')
+setwd('~/Desktop/course_data/wtac_mrna_2016')
 library(DESeq2)
+```
+
+               ## Warning: package 'DESeq2' was built under R version 3.3.2
+
+               ## Warning: package 'S4Vectors' was built under R version 3.3.3
+
+               ## Warning: package 'IRanges' was built under R version 3.3.3
+
+               ## Warning: package 'GenomicRanges' was built under R version 3.3.3
+
+               ## Warning: package 'GenomeInfoDb' was built under R version 3.3.2
+
+``` r
 library(gplots)
 library(RColorBrewer)
 ```
