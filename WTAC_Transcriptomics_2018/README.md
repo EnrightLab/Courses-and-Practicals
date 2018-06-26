@@ -41,12 +41,12 @@ List of Practicals:
 4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
    * [SmallRNA Sequencing - Course Data 2018](course_smallrna_seq/course_smallrna.md)
    
-4.  Analysis of course SmallRNA Seq data - NREP Mutant
+5.  Analysis of course SmallRNA Seq data - NREP Mutant
    * [SmallRNA Sequencing - Course Data 2018](course_smallrna_seq/course_smallrna.md)
 
-5.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
+6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
-6.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+7.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
 
 ***
 
