@@ -16,7 +16,7 @@ https://github.com/nanopore-wgs-consortium/NA12878/blob/master/RNA.md
 
 MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). Each read is contained in a single file.
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/HDF5.jpeg)
+![](pictures/HDF5.jpeg)
 
 
 
@@ -24,21 +24,21 @@ Files can be explored using **HDFview**
 
 **Fast5 containing raw data only**
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/fast5_pre.png)
+![](pictures/fast5_pre.png)
 
 **Fast5 after basecalling with Albacore (or live basecalling with MINKnow)**
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/fast5_post.png)
+![](pictures/fast5_post.png)
 
 
 
 **Example of raw signal**
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/Raw1.png)
+![](pictures/Raw1.png)
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/Raw2.png)
+![](pictures/Raw2.png)
 
-![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/Raw3.png)
+![](pictures/Raw3.png)
 
 
 
