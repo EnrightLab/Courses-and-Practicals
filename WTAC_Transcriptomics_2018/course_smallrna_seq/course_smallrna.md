@@ -8,10 +8,10 @@ Anton Enright & Jack Monahan
     -   [Setup](#setup)
     -   [SmallRNA Read Quality Control](#smallrna-read-quality-control)
     -   [Mapping Cleaned Reads to MicroRNAs](#mapping-cleaned-reads-to-micrornas)
-    -   [Analysis of smallRNA count data](#analysis-of-smallrna-count-data)
--   [Experiment Setup](#experiment-setup)
+-   [Analysis of smallRNA count data](#analysis-of-smallrna-count-data)
+    -   [Experiment Setup](#experiment-setup)
     -   [Preparation](#preparation)
--   [Mouse Analysis](#mouse-analysis)
+    -   [Main Analysis](#main-analysis)
     -   [Count Loading](#count-loading)
     -   [Count Preparation & Normalisation](#count-preparation-normalisation)
 
@@ -55,29 +55,9 @@ library(Reaper)
 library(gplots)
 library(RColorBrewer)
 library(DESeq2)
-```
-
-               ## Warning: package 'DESeq2' was built under R version 3.3.2
-
-               ## Warning: package 'S4Vectors' was built under R version 3.3.3
-
-               ## Warning: package 'IRanges' was built under R version 3.3.3
-
-               ## Warning: package 'GenomicRanges' was built under R version 3.3.3
-
-               ## Warning: package 'GenomeInfoDb' was built under R version 3.3.2
-
-``` r
 library(reshape2)
-```
-
-               ## Warning: package 'reshape2' was built under R version 3.3.2
-
-``` r
 library(ggplot2)
 ```
-
-               ## Warning: package 'ggplot2' was built under R version 3.3.2
 
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
@@ -86,7 +66,7 @@ setwd("~/Desktop/course_data/wtac_smallrna_2018")
 list.files()
 ```
 
-               ## [1] "mircounts.txt" "pdata.txt"     "reaper.pdf"
+               ## [1] "go.tar.gz"     "mircounts.txt" "pdata.txt"     "reaper.pdf"
 
 Hopefully, you will see a compressed FASTQ txt file for each of the 4 lanes
 
@@ -188,10 +168,10 @@ For this web-server, choose each of the **.clean.uniq** fastq files that were pr
 We now have raw counts of reads on microRNAs ready for QC and differential analysis.
 
 Analysis of smallRNA count data
--------------------------------
+===============================
 
 Experiment Setup
-================
+----------------
 
 All data were pre-processed using *minion* to identify and check adapters, *reaper* to trim adapter sequences followed by *tally* to deduplicate reads while maintaining depth information. Subsequent to this all reads passed through the *ChimiRa* pipeline against all miRBase (Release 22) precursor sequences for Mouse. Reads were summed across paired end sequences for the same read pair. Finally reads are loaded into R for final analysis.
 
@@ -207,8 +187,8 @@ hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 spectral <- colorRampPalette(rev(brewer.pal(11, "Spectral")), space="Lab")(100)
 ```
 
-Mouse Analysis
-==============
+Main Analysis
+-------------
 
 Count Loading
 -------------
@@ -255,3 +235,21 @@ rownames(coldata)=colnames(mircounts)
 colnames(coldata)='treatment'
 dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design = ~ treatment)
 ```
+
+We are ready to normalise the data, but first we should look at the number of sequenced reads per sample. There are some stark differences across the samples.
+
+``` r
+cond_colours = brewer.pal(length(rownames(pdata)),"Set2")[as.factor((pdata$genotype))]
+```
+
+               ## Warning in brewer.pal(length(rownames(pdata)), "Set2"): n too large, allowed maximum for palette Set2 is 8
+               ## Returning the palette you asked for with that many colors
+
+``` r
+names(cond_colours)=pdata$genotype
+
+barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
+legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
+```
+
+![](course_smallrna_files/figure-markdown_github/unnamed-chunk-8-1.png)
