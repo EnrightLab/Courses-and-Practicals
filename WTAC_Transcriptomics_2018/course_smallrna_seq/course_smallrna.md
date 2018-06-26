@@ -200,28 +200,18 @@ mircounts <- read.table("mircounts.txt",header=TRUE,row.names=1)
 mircounts=mircounts[-nrow(mircounts),]
 ```
 
-As well as the pdata, which contains information on each sample.
+Lets set up the count matrix column names and make a list of genotype conditions
 
 ``` r
-pdata <- read.table("pdata.txt",header=TRUE,row.names=1)
 colnames(mircounts)=rownames(pdata)
 conds=as.factor(as.character(pdata$genotype))
-pdata
+conds
 ```
 
-               ##                               filename           X3p.ad    genotype group
-               ## wt1           26151_merged1.cram.fq.gz AGATCGGAAGAGCACA          wt    g1
-               ## wt2           26151_merged2.cram.fq.gz AGATCGGAAGAGCACA          wt    g4
-               ## wt3           26151_merged3.cram.fq.gz AGATCGGAAGAGCACA          wt    g6
-               ## nrep_scram1   26151_merged4.cram.fq.gz AGATCGGAAGAGCACA  nrep_scram    g1
-               ## nrep_scram2   26151_merged5.cram.fq.gz AGATCGGAAGAGCACA  nrep_scram    g2
-               ## nrep_scram3   26151_merged6.cram.fq.gz AGATCGGAAGAGCACA  nrep_scram    g3
-               ## nrepm29a_ho1  26151_merged7.cram.fq.gz AGATCGGAAGAGCACA nrepm29a_ho    g2
-               ## nrepm29a_ho2  26151_merged8.cram.fq.gz AGATCGGAAGAGCACA nrepm29a_ho    g4
-               ## nrepm29a_ho3  26151_merged9.cram.fq.gz AGATCGGAAGAGCACA nrepm29a_ho    g5
-               ## cyrano_ho1   26151_merged10.cram.fq.gz AGATCGGAAGAGCACA   cyrano_ho    g3
-               ## cyrano_ho2   26151_merged11.cram.fq.gz AGATCGGAAGAGCACA   cyrano_ho    g5
-               ## cyrano_ho3   26151_merged12.cram.fq.gz AGATCGGAAGAGCACA   cyrano_ho    g6
+               ##  [1] wt          wt          wt          nrep_scram  nrep_scram 
+               ##  [6] nrep_scram  nrepm29a_ho nrepm29a_ho nrepm29a_ho cyrano_ho  
+               ## [11] cyrano_ho   cyrano_ho  
+               ## Levels: cyrano_ho nrep_scram nrepm29a_ho wt
 
 Count Preparation & Normalisation
 ---------------------------------
@@ -238,7 +228,7 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 
 We are ready to normalise the data, but first we should look at the number of sequenced reads per sample. There are some stark differences across the samples.
 
-    cond_colours = brewer.pal(length(rownames(pdata)),"Set2")[as.factor((pdata$genotype))]
+    cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
     names(cond_colours)=pdata$genotype
 
     barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
