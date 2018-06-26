@@ -238,18 +238,8 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 
 We are ready to normalise the data, but first we should look at the number of sequenced reads per sample. There are some stark differences across the samples.
 
-``` r
-cond_colours = brewer.pal(length(rownames(pdata)),"Set2")[as.factor((pdata$genotype))]
-```
+    cond_colours = brewer.pal(length(rownames(pdata)),"Set2")[as.factor((pdata$genotype))]
+    names(cond_colours)=pdata$genotype
 
-               ## Warning in brewer.pal(length(rownames(pdata)), "Set2"): n too large, allowed maximum for palette Set2 is 8
-               ## Returning the palette you asked for with that many colors
-
-``` r
-names(cond_colours)=pdata$genotype
-
-barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
-legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])
-```
-
-![](course_smallrna_files/figure-markdown_github/unnamed-chunk-8-1.png)
+    barplot(apply(mircounts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
+    legend("topright",levels((conds)),cex=0.6,fill=cond_colours[levels(conds)])

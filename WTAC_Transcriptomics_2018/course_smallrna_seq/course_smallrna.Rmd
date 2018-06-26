@@ -192,7 +192,7 @@ dds <- DESeqDataSetFromMatrix(countData = mircounts, colData = coldata, design =
 ```
 
 We are  ready to normalise the data, but first we should look at the number of sequenced reads per sample. There are some stark differences across the samples.
-```{r}
+```{}
 cond_colours = brewer.pal(length(rownames(pdata)),"Set2")[as.factor((pdata$genotype))]
 names(cond_colours)=pdata$genotype
 
