@@ -39,7 +39,7 @@ List of Practicals:
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
    
 4.  Analysis of course SmallRNA Seq data 
-   * [SmallRNA Sequencing -Course Data 2015](course_smallrna_seq/course_smallrna.md)
+   * [SmallRNA Sequencing - Course Data 2018](course_smallrna_seq/course_smallrna.md)
 
 5.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
