@@ -6,9 +6,37 @@ Adrien Leger, EMBL-EBI
 
 
 
-## Comparison with cDNA seq
+## Pros and cons of dRNA
 
-https://github.com/nanopore-wgs-consortium/NA12878/blob/master/RNA.md
+#### Cons
+
+- Lower yield than cDNA seq => 500Mb to 1.5Gb per flowcell 
+- Slighly higher error ~ 11%
+- Requires a massive quantity of polyA+ RNA (or of a specific target)
+
+
+
+#### Pros
+
+- Library Preparation much simpler, fewer steps => less biaised
+
+- Longer reads than cDNA
+
+  ![](pictures/Slide17.png) 
+
+- Better exons connectivity
+
+![](pictures/exon_align.png)
+
+* PolyAs can be detected and measured (hopefully)
+
+  ![](pictures/Slide09.png)
+
+* (Some) RNA modifications can modify the signal
+
+  ![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/Slide34.png)
+
+   
 
 
 
