@@ -18,7 +18,7 @@ Adrien Leger, EMBL-EBI
 
 #### Pros
 
-- Library Preparation much simpler, fewer steps => less biaised
+- Library preparation much simpler, fewer steps => less biaised
 
 - Longer reads than cDNA
 
@@ -109,42 +109,68 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
 
 1. Get you data !
 
-```bash
-tar xf XXXXXXX.tar.gz
-```
+   ```bash
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/datasets/
+   ```
 
-2. Inspect reads with HDFView GUI
+   ```
+   tar xvf {YOUR-SAMPLE}.tar.gz
+   ```
 
-    
+2. Inspect reads with the HDFView GUI
+
+   ```bash
+   hdfview {PATH_TO_A_RANDOM_FAST5}
+   ```
+
+     
 
 3. Basecall your data with Albacore
 
-```bash
-read_fast5_basecaller.py --help
+   ```bash
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/analyses/
+   ```
 
-read_fast5_basecaller.py --list_workflows
-
-read_fast5_basecaller.py -r -t 8 -f {flowcell} -k {kit} -o fastq -q 0  -i {fast5_source_dir} -s {fast5_output_dir}`
-```
+   ```bash
+   read_fast5_basecaller.py --help
+   
+   read_fast5_basecaller.py --list_workflows
+   
+   read_fast5_basecaller.py -r -t 8 -f {FLOWCELL} -k {KIT} -o fastq -q 0  -i ../datasets/{YOUR-SAMPLE} -s ./
+   ```
 
    *Flowcell and kit information can be found in the fast5 files*
 
+   *With your sample data it should take around 10 mins*
+
+   
 
 
+4. QC the basecalled files with NanoPack
 
-4. QC the basecalled files with Nanoplot ans Nanostat
+   https://github.com/wdecoster/Nanopack
 
-   https://github.com/wdecoster/NanoPlot
+   * Install Nanopack first
 
-```bash
-Nanoplot --summary sequencing_summary.txt --loglength -o summary-plots-log-transformed
-```
+   ```bash
+   pip3 install NanoPack --user
+   ```
 
-```bash
-NanoStat --summary sequencing_summary.txt --readtype 1D
-```
+   * Run Nanoplot and NanoStat
 
+   ```bash
+   NanoPlot --summary sequencing_summary.txt --loglength -o summary-plots-log-transformed
+   ```
 
+   *Results are in summary-plots-log-transformed*
+
+   ```bash
+   NanoStat --summary sequencing_summary.txt --readtype 1D
+   ```
+
+   *Results are sent to standard output*
+
+   
 
 5. Align reads against the transcriptome or the genome with Minimap2
 
@@ -153,13 +179,13 @@ https://github.com/lh3/minimap2
 *Spliced alignment against genome*
 
 ```bash
-minimap2 -ax splice -uf -k 14 -L -t 8 {genome.fasta} {albacore.fastq} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{human OR yeast}/genome.fa ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
 ```
 
    *Unspliced alignment against transcriptome*
 
 ```bash
-minimap2 -ax map-ont -L -t 8 {transcriptome.fasta} {albacore.fastq} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+minimap2 -ax map-ont -L -t 8 ../references/{human OR yeast}/genome.fa ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
 ```
 
 
