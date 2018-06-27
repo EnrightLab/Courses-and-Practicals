@@ -102,3 +102,73 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 * [Nanopolish call-methylation](https://nanopolish.readthedocs.io/en/latest/quickstart_call_methylation.html)
 
 Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOHVthl8JRX-FzJ9w8jrWogS4YhDcxyAfI/edit#gid=0
+
+
+
+# Mini-Practical
+
+1. Get you data !
+
+```bash
+tar xf XXXXXXX.tar.gz
+```
+
+2. Inspect reads with HDFView GUI
+
+    
+
+3. Basecall your data with Albacore
+
+```bash
+read_fast5_basecaller.py --help
+
+read_fast5_basecaller.py --list_workflows
+
+read_fast5_basecaller.py -r -t 8 -f {flowcell} -k {kit} -o fastq -q 0  -i {fast5_source_dir} -s {fast5_output_dir}`
+```
+
+   *Flowcell and kit information can be found in the fast5 files*
+
+
+
+
+4. QC the basecalled files with Nanoplot ans Nanostat
+
+   https://github.com/wdecoster/NanoPlot
+
+```bash
+Nanoplot --summary sequencing_summary.txt --loglength -o summary-plots-log-transformed
+```
+
+```bash
+NanoStat --summary sequencing_summary.txt --readtype 1D
+```
+
+
+
+5. Align reads against the transcriptome or the genome with Minimap2
+
+https://github.com/lh3/minimap2
+
+*Spliced alignment against genome*
+
+```bash
+minimap2 -ax splice -uf -k 14 -L -t 8 {genome.fasta} {albacore.fastq} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+```
+
+   *Unspliced alignment against transcriptome*
+
+```bash
+minimap2 -ax map-ont -L -t 8 {transcriptome.fasta} {albacore.fastq} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+```
+
+
+
+6. Visualise aligned reads with IGV
+
+   *Index reads first for visualization*
+
+```bash
+samtools index reads.bam
+```
+
