@@ -6,7 +6,7 @@ Adrien Leger, EMBL-EBI
 
 
 
-## Pros and cons of dRNA
+## Why and where to use dRNA-Seq
 
 #### Cons
 
@@ -116,11 +116,12 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    ```
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
+   
 
 2. Inspect reads with the HDFView GUI
 
    ```bash
-   hdfview {PATH_TO_A_RANDOM_FAST5}
+   hdfview
    ```
 
      
@@ -139,7 +140,7 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    read_fast5_basecaller.py -r -t 8 -f {FLOWCELL} -k {KIT} -o fastq -q 0  -i ../datasets/{YOUR-SAMPLE} -s ./
    ```
 
-   *Flowcell and kit information can be found in the fast5 files*
+   *Flowcell and Kit information can be found in the fast5 files*
 
    *With your sample data it should take around 10 mins*
 
@@ -179,18 +180,20 @@ https://github.com/lh3/minimap2
 *Spliced alignment against genome*
 
 ```bash
-minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{human OR yeast}/genome.fa ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_genome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
 ```
 
    *Unspliced alignment against transcriptome*
 
 ```bash
-minimap2 -ax map-ont -L -t 8 ../references/{human OR yeast}/genome.fa ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+minimap2 -ax map-ont -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_transcriptome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
 ```
 
 
 
 6. Visualise aligned reads with IGV
+
+   https://software.broadinstitute.org/software/igv/download
 
    *Index reads first for visualization*
 
