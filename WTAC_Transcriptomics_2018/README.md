@@ -37,14 +37,15 @@ List of Practicals:
    * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
    * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
-
-4. [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
-
-5. [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
-
-6. [Nanopore Direct RNA sequencing  analysis](Nanopore_dRNA_Seq)
-
    
+4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
+   * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
+   
+5.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
+
+6.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+
+7. [Nanopore Direct RNA sequencing  analysis](Nanopore_dRNA_Seq)
 
 ***
 
