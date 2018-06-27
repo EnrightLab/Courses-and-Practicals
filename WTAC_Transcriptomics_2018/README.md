@@ -45,6 +45,8 @@ List of Practicals:
 
 6.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
 
+7. [Nanopore Direct RNA sequencing  analysis](Nanopore_dRNA_Seq)
+
 ***
 
 Useful resources:
