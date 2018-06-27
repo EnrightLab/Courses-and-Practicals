@@ -34,7 +34,7 @@ Adrien Leger, EMBL-EBI
 
 * (Some) RNA modifications can modify the signal
 
-  ![](/home/aleg/Drive/EBI/Teaching/Courses-and-Practicals/WTAC_Transcriptomics_2018/Nanopore_dRNA_Seq/pictures/Slide34.png)
+  ![](pictures/Slide34.png)
 
    
 
@@ -116,6 +116,7 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    ```
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
+
    
 
 2. Inspect reads with the HDFView GUI
@@ -175,21 +176,21 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
 
 5. Align reads against the transcriptome or the genome with Minimap2
 
-https://github.com/lh3/minimap2
+   https://github.com/lh3/minimap2
 
-*Spliced alignment against genome*
+   *Spliced alignment against genome*
 
-```bash
-minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_genome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
-```
+   ```bash
+   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_genome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   ```
 
-   *Unspliced alignment against transcriptome*
+    *Unspliced alignment against transcriptome*
 
-```bash
-minimap2 -ax map-ont -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_transcriptome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
-```
+   ```bash
+   minimap2 -ax map-ont -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_transcriptome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   ```
 
-
+   
 
 6. Visualise aligned reads with IGV
 
@@ -197,7 +198,8 @@ minimap2 -ax map-ont -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisia
 
    *Index reads first for visualization*
 
-```bash
-samtools index reads.bam
-```
+   ```bash
+   samtools index reads.bam
+   ```
 
+   
