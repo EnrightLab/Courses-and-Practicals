@@ -257,11 +257,6 @@ colnames(coldata)='genotype'
 dds <- DESeqDataSetFromMatrix(countData = human_counts, colData = coldata, design = ~ genotype)
 
 cond_colours = brewer.pal(length(levels(yeast_conds)),"Set2")[human_conds]
-```
-
-               ## Warning in brewer.pal(length(levels(yeast_conds)), "Set2"): minimal value for n is 3, returning requested palette with 3 different levels
-
-``` r
 names(cond_colours)=human_conds
 ```
 

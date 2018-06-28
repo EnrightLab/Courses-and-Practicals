@@ -177,7 +177,7 @@ abline(a=0,b=1,lty=2,col="red")
 
 ## Human Data Analysis
 
-```{r}
+```{r, error=F,warning=F}
 human_counts = read.table("combined_counts.txt",header=T,row.names=1)
 
 human_conds=as.factor(c("illumina","illumina","nano","nano"))
@@ -200,7 +200,7 @@ legend("topright",levels((human_conds)),cex=0.6,fill=cond_colours[levels(human_c
 ### Normalisation and Statistics
 
 Fit the DESeq neg. binomial model to the data
-```{r}
+```{r,error=F,warning=F}
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 plotDispEsts(dds)
