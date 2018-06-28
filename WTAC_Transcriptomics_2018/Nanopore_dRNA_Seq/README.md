@@ -117,9 +117,27 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
 
+   If you have a human sample, download the reference genome first 
+
+   ```
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/references/
+   ```
+
+   ```bash
+   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.transcripts.fa.gz -o Homo_sapiens_transcriptome.fa.gz 
+   ```
+
+   ```bash
+   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/GRCh38.primary_assembly.genome.fa.gz -o Homo_sapiens_genome.fa.gz 
+   ```
+
    
 
 2. Inspect reads with the HDFView GUI
+
+   ```
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/datasets/
+   ```
 
    ```bash
    hdfview
