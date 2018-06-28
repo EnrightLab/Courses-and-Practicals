@@ -59,6 +59,8 @@ S6|S6_combined_results.genome.bam.tdf| Tiled Data File
 To launch IGV use the following Link to launch Java with 2Gb Memory
  - [http://data.broadinstitute.org/igv/projects/2.4/igv24_lm.jnlp](http://data.broadinstitute.org/igv/projects/2.4/igv24_lm.jnlp)
  
+On a Macintosh or Windows, you may have to play with Java security settings to get it to launch correctly, or you can download a local version.
+ 
 ## Reference Genome
 
 As reads are mapped to a known reference:
