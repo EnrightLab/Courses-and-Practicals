@@ -54,3 +54,15 @@ S6|S6_combined_results.genome.bam.bai| BAM INDEX
 S6|S6_combined_results.genome.bam.tdf| Tiled Data File
 
    
+## Starting IGV
+
+To launch IGV use the following Link to launch Java with 2Gb Memory
+ - [http://data.broadinstitute.org/igv/projects/2.4/igv24_lm.jnlp](http://data.broadinstitute.org/igv/projects/2.4/igv24_lm.jnlp)
+ 
+## Reference Genome
+
+As reads are mapped to a known reference:
+  -*GSM552910*, Saccharomyces cerevisea (Ensembl)
+  -*hg38* Homo Sapiens (Ensembl)
+  
+You need to ensure the correct genome is selected when using IGV. You can load your own genomes and gene models directly into the program.
