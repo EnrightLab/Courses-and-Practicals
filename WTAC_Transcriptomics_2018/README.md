@@ -41,11 +41,13 @@ List of Practicals:
 4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
    * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
    
-5.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
+5. Nanopore Direct RNA Analysis
+   * [Albacore Basecalling and Mapping](Nanopore_dRNA_Seq/README.md)
+   * [Count analysis of Nanopore DirectRNA ](Nanopore_dRNA_Seq/nanopore_drna_seq.md)
 
-6.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
-7. [Nanopore Direct RNA sequencing  analysis](Nanopore_dRNA_Seq)
+7.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
 
 ***
 
