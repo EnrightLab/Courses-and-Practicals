@@ -42,6 +42,7 @@ List of Practicals:
    * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
    
 5. Nanopore Direct RNA Analysis
+   * [IGV Browsing of DirectRNA mappings](Nanopore_dRNA_Seq/igv_drna_seq.md)
    * [Albacore Basecalling and Mapping](Nanopore_dRNA_Seq/README.md)
    * [Count analysis of Nanopore DirectRNA ](Nanopore_dRNA_Seq/nanopore_drna_seq.md)
 
