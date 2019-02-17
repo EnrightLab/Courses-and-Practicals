@@ -1,0 +1,8 @@
+
+Start Fri Jun 22 15:07:05 2018 
+[reaper] R is calling
+[reaper] only using columns 3p-ad and tabu
+[reaper] scanned line 1 sinsert3p [NA] barcode3p [NA] adaptor3p [AGATCGGAAGAGCACACGTCTG] cat3p [NA] barcode5p [NA] sinsert5p [] tabu [NA]
+cannae open file <A638S1.R1.fastq.gz> in mode <r>
+End
+
