@@ -2,7 +2,7 @@ Part II - BBS Bioinformatics
 ===============================
 ![Cambridge](/images/cambridge.jpg)
 
-Practical 1: Differential Gene Expression Analysis
+Differential Gene Expression Analysis
 Transcriptomics, Bioinformatics Training Lab, Cambridge, UK
 -------------------------------------------------------------------
 
@@ -29,6 +29,7 @@ Presentation:
 List of Practicals:
 ------------------
 
+*Practical 1*  Monday 18th February 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md) - if needed for some remindeders
 
 2. Basics of SmallRNA Sequencing Data Analysis
@@ -39,18 +40,16 @@ List of Practicals:
    * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
    * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
-   
-4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
-   * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
-   
-5. Nanopore Direct RNA Analysis
-   * [IGV Browsing of DirectRNA mappings](Nanopore_dRNA_Seq/igv_drna_seq.md)
-   * [Albacore Basecalling and Mapping](Nanopore_dRNA_Seq/README.md)
-   * [Count analysis of Nanopore DirectRNA ](Nanopore_dRNA_Seq/nanopore_drna_seq.md)
+ 
+*Practical 2*   
+4. Downstream Analysis of gene function - Differential Gene Expression Analysis
+  * MicroRNA Target Signatures 6nt
+  * Gene Set Enrichment Analysis
+  * Pathway, Ontology and Functional Analysis
 
-6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
-
-7.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+5. Downstream Analysis of microRNA data
+  * MicroRNA Target Signature Analysis
+  * Prediction of novel microRNAs.
 
 ***
 
