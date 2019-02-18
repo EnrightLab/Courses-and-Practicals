@@ -1,7 +1,7 @@
 mRNA Seq - miR210 Practical
 ================
-Anton Enright & Dimitrios Vitsios
-'24 June, 2018'
+Anton Enright & Jack Monahan & Katy Brown
+'Feb 2019'
 
 -   [mRNA Analysis](#mrna-analysis)
     -   [Raw Data](#raw-data)
@@ -45,7 +45,7 @@ This is the <em>pdata.txt</em> file:
 First we will load required modules and change to our working directory
 
 ``` r
-setwd('~/Desktop/course_data/wtac_mrna_2016')
+setwd('~/Desktop/Course_Materials/mrna_seq')
 library(DESeq2)
 ```
 
