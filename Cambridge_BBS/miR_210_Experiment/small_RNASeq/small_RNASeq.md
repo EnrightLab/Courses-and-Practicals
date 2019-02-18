@@ -1,8 +1,8 @@
 Small RNA Seq - miR-210 Practical
 ================
-Jack Monahan, Yuvia Perez Rico and Jan Provaznik
+Jack Monahan, Anton Enright & Katy Brown
 
-14th September 2017
+Feb 2018
 
 -   [Analysis of an sRNA-Seq data for miR-210 over-expression](#analysis-of-an-srna-seq-data-for-mir-210-over-expression)
     -   [Experiment Overview](#experiment-overview)
@@ -40,7 +40,7 @@ The data should be preinstalled. Otherwise download the [raw data](http://wwwdev
 Launch RStudio
 
 ``` r
-setwd('/data/mir210_smallRNA')
+setwd('~/Desktop/Course_Materials/small_RNASeq')
 library(RColorBrewer)
 library(gplots)
 library(DESeq2)
