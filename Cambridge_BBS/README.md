@@ -8,9 +8,8 @@ Transcriptomics, Bioinformatics Training Lab, Cambridge, UK
 
 **Instructors: Anton Enright, Jack Monahan, Adrien Leger**
 
-|Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Adrien Leger (aleg@ebi.ac.uk)|
+|Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Katy Brown (kab84@cam.ac.uk)|
 |---------------------------|------------------------------------|------------------------------------|
-|<img src="../images/anton.jpg" height="150">|<img src="../images/jack_picture.png" height="150">|<img src="../images/adrien.jpeg" height="150">|
 
 ***
 
