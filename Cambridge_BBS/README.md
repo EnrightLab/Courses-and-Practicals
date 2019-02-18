@@ -23,7 +23,7 @@ Cambridge, UK._
 
 Presentation:
 ------------
-1. [Anton's Lecture from the course](Lecture.pdf)
+1. Available on Moodle as PDF
 
 List of Practicals:
 ------------------
