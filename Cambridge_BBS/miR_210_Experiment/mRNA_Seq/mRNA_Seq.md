@@ -62,6 +62,8 @@ library(DESeq2)
 ``` r
 library(gplots)
 library(RColorBrewer)
+library(ggplot2)
+library(Rtsne)
 ```
 
 Let’s make a colour palette (100 colours) for nice heatmaps (Green to Blue)
@@ -173,7 +175,7 @@ text(pca$loadings, conds, pos=3, cex=0.8)
 
 
 ``` r
-tsne <- Rtsne(t(vstcounts), perplexity = 5, check_duplicates = FALSE)
+tsne <- Rtsne(assay(vsd, perplexity = 5, check_duplicates = FALSE)
 tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
 ggplot(data = tsne.df, aes(tsne.1, tsne.2)) + 
   geom_point(size = 4, pch = 20, colour = cond_colours[conds]) +
