@@ -161,7 +161,10 @@ We can also view the mapped reads using a genome browser such as **[http://softw
 Before we do this we need to index the BAM files for use with the browser.
 
 ```
-samtools index *.bam
+samtools index control_lane1.bam
+samtools index control_lane2.bam
 ```
+
+Start IGV running and we will explore the counts on Chromosome 22 across some reads. 
 
 
