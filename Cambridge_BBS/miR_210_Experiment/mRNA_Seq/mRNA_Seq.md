@@ -175,11 +175,11 @@ text(pca$loadings, conds, pos=3, cex=0.8)
 
 
 ``` r
-tsne <- Rtsne(assay(vsd, perplexity = 5, check_duplicates = FALSE)
+tsne <- Rtsne(t(assay(vsd)), perplexity = 1, check_duplicates = FALSE)
 tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
 ggplot(data = tsne.df, aes(tsne.1, tsne.2)) + 
-  geom_point(size = 4, pch = 20, colour = cond_colours[conds]) +
-  geom_text(size = 1.5, vjust=2, aes(label=colnames(vstcounts))) +
+  geom_point(size = 4, pch = 20, colour = condcols[pdata$condition]) +
+  geom_text(size = 1.5, vjust=2, aes(label=pdata$SampleName)) +
   scale_alpha_discrete(range = c(0.5, 1)) +
   theme_minimal() +
   ylab("tSNE 1") +
