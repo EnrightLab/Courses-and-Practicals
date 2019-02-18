@@ -121,7 +121,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("~/Desktop/course_data/smallrna")
+setwd("~/Desktop/Course_Materials/smallrna")
 list.files()
 ```
 
