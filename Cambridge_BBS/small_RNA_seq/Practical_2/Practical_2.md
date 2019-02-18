@@ -1,7 +1,6 @@
 Small RNA Seq - Practical 2
 ================
-Anton Enright & Jack Monahan
-'22 June, 2018'
+Anton Enright & Jack Monahan & Katy Brown
 
 -   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
 -   [Experiment Setup](#experiment-setup)
