@@ -155,3 +155,13 @@ less mir210_lane1.bam.counts
 ```
 
 Typically we would now switch to R/BioConductor to load these count files directly into DESeq2 for a negative binomial analysis of count statistics. This will happen in the next practical.
+
+We can also view the mapped reads using a genome browser such as **[http://software.broadinstitute.org/software/igv](IGV)**.
+
+Before we do this we need to index the BAM files for use with the browser.
+
+```
+samtools index *.bam
+```
+
+
