@@ -97,7 +97,7 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 Lets install the module manually. Please open up a new terminal window.
 
     cd ~/Desktop/Course_Materials/smallrna
-    R CMD install Reaper_1.5.tar.gz 
+    R CMD INSTALL Reaper_1.5.tar.gz 
 
 This will install the module into R manually.
 
