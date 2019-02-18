@@ -173,7 +173,8 @@ text(pca$loadings, conds, pos=3, cex=0.8)
 
 ![](mRNA_Seq_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-
+Tsne Analysis
+-------------
 ``` r
 tsne <- Rtsne(t(assay(vsd)), perplexity = 1, check_duplicates = FALSE)
 tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
