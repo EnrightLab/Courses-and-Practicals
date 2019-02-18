@@ -1,7 +1,7 @@
 Small RNA Seq - Practical 1
 ================
-Anton Enright & Jack Monahan
-'22 June, 2018'
+Anton Enright & Jack Monahan & Katy Brown
+'Feb, 2019'
 
 -   [Analysis of smallRNA Seq datasets](#analysis-of-smallrna-seq-datasets)
     -   [The Fastq file format](#the-fastq-file-format)
