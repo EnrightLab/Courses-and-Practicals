@@ -162,7 +162,7 @@ Before we do this we need to index the BAM files for use with the browser.
 
 ```
 samtools sort control_lane1.bam > control_lane1_sorted.bam
-santools sort control_lane2.bam > control_lane2_sorted.bam
+samtools sort control_lane2.bam > control_lane2_sorted.bam
 ```
 
 ```
