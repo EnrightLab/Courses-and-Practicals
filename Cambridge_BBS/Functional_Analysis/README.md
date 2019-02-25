@@ -38,7 +38,7 @@ The miR-210 microRNA has the following sequence:
 AGCCCCAGCCCACCGCACACUG
 ```
 
-its reverse complementary seed match would be expected to be: ```CTGGGC```
+its reverse complementary seed match would be expected to be: ```CTGGGGC```
 
 A binding site would hence look something like:
 ```
