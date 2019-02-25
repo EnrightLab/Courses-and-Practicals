@@ -7,7 +7,7 @@ In this practical we will briefly explore using such tools to search for biologi
 We will work with the genelist obtained from the mRNA Seq data in the last practical.
 
 You should download the genelist file from here to your Desktop:
-mir_210_protein_coding_list.txt
+[mir_210_protein_coding_list.txt](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/mir_210_protein_coding_list.txt)
 
 ## Sylamer Analysis of Genelists for microRNA signatures
 
@@ -77,3 +77,9 @@ Gene Mania is a probabalistic network of gene functions according to large-scale
 ## Reactome
 
 [Reactome](http://www.reactome.org) is a slightly different view of function that is based on human curated biological pathways.
+
+1. On Reactome choose *Analyze Data*
+2. Click on *Choose File* and the hit *Continue*
+3. Project to human is fine, clicl *Analyze!*
+
+![reactome](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/reactome.png)
