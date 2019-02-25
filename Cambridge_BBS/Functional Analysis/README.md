@@ -9,6 +9,19 @@ We will work with the genelist obtained from the mRNA Seq data in the last pract
 You should download the genelist file from here to your Desktop:
 mir_210_protein_coding_list.txt
 
+## Sylamer Analysis of Genelists for microRNA signatures
+
+The purpose of our miR-210 overexpression experiment was to see if an over-expressed microRNA would influence gene-expression in MCF7 cells. To try and understand the physiological role of miR-210 regulation in this system.
+
+We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take the gene Names from the genelists we produced. These are sorted according to log2 Fold change. This algorithm will search for 6nt motifs that correlate with expression changes. We are hoping to see a motif for the seed match to miR-210.
+
+![sylamer](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/sylamer.png)
+
+* Choose upload gene list
+** Then pick mir_210_short_list.txt
+* Then select *homo sapiens* as the *species*
+* Then choose *external gene name* as the *Input Gene Ids* 
+* Then click on *Launch*
 
 ## Gene Ontology Analysis
 
