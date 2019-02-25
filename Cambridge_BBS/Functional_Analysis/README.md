@@ -15,14 +15,16 @@ The purpose of our miR-210 overexpression experiment from last week was to see i
 
 We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take the gene Names from the genelists we produced. These are sorted according to log2 Fold change. This algorithm will search for 6nt motifs that correlate with expression changes. We are hoping to see a motif for the seed match to miR-210.
 
-![sylamer](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/Sylamer.png)
+Information about Sylamer is in this short presentation:
+[PDF](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/bbs_short_talk.pdf)
+
 
 * Launch [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/)
 * Choose *Start Analysis Now*
 * Choose upload gene list
   * Then pick mir_210_short_list.txt
 * Then select *homo sapiens (hsa)* as the *species*
-* Then choose *external gene name* as the *Input Gene Ids* 
+* Then choose *HGNC_Symbol* as the *Input Gene Ids* 
 * Then click on *Launch*
 
 This will produce a Sylamer analysis of 6nt motifs from matched 3' UTR sequences from our sorted genelist from the miR-210 experiment.
