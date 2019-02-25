@@ -7,7 +7,7 @@ In this practical we will briefly explore using such tools to search for biologi
 We will work with the genelist obtained from the mRNA Seq data in the last practical.
 
 You should download the genelist file from here to your Desktop:
-[mir_210_protein_coding_list.txt](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/mir_210_protein_coding_list.txt)
+[mir_210_short_list.txt](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/mir_210_short_list.txt)
 
 ## Sylamer Analysis of Genelists for microRNA signatures
 
