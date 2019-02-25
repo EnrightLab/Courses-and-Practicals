@@ -15,7 +15,7 @@ The purpose of our miR-210 overexpression experiment was to see if an over-expre
 
 We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take the gene Names from the genelists we produced. These are sorted according to log2 Fold change. This algorithm will search for 6nt motifs that correlate with expression changes. We are hoping to see a motif for the seed match to miR-210.
 
-![sylamer](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/Sylamer.png)
+![sylamer](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/Sylamer.png)
 
 * Choose upload gene list
   * Then pick mir_210_short_list.txt
@@ -41,7 +41,7 @@ The ontology is split into three categories for describing genes
 Let's load our genelist into Cytoscape and explore Gene Ontology Enrichments using the BinGO Package.
 
 *File -> Import -> Network -> File -> miR_210_protein_coding_list.txt*
-![import](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/import.png)
+![import](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/import.png)
 
 Make sure you select the log FC column as node data and the first column as the source Node, i.e. **Green Document Icon**.
 
@@ -51,16 +51,16 @@ The genes will load as an unconnected network. Make sure the gene list is sorted
 We will now select genes from the list. Highlight the top 50 or so up or down-regulated genes.
 1. Right click then choose *Select nodes from selected rows*
 2. Then choose *Apps* -> *BinGO*
-![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/genelist.png)
+![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/genelist.png)
 3. Enter *upregulated* or *downregulated* as the **Cluster Name**
 4. Choose *Homo Sapiens* as the species and *GO Full* as the ontology file.
 5. Click *Start BinGO*
 6. You can make a hiearchical layout of the results by choosing:
   *Layout* -> *Hierarchical Layout*
 
-![bingo1](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo.png)
+![bingo1](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/bingo.png)
 
-![bingo2](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo_result.png)
+![bingo2](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/bingo_result.png)
 
 ## GeneMania
 
