@@ -41,14 +41,10 @@ List of Practicals:
    * [SmallRNA Sequencing - Mapping and Statistical analysis of count data](small_RNA_seq/Practical_2/Practical_2.md)
 
 *Practical 2*   
-4. Downstream Analysis of gene function - Differential Gene Expression Analysis
+4. [Downstream Analysis of gene function - Differential Gene Expression Analysis](Functional Analysis)
   * MicroRNA Target Signatures 6nt
-  * Gene Set Enrichment Analysis
   * Pathway, Ontology and Functional Analysis
 
-5. Downstream Analysis of microRNA data
-  * MicroRNA Target Signature Analysis
-  * Prediction of novel microRNAs.
 
 ***
 

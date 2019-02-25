@@ -45,13 +45,13 @@ Let's load our genelist into Cytoscape and explore Gene Ontology Enrichments usi
 
 Make sure you select the log FC column as node data and the first column as the source Node, i.e. **Green Document Icon**.
 
-![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/genelist.png)
 
 The genes will load as an unconnected network. Make sure the gene list is sorted on log2Fold change.
 
 We will now select genes from the list. Highlight the top 50 or so up or down-regulated genes.
 1. Right click then choose *Select nodes from selected rows*
 2. Then choose *Apps* -> *BinGO*
+![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/genelist.png)
 3. Enter *upregulated* or *downregulated* as the **Cluster Name**
 4. Choose *Homo Sapiens* as the species and *GO Full* as the ontology file.
 5. Click *Start BinGO*
@@ -61,5 +61,7 @@ We will now select genes from the list. Highlight the top 50 or so up or down-re
 ![bingo1](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo.png)
 
 ![bingo2](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo_result.png)
+
 ## GeneMania
 
+Gene Mania is a probabalistic network of gene functions according to large-scale genomics datasets. It is an interesting alternative to human curated datasets such as *GO*. 
