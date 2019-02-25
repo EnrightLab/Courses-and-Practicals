@@ -25,15 +25,18 @@ We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take th
 
 This will produce a Sylamer analysis of 6nt motifs from matched 3' UTR sequences from our sorted genelist from the miR-210 experiment.
 
-The miR-210 microRNA has this sequence:
+Reference: **Stijn van Dongen, Cei Abreu-Goodger & Anton J. Enright; Nature Methods(2008)**
 
+## MicroRNA Seed level analysis
+
+The miR-210 microRNA has the following sequence:
 ```
 AGCCCCUGCCCACCGCACACUG
 ```
 
-it's complementary seed match would be: ```CGGGGAC```
+its complementary seed match would be expected to be: ```CGGGGAC```
 
-The binding site would look something like:
+A binding site would hence look something like:
 ```
 AGCCCCUGCCCACCGCACACUG
  |||||||
