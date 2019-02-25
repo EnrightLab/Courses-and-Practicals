@@ -39,19 +39,19 @@ Reference: **Stijn van Dongen, Cei Abreu-Goodger & Anton J. Enright; Nature Meth
 
 The miR-210 microRNA has the following sequence:
 ```
-AGCCCCAGCCCACCGCACACUG
+AGCCCAGCCCACCGCACACUG
 ```
 
-its reverse complementary seed match would be expected to be: ```CTGGGGC```
+its reverse complementary seed match would be expected to be: ```CTGGGC```
 
 A binding site would hence look something like:
 ```
-AGCCCCAGCCCACCGCACACUG
- |||||||
-NCGGGGTCNNNNNNNNNNNNNN
+AGCCCAGCCCACCGCACACUG
+ ||||||
+NCGGGTCNNNNNNNNNNNNNN
 ```
 
-We should see enrichments of ```CTGGGGC``` motifs if the microRNA has caused a significant effect on mRNA expression.
+We should see enrichments of ```CTGGGC``` motifs if the microRNA has caused a significant effect on mRNA expression.
 
 ## Gene Ontology Analysis
 
