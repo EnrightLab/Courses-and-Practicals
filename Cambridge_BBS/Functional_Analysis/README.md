@@ -1,5 +1,8 @@
 # Functional Analysis of Differential Expression Data
 
+Anton Enright (aje39@cam.ac.uk) 
+Stephanie Wenlock (scw65@cam.ac.uk)
+
 Differential Gene expression analysis usually yields lists of genes from most up-regulated to most down-regulated.
 
 In this practical we will briefly explore using such tools to search for biological commonalities in our datasets.
