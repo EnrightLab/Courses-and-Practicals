@@ -17,9 +17,11 @@ We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take th
 
 ![sylamer](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/Sylamer.png)
 
+* Launch [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/)
+* Choose *Start Analysis Now*
 * Choose upload gene list
   * Then pick mir_210_short_list.txt
-* Then select *homo sapiens* as the *species*
+* Then select *homo sapiens (hsa)* as the *species*
 * Then choose *external gene name* as the *Input Gene Ids* 
 * Then click on *Launch*
 
@@ -31,19 +33,19 @@ Reference: **Stijn van Dongen, Cei Abreu-Goodger & Anton J. Enright; Nature Meth
 
 The miR-210 microRNA has the following sequence:
 ```
-AGCCCCUGCCCACCGCACACUG
+AGCCCCAGCCCACCGCACACUG
 ```
 
-its complementary seed match would be expected to be: ```CGGGGAC```
+its reverse complementary seed match would be expected to be: ```CTGGGC```
 
 A binding site would hence look something like:
 ```
-AGCCCCUGCCCACCGCACACUG
+AGCCCCAGCCCACCGCACACUG
  |||||||
-NCGGGGACNNNNNNNNNNNNNN
+NCGGGGTCNNNNNNNNNNNNNN
 ```
 
-We should see enrichments of ```CGGGGAC``` motifs if the microRNA has caused a significant effect on mRNA expression.
+We should see enrichments of ```CTGGGGC``` motifs if the microRNA has caused a significant effect on mRNA expression.
 
 ## Gene Ontology Analysis
 
