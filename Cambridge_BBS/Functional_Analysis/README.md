@@ -37,8 +37,10 @@ The binding site would look something like:
 ```
 AGCCCCUGCCCACCGCACACUG
  |||||||
- CGGGGAC
+NCGGGGACNNNNNNNNNNNNNN
 ```
+
+We should see enrichments of ```CGGGGAC``` motifs if the microRNA has caused a significant effect on mRNA expression.
 
 ## Gene Ontology Analysis
 
