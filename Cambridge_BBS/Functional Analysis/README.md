@@ -40,12 +40,23 @@ The ontology is split into three categories for describing genes
 
 Let's load our genelist into Cytoscape and explore Gene Ontology Enrichments using the BinGO Package.
 
-File -> Import -> Network -> File -> miR_210_protein_coding_list.txt
+*File -> Import -> Network -> File -> miR_210_protein_coding_list.txt*
 ![import](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/import.png)
 
-Make sure you select the log FC column as node data and the first column as the source Node
+Make sure you select the log FC column as node data and the first column as the source Node, i.e. **Green Document Icon**.
 
 ![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/genelist.png)
+
+The genes will load as an unconnected network. Make sure the gene list is sorted on log2Fold change.
+
+We will now select genes from the list. Highlight the top 50 or so up or down-regulated genes.
+1. Right click then choose *Select nodes from selected rows*
+2. Then choose *Apps* -> *BinGO*
+3. Enter *upregulated* or *downregulated* as the **Cluster Name**
+4. Choose *Homo Sapiens* as the species and *GO Full* as the ontology file.
+5. Click *Start BinGO*
+6. You can make a hiearchical layout of the results by choosing:
+  *Layout* -> *Hierarchical Layout*
 
 ![bingo1](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo.png)
 
