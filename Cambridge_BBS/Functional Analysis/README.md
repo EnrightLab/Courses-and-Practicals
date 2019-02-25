@@ -23,7 +23,7 @@ The ontology is split into three categories for describing genes
 Let's load our genelist into Cytoscape and explore Gene Ontology Enrichments using the BinGO Package.
 
 File -> Import -> Network -> File -> miR_210_protein_coding_list.txt
-![import](import.png,"Logo Title Text 1")
+![import](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/import.png)
 
 Make sure you select the log FC column as node data and the first column as the source Node
 
