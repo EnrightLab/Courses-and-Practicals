@@ -11,7 +11,7 @@ You should download the genelist file from here to your Desktop:
 
 ## Sylamer Analysis of Genelists for microRNA signatures
 
-The purpose of our miR-210 overexpression experiment was to see if an over-expressed microRNA would influence gene-expression in MCF7 cells. To try and understand the physiological role of miR-210 regulation in this system.
+The purpose of our miR-210 overexpression experiment from last week was to see if an over-expressed microRNA would influence gene-expression in MCF7 cells. To try and understand the physiological role of miR-210 regulation in this system.
 
 We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take the gene Names from the genelists we produced. These are sorted according to log2 Fold change. This algorithm will search for 6nt motifs that correlate with expression changes. We are hoping to see a motif for the seed match to miR-210.
 
@@ -25,6 +25,20 @@ We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take th
 
 This will produce a Sylamer analysis of 6nt motifs from matched 3' UTR sequences from our sorted genelist from the miR-210 experiment.
 
+The miR-210 microRNA has this sequence:
+
+```
+AGCCCCUGCCCACCGCACACUG
+```
+
+it's complementary seed match would be: ```CGGGGAC```
+
+The binding site would look something like:
+```
+AGCCCCUGCCCACCGCACACUG
+ |||||||
+ CGGGGAC
+```
 
 ## Gene Ontology Analysis
 
