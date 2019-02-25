@@ -23,7 +23,12 @@ We will use [Sylamer](http://wwwdev.ebi.ac.uk/enright-dev/sylarray2/) to take th
 * Then choose *external gene name* as the *Input Gene Ids* 
 * Then click on *Launch*
 
+This will produce a Sylamer analysis of 6nt motifs from matched 3' UTR sequences from our sorted genelist from the miR-210 experiment.
+
+
 ## Gene Ontology Analysis
+
+We can also explore the functional annotations of the same genelist. We can arbitrarily select up-regulated and down-regulated genes to test for functional commonalities using the Gene ontology (GO).
 
 The mission of the [GO Consortium](http://geneontology.org) is to develop a comprehensive, computational model of biological systems, ranging from the molecular to the organism level, across the multiplicity of species in the tree of life. The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes. This knowledge is both human-readable and machine-readable, and is a foundation for computational analysis of large-scale molecular biology and genetics experiments in biomedical research.
 
@@ -40,7 +45,10 @@ File -> Import -> Network -> File -> miR_210_protein_coding_list.txt
 
 Make sure you select the log FC column as node data and the first column as the source Node
 
+![cytoscape](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/genelist.png)
 
+![bingo1](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo.png)
 
+![bingo2](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional%20Analysis/bingo_result.png)
 ## GeneMania
 
