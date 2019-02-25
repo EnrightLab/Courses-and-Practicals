@@ -65,3 +65,15 @@ We will now select genes from the list. Highlight the top 50 or so up or down-re
 ## GeneMania
 
 Gene Mania is a probabalistic network of gene functions according to large-scale genomics datasets. It is an interesting alternative to human curated datasets such as *GO*. 
+
+1. Go to the [GeneMania]:https://genemania.org website. 
+2. Paste in gene names from either up-regulated or down-regulated genes.
+3. Download and open in a spreadsheet the *mir_210_protein_coding_list.txt* file.
+4. Select about 100 either up or down-regulated genes from either end of the list and paste them into the search box.
+5. It will automaticaly parse and process the genes and build a functional network.
+
+![genemania](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_BBS/Functional_Analysis/GeneMania.png)
+
+## Reactome
+
+[Reactome]:http://www.reactome.org is a slightly different view of function that is based on human curated biological pathways.
