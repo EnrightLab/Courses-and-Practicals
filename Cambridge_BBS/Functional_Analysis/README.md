@@ -1,7 +1,8 @@
 # Functional Analysis of Differential Expression Data
 
-Anton Enright (aje39@cam.ac.uk) 
-Stephanie Wenlock (scw65@cam.ac.uk)
+**Anton Enright (aje39@cam.ac.uk)  Stephanie Wenlock (scw65@cam.ac.uk) **
+
+## Overview 
 
 Differential Gene expression analysis usually yields lists of genes from most up-regulated to most down-regulated.
 
