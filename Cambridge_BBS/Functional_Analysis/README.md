@@ -1,5 +1,9 @@
 # Functional Analysis of Differential Expression Data
 
+**Anton Enright (aje39@cam.ac.uk)  Stephanie Wenlock (scw65@cam.ac.uk) **
+
+## Overview 
+
 Differential Gene expression analysis usually yields lists of genes from most up-regulated to most down-regulated.
 
 In this practical we will briefly explore using such tools to search for biological commonalities in our datasets.
@@ -35,19 +39,19 @@ Reference: **Stijn van Dongen, Cei Abreu-Goodger & Anton J. Enright; Nature Meth
 
 The miR-210 microRNA has the following sequence:
 ```
-AGCCCCAGCCCACCGCACACUG
+AGCCCAGCCCACCGCACACUG
 ```
 
 its reverse complementary seed match would be expected to be: ```CTGGGC```
 
 A binding site would hence look something like:
 ```
-AGCCCCAGCCCACCGCACACUG
- |||||||
-NCGGGGTCNNNNNNNNNNNNNN
+AGCCCAGCCCACCGCACACUG
+ ||||||
+NCGGGTCNNNNNNNNNNNNNN
 ```
 
-We should see enrichments of ```CTGGGGC``` motifs if the microRNA has caused a significant effect on mRNA expression.
+We should see enrichments of ```CTGGGC``` motifs if the microRNA has caused a significant effect on mRNA expression.
 
 ## Gene Ontology Analysis
 
