@@ -1,8 +1,9 @@
 # Nanopore Direct RNA IGV Browsing
 
-Anton Enright, Jack Monahan & Adrien Leger, EMBL-EBI
+Anton Enright, Jack Monahan & Adrien Leger
+Universty of Cambridge & EMBL-EBI
 
-26th June 2018
+27th June 2018
 
 
 

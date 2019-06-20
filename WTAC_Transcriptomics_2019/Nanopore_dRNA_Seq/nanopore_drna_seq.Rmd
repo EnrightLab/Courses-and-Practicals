@@ -24,12 +24,12 @@ opts_chunk$set(dev="png",
 First we should change directory to where the data is
 
 ```{r}
-setwd("~/Desktop/course_data/wtac_nanopore_drna_2018")
+setwd("~/Desktop/course_data/wtac_nanopore_drna_2019")
 ```
 
 # Direct RNA Seq Discussion
 
-We have 4 yeast datasets, with 2 wildtypes and 2 knockouts for an RNA methylation enzyme. We also have two Human datasets from MCF7 which are wildtype.
+We have 6 mouse datasets, with 3 wildtypes and 3 knockouts for .....
 
 We want to look for differential expression between wt and knockout in the yeast samples. For the Human samples we want to compare to our existing illumina data from the mRNASeq practical.
 

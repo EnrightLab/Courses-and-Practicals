@@ -1,8 +1,8 @@
 # Nanopore Direct RNA sequencing analysis
 
-Adrien Leger, EMBL-EBI
+Jack Monahan & Adrien Leger, EMBL-EBI
 
-26th June 2018
+26th June 2019
 
 
 
@@ -40,7 +40,7 @@ Adrien Leger, EMBL-EBI
 
 
 
-## ONT Fast5 file format
+## ONT multiFast5/Fast5 file format
 
 MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). Each read is contained in a single file.
 
@@ -50,17 +50,16 @@ MINKnow generates files containing the raw intensity signal in [HDF5 format](htt
 
 Files can be explored using **HDFview**
 
-**Fast5 containing raw data only**
+**Multifast5 containing raw data only**
 
 ![](pictures/fast5_pre.png)
 
-**Fast5 after basecalling with Albacore (or live basecalling with MINKnow)**
-
-![](pictures/fast5_post.png)
 
 
 
 **Example of raw signal**
+
+![](pictures/fast5_raw.png)
 
 ![](pictures/Raw1.png)
 
@@ -74,22 +73,24 @@ Files can be explored using **HDFview**
 
 ### Basecalling
 
-* **Albacore** (available to ONT community)
-* Guppy = GPU accelerated version of Albacore (available to developer contract with ONT)
+* Albacore (available to ONT community, development ceased)
+* Guppy (available to ONT community) 
+* [Scrappie](https://github.com/nanoporetech/scrappie)
+* [Flappie](https://github.com/nanoporetech/flappie)  = Flip-flop basecaller, for DNA and cDNA
 * [Chiron](https://github.com/haotianteng/chiron) = Community alternative
 
 See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
 ### Quality control
 
+* [pycoQC](https://github.com/a-slide/pycoQC) = ONT data QC from sequencing summary file
 * [NanoPack](https://github.com/wdecoster/nanopack) = Suite of tools to QC and process raw ONT data
-* [pycoQC](https://github.com/a-slide/pycoQC) = ONT data QC for Jupyter Notebook
 
 ### RNA alignment
 
 * [**Minimap2** ](https://github.com/lh3/minimap2)
+* [LAST](http://last.cbrc.jp)
 * [STAR](https://github.com/alexdobin/STAR)
-* Transcriptome based aligner => Kallisto or Salmon
 
 ### Read Polishing
 
@@ -100,9 +101,6 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
 * [Tombo detect_modifications](https://nanoporetech.github.io/tombo/)
 * [Nanopolish call-methylation](https://nanopolish.readthedocs.io/en/latest/quickstart_call_methylation.html)
-
-Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOHVthl8JRX-FzJ9w8jrWogS4YhDcxyAfI/edit#gid=0
-
 
 
 # Mini-Practical
@@ -117,18 +115,18 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
 
-   If you have a human sample, download the reference genome first 
+   Your samples are derived from mouse X, you'll need to download the reference transcriptome and genomes first 
 
    ```
    cd ~/Desktop/course_data/nanopore_dRNA_Seq/references/
    ```
 
    ```bash
-   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.transcripts.fa.gz -o Homo_sapiens_transcriptome.fa.gz 
+   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_21/gencode.vM21.transcripts.fa.gz -o Mus_musculus_transcriptome.fa.gz 
    ```
 
    ```bash
-   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/GRCh38.primary_assembly.genome.fa.gz -o Homo_sapiens_genome.fa.gz 
+   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M21/GRCm38.primary_assembly.genome.fa.gz -o Mus_musculus_genome.fa.gz
    ```
 
    
@@ -152,60 +150,52 @@ Exhaustive list of tools => https://docs.google.com/spreadsheets/d/15LWXg0mUeNOH
    ```
 
    ```bash
-   read_fast5_basecaller.py --help
+   guppy_basecaller --help
    
-   read_fast5_basecaller.py --list_workflows
+   guppy_basecaller --print_workflows
    
-   read_fast5_basecaller.py -r -t 8 -f {FLOWCELL} -k {KIT} -o fastq -q 0  -i ../datasets/{YOUR-SAMPLE} -s ./
+   guppy_basecaller --num_callers 2 --flowcell ${FLOWCELL} --kit ${KIT} --reverse_sequence true --qscore_filtering 0 -q 0 --enable_trimming true -i ../datasets/{YOUR-SAMPLE} -s guppy/{YOUR-SAMPLE}
    ```
 
    *Flowcell and Kit information can be found in the fast5 files*
 
    *With your sample data it should take around 10 mins*
-
    
 
 
-4. QC the basecalled files with NanoPack
+4. QC the basecalled files with pycoQC
 
-   https://github.com/wdecoster/Nanopack
+   https://github.com/a-slide/pycoQC
 
    * Install Nanopack first
 
    ```bash
-   pip3 install NanoPack --user
+   pip3 install pycoQC --user
    ```
-
-   * Run Nanoplot and NanoStat
 
    ```bash
-   NanoPlot --summary sequencing_summary.txt --loglength -o summary-plots-log-transformed
+   pycoQC -f guppy/{YOUR-SAMPLE}/sequencing_summary.txt -o {YOUR-SAMPLE}.pycoQC.html
    ```
-
-   *Results are in summary-plots-log-transformed*
-
-   ```bash
-   NanoStat --summary sequencing_summary.txt --readtype 1D
-   ```
-
-   *Results are sent to standard output*
-
    
 
 5. Align reads against the transcriptome or the genome with Minimap2
 
    https://github.com/lh3/minimap2
 
-   *Spliced alignment against genome*
-
+   Merge reads
    ```bash
-   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_genome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   cat guppy/{YOUR-SAMPLE}/pass/*.fastq > {YOUR-SAMPLE}.fastq
+   ```
+
+   *Spliced alignment against genome*
+   ```bash
+   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o transcipts.bam
    ```
 
     *Unspliced alignment against transcriptome*
 
    ```bash
-   minimap2 -ax map-ont -L -t 8 ../references/{Homo_sapiens/Saccharomyces_cerevisiae}_transcriptome.fa.gz ./workspace/pass/{FASTQ_FILE} | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
 
    
