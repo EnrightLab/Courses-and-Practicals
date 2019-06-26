@@ -198,7 +198,6 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    ```bash
 
    salmon quant --noErrorModel -p 4 -t ../references/Mus_musculus_transcriptome.fa.gz -l U -a transcriptome.bam  -o salmon/$Sample
-   salmon 
    ```
 
 8. Inspect transcript counts
