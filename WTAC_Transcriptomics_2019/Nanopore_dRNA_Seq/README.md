@@ -103,6 +103,36 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 * [Tombo detect_modifications](https://nanoporetech.github.io/tombo/)
 * [Nanopolish call-methylation](https://nanopolish.readthedocs.io/en/latest/quickstart_call_methylation.html)
 
+# Sample QC
+
+Poly-A+ selection: `RNA was extracted using TRIzol reagent and poly-A+ RNA was isolated from 50ug of total RNA using Dynabeads Oligo(dT)25.`
+
+The eluted poly-A+ RNA concentration was quantified by Qubit and RNA quality was assessed with the TapeStation System.
+
+The RNA Integrity Number (RIN), a quality measurement from Agilent, is presented as a value between 1 and 10, where 10 represent the highest quality RNA sample.
+
+| Sample # | Name | Type | Concentration (ng/uL) |        RIN        |
+|:--------:|------|------|:---------------------:|:-----------------:|
+|     1    |  C1  |  wt  |          1961         |        8.6        |
+|     2    |  C3  |  wt  |          2100         |        8.8        |
+|     3    |  C7  |  wt  |          2026         |        8.2        |
+|     5    |  C8  |  scr |          1400         | TapeStation error |
+|     6    |  C18 |  scr |          1800         |        8.3        |
+|     7    |  C29 |  scr |          2000         |        7.8        |
+
+  ![](pictures/ts_Gel.png) 
+
+The TapeStation Software can display the results as electropherogram images to visualise the gel bands.
+
+- Sample 2 (RIN = 8.8):
+
+  ![](pictures/ts_S2EPG.png) 
+
+- Sample 7 (RIN = 7.8) - note the lower 28S:18S ratio:
+
+  ![](pictures/ts_S8EPG.png) 
+
+Overall (apart from Sample 5 which just requires another TapeStation run), our RNA samples have not been degraded and can proceed to library preparation.
 
 # Mini-Practical
 
