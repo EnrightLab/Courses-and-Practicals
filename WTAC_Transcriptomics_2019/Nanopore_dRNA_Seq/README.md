@@ -113,7 +113,7 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    ```
 
    ```
-   tar xvf {YOUR-SAMPLE}.tar.gz
+   tar xvf ${Sample}.tar.gz
    ```
 
 2. Inspect reads with the HDFView GUI
@@ -167,7 +167,7 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
    Merge reads
    ```bash
-   cat guppy/{YOUR-SAMPLE}/pass/*.fastq > {Sample}.fastq
+   cat guppy/${Sample}/pass/*.fastq > ${Sample}.fastq
    ```
 
    *Spliced alignment against genome*
