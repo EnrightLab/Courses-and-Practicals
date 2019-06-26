@@ -116,21 +116,6 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
 
- #  Your samples are derived from mouse NPCs, you'll need to download the reference transcriptome and genomes first 
-
-   ```
-   cd ~/Desktop/course_data/nanopore_dRNA_Seq/references/
-   ```
-
-#   ```bash
-#   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_21/gencode.vM21.transcripts.fa.gz -o Mus_musculus_transcriptome.fa.gz 
-#   ```
-
- #  ```bash
- #  wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M21/GRCm38.primary_assembly.genome.fa.gz -o Mus_musculus_genome.fa.gz
- #  ```
-   
-
 2. Inspect reads with the HDFView GUI
 
    ```
