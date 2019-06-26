@@ -1,6 +1,6 @@
 ---
 title: "Nanopore Direct RNA Seq - Practical 2"
-author: "Anton Enright & Jack Monahan & Adrien Leger"
+author: "Anton Enright & Jack Monahan"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
 output:
@@ -11,7 +11,7 @@ output:
 
 ```{r setup, results='hide',message=F, warning=F, echo=F}
 require(knitr)
-opts_knit$set(root.dir = '~/Desktop/course_data/wtac_nanopore_drna_2018')
+opts_knit$set(root.dir = '~/Desktop/course_data/wtac_nanopore_drna_2019')
 opts_chunk$set(dev="png", 
                dev.args=list(type="cairo"),
                comment='           ##',
@@ -29,260 +29,228 @@ setwd("~/Desktop/course_data/wtac_nanopore_drna_2019")
 
 # Direct RNA Seq Discussion
 
-We have 6 mouse datasets, with 3 wildtypes and 3 knockouts for .....
+We have 6 mouse datasets, with 3 wildtypes and 3 scrambles
 
-We want to look for differential expression between wt and knockout in the yeast samples. For the Human samples we want to compare to our existing illumina data from the mRNASeq practical.
+We want to look for any differential gene expression (DGE) and differential transcript usage (DTU) between them.
 
-**Sample**|**Species**|**Description**
-----|----|--------
-s1|yeast|wt
-s2|yeast|wt
-s3|yeast|ko
-s4|yeast|ko
-----|----|--------
-s5|human|MCF7 wt Line
-s6|human|MCF7 wt Line
 
 ## Preparation
 We first load the R/BioConductor libraries that we need.
 ```{r, results='hide',message=F, warning=F}
-library(RColorBrewer)
-library(gplots)
-library(DESeq2)
+suppressMessages(library(ggplot2)) # for plotting
+suppressMessages(library(gplots)) # for plotting
+suppressMessages(library(dplyr))
+suppressMessages(library(RColorBrewer))
+
+suppressMessages(library(GenomicFeatures)) #to create txdb from gtf
+
+suppressMessages(library(tximport)) #import salmon counts
+suppressMessages(library(readr)) #speeds up tximport
+
+suppressMessages(library(DRIMSeq)) #for DTU
+suppressMessages(library(DEXSeq)) #for DTU
+suppressMessages(library(stageR)) #for DTU
+
+suppressMessages(library(DESeq2)) #for DGE
+```
+
+#Modified from https://github.com/nanoporetech/pipeline-transcriptome-de & https://f1000research.com/articles/7-952/v3
+
+```{r inputs}
+
+colData = read.delim("datasets/samples.txt", stringsAsFactors = F)
+colData$condition = as.factor(colData$condition)
+rownames(colData) = colData$sample_id
+samples = colData$sample_id
+
+conds = colData$condition
+
+#Salmon transcript counts 
+salmon_files = file.path("datasets/salmon", samples, "quant.sf")
+print(salmon_files)
+
+#Transcript annotation
+annotation_file = "references/mm10.96.gtf"
+
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
-```
-
-## Yeast Analysis
-
-We will first look at the yeast data. We will load the count data first. We then set up conditions in an array.
-```{r}
-yeast_counts = read.table("yeast_trans_counts.txt",header=T,row.names=1)
-#yeast_annot = read.table("yeast_annot.txt",row.names=1)
-
-yeast_conds=as.factor(c("wt","wt","t5d","t5d"))
+cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
+names(cond_colours)=conds
 
 ```
 
-### Setup of counts and DESeq objects
-We now setup the condition information for DESeq2.
-```{r}
-coldata = as.data.frame(yeast_conds)
-rownames(coldata)=colnames(yeast_counts)
-colnames(coldata)='genotype'
-dds <- DESeqDataSetFromMatrix(countData = yeast_counts, colData = coldata, design = ~ genotype)
-```
-
-Now we will make some colours per condition and plot the counts yielded.
-```{r}
-cond_colours = brewer.pal(length(levels(yeast_conds)),"Set2")[yeast_conds]
-names(cond_colours)=yeast_conds
-
-barplot(apply(yeast_counts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
-legend("topright",levels((yeast_conds)),cex=0.6,fill=cond_colours[levels(yeast_conds)])
+#Make txdb from gencode transcript annotation gtf
+```{r create_txdb}
+#Already run
+txdb = makeTxDbFromGFF(annotation_file, organism = "Mus Musculus",dataSource="Ensembl")
+saveDb(txdb, "references/mm10.96.annotation.sqlite")
 
 ```
 
-### Initial QC of samples
-We have probably got a lot of the control standard sequenced (ENOLASE 1 - Gene YHR174W)
-```{r}
-barplot(as.numeric(yeast_counts["YHR174W",]/sum(yeast_counts[,1])),col=cond_colours,xlab="Enolase",ylab="% of Reads")
-```
+#Load txdb and generate Ensembl transcript id to gene id table
+```{r txdb}
+txdb = loadDb("references/mm10.96.annotation.sqlite")
+cols <- c("TXNAME", "GENEID")
+tx2gene = select(txdb, keys(txdb,"TXNAME"), columns=cols, keytype="TXNAME")
 
-Lets Remove the Enolase to not contaminate our counts.
-```{r}
-yeast_counts=yeast_counts[rownames(yeast_counts)!= "YHR174W",]
-```
+#Strip version numbers from transcript ids
+tx2gene$TXNAME = sapply(strsplit(tx2gene$TXNAME, ".", fixed = T), "[[", 1)
+#Strip version numbers from gene ids
+tx2gene$GENEID = sapply(strsplit(tx2gene$GENEID, ".", fixed = T), "[[", 1)
 
-### Normalisation and model fitting
-
-Now we can build a DESeq2 Dataset.
-```{r}
-dds <- DESeqDataSetFromMatrix(countData = yeast_counts, colData = coldata, design = ~ genotype)
-barplot(apply(yeast_counts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
-legend("topright",levels((yeast_conds)),cex=0.6,fill=cond_colours[levels(yeast_conds)])
-
-
-
-dds <- estimateSizeFactors(dds)
-dds <- estimateDispersions(dds)
-plotDispEsts(dds)
-```
-
-### Post Normalisation QC
-```{r}
-normcounts <- counts(dds, normalized=TRUE)
-rawcounts=counts(dds,normalized=FALSE)
-log2counts=log2(normcounts+1)
-
-barplot(apply(normcounts,2,sum), las=2,col=cond_colours,main="Post-Normalised Counts",cex.names=0.4)
-legend("topright",levels((yeast_conds)),cex=0.6,fill=cond_colours[levels(yeast_conds)])
-```
-Stabilise the counts for visualisation.
-```{r}
-vsd <- varianceStabilizingTransformation(dds)
-vstcounts <- assay(vsd)
-vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
-```
-
-And make some heatmaps
-```{r}
-heatmap.2(cor(rawcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (Raw Counts)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
-
-heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours,margins=c(9,7))
-```
-Lets PCA the data and see if wt and mutant are separated properly
-```{r}
-pca2=prcomp(t(vstcounts),center=TRUE)
-
-plot(pca2$x, col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)")
-text(pca2$x, as.vector(colnames(vstcounts)), pos=3, cex=0.4)
-```
-
-### Yeast Statistics
-
-Can we find any differentials ? The data are perhaps too noisy.....
-
-```{r}
-p_threshold=0.05
-lfc_threshold=0.75
-
-cds <- nbinomWaldTest(dds)
-
-res=results(cds,contrast=c("genotype","wt","t5d"))
-res <- res[order(res$padj),]
-res
-
-sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
-```
-
-Volcanoplot of the results... Nothing is significant
-```{r}
-plot(res$log2FoldChange,-log(res$padj,10),ylab="-log10(Adjusted P)",xlab="Log2 FoldChange",main=paste("Volcano Plot sig. in red"),pch=19,cex=0.4)      
-points(res[sig,"log2FoldChange"],-log(res[sig,"padj"],10),pch=19,cex=0.4,col="red")
-text(res[sig[1:10],"log2FoldChange"],-log(res[sig[1:10],"padj"],10),pch=19,cex=0.4,pos=2,labels = rownames(res[sig[1:10],]))
-abline(h=-log10(p_threshold),lty=3)
-abline(v=-lfc_threshold,lty=3)
-abline(v=lfc_threshold,lty=3) 
-```
-
-```{r}
-wt_median = apply(vstcounts[,yeast_conds == "wt"],1,median)
-mt_median = apply(vstcounts[,yeast_conds == "t5d"],1,median)
-plot(wt_median,mt_median,cex=0.4,pch=19,col="darkblue")
-abline(a=0,b=1,lty=2,col="red")
-```
-
-
-
-
-## Human Data Analysis
-
-```{r, error=F,warning=F}
-human_counts = read.table("combined_counts.txt",header=T,row.names=1)
-
-human_conds=as.factor(c("illumina","illumina","nano","nano"))
-
-#Lets Load the Counts First
-coldata = as.data.frame(human_conds)
-rownames(coldata)=colnames(human_counts)
-colnames(coldata)='genotype'
-dds <- DESeqDataSetFromMatrix(countData = human_counts, colData = coldata, design = ~ genotype)
-
-cond_colours = brewer.pal(length(levels(yeast_conds)),"Set2")[human_conds]
-names(cond_colours)=human_conds
-```
-### Initial QC of counts
-```{r}
-barplot(apply(human_counts,2,sum), las=2,col=cond_colours,main="Pre Normalised Counts",cex.names=0.4)
-legend("topright",levels((human_conds)),cex=0.6,fill=cond_colours[levels(human_conds)])
-```
-
-### Normalisation and Statistics
-
-Fit the DESeq neg. binomial model to the data
-```{r,error=F,warning=F}
-dds <- estimateSizeFactors(dds)
-dds <- estimateDispersions(dds)
-plotDispEsts(dds)
-```
-
-### Post Normalisation QC
-
-Lets see the effect of normalisation and compute some VST stabilised counts for visualisation.
-```{r}
-normcounts <- counts(dds, normalized=TRUE)
-rawcounts=counts(dds,normalized=FALSE)
-log2counts=log2(normcounts+1)
-
-vsd <- varianceStabilizingTransformation(dds)
-vstcounts <- assay(vsd)
-vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
-
-
-barplot(apply(normcounts,2,sum), las=2,col=cond_colours,main="Post-Normalised Counts",cex.names=0.4)
-legend("topright",levels((human_conds)),cex=0.6,fill=cond_colours[levels(human_conds)])
-```
-
-### Comparison Nanopore to Illumina
-
-Lets compare the replicates of the illumina vs each other and likewise for the nanopore results
-```{r}
-par(mfrow=c(2,1))
-plot(vstcounts[,"nano1_s5"],vstcounts[,"nano2_s6"],cex=0.4,pch=19,col="darkblue",main="Nanopore")
-abline(a=0,b=1,lty=2,col="red")
-plot(vstcounts[,"illumina1"],vstcounts[,"illumina2"],cex=0.4,pch=19,col="darkblue",main="Illumina")
-abline(a=0,b=1,lty=2,col="red")
-par(mfrow=c(1,1))
-```
-
-Now lets see the correlation between the illumina and nanopore reads.
-```{r}
-illumina_median = apply(vstcounts[,human_conds == "illumina"],1,median)
-nano_median = apply(vstcounts[,human_conds == "nano"],1,median)
-plot(illumina_median,nano_median,cex=0.4,pch=19,col="darkblue")
-abline(a=0,b=1,lty=2,col="red")
-```
-
-Now lets see explore the correlation and fit.
-```{r}
-# work out pearson correlation
-correlation=cor(illumina_median,nano_median)
-
-# Replot
-illumina_median = apply(vstcounts[,human_conds == "illumina"],1,median)
-nano_median = apply(vstcounts[,human_conds == "nano"],1,median)
-plot(illumina_median,nano_median,cex=0.4,pch=19,col="darkblue",main=paste("Cor:",correlation))
-abline(a=0,b=1,lty=2,col="red")
-
-# Fit a linear model
-abline(lm(illumina_median ~ nano_median),col="orange",lwd=2)
-
-# Fit a smooth spline model
-lines(smooth.spline(illumina_median,nano_median),col="purple",lwd=2)
+enolase_ids  = c("ENSMUSG00000004267","ENSMUSG00000048029","ENSMUSG00000060600","ENSMUSG00000063524")
+#Remove Enolase
+tx2gene = tx2gene[!(tx2gene$GENEID %in% enolases),]
 
 ```
 
-### Human Statistics
-This is a pretty meaningless comparison as the samples are too different.
-```{r}
-p_threshold=0.05
-lfc_threshold=0.75
+#Import Salmon transcript counts
+```{r import_salmon}
+#Import salmon transcript counts
+#Don't use TPMs, use NumReads i.e. txi.salmon$counts
+txi.salmon = tximport(salmon_files, type = "salmon", txOut = TRUE)
+colnames(txi.salmon$abundance) = samples
+colnames(txi.salmon$counts) = samples
 
-cds <- nbinomWaldTest(dds)
-
-res=results(cds,contrast=c("genotype","illumina","nano"))
-res <- res[order(res$padj),]
-res
-
-sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
 ```
 
-Volcanoplot of results
-```{r}
-plot(res$log2FoldChange,-log(res$padj,10),ylab="-log10(Adjusted P)",xlab="Log2 FoldChange",main=paste("Volcano Plot","sig. in red"),pch=19,cex=0.4)      
-points(res[sig,"log2FoldChange"],-log(res[sig,"padj"],10),pch=19,cex=0.4,col="red")
-text(res[sig[1:10],"log2FoldChange"],-log(res[sig[1:10],"padj"],10),pch=19,cex=0.4,pos=2,labels = rownames(res[sig[1:10],]))
-abline(h=-log10(p_threshold),lty=3)
-abline(v=-lfc_threshold,lty=3)
-abline(v=lfc_threshold,lty=3)
+
+#Analysis of Differential Transcript Usage
+```{r Filter}
+
+#Filter out unexpressed transcripts
+keep_feature = rowSums(txi.salmon$counts) > 0
+transcript_counts = txi.salmon$counts[keep_feature,]
+transcript_counts = as.data.frame(transcript_counts)
+
+#Filter transcript counts with DRIMSeq
+#Make data.frame with the gene ID, the feature (transcript) ID, and then columns for each of the samples
+transcript_counts$TXNAME = rownames(transcript_counts)
+transcript_counts = merge(tx2gene, transcript_counts, by = "TXNAME")
+colnames(transcript_counts)[c(1,2)] = c("feature_id","gene_id")
+
+d = dmDSdata(counts=transcript_counts, samples=colData)
+counts_unfiltered <- counts(d)
+
+# DRIMSeq filter parameters
+min_samps_gene_expr = 2 # or 3 normally
+min_samps_feature_expr = 1
+min_gene_expr = 10 
+min_feature_expr =  3
+
+d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_expr = min_samps_feature_expr, min_gene_expr = min_gene_expr, min_feature_expr = min_feature_expr)
+counts_filtered = counts(d)
+
+```
+
+
+```{r DEXSeq}
+design <- model.matrix(~condition, data=DRIMSeq::samples(d))
+
+#DEXSeq (for differential exon usage)
+sample.data = DRIMSeq::samples(d)
+trans_counts.data = round(as.matrix(counts_filtered[,-c(1:2)]))
+dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design= ~sample + exon + condition:exon, featureID=counts(d)$feature_id, groupID=counts(d)$gene_id)
+dxd = estimateSizeFactors(dxd)
+dxd = estimateDispersions(dxd, fitType='local')
+dxd = testForDEU(dxd, reducedModel=~sample + exon)
+dxd = estimateExonFoldChanges( dxd, fitExpToVar="condition")
+dxr = DEXSeqResults(dxd, independentFiltering=FALSE)
+
+#pdf("analyses/results_dtu.pdf")
+plotMA(dxr, cex=0.8, alpha=0.05) 
+plotDispEsts(dxd)
+#dev.off()
+
+qval = perGeneQValue(dxr) 
+dxr.g = data.frame(gene=names(qval), qval)
+dxr.g = dxr.g[order(dxr.g$qval),]
+
+dxr = as.data.frame(dxr[,c("featureID", "groupID", "pvalue")])
+dxr = dxr[order(dxr$pvalue),]
+
+write.table(dxr.g, file="analyses/results_dtu_gene.txt", sep="\t", quote = F)
+write.table(dxr, file="analyses/results_dtu_transcript.txt", sep="\t", quote = F)
+
+# stageR analysis on differential transcript usage results
+pConfirmation <- matrix(dxr$pvalue, ncol=1)
+dimnames(pConfirmation) <- list(dxr$featureID, "transcript")
+pScreen <- qval
+tx2gene <- as.data.frame(dxr[,c("featureID", "groupID")])
+
+stageRObj <- stageRTx(pScreen=pScreen, pConfirmation=pConfirmation, pScreenAdjusted=TRUE, tx2gene=tx2gene)
+# note: the choice of 0.05 here means you can *only* threshold at 5% overall false discovery rate (OFDR) later
+stageRObj <- stageWiseAdjustment(stageRObj, method="dtu", alpha=0.05)
+suppressWarnings({dex.padj <- getAdjustedPValues(stageRObj, order=FALSE, onlySignificantGenes=FALSE)})
+
+write.table(dex.padj, file="analyses/results_dtu_stageR.txt", sep="\t", quote = F)
+
+```
+
+```{r plot_DTU}
+
+# stageR results:
+stageR = dex.padj
+names(stageR) = c("gene_id", "transcript_id", "p_transcript", "p_gene")
+
+# Read filtered counts:
+counts = counts_filtered
+names(counts)[2]<-"transcript_id"
+
+# Join counts and stageR results:
+df = merge(counts, stageR, by = c("gene_id", "transcript_id"))
+df <- df[order(df$p_gene),]
+
+#Drop columns
+scols = setdiff(names(df),c("gene_id", "transcript_id", "p_gene", "p_transcript"))
+
+# Normalise counts by the library size (i.e. the total counts per sample)
+for(sc in scols){
+    df[sc] <- df[sc] / sum(df[sc])
+}
+
+# Melt data frame:
+tdf <- df %>% gather(key='sample', value='norm_count',-gene_id, -transcript_id, -p_gene, -p_transcript)
+
+# Add sample group column:
+sampleToGroup<-function(x){
+    return(colData[x,]$condition)
+}
+
+tdf$group <- sampleToGroup(tdf$sample)
+
+# Filter for significant genes:
+sig_level <- 0.05
+genes <- as.character(tdf[which(tdf$p_gene < sig_level),]$gene_id)
+genes <- unique(genes)
+
+pdf("analyses/dtu_plots.pdf")
+
+for(gene in genes){
+    gdf = tdf[which(tdf$gene_id==gene),]
+    p_gene = unique(gdf$p_gene)
+    p = ggplot(gdf, aes(x=transcript_id, y=norm_count)) + geom_bar(stat="identity", aes(fill=sample), position="dodge")
+    p = p + facet_wrap(~ group) + coord_flip()
+    p = p + ggtitle(paste(gene," : p_value=", p_gene, sep=""))
+    print(p)
+}
+
+dev.off()
+
+```
+
+# Analysis of Differential Gene Expression
+```{r DGE}
+
+#Get gene counts from transcript counts i.e. txi.salmon$counts
+txi.sum = summarizeToGene(txi.salmon, tx2gene = tx2gene, countsFromAbundance = "no")
+
+#DESeq2 dds object from txi gene object
+dds = DESeqDataSetFromTximport(txi.sum, colData = colData, design = ~condition)
+
+#Filter out unexpressed genes
+keep_feature = rowSums(counts(dds)) > 0
+dds = dds[keep_feature,]
+
+#Normal DESeq2 DGE analysis from here...
+
 ```
