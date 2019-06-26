@@ -73,7 +73,7 @@ Files can be explored using **HDFview**
 
 ### Basecalling
 
-* ~~Albacore~~ (available to ONT community, development ceased)
+* ~~Albacore~~ (development ceased)
 * Guppy (available to ONT community) 
 * [Scrappie](https://github.com/nanoporetech/scrappie)
 * [Flappie](https://github.com/nanoporetech/flappie)  = Flip-flop basecaller, for DNA and cDNA
