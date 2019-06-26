@@ -146,15 +146,19 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 3. Basecall your data with Albacore
 
    ```bash
-   cd ~/Desktop/course_data/nanopore_dRNA_Seq/analyses/
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/
+  
    ```
 
    ```bash
-   guppy_basecaller --help
+   ./ont-guppy-cpu/bin/guppy_basecaller --help
    
-   guppy_basecaller --print_workflows
+   ./ont-guppy-cpu/bin/guppy_basecaller --print_workflows
    
-   guppy_basecaller --num_callers 2 --flowcell ${FLOWCELL} --kit ${KIT} --reverse_sequence true --qscore_filtering 0 -q 0 --enable_trimming true -i ../datasets/{YOUR-SAMPLE} -s guppy/{YOUR-SAMPLE}
+   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s wt1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --enable_trimming true --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
+   
+   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s scr1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --enable_trimming true --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
+   
    ```
 
    *Flowcell and Kit information can be found in the fast5 files*
