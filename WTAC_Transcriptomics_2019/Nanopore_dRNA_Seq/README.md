@@ -1,8 +1,8 @@
 # Nanopore Direct RNA sequencing analysis
 
-Jack Monahan & Adrien Leger, EMBL-EBI
+Jack Monahan & Anton Enright, EMBL-EBI
 
-26th June 2019
+27th June 2019
 
 
 
@@ -42,7 +42,7 @@ Jack Monahan & Adrien Leger, EMBL-EBI
 
 ## ONT multiFast5/Fast5 file format
 
-MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). Latest Fast5 format contains multiple reads per file.
+MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). The latest Fast5 format contains multiple reads per file.
 
 ![](pictures/HDF5.jpeg)
 
@@ -156,14 +156,8 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
    https://github.com/a-slide/pycoQC
 
-   * Install Nanopack first
-
    ```bash
-   pip3 install pycoQC --user
-   ```
-
-   ```bash
-   pycoQC -f guppy/{YOUR-SAMPLE}/sequencing_summary.txt -o {YOUR-SAMPLE}.pycoQC.html
+   pycoQC -f guppy/${Sample}/sequencing_summary.txt -o ${Sample}.pycoQC.html
    ```
    
 
@@ -173,18 +167,18 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
    Merge reads
    ```bash
-   cat guppy/{YOUR-SAMPLE}/pass/*.fastq > {YOUR-SAMPLE}.fastq
+   cat guppy/{YOUR-SAMPLE}/pass/*.fastq > {Sample}.fastq
    ```
 
    *Spliced alignment against genome*
    ```bash
-   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz ${Sample}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
 
     *Unspliced alignment against transcriptome*
 
    ```bash
-   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
+   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz ${Sample}.fastq | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
    ```
 
    
@@ -214,5 +208,4 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    less salmon/$Sample/quant.sf
    ```
 
-   ```
 
