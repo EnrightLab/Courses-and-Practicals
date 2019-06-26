@@ -24,7 +24,7 @@ Jack Monahan & Anton Enright, EMBL-EBI
 
   ![](pictures/Slide17.png) 
 
-- Better exons connectivity
+- Better exon connectivity
 
 ![](pictures/exon_align.png)
 
@@ -106,7 +106,7 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
 # Mini-Practical
 
-1. Get you data !
+1. Get your data !
 
    ```bash
    cd ~/Desktop/course_data/nanopore_dRNA_Seq/datasets/
@@ -166,11 +166,13 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    https://github.com/lh3/minimap2
 
    Merge reads
+   
    ```bash
    cat guppy/${Sample}/pass/*.fastq > ${Sample}.fastq
    ```
 
    *Spliced alignment against genome*
+   
    ```bash
    minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz ${Sample}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
@@ -196,14 +198,12 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 7. Generate transcript counts with Salmon
 
    ```bash
-
    salmon quant --noErrorModel -p 4 -t ../references/Mus_musculus_transcriptome.fa.gz -l U -a transcriptome.bam  -o salmon/$Sample
    ```
 
 8. Inspect transcript counts
 
    ```bash
-
    less salmon/$Sample/quant.sf
    ```
 
