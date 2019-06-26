@@ -42,7 +42,7 @@ Jack Monahan & Adrien Leger, EMBL-EBI
 
 ## ONT multiFast5/Fast5 file format
 
-MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). Each read is contained in a single file.
+MINKnow generates files containing the raw intensity signal in [HDF5 format](https://support.hdfgroup.org/HDF5/). Latest Fast5 format contains multiple reads per file.
 
 ![](pictures/HDF5.jpeg)
 
@@ -73,7 +73,7 @@ Files can be explored using **HDFview**
 
 ### Basecalling
 
-* Albacore (available to ONT community, development ceased)
+* ~~Albacore~~ (available to ONT community, development ceased)
 * Guppy (available to ONT community) 
 * [Scrappie](https://github.com/nanoporetech/scrappie)
 * [Flappie](https://github.com/nanoporetech/flappie)  = Flip-flop basecaller, for DNA and cDNA
@@ -90,6 +90,7 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
 * [**Minimap2** ](https://github.com/lh3/minimap2)
 * [LAST](http://last.cbrc.jp)
+* [Exonerate](https://www.ebi.ac.uk/about/vertebrate-genomics/software/exonerate)
 * [STAR](https://github.com/alexdobin/STAR)
 
 ### Read Polishing
@@ -98,7 +99,7 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 * [Tombo resquiggle](https://nanoporetech.github.io/tombo/)
 
 ### DNA/RNA modification detection
-
+* Nanopolish
 * [Tombo detect_modifications](https://nanoporetech.github.io/tombo/)
 * [Nanopolish call-methylation](https://nanopolish.readthedocs.io/en/latest/quickstart_call_methylation.html)
 
@@ -115,20 +116,19 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    tar xvf {YOUR-SAMPLE}.tar.gz
    ```
 
-   Your samples are derived from mouse X, you'll need to download the reference transcriptome and genomes first 
+ #  Your samples are derived from mouse NPCs, you'll need to download the reference transcriptome and genomes first 
 
    ```
    cd ~/Desktop/course_data/nanopore_dRNA_Seq/references/
    ```
 
-   ```bash
-   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_21/gencode.vM21.transcripts.fa.gz -o Mus_musculus_transcriptome.fa.gz 
-   ```
+#   ```bash
+#   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_21/gencode.vM21.transcripts.fa.gz -o Mus_musculus_transcriptome.fa.gz 
+#   ```
 
-   ```bash
-   wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M21/GRCm38.primary_assembly.genome.fa.gz -o Mus_musculus_genome.fa.gz
-   ```
-
+ #  ```bash
+ #  wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M21/GRCm38.primary_assembly.genome.fa.gz -o Mus_musculus_genome.fa.gz
+ #  ```
    
 
 2. Inspect reads with the HDFView GUI
@@ -193,18 +193,18 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
 
    *Spliced alignment against genome*
    ```bash
-   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o transcipts.bam
+   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
 
     *Unspliced alignment against transcriptome*
 
    ```bash
-   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz {YOUR-SAMPLE}.fastq | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
    ```
 
    
 
-6. Visualise aligned reads with IGV
+6. Visualise genome-aligned reads with IGV
 
    https://software.broadinstitute.org/software/igv/download
 
@@ -214,4 +214,20 @@ See basecaller comparison => https://github.com/rrwick/Basecalling-comparison
    samtools index reads.bam
    ```
 
-   
+7. Generate transcript counts with Salmon
+
+   ```bash
+
+   salmon quant --noErrorModel -p 4 -t ../references/Mus_musculus_transcriptome.fa.gz -l U -a transcriptome.bam  -o salmon/$Sample
+   salmon 
+   ```
+
+8. Inspect transcript counts
+
+   ```bash
+
+   less salmon/$Sample/quant.sf
+   ```
+
+   ```
+
