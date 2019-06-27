@@ -62,8 +62,8 @@ nanopore_counts = read.table("nanopore_drna_counts.txt", row.names = 1,header= T
 #nanopore_counts = nanopore_counts[,-5]
 
 #Transcript annotation
-annotation_file = "reference/mm10.96.gtf"
-#trans2gene = read.table("reference/mm10.96.transcripts2genes.txt", header =F)
+annotation_file = "references/mm10.96.gtf"
+#trans2gene = read.table("references/mm10.96.transcripts2genes.txt", header =F)
 
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
