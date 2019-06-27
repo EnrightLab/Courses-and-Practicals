@@ -42,7 +42,7 @@ suppressMessages(library(stageR)) #for DTU
 suppressMessages(library(DESeq2)) #for DGE
 ```
 
-\#Modified from
+Modified from
 <https://github.com/nanoporetech/pipeline-transcriptome-de> &
 <https://f1000research.com/articles/7-952/v3>
 
@@ -71,14 +71,14 @@ cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
 names(cond_colours)=conds
 ```
 
-\#Make txdb from gencode transcript annotation gtf
+#Make txdb from gencode transcript annotation gtf
 
 ``` r
 txdb = makeTxDbFromGFF(annotation_file, dataSource="Ensembl")
 saveDb(txdb, "references/mm10.96.annotation.sqlite")
 ```
 
-\#Load txdb and generate Ensembl transcript id to gene id table
+#Load txdb and generate Ensembl transcript id to gene id table
 
 ``` r
 txdb = loadDb("references/mm10.96.annotation.sqlite")
@@ -97,8 +97,9 @@ enolase_ids  = c("ENSMUSG00000004267","ENSMUSG00000048029","ENSMUSG00000060600",
 tx2gene = tx2gene[!(tx2gene$GENEID %in% enolase_ids),]
 ```
 
-\#Analysis of Differential Transcript Usage
+## Analysis of Differential Transcript Usage
 
+# Filter transcripts
 ``` r
 #Filter out unexpressed transcripts
 keep_feature = rowSums(nanopore_counts) > 0
@@ -124,6 +125,7 @@ d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_exp
 counts_filtered = counts(d)
 ```
 
+# Model exon usage
 ``` r
 design <- model.matrix(~condition, data=DRIMSeq::samples(d))
 
