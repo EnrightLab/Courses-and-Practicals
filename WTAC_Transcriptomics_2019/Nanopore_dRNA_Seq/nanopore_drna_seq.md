@@ -182,6 +182,7 @@ suppressWarnings({dex.padj = getAdjustedPValues(stageRObj, order=FALSE, onlySign
 write.table(dex.padj, file="analyses/results_dtu_stageR.txt", sep="\t", quote = F)
 ```
 
+## Plot DTU
 ``` r
 # stageR results:
 stageR = dex.padj
