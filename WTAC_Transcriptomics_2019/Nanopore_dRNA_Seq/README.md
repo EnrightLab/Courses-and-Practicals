@@ -204,13 +204,13 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
    *Spliced alignment against genome*
    
    ```bash
-   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/mm10_ref.fa ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   minimap2 -ax splice -uf -k 14 -L -t 2 ../references/mm10_ref.fa ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
 
     *Unspliced alignment against transcriptome*
 
    ```bash
-   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
+   minimap2 -ax map-ont -L -t 2 ../references/Mus_musculus_transcriptome.fa.gz ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
    ```
 
    
