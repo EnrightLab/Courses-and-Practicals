@@ -181,13 +181,7 @@ stageRObj <- stageRTx(pScreen=pScreen, pConfirmation=pConfirmation, pScreenAdjus
 # note: the choice of 0.05 here means you can *only* threshold at 5% overall false discovery rate (OFDR) later
 stageRObj <- stageWiseAdjustment(stageRObj, method="dtu", alpha=0.05)
 suppressWarnings({dex.padj <- getAdjustedPValues(stageRObj, order=FALSE, onlySignificantGenes=FALSE)})
-```
 
-``` 
-           ## The returned adjusted p-values are based on a stage-wise testing approach and are only valid for the provided target OFDR level of 5%. If a different target OFDR level is of interest,the entire adjustment should be re-run.
-```
-
-``` r
 write.table(dex.padj, file="analyses/results_dtu_stageR.txt", sep="\t", quote = F)
 ```
 
