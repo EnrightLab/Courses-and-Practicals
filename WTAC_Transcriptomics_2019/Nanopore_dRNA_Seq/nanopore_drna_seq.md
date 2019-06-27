@@ -98,31 +98,15 @@ tx2gene = tx2gene[!(tx2gene$GENEID %in% enolase_ids),]
 #Filter out unexpressed transcripts
 keep_feature = rowSums(nanopore_counts) > 0
 transcript_counts = nanopore_counts[keep_feature,]
-transcript_counts = as.data.frame(transcript_counts)
 
-#Filter transcript counts with DRIMSeq
-#Make data.frame with the gene ID, the feature (transcript) ID, and then columns for each of the samples
-transcript_counts$TXNAME = rownames(transcript_counts)
-transcript_counts = merge(tx2gene, transcript_counts, by = "TXNAME")
-colnames(transcript_counts)[c(1,2)] = c("feature_id","gene_id")
 
-d = dmDSdata(counts=transcript_counts, samples=colData)
-counts_unfiltered = counts(d)
-
-# DRIMSeq filter parameters
-min_samps_gene_expr = 2 # or 3 normally
-min_samps_feature_expr = 1
-min_gene_expr = 10 
-min_feature_expr =  3
-
-d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_expr = min_samps_feature_expr, min_gene_expr = min_gene_expr, min_feature_expr = min_feature_expr)
-counts_filtered = counts(d)
 ```
+
 # Sample QC
 
 ``` r
 #Get gene counts from transcript counts using gather function from tidyr
-gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
+gene_counts = transcript_counts %>% dplyr::select(c(1, 3:ncol(transcript_counts)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
 
 #Set the gene id as the rowname
 rownames(gene_counts) = gene_counts$gene_id
@@ -146,10 +130,6 @@ dds = dds[keep_feature,]
 dds = estimateSizeFactors(dds)
 dds = estimateDispersions(dds)
 
-```
-
-## Sample QC
-``` r
 #Dispersion plot
 plotDispEsts(dds,main='Dispersion Plot')
 
@@ -180,7 +160,7 @@ ggplot(pca.df,aes(x=PC1,y=PC3, colour = Condition, label = Sample)) + geom_point
         geom_text(aes(label=Sample),hjust=0, vjust=0) +
         theme_minimal() +
         theme(legend.position="bottom",  legend.box = "vertical") +
-        xlab(percentages[1]) + ylab(percentages[2])
+        xlab(percentages[1]) + ylab(percentages[3])
 ```
 
 # wt3 & scr2 look like outliers, these 2 samples had the lowest counts.
@@ -188,11 +168,152 @@ ggplot(pca.df,aes(x=PC1,y=PC3, colour = Condition, label = Sample)) + geom_point
 
 ``` r
 #Remove dodgy samples wt3 & scr2
-#nanopore_counts = nanopore_counts[,-c(3,5)]
+colData = colData[-c(3,5,]
+transcript_counts = transcript_counts[,-c(3,5)]
+
+#Transcript to gene counts again
+transcript_counts = as.data.frame(transcript_counts)
+gene_counts = transcript_counts %>% dplyr::select(c(1, 3:ncol(transcript_counts)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
+
+#Set the gene id as the rowname
+rownames(gene_counts) = gene_counts$gene_id
+gene_counts$gene_id = NULL
+gene_counts = as.matrix(gene_counts)
+
+#Filter out unexpressed genes
+keep_feature = rowSums(gene_counts) > 0
+gene_counts = gene_counts[keep_feature,]
+
+```
+
+## Post-QC Sample plots
+``` r
+#DESeq2 dds object from matrix of gene counts
+dds = DESeqDataSetFromMatrix(gene_counts, colData = colData, design = ~condition)
+
+#Normal DESeq2 DGE analysis from here...
+
+#Normalisation
+dds = estimateSizeFactors(dds)
+dds = estimateDispersions(dds)
+
+#Dispersion plot
+plotDispEsts(dds,main='Dispersion Plot')
+
+vsd = varianceStabilizingTransformation(dds)
+vstMat = assay(vsd)
+
+#Heat map
+heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabilised',col=hmcol,cexRow=0.6,cexCol=0.6)
+
+#PCA
+pca = prcomp(t(vstMat))
+
+pca.df = pca$x
+# Percentage explained by each component
+percentages <- round(pca$sdev^2 / sum(pca$sdev^2) * 100)[1:3]
+percentages <- paste(paste0(colnames(pca.df), ":"),  paste0(as.character(percentages), "%"), "variance", sep=" ")
+pca.df = data.frame(pca.df, Condition = dds$condition, Sample = colnames(dds))
+
+#Plot PCA
+#1 vs. 2
+ggplot(pca.df,aes(x=PC1,y=PC2, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[2])
+#1 vs. 3
+ggplot(pca.df,aes(x=PC1,y=PC3, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[3])
+```
+
+
+# Analysis of Differential Gene Expression
+``` r
+
+# New Negative Binomial test
+dds = nbinomWaldTest(dds)
+
+logfc.threshold = log2(2)
+
+#Differential Gene Expression
+res = DESeq2::results(dds, contrast=c('condition', 'wt', 'scr'))
+res = as.data.frame(res)
+#Remove rows with NA values i.e. those that are 'incomplete'
+res = res[complete.cases(res),] 
+res = res[order(-res$log2FoldChange),]
+res$Diff.Exprs = ifelse(res$padj <= 0.05 & res$log2FoldChange >=logfc.threshold, "Control+", ifelse(res$padj <= 0.05 & res$log2FoldChange <= -logfc.threshold, "Scramble+", "unchanged"))
+
+
+#Significant genes
+sig = res[res$padj <= 0.05,]
+
+#Significantly differentially expressed genes
+sig.de = sig[sig$Diff.Exprs != "unchanged",]
+
+print(nrow(sig.de))
+
+#Write full table to file
+res$gene_id = rownames(res)
+write.table(res,  file = "differential_expression.deseq2.txt", quote = F, row.names = F )
+
+```
+
+## Volcano Plot
+``` r
+
+ggplot(res, aes(log2FoldChange, -log10(padj))) +
+	geom_point(aes(col=Diff.Exprs)) +
+	scale_color_manual(limits = c("Scramble+","unchanged","Control+"), labels = c("Scrambled", "unchanged", "Control"), values=c("red","grey", "blue"), guide_legend(title="Differential\nExpression")) + 
+	geom_hline(yintercept = -log(0.05,10), linetype = 2, size = 1) +
+	geom_vline(xintercept = c(-(logfc.threshold),logfc.threshold), linetype = 2, size = 1) +
+	theme_classic()
+
+```
+
+
+## Plot Hoxc6 expression
+``` r
+
+exprs = t(vstMat)
+exprs = as.data.frame(exprs)
+exprs$condition = dds$condition
+exprs$sample= colnames(dds)
+
+#Boxplot of Hoxc6 expression
+#Hoxc6 = ENSMUSG00000001661
+ggplot(exprs, aes(x = sample, y =  ENSMUSG00000001661, fill = condition)) +
+        geom_boxplot() +
+        xlab("Condition") +
+        ylab("Hoxc6 Expression (VST)") 
 
 ```
 
 # Analysis of Differential Transcript Usage
+## Filter transcript counts with DRIMSeq
+``` r
+
+#Filter transcript counts with DRIMSeq
+#Make data.frame with the gene ID, the feature (transcript) ID, and then columns for each of the samples
+transcript_counts$TXNAME = rownames(transcript_counts)
+transcript_counts = merge(tx2gene, transcript_counts, by = "TXNAME")
+colnames(transcript_counts)[c(1,2)] = c("feature_id","gene_id")
+
+d = dmDSdata(counts=transcript_counts, samples=colData)
+counts_unfiltered = counts(d)
+
+# DRIMSeq filter parameters
+min_samps_gene_expr = 2 # or 3 normally
+min_samps_feature_expr = 1
+min_gene_expr = 10 
+min_feature_expr =  3
+
+d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_expr = min_samps_feature_expr, min_gene_expr = min_gene_expr, min_feature_expr = min_feature_expr)
+counts_filtered = counts(d)
+```
 
 ## DEXSeq (for differential exon usage)
 ``` r
@@ -205,8 +326,7 @@ dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design=
 
 ``` r
 dxd = estimateSizeFactors(dxd)
-dxd = estimateDispersions(dxd)
-#dxd = estimateDispersions(dxd, fitType='local')
+dxd = estimateDispersions(dxd, fitType='local')
 
 #Test for differential exon usage
 dxd = testForDEU(dxd, reducedModel=~sample + exon)
@@ -305,38 +425,6 @@ for(gene in genes){
 }
 
 dev.off()
-```
-
-# Analysis of Differential Gene Expression
-
-``` r
-#Get gene counts from transcript counts using gather function from tidyr
-gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
-```
-
-``` r
-#Set the gene id a s the rowname
-rownames(gene_counts) = gene_counts$gene_id
-gene_counts$gene_id = NULL
-gene_counts = as.matrix(gene_counts)
-
-#Filter out unexpressed genes
-keep_feature = rowSums(gene_counts) > 0
-gene_counts = gene_counts[keep_feature,]
-
-#DESeq2 dds object from matrix of gene counts
-dds = DESeqDataSetFromMatrix(gene_counts, colData = colData, design = ~condition)
-
-#Filter out unexpressed genes
-keep_feature = rowSums(counts(dds)) > 0
-dds = dds[keep_feature,]
-
-#Normal DESeq2 DGE analysis from here...
-
-#Normalisation
-dds = estimateSizeFactors(dds)
-dds = estimateDispersions(dds)
-
 ```
 
 ## Sample QC
