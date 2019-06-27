@@ -9,7 +9,7 @@ Anton Enright & Jack Monahan
 First we should change directory to where the data is
 
 ``` r
-setwd("~/Desktop/course_data/wtac_nanopore_drna_2019")
+setwd("~/Desktop/course_data/nanopore_dRNA_Seq")
 ```
 
 # Direct RNA Seq Discussion
