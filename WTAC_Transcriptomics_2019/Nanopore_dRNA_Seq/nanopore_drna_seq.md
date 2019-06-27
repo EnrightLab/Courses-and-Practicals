@@ -331,14 +331,14 @@ dds = nbinomWaldTest(dds)
 logfc.threshold = log2(2)
 
 #Differential Gene Expression
-res = DESeq2::results(dds, contrast=c('condition', 'control', 'mettl3_KD'))
+res = DESeq2::results(dds, contrast=c('condition', 'wt', 'scr'))
 res = as.data.frame(res)
 res = res[complete.cases(res),]
 res = res[order(-res$log2FoldChange),]
 
 #Significant genes
 sig = res[res$padj <= 0.05,]
-sig$Diff.Exprs = ifelse(sig$log2FoldChange >= logfc.threshold, "Control+", ifelse(sig$log2FoldChange <= -logfc.threshold, "Mettl3_kd+", "unchanged"))
+sig$Diff.Exprs = ifelse(sig$log2FoldChange >= logfc.threshold, "Control+", ifelse(sig$log2FoldChange <= -logfc.threshold, "Scramble+", "unchanged"))
 
 #Significantly differentially expressed genes
 sig.de = sig[sig$Diff.Exprs != "unchanged",]
@@ -349,4 +349,15 @@ write.table(res,  file = "differential_expression.deseq2.txt", quote = F, row.na
 
 ```
 
+## Volcano Plot
+``` r
+
+ggplot(res, aes(log2FoldChange, -log10(padj))) +
+	geom_point(aes(col=Diff.Exprs)) +
+	scale_color_manual(limits = c("Scramble+","unchanged","Control+"), labels = c("Scrambled, "unchanged", "Control"), values=c("red","grey", "blue"), guide_legend(title="Differential\nExpression")) + 
+	geom_hline(yintercept = -log(0.05,10), linetype = 2, size = 1) +
+	geom_vline(xintercept = c(-(logfc.threshold),logfc.threshold), linetype = 2, size = 1) +
+	theme_classic()
+
+```
 
