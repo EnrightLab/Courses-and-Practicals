@@ -81,7 +81,7 @@ saveDb(txdb, "references/mm10.96.annotation.sqlite")
 
 ``` r
 txdb = loadDb("references/mm10.96.annotation.sqlite")
-cols <- c("TXNAME", "GENEID")
+cols = c("TXNAME", "GENEID")
 tx2gene = select(txdb, keys(txdb,"TXNAME"), columns=cols, keytype="TXNAME")
 ```
 
@@ -126,7 +126,7 @@ counts_filtered = counts(d)
 
 ## DEXSeq (for differential exon usage)
 ``` r
-design <- model.matrix(~condition, data=DRIMSeq::samples(d))
+design = model.matrix(~condition, data=DRIMSeq::samples(d))
 
 sample.data = DRIMSeq::samples(d)
 trans_counts.data = round(as.matrix(counts_filtered[,-c(1:2)]))
@@ -169,15 +169,15 @@ write.table(dxr.g, file="analyses/results_dtu_gene.txt", sep="\t", quote = F)
 write.table(dxr, file="analyses/results_dtu_transcript.txt", sep="\t", quote = F)
 
 # stageR analysis on differential transcript usage results
-pConfirmation <- matrix(dxr$pvalue, ncol=1)
-dimnames(pConfirmation) <- list(dxr$featureID, "transcript")
-pScreen <- qval
-tx2gene <- as.data.frame(dxr[,c("featureID", "groupID")])
+pConfirmation = matrix(dxr$pvalue, ncol=1)
+dimnames(pConfirmation) = list(dxr$featureID, "transcript")
+pScreen = qval
+tx2gene = as.data.frame(dxr[,c("featureID", "groupID")])
 
-stageRObj <- stageRTx(pScreen=pScreen, pConfirmation=pConfirmation, pScreenAdjusted=TRUE, tx2gene=tx2gene)
+stageRObj = stageRTx(pScreen=pScreen, pConfirmation=pConfirmation, pScreenAdjusted=TRUE, tx2gene=tx2gene)
 # note: the choice of 0.05 here means you can *only* threshold at 5% overall false discovery rate (OFDR) later
-stageRObj <- stageWiseAdjustment(stageRObj, method="dtu", alpha=0.05)
-suppressWarnings({dex.padj <- getAdjustedPValues(stageRObj, order=FALSE, onlySignificantGenes=FALSE)})
+stageRObj = stageWiseAdjustment(stageRObj, method="dtu", alpha=0.05)
+suppressWarnings({dex.padj = getAdjustedPValues(stageRObj, order=FALSE, onlySignificantGenes=FALSE)})
 
 write.table(dex.padj, file="analyses/results_dtu_stageR.txt", sep="\t", quote = F)
 ```
@@ -189,34 +189,34 @@ names(stageR) = c("gene_id", "transcript_id", "p_transcript", "p_gene")
 
 # Read filtered counts:
 counts = counts_filtered
-names(counts)[2]<-"transcript_id"
+names(counts)[2] = "transcript_id"
 
 # Join counts and stageR results:
 df = merge(counts, stageR, by = c("gene_id", "transcript_id"))
-df <- df[order(df$p_gene),]
+df = df[order(df$p_gene),]
 
 #Drop columns
 scols = setdiff(names(df),c("gene_id", "transcript_id", "p_gene", "p_transcript"))
 
 # Normalise counts by the library size (i.e. the total counts per sample)
 for(sc in scols){
-    df[sc] <- df[sc] / sum(df[sc])
+    df[sc] = df[sc] / sum(df[sc])
 }
 
 # Melt data frame:
-tdf <- df %>% gather(key='sample', value='norm_count',-gene_id, -transcript_id, -p_gene, -p_transcript)
+tdf = df %>% gather(key='sample', value='norm_count',-gene_id, -transcript_id, -p_gene, -p_transcript)
 
 # Add sample group column:
-sampleToGroup<-function(x){
+sampleToGroup = function(x){
     return(colData[x,]$condition)
 }
 
-tdf$group <- sampleToGroup(tdf$sample)
+tdf$group = sampleToGroup(tdf$sample)
 
 # Filter for significant genes:
-sig_level <- 0.05
-genes <- as.character(tdf[which(tdf$p_gene < sig_level),]$gene_id)
-genes <- unique(genes)
+sig_level = 0.05
+genes = as.character(tdf[which(tdf$p_gene < sig_level),]$gene_id)
+genes = unique(genes)
 
 pdf("analyses/dtu_plots.pdf")
 
