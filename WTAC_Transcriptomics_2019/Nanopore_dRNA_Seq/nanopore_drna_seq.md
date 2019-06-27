@@ -417,6 +417,7 @@ sig.de = sig[sig$Diff.Exprs != "unchanged",]
 
 print(sig.de)
 
+res$gene_id = rownames(res)
 write.table(res,  file = "differential_expression.deseq2.txt", quote = F, row.names = F )
 
 ```
