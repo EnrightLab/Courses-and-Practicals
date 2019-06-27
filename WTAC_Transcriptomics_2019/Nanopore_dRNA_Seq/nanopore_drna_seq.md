@@ -251,6 +251,10 @@ rownames(gene_counts) = gene_counts$gene_id
 gene_counts$gene_id = NULL
 gene_counts = as.matrix(gene_counts)
 
+#Filter out unexpressed genes
+keep_feature = rowSums(gene_counts) > 0
+gene_counts = gene_counts[keep_feature,]
+
 #DESeq2 dds object from matrix of gene counts
 dds = DESeqDataSetFromMatrix(gene_counts, colData = colData, design = ~condition)
 
@@ -259,5 +263,90 @@ keep_feature = rowSums(counts(dds)) > 0
 dds = dds[keep_feature,]
 
 #Normal DESeq2 DGE analysis from here...
+#Shorten sample name
+colnames(dds) = gsub("molm13_", "", colnames(dds))
+
+#Normalisation
+dds = estimateSizeFactors(dds)
+dds = estimateDispersions(dds)
 
 ```
+
+## Sample QC
+``` r
+#Dispersion plot
+plotDispEsts(dds,main='Dispersion Plot')
+
+vsd = varianceStabilizingTransformation(dds)
+vstMat = assay(vsd)
+
+#Heat map
+heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabilised',col=hmcol,cexRow=0.6,cexCol=0.6)
+
+#PCA
+pca = prcomp(t(vstMat))
+
+pca.df = pca$x
+# Percentage explained by each component
+percentages <- round(pca$sdev^2 / sum(pca$sdev^2) * 100)[1:3]
+percentages <- paste(paste0(colnames(pca.df), ":"),  paste0(as.character(percentages), "%"), "variance", sep=" ")
+pca.df = data.frame(pca.df, Condition = dds$condition, Sample = colnames(dds))
+
+#Plot PCA
+#1 vs. 2
+ggplot(pca.df,aes(x=PC1,y=PC2, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[2])
+#1 vs. 3
+ggplot(pca.df,aes(x=PC1,y=PC3, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[2])
+```
+
+``` r
+
+exprs = t(vstMat)
+exprs = as.data.frame(exprs)
+exprs$condition = dds$condition
+exprs$sample= colnames(dds)
+
+#Boxplot of Hoxc6 expression
+#Hoxc6 = ENSMUSG00000001661
+ggplot(exprs, aes(x = sample, y =  ENSMUSG00000001661, fill = condition)) +
+        geom_boxplot() +
+        xlab("Condition") +
+        ylab("Hoxc6 Expression (VST)") 
+
+```
+## Differentially Expressed Genes
+``` r
+
+# New Negative Binomial test
+dds = nbinomWaldTest(dds)
+
+logfc.threshold = log2(2)
+
+#Differential Gene Expression
+res = DESeq2::results(dds, contrast=c('condition', 'control', 'mettl3_KD'))
+res = as.data.frame(res)
+res = res[complete.cases(res),]
+res = res[order(-res$log2FoldChange),]
+
+#Significant genes
+sig = res[res$padj <= 0.05,]
+sig$Diff.Exprs = ifelse(sig$log2FoldChange >= logfc.threshold, "Control+", ifelse(sig$log2FoldChange <= -logfc.threshold, "Mettl3_kd+", "unchanged"))
+
+#Significantly differentially expressed genes
+sig.de = sig[sig$Diff.Exprs != "unchanged",]
+
+print(sig.de)
+
+write.table(res,  file = "differential_expression.deseq2.txt", quote = F, row.names = F )
+
+```
+
+
