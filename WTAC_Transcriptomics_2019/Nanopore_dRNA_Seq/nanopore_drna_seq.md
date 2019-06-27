@@ -45,6 +45,7 @@ suppressMessages(library(DESeq2)) #for DGE
 
 Modified from
 <https://github.com/nanoporetech/pipeline-transcriptome-de> &
+
 <https://f1000research.com/articles/7-952/v3>
 
 ``` r
@@ -98,9 +99,9 @@ enolase_ids  = c("ENSMUSG00000004267","ENSMUSG00000048029","ENSMUSG00000060600",
 tx2gene = tx2gene[!(tx2gene$GENEID %in% enolase_ids),]
 ```
 
-## Analysis of Differential Transcript Usage
+# Analysis of Differential Transcript Usage
 
-# Filter transcripts
+## Filter transcripts
 ``` r
 #Filter out unexpressed transcripts
 keep_feature = rowSums(nanopore_counts) > 0
@@ -126,11 +127,10 @@ d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_exp
 counts_filtered = counts(d)
 ```
 
-# Model exon usage
+## DEXSeq (for differential exon usage)
 ``` r
 design <- model.matrix(~condition, data=DRIMSeq::samples(d))
 
-#DEXSeq (for differential exon usage)
 sample.data = DRIMSeq::samples(d)
 trans_counts.data = round(as.matrix(counts_filtered[,-c(1:2)]))
 dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design= ~sample + exon + condition:exon, featureID=counts(d)$feature_id, groupID=counts(d)$gene_id)
