@@ -58,9 +58,6 @@ conds = colData$condition
 # Transcript counts from Salmon
 nanopore_counts = read.table("nanopore_drna_counts.txt", row.names = 1,header= TRUE)
 
-#Remove dodgy sample scr2
-#nanopore_counts = nanopore_counts[,-5]
-
 #Transcript annotation
 annotation_file = "references/mm10.96.gtf"
 #trans2gene = read.table("references/mm10.96.transcripts2genes.txt", header =F)
@@ -96,8 +93,6 @@ enolase_ids  = c("ENSMUSG00000004267","ENSMUSG00000048029","ENSMUSG00000060600",
 tx2gene = tx2gene[!(tx2gene$GENEID %in% enolase_ids),]
 ```
 
-# Analysis of Differential Transcript Usage
-
 ## Filter transcripts
 ``` r
 #Filter out unexpressed transcripts
@@ -123,6 +118,83 @@ min_feature_expr =  3
 d = dmFilter(d, min_samps_gene_expr = min_samps_gene_expr, min_samps_feature_expr = min_samps_feature_expr, min_gene_expr = min_gene_expr, min_feature_expr = min_feature_expr)
 counts_filtered = counts(d)
 ```
+# Sample QC
+
+``` r
+#Get gene counts from transcript counts using gather function from tidyr
+gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
+```
+
+``` r
+#Set the gene id a s the rowname
+rownames(gene_counts) = gene_counts$gene_id
+gene_counts$gene_id = NULL
+gene_counts = as.matrix(gene_counts)
+
+#Filter out unexpressed genes
+keep_feature = rowSums(gene_counts) > 0
+gene_counts = gene_counts[keep_feature,]
+
+#DESeq2 dds object from matrix of gene counts
+dds = DESeqDataSetFromMatrix(gene_counts, colData = colData, design = ~condition)
+
+#Filter out unexpressed genes
+keep_feature = rowSums(counts(dds)) > 0
+dds = dds[keep_feature,]
+
+#Normal DESeq2 DGE analysis from here...
+
+#Normalisation
+dds = estimateSizeFactors(dds)
+dds = estimateDispersions(dds)
+
+```
+
+## Sample QC
+``` r
+#Dispersion plot
+plotDispEsts(dds,main='Dispersion Plot')
+
+vsd = varianceStabilizingTransformation(dds)
+vstMat = assay(vsd)
+
+#Heat map
+heatmap.2(cor(assay(vsd)),trace='none',main='Sample Correlation Variance Stabilised',col=hmcol,cexRow=0.6,cexCol=0.6)
+
+#PCA
+pca = prcomp(t(vstMat))
+
+pca.df = pca$x
+# Percentage explained by each component
+percentages <- round(pca$sdev^2 / sum(pca$sdev^2) * 100)[1:3]
+percentages <- paste(paste0(colnames(pca.df), ":"),  paste0(as.character(percentages), "%"), "variance", sep=" ")
+pca.df = data.frame(pca.df, Condition = dds$condition, Sample = colnames(dds))
+
+#Plot PCA
+#1 vs. 2
+ggplot(pca.df,aes(x=PC1,y=PC2, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[2])
+#1 vs. 3
+ggplot(pca.df,aes(x=PC1,y=PC3, colour = Condition, label = Sample)) + geom_point(size = 4) +
+        geom_text(aes(label=Sample),hjust=0, vjust=0) +
+        theme_minimal() +
+        theme(legend.position="bottom",  legend.box = "vertical") +
+        xlab(percentages[1]) + ylab(percentages[2])
+```
+
+# wt3 & scr2 look like outliers, these 2 samples had the lowest counts.
+# Remove these from the nanopore_counts and repeat the analysis.
+
+``` r
+#Remove dodgy samples wt3 & scr2
+#nanopore_counts = nanopore_counts[,-c(3,5)]
+
+```
+
+# Analysis of Differential Transcript Usage
 
 ## DEXSeq (for differential exon usage)
 ``` r
@@ -236,7 +308,6 @@ for(gene in genes){
 
 dev.off()
 ```
-
 
 # Analysis of Differential Gene Expression
 
