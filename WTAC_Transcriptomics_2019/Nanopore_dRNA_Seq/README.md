@@ -73,6 +73,8 @@ Files can be explored using **HDFview**
 
 ### Basecalling
 
+![](pictures/nanopore_signal_to_sequence.jpg)
+
 * ~~Albacore~~ (development ceased)
 * Guppy (available to ONT community) 
 * [Scrappie](https://github.com/nanoporetech/scrappie)
