@@ -67,9 +67,6 @@ annotation_file = "reference/mm10.96.gtf"
 
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
-```
-
-``` r
 names(cond_colours)=conds
 ```
 
