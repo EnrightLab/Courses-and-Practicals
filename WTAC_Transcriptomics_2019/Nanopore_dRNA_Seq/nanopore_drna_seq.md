@@ -8,7 +8,7 @@ Anton Enright & Jack Monahan
 First we should change directory to where the data is
 
 ``` r
-setwd("~/Desktop/course_data/wtac_nanopore_drna_2019")
+#setwd("~/Desktop/course_data/wtac_nanopore_drna_2019")
 ```
 
 # Direct RNA Seq Discussion
@@ -60,11 +60,15 @@ nanopore_counts = read.table("nanopore_drna_counts.txt", row.names = 1,header= T
 #nanopore_counts = nanopore_counts[,-5]
 
 #Transcript annotation
-annotation_file = "reference/mm10.96.gtf"
-trans2gene = read.table("reference/mm10.96.transcripts2genes.txt", header =F)
+#annotation_file = "reference/mm10.96.gtf"
+#trans2gene = read.table("reference/mm10.96.transcripts2genes.txt", header =F)
 
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
+```
+
+``` 
+           ## Warning in brewer.pal(length(levels(conds)), "Set2"): minimal value for n is 3, returning requested palette with 3 different levels
 ```
 
 ``` r
@@ -85,6 +89,10 @@ names(cond_colours)=conds
 txdb = loadDb("references/mm10.96.annotation.sqlite")
 cols <- c("TXNAME", "GENEID")
 tx2gene = select(txdb, keys(txdb,"TXNAME"), columns=cols, keytype="TXNAME")
+```
+
+``` 
+           ## 'select()' returned 1:1 mapping between keys and columns
 ```
 
 ``` r
@@ -134,11 +142,19 @@ trans_counts.data = round(as.matrix(counts_filtered[,-c(1:2)]))
 dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design= ~sample + exon + condition:exon, featureID=counts(d)$feature_id, groupID=counts(d)$gene_id)
 ```
 
+``` 
+           ## converting counts to integer mode
+```
+
 ``` r
 dxd = estimateSizeFactors(dxd)
 dxd = estimateDispersions(dxd, fitType='local')
 dxd = testForDEU(dxd, reducedModel=~sample + exon)
 dxd = estimateExonFoldChanges( dxd, fitExpToVar="condition")
+```
+
+``` 
+           ## Warning in vst(exp(alleffects), object): Dispersion function not parametric, applying log2(x+ 1) instead of vst...
 ```
 
 ``` r
@@ -148,13 +164,13 @@ dxr = DEXSeqResults(dxd, independentFiltering=FALSE)
 plotMA(dxr, cex=0.8, alpha=0.05) 
 ```
 
-![](pictures/DEXSeq-1.png)<!-- -->
+![](nanopore_drna_seq.final_files/figure-gfm/DEXSeq-1.png)<!-- -->
 
 ``` r
 plotDispEsts(dxd)
 ```
 
-![](pictures/DEXSeq-2.png)<!-- -->
+![](nanopore_drna_seq.final_files/figure-gfm/DEXSeq-2.png)<!-- -->
 
 ``` r
 #dev.off()
@@ -249,6 +265,18 @@ dev.off()
 ``` r
 #Get gene counts from transcript counts
 gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(funs(sum)) %>% data.frame()
+```
+
+``` 
+           ## Warning: funs() is soft deprecated as of dplyr 0.8.0
+           ## please use list() instead
+           ## 
+           ##   # Before:
+           ##   funs(name = f(.))
+           ## 
+           ##   # After: 
+           ##   list(name = ~ f(.))
+           ## This warning is displayed once per session.
 ```
 
 ``` r
