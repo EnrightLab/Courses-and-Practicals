@@ -242,7 +242,7 @@ dev.off()
 
 ``` r
 #Get gene counts from transcript counts using gather function from tidyr
-gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(funs(sum)) %>% data.frame()
+gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
 ```
 
 ``` r
