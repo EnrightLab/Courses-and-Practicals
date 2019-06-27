@@ -71,14 +71,14 @@ cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
 names(cond_colours)=conds
 ```
 
-#Make txdb from gencode transcript annotation gtf
+# Make txdb from gencode transcript annotation gtf
 
 ``` r
 txdb = makeTxDbFromGFF(annotation_file, dataSource="Ensembl")
 saveDb(txdb, "references/mm10.96.annotation.sqlite")
 ```
 
-#Load txdb and generate Ensembl transcript id to gene id table
+# Load txdb and generate Ensembl transcript id to gene id table
 
 ``` r
 txdb = loadDb("references/mm10.96.annotation.sqlite")
