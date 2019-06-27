@@ -14,7 +14,7 @@ setwd("~/Desktop/course_data/nanopore_dRNA_Seq")
 
 # Direct RNA Seq Discussion
 
-We have 6 mouse datasets, with 3 wildtypes and 3 scrambles
+We have 6 mouse datasets, with 3 wildtypes and 3 scrambled
 
 We want to look for any differential gene expression (DGE) and
 differential transcript usage (DTU) between them.
