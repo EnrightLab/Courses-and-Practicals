@@ -145,7 +145,6 @@ dxd = estimateExonFoldChanges( dxd, fitExpToVar="condition")
 ``` r
 dxr = DEXSeqResults(dxd, independentFiltering=FALSE)
 
-#pdf("analyses/results_dtu.pdf")
 plotMA(dxr, cex=0.8, alpha=0.05) 
 ```
 
@@ -158,7 +157,6 @@ plotDispEsts(dxd)
 ![](pictures/DEXSeq-2.png)<!-- -->
 
 ``` r
-#dev.off()
 
 qval = perGeneQValue(dxr) 
 dxr.g = data.frame(gene=names(qval), qval)
@@ -240,10 +238,6 @@ for(gene in genes){
 dev.off()
 ```
 
-``` 
-           ## png 
-           ##   2
-```
 
 # Analysis of Differential Gene Expression
 
