@@ -405,6 +405,8 @@ res = as.data.frame(res)
 #Remove rows with NA values i.e. those that are 'incomplete'
 res = res[complete.cases(res),] 
 res = res[order(-res$log2FoldChange),]
+res$Diff.Exprs = ifelse(res$padj <= 0.05 & res$log2FoldChange >=logfc.threshold, "Control+", ifelse(res$padj <= 0.05 & res$log2FoldChange <= -logfc.threshold, "Scramble+", "unchanged"))
+
 
 #Significant genes
 sig = res[res$padj <= 0.05,]
