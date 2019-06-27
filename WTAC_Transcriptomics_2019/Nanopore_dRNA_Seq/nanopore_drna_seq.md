@@ -157,6 +157,8 @@ plotDispEsts(dxd)
 
 ![](pictures/DEXSeq-2.png)<!-- -->
 
+## stageR analysis on differential transcript usage results
+### stage-wise method for controlling the gene-level false discovery rate in differential transcript usage
 ``` r
 
 qval = perGeneQValue(dxr) 
