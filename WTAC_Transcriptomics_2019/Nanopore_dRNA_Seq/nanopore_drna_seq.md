@@ -56,19 +56,15 @@ conds = colData$condition
 # Transcript counts from Salmon
 nanopore_counts = read.table("nanopore_drna_counts.txt", row.names = 1,header= TRUE)
 
-#Remove scr2
+#Remove dodgy sample scr2
 #nanopore_counts = nanopore_counts[,-5]
 
 #Transcript annotation
-#annotation_file = "reference/mm10.96.gtf"
+annotation_file = "reference/mm10.96.gtf"
 #trans2gene = read.table("reference/mm10.96.transcripts2genes.txt", header =F)
 
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 cond_colours = brewer.pal(length(levels(conds)),"Set2")[conds]
-```
-
-``` 
-           ## Warning in brewer.pal(length(levels(conds)), "Set2"): minimal value for n is 3, returning requested palette with 3 different levels
 ```
 
 ``` r
@@ -78,9 +74,8 @@ names(cond_colours)=conds
 \#Make txdb from gencode transcript annotation gtf
 
 ``` r
-#Already run
-#txdb = makeTxDbFromGFF(annotation_file, dataSource="Ensembl")
-#saveDb(txdb, "references/mm10.96.annotation.sqlite")
+txdb = makeTxDbFromGFF(annotation_file, dataSource="Ensembl")
+saveDb(txdb, "references/mm10.96.annotation.sqlite")
 ```
 
 \#Load txdb and generate Ensembl transcript id to gene id table
@@ -89,10 +84,6 @@ names(cond_colours)=conds
 txdb = loadDb("references/mm10.96.annotation.sqlite")
 cols <- c("TXNAME", "GENEID")
 tx2gene = select(txdb, keys(txdb,"TXNAME"), columns=cols, keytype="TXNAME")
-```
-
-``` 
-           ## 'select()' returned 1:1 mapping between keys and columns
 ```
 
 ``` r
@@ -142,19 +133,11 @@ trans_counts.data = round(as.matrix(counts_filtered[,-c(1:2)]))
 dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design= ~sample + exon + condition:exon, featureID=counts(d)$feature_id, groupID=counts(d)$gene_id)
 ```
 
-``` 
-           ## converting counts to integer mode
-```
-
 ``` r
 dxd = estimateSizeFactors(dxd)
 dxd = estimateDispersions(dxd, fitType='local')
 dxd = testForDEU(dxd, reducedModel=~sample + exon)
 dxd = estimateExonFoldChanges( dxd, fitExpToVar="condition")
-```
-
-``` 
-           ## Warning in vst(exp(alleffects), object): Dispersion function not parametric, applying log2(x+ 1) instead of vst...
 ```
 
 ``` r
@@ -164,13 +147,13 @@ dxr = DEXSeqResults(dxd, independentFiltering=FALSE)
 plotMA(dxr, cex=0.8, alpha=0.05) 
 ```
 
-![](nanopore_drna_seq.final_files/figure-gfm/DEXSeq-1.png)<!-- -->
+![](pictures/DEXSeq-1.png)<!-- -->
 
 ``` r
 plotDispEsts(dxd)
 ```
 
-![](nanopore_drna_seq.final_files/figure-gfm/DEXSeq-2.png)<!-- -->
+![](pictures/DEXSeq-2.png)<!-- -->
 
 ``` r
 #dev.off()
@@ -267,18 +250,6 @@ dev.off()
 gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(funs(sum)) %>% data.frame()
 ```
 
-``` 
-           ## Warning: funs() is soft deprecated as of dplyr 0.8.0
-           ## please use list() instead
-           ## 
-           ##   # Before:
-           ##   funs(name = f(.))
-           ## 
-           ##   # After: 
-           ##   list(name = ~ f(.))
-           ## This warning is displayed once per session.
-```
-
 ``` r
 #Set the gene id a s the rowname
 rownames(gene_counts) = gene_counts$gene_id
@@ -293,4 +264,5 @@ keep_feature = rowSums(counts(dds)) > 0
 dds = dds[keep_feature,]
 
 #Normal DESeq2 DGE analysis from here...
+
 ```
