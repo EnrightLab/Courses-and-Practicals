@@ -424,7 +424,7 @@ write.table(res,  file = "differential_expression.deseq2.txt", quote = F, row.na
 
 ggplot(res, aes(log2FoldChange, -log10(padj))) +
 	geom_point(aes(col=Diff.Exprs)) +
-	scale_color_manual(limits = c("Scramble+","unchanged","Control+"), labels = c("Scrambled, "unchanged", "Control"), values=c("red","grey", "blue"), guide_legend(title="Differential\nExpression")) + 
+	scale_color_manual(limits = c("Scramble+","unchanged","Control+"), labels = c("Scrambled", "unchanged", "Control"), values=c("red","grey", "blue"), guide_legend(title="Differential\nExpression")) + 
 	geom_hline(yintercept = -log(0.05,10), linetype = 2, size = 1) +
 	geom_vline(xintercept = c(-(logfc.threshold),logfc.threshold), linetype = 2, size = 1) +
 	theme_classic()
