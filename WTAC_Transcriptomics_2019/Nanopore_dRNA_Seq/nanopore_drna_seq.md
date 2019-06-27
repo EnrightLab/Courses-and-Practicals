@@ -135,9 +135,13 @@ dxd = DEXSeqDataSet(countData=trans_counts.data, sampleData=sample.data, design=
 
 ``` r
 dxd = estimateSizeFactors(dxd)
-dxd = estimateDispersions(dxd, fitType='local')
+dxd = estimateDispersions(dxd)
+#dxd = estimateDispersions(dxd, fitType='local')
+
+#Test for differential exon usage
 dxd = testForDEU(dxd, reducedModel=~sample + exon)
 dxd = estimateExonFoldChanges( dxd, fitExpToVar="condition")
+
 ```
 
 ``` r
