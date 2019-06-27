@@ -73,6 +73,8 @@ Files can be explored using **HDFview**
 
 ### Basecalling
 
+![](pictures/nanopore_signal_to_sequence.jpg)
+
 * ~~Albacore~~ (development ceased)
 * Guppy (available to ONT community) 
 * [Scrappie](https://github.com/nanoporetech/scrappie)
@@ -111,14 +113,14 @@ The eluted poly-A+ RNA concentration was quantified by Qubit and RNA quality was
 
 The RNA Integrity Number (RIN), a quality measurement from Agilent, is presented as a value between 1 and 10, where 10 represent the highest quality RNA sample.
 
-| Sample # | Name | Type | Concentration (ng/uL) |        RIN        |
-|:--------:|------|------|:---------------------:|:-----------------:|
-|     1    |  C1  |  wt  |          1961         |        8.6        |
-|     2    |  C3  |  wt  |          2100         |        8.8        |
-|     3    |  C7  |  wt  |          2026         |        8.2        |
-|     5    |  C8  |  scr |          1400         | TapeStation error |
-|     6    |  C18 |  scr |          1800         |        8.3        |
-|     7    |  C29 |  scr |          2000         |        7.8        |
+| Sample # | Group | Name | Type  | Concentration (ng/uL) |        RIN        | Reads | Bases (Gb) |
+|:--------:|:-----:|------|-------|:---------------------:|:-----------------:|:-----:|:-----------|
+|     1    |  1    |  C1  |  wt1  |          1961         |        8.6        | 2.52M | 2.77       |
+|     2    |  2    |  C3  |  wt2  |          2100         |        8.8        | 1.02M | 1.02       |
+|     3    |  3    |  C7  |  wt3  |          2026         |        8.2        | 2.58M | 3.01       |
+|     5    |  4    |  C8  |  scr1 |          1400         | TapeStation error | 2.61M | 3.03       |
+|     6    |  5    | C18 |  scr2  |          1800         |        8.3        | 1.90M | 2.16       |
+|     7    |  6    | C29 |  scr3  |          2000         |        7.8        | 1.10M | 0.60       |
 
   ![](pictures/ts_Gel.png) 
 
@@ -142,9 +144,6 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
    cd ~/Desktop/course_data/nanopore_dRNA_Seq/datasets/
    ```
 
-   ```
-   tar xvf ${Sample}.tar.gz
-   ```
 
 2. Inspect reads with the HDFView GUI
 
@@ -158,10 +157,10 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
 
      
 
-3. Basecall your data with Albacore
+3. Basecall your data with Guppy
 
    ```bash
-   cd ~/Desktop/course_data/nanopore_dRNA_Seq/
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/datasets
   
    ```
 
@@ -170,9 +169,9 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
    
    ./ont-guppy-cpu/bin/guppy_basecaller --print_workflows
    
-   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s wt1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --enable_trimming true --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
+   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s wt1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
    
-   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s scr1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --enable_trimming true --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
+   ./ont-guppy-cpu/bin/guppy_basecaller -i wt1 -s scr1_basecalls --flowcell FLO-MIN106 --kit SQK-RNA002 -q 0 --trim_strategy rna --reverse_sequence true --pt_scaling --qscore_filtering 0
    
    ```
 
@@ -187,7 +186,8 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
    https://github.com/a-slide/pycoQC
 
    ```bash
-   pycoQC -f guppy/${Sample}/sequencing_summary.txt -o ${Sample}.pycoQC.html
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/qc
+   pycoQC -f guppy/${Sample}/{sample}_summary.txt -o ${Sample}.pycoQC.html
    ```
    
 
@@ -195,22 +195,22 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
 
    https://github.com/lh3/minimap2
 
-   Merge reads
+   Go to fastq folder
    
    ```bash
-   cat guppy/${Sample}/pass/*.fastq > ${Sample}.fastq
+   cd ~/Desktop/course_data/nanopore_dRNA_Seq/fastq
    ```
 
    *Spliced alignment against genome*
    
    ```bash
-   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz ${Sample}.fastq | samtools view -bh -F 2308 | samtools sort -o reads.bam
+   minimap2 -ax splice -uf -k 14 -L -t 8 ../references/Mus_musculus_genome.fa.gz ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o reads.bam
    ```
 
     *Unspliced alignment against transcriptome*
 
    ```bash
-   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz ${Sample}.fastq | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
+   minimap2 -ax map-ont -L -t 8 ../references/Mus_musculus_transcriptome.fa.gz ${Sample}.fastq.gz | samtools view -bh -F 2308 | samtools sort -o transcriptome.bam
    ```
 
    
