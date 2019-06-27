@@ -263,8 +263,6 @@ keep_feature = rowSums(counts(dds)) > 0
 dds = dds[keep_feature,]
 
 #Normal DESeq2 DGE analysis from here...
-#Shorten sample name
-colnames(dds) = gsub("molm13_", "", colnames(dds))
 
 #Normalisation
 dds = estimateSizeFactors(dds)
