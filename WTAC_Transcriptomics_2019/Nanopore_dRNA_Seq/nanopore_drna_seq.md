@@ -123,10 +123,8 @@ counts_filtered = counts(d)
 ``` r
 #Get gene counts from transcript counts using gather function from tidyr
 gene_counts = counts_unfiltered %>% dplyr::select(c(1, 3:ncol(counts_unfiltered)))  %>% group_by(gene_id) %>% summarise_all(list(sum)) %>% data.frame()
-```
 
-``` r
-#Set the gene id a s the rowname
+#Set the gene id as the rowname
 rownames(gene_counts) = gene_counts$gene_id
 gene_counts$gene_id = NULL
 gene_counts = as.matrix(gene_counts)
