@@ -187,7 +187,7 @@ Overall (apart from Sample 5 which just requires another TapeStation run), our R
 
    ```bash
    cd ~/Desktop/course_data/nanopore_dRNA_Seq/qc
-   pycoQC -f guppy/${Sample}/{sample}_summary.txt -o ${Sample}.pycoQC.html
+   pycoQC -f ${sample}_summary.txt -o ${sample}.pycoQC.html
    ```
    
 
