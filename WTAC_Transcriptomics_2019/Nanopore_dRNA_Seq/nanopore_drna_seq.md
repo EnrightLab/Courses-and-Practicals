@@ -1,7 +1,8 @@
 Nanopore Direct RNA Seq - Practical 2
 ================
 Anton Enright & Jack Monahan
-'27 June, 2019'
+
+27 June, 2019
 
 # Analysis of Nanopore Direct RNA counts
 
