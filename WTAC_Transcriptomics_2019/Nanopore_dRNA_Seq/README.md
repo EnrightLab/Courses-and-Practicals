@@ -113,14 +113,14 @@ The eluted poly-A+ RNA concentration was quantified by Qubit and RNA quality was
 
 The RNA Integrity Number (RIN), a quality measurement from Agilent, is presented as a value between 1 and 10, where 10 represent the highest quality RNA sample.
 
-| Sample # | Name | Type | Concentration (ng/uL) |        RIN        |
-|:--------:|------|------|:---------------------:|:-----------------:|
-|     1    |  C1  |  wt  |          1961         |        8.6        |
-|     2    |  C3  |  wt  |          2100         |        8.8        |
-|     3    |  C7  |  wt  |          2026         |        8.2        |
-|     5    |  C8  |  scr |          1400         | TapeStation error |
-|     6    |  C18 |  scr |          1800         |        8.3        |
-|     7    |  C29 |  scr |          2000         |        7.8        |
+| Sample # | Name | Type | Concentration (ng/uL) |        RIN        | Reads | Bases (Gb) |
+|:--------:|------|------|:---------------------:|:-----------------:|:-----:|:-----------|
+|     1    |  C1  |  wt  |          1961         |        8.6        | 2.52M | 2.77       |
+|     2    |  C3  |  wt  |          2100         |        8.8        | 1.02M | 1.0        |
+|     3    |  C7  |  wt  |          2026         |        8.2        | 2.58M | 3.01       |
+|     5    |  C8  |  scr |          1400         | TapeStation error | 2.61M | 3.03       |
+|     6    |  C18 |  scr |          1800         |        8.3        | 1.90M | 2.16       |
+|     7    |  C29 |  scr |          2000         |        7.8        | 1.10M | 0.60.      |
 
   ![](pictures/ts_Gel.png) 
 
