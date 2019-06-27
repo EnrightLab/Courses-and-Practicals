@@ -331,7 +331,8 @@ logfc.threshold = log2(2)
 #Differential Gene Expression
 res = DESeq2::results(dds, contrast=c('condition', 'wt', 'scr'))
 res = as.data.frame(res)
-res = res[complete.cases(res),]
+#Remove rows with NA values i.e. those that are 'incomplete'
+res = res[complete.cases(res),] 
 res = res[order(-res$log2FoldChange),]
 
 #Significant genes
