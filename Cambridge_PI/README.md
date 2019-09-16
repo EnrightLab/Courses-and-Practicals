@@ -9,7 +9,7 @@ Transcriptomics, Bioinformatics Training Lab, Cambridge, UK
 **Instructors: Anton Enright, Stephanie Wenlock, Albert Kang**
 
 |Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk) |
-|---------------------------|------------------------------------|------------------------------------|
+|--------------------------------|-------------------------------------|
 
 ***
 
