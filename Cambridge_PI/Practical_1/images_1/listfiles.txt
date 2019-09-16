@@ -1,0 +1,8 @@
+ [1] "lane1Brain2_sequence.fastq.gz"    "lane1Brain5_sequence.fastq.gz"   
+ [3] "lane1Brain6_sequence.fastq.gz"    "lane1Heart1_sequence.fastq.gz"   
+ [5] "lane1Heart11_sequence.fastq.gz"   "lane1heart3_sequence.fastq.gz"   
+ [7] "lane1Heart8_sequence.fastq.gz"    "lane1Liver10_sequence.fastq.gz"  
+ [9] "lane1Liver12x2_sequence.fastq.gz" "lane1Liver4_sequence.fastq.gz"   
+[11] "lane1Liver7_sequence.fastq.gz"    "lane1Liver9_sequence.fastq.gz"   
+[13] "mircounts.txt"                    "pdata.txt"                       
+
