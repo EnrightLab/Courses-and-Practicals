@@ -28,7 +28,7 @@ Presentation:
 List of Practicals:
 ------------------
 
-*Practical 1*  Monday 18th February 
+*Practical 1*  Tuesday 16th February 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md) - if needed for some remindeders
 
 2. Worked Example for gene expression differential analysis - MiR-210 in Breast Cancer
