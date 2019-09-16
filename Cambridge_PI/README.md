@@ -1,4 +1,4 @@
-Part II - BBS Bioinformatics 
+Bioinformatics for PIs - RNA Seq Practical Sessions 
 ===============================
 ![Cambridge](/images/cambridge.jpg)
 
@@ -6,9 +6,9 @@ Differential Gene Expression Analysis
 Transcriptomics, Bioinformatics Training Lab, Cambridge, UK
 -------------------------------------------------------------------
 
-**Instructors: Anton Enright, Jack Monahan, Adrien Leger**
+**Instructors: Anton Enright, Stephanie Wenlock, Albert Kang**
 
-|Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk) | Katy Brown (kab84@cam.ac.uk)|
+|Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk) |
 |---------------------------|------------------------------------|------------------------------------|
 
 ***
@@ -23,7 +23,7 @@ Cambridge, UK._
 
 Presentation:
 ------------
-1. Available on Moodle as PDF
+1. Available as PDF [here](https://github.com/EnrightLab/Courses-and-Practicals/blob/master/Cambridge_PI/Bioinformatics%20for%20PIs%20RNASeq.pdf)
 
 List of Practicals:
 ------------------
