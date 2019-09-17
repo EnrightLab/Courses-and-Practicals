@@ -95,7 +95,7 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 
 Lets install the module manually. Please open up a new terminal window.
 
-    cd ~/Desktop/course_data/smallrna
+    cd ~/Course_Materials/rnaseq/smallrna
     R CMD install Reaper_1.5.tar.gz 
 
 This will install the module into R manually.
@@ -120,7 +120,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("~/Desktop/course_data/smallrna")
+setwd("~/Course_Materials/rnaseq/smallrna")
 list.files()
 ```
 
