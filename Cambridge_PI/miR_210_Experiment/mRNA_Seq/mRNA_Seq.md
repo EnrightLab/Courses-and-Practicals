@@ -45,7 +45,7 @@ This is the <em>pdata.txt</em> file:
 First we will load required modules and change to our working directory
 
 ``` r
-setwd('~/Desktop/Course_Materials/mrna_seq')
+setwd('~/Course_Materials/rnaseq/mrna')
 library(DESeq2)
 ```
 
