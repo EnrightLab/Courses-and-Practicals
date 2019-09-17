@@ -29,7 +29,7 @@ We will open a terminal and change to the practical folder on your desktop.
 We will also add the paths to the programs we will be using **hisat2** and **htseq-count**.
 
 ```
-cd ~/Desktop/Course_Materials/mapping_data
+cd ~/Desktop/Course_Materials/rnaseq/mapping_practical
 
 ```
 
