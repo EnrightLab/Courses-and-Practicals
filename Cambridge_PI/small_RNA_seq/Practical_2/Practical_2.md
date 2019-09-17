@@ -20,7 +20,7 @@ Differential Expression of smallRNA counts with DESeq2
 First we should change directory to where the data is
 
 ``` r
-setwd("~/Desktop/course_data/smallrna")
+setwd("~/Course_Materials/rnaseq/smallrna")
 ```
 
 Experiment Setup
