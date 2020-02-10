@@ -1,6 +1,6 @@
 Small RNA Seq - Practical 1
 ================
-Anton Enright & Jack Monahan & Katy Brown
+Anton Enright & Stephanie Wenlock & Albert Kang
 
 -   [Analysis of smallRNA Seq datasets](#analysis-of-smallrna-seq-datasets)
     -   [The Fastq file format](#the-fastq-file-format)
@@ -95,8 +95,8 @@ The module is available [here](../data/Reaper_1.5.tar.gz) If you want to install
 
 Lets install the module manually. Please open up a new terminal window.
 
-    cd ~/Desktop/course_data/smallrna
-    R CMD install Reaper_1.5.tar.gz 
+    cd ~/Desktop/Course_Materials/smallrna/course_material_wtac2018/smallrna
+    R CMD INSTALL Reaper_1.5.tar.gz 
 
 This will install the module into R manually.
 
@@ -120,7 +120,7 @@ library(RColorBrewer)
 Now we will set our working directory to where the solexa FASTQ files (zipped) are stored
 
 ``` r
-setwd("~/Desktop/course_data/smallrna")
+setwd("~/Desktop/Course_Materials/smallrna/course_material_wtac2018/smallrna")
 list.files()
 ```
 
