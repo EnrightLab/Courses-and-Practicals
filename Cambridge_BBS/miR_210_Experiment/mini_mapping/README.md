@@ -163,11 +163,15 @@ Before we do this we need to index the BAM files for use with the browser.
 ```
 samtools sort control_lane1.bam > control_lane1_sorted.bam
 samtools sort control_lane2.bam > control_lane2_sorted.bam
+samtools sort mir210_lane1.bam > mir210_lane1_sorted.bam
+samtools sort mir210_lane2.bam > mir210_lane2_sorted.bam
 ```
 
 ```
 samtools index control_lane1_sorted.bam
 samtools index control_lane2_sorted.bam
+samtools index mir210_lane1_sorted.bam
+samtools index mir210_lane2_sorted.bam
 ```
 
 Start IGV running and we will explore the counts on Chromosome 22 across some reads. 
