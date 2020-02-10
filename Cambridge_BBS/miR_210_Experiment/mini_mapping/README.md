@@ -74,7 +74,7 @@ To build a new index you will need to use the hisat2-build command
 We will only build an index for Chromosome 22 instead of the whole Human Genome.
 
 ```
-hisat2-build Homo_sapiens.GRCh38.99.dna.chromosome.22.fa Homo_sapiens.GRCh38.dna.22
+hisat2-build Homo_sapiens.GRCh38.dna.chromosome.22.fa Homo_sapiens.GRCh38.dna.22
 ```
 
 We also need to assemble a list of known spice sites for HISAT2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
