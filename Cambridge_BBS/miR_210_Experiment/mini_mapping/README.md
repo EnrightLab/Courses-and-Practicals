@@ -74,13 +74,13 @@ To build a new index you will need to use the hisat2-build command
 We will only build an index for Chromosome 22 instead of the whole Human Genome.
 
 ```
-hisat2-build Homo_sapiens.GRCh37.75.dna.chromosome.22.fa Homo_sapiens.GRCh37.dna.22
+hisat2-build Homo_sapiens.GRCh38.99.dna.chromosome.22.fa Homo_sapiens.GRCh38.dna.22
 ```
 
 We also need to assemble a list of known spice sites for HISAT2, we use a utility script called _hisat2_extract_splice_sites.py_ to do this.
 
 ```
-hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf > known_splice_sites.txt
+hisat2_extract_splice_sites.py Homo_sapiens.GRCh38.99.dna.chromosome.22.gtf > known_splice_sites.txt
 ```
 
 This will produce the following output file containing coordinates for all splice sites on Chr22.
@@ -108,10 +108,10 @@ The two samples (Lanes 1-4, 2 replicates) are represented by single-end sequenci
 We will launch HISAT2 on each of the files (HISAT2 can also process sets of paired end files). By default HISAT2 assumes the sequencing was unstranded. We provide the splice site information and the HISAT2 Index. The -p 4 option asks for four processors per run, for bigger machines you can increase this for faster runs when aligning more reads.
 
 ```
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U mir210_lane1.fq.gz | samtools view -bS - > mir210_lane1.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U mir210_lane2.fq.gz | samtools view -bS - > mir210_lane2.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U control_lane1.fq.gz | samtools view -bS - > control_lane1.bam
-hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh37.dna.22 -U control_lane2.fq.gz | samtools view -bS - > control_lane2.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U mir210_lane1.fq.gz | samtools view -bS - > mir210_lane1.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U mir210_lane2.fq.gz | samtools view -bS - > mir210_lane2.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U control_lane1.fq.gz | samtools view -bS - > control_lane1.bam
+hisat2 --known-splicesite-infile known_splice_sites.txt -p 4 -x Homo_sapiens.GRCh38.dna.22 -U control_lane2.fq.gz | samtools view -bS - > control_lane2.bam
 ```
 
 ```
@@ -132,10 +132,10 @@ Now we can run HTSeq-Count on the results to produce count tables
 If the data is strand-specific you should use **-s yes**. In this case it is not strand-specific. It is also worth noting that if you are processing paired-end data you may need to sort the bam first before running _htseq-count_. This can be done using "_samtools sort -n BAM_FILE OUT_BASENAME_ ".
 
 ```
-htseq-count -f bam mir210_lane1.bam Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf --stranded=no > mir210_lane1.bam.counts
-htseq-count -f bam mir210_lane2.bam Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf --stranded=no > mir210_lane2.bam.counts
-htseq-count -f bam control_lane1.bam  Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf --stranded=no > control_lane1.bam.counts
-htseq-count -f bam control_lane2.bam  Homo_sapiens.GRCh37.75.dna.chromosome.22.gtf --stranded=no > control_lane2.bam.counts
+htseq-count -f bam mir210_lane1.bam Homo_sapiens.GRCh38.99.dna.chromosome.22.gtf --stranded=no > mir210_lane1.bam.counts
+htseq-count -f bam mir210_lane2.bam Homo_sapiens.GRCh38.99.dna.chromosome.22.gtf --stranded=no > mir210_lane2.bam.counts
+htseq-count -f bam control_lane1.bam  Homo_sapiens.GRCh38.99.dna.chromosome.22.gtf --stranded=no > control_lane1.bam.counts
+htseq-count -f bam control_lane2.bam  Homo_sapiens.GRCh38.99.dna.chromosome.22.gtf --stranded=no > control_lane2.bam.counts
 ```
 
 ```
