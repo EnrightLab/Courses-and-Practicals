@@ -6,9 +6,9 @@ Differential Gene Expression Analysis
 Transcriptomics, Bioinformatics Training Lab, Cambridge, UK
 -------------------------------------------------------------------
 
-**Instructors: Anton Enright, Jack Monahan, Adrien Leger**
+**Instructors: Anton Enright, Stephanie Wenlock, Albert Kang **
 
-|Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk) | Katy Brown (kab84@cam.ac.uk)|
+|Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk) | Albert Kang (swk30@cam.ac.uk)|
 |---------------------------|------------------------------------|------------------------------------|
 
 ***
@@ -28,7 +28,7 @@ Presentation:
 List of Practicals:
 ------------------
 
-*Practical 1*  Monday 18th February 
+*Practical 1*  Monday 10th February 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md) - if needed for some remindeders
 
 2. Worked Example for gene expression differential analysis - MiR-210 in Breast Cancer
