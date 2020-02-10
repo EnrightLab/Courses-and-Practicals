@@ -31,17 +31,20 @@ List of Practicals:
 *Practical 1*  Monday 10th February 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md) - if needed for some remindeders
 
-2. Worked Example for gene expression differential analysis - MiR-210 in Breast Cancer
+2. Worked Example for mRNA Seq Mapping and Analysis - MiR-210 in Breast Cancer
    * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
-   * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
-
-3. Advanced SmallRNA Sequencing Data Analysis
+   
+3. Worked Example of small RNA Seq QC, Mapping and Analysis
    * [SmallRNA Sequencing - Basic Analysis and QC](small_RNA_seq/Practical_1/Practical_1.md)
    * [SmallRNA Sequencing - Mapping and Statistical analysis of count data](small_RNA_seq/Practical_2/Practical_2.md)
-
+  
 *Practical 2*   
-4. [Downstream Analysis of gene function - Differential Gene Expression Analysis](Functional_Analysis/README.md)
+
+4. Small RNA Seq matching the miR210 dataset above - Participant Driven
+   * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
+
+5. [Downstream Analysis of gene function - Differential Gene Expression Analysis](Functional_Analysis/README.md)
   * MicroRNA Target Signatures 6nt
   * Pathway, Ontology and Functional Analysis
 
