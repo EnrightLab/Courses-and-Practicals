@@ -1,6 +1,6 @@
 Small RNA Seq - Practical 2
 ================
-Anton Enright & Jack Monahan & Katy Brown
+Anton Enright & Albert Kang & Stephanie Wenlock
 
 -   [Differential Expression of smallRNA counts with DESeq2](#differential-expression-of-smallrna-counts-with-deseq2)
 -   [Experiment Setup](#experiment-setup)
@@ -20,7 +20,7 @@ Differential Expression of smallRNA counts with DESeq2
 First we should change directory to where the data is
 
 ``` r
-setwd("~/Desktop/course_data/smallrna")
+setwd("~/Desktop/Course_Materials/smallrna/course_material_wtac2018/smallrna")
 ```
 
 Experiment Setup
