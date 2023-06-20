@@ -8,11 +8,11 @@ Wellcome Trust Advanced Courses - RNA Transcriptomics
 2018 WTAC - RNA Transcriptomics, Hinxton, Cambridge, UK
 -------------------------------------------------------------------
 
-**Instructors: Anton Enright, Jack Monahan, Adrien Leger**
+**Instructors: Anton Enright, Stephanie Wenlock**
 
-|Anton Enright (aje39@cam.ac.uk) | Jack Monahan (monahanj@ebi.ac.uk) | Adrien Leger (aleg@ebi.ac.uk)|
-|---------------------------|------------------------------------|------------------------------------|
-|<img src="../images/anton.jpg" height="150">|<img src="../images/jack_picture.png" height="150">|<img src="../images/adrien.jpeg" height="150">|
+|Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk)|
+|---------------------------|------------------------------------|
+|<img src="../images/anton.jpg" height="150">|<img src="../images/steph.png" height="150">|
 
 ***
 
