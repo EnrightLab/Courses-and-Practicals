@@ -32,28 +32,36 @@ List of Practicals:
 ------------------
 
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md)
-<!--
+
 2. Basics of SmallRNA Sequencing Data Analysis
+<!--
    * [SmallRNA Sequencing - Basic Analysis and QC](small_RNA_seq/Practical_1/Practical_1.md)
    * [SmallRNA Sequencing - Mapping and Statistical analysis of count data](small_RNA_seq/Practical_2/Practical_2.md)
 -->
 
 3. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
-#   * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
-#   * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
-#   * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
+<!--
+   * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
+   * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
+   * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
+-->
    
 4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
+<!--
    * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
+-->
    
 5. Nanopore Direct RNA Analysis
+<!--
    * [IGV Browsing of DirectRNA mappings](Nanopore_dRNA_Seq/igv_drna_seq.md)
    * [Guppy Basecalling and Mapping](Nanopore_dRNA_Seq/README.md)
    * [Count analysis of Nanopore DirectRNA ](Nanopore_dRNA_Seq/nanopore_drna_seq.md)
-
+-->
+<!--
 6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
 7.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+-->
 
 ***
 
