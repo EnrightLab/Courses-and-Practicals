@@ -1,0 +1,7 @@
+filename	group	samplename	treatment	fullname	3p-ad
+"20127_1#1.converted.fastq.gz"	3	3A	miR210	miRNA03_MIR_GR3	TGGAATTCTCGGGTGCCAA
+"20127_1#2.converted.fastq.gz"	4	4A	miR210	miRNA04_MIR_GR4	TGGAATTCTCGGGTGCCAA
+"20127_1#3.converted.fastq.gz"	6	3B	miR210	miRNA14_MIR_GR6	TGGAATTCTCGGGTGCCAA
+"20127_1#4.converted.fastq.gz"	3	7A	Scr	miRNA07_SCR_GR3	TGGAATTCTCGGGTGCCAA
+"20127_1#5.converted.fastq.gz"	4	8A	Scr	miRNA08_SCR_GR4	TGGAATTCTCGGGTGCCAA
+"20127_1#6.converted.fastq.gz"	6	6B	Scr	miRNA16_SCR_GR6	TGGAATTCTCGGGTGCCAA

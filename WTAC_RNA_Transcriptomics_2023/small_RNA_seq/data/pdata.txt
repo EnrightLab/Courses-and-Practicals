@@ -1,0 +1,7 @@
+Name  FileName  Genotype
+mt1 A638S4.R1.fastq.gz  mut
+mt2 A638S5.R1.fastq.gz  mut
+mt3 A638S6.R1.fastq.gz  mut
+wt1 A638S1.R1.fastq.gz  wt
+wt2 A638S2.R1.fastq.gz  wt
+wt3 A638S3.R1.fastq.gz  wt
