@@ -70,7 +70,7 @@ List of Practicals:
 
 Useful resources:
 
-* [Enright Lab](http://www.ebi.ac.uk/research/enright)
+* [Enright Lab](https://www.path.cam.ac.uk/directory/anton-enright)
 * [R Cran](https://cran.r-project.org/)
 * [R Studio](http://www.rstudio.com/)
 * [BioConductor](http://www.bioconductor.org)
