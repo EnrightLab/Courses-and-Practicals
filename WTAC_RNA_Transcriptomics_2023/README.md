@@ -27,9 +27,9 @@ Cambridge, UK._
 Presentation:
 ------------
 Course Presentations (PPT) will be available here.
-<!--
-1. [Anton's Combined Presentations from the course](Anton_Presentations_WTAC_2018.pdf)
--->
+
+1. [Anton's Overview Presentation](WTAC_RNA_TRANSCRIPTOMICS_2023.pdf)
+
 
 List of Practicals:
 ------------------
@@ -42,16 +42,11 @@ List of Practicals:
    * [SmallRNA Sequencing - Mapping and Statistical analysis of count data](small_RNA_seq/Practical_2/Practical_2.md)
 -->
 
-3. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
+3. Worked Example for microRNA Analysis - MiR-210 in Breast Cancer
 <!--
    * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
    * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
    * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
--->
-   
-4. Worked Example for microRNA Target Analysis - MiR-210 in Breast Cancer
-<!--
-   * [SmallRNA Sequencing - Course Data 2018 - Clean, Map, QC, Analysis](course_smallrna_seq/course_smallrna.md)
 -->
    
 5. Nanopore Direct RNA Analysis
