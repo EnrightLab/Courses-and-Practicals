@@ -138,7 +138,7 @@ heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlati
 
 PCA of the first two Principal Components.
 ```{r}
-pca2=prcomp(t(vstcounts),center=TRUE)
+pca2=prcomp(t(normcounts),center=TRUE)
 
 plot(pca2$x, col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)")
 text(pca2$x, as.vector(colnames(mircounts)), pos=3, cex=0.4)
@@ -157,6 +157,21 @@ plot(pca2$x[,2],pca2$x[,3], col=cond_colours,  pch=19, cex=2, main="Sample to Sa
 text(pca2$x[,2],pca2$x[,3], as.vector(colnames(mircounts)), pos=3, cex=0.4)
 ```
 
+#tSNE Analysis
+
+t-Stochastic Neighbour Embedding (tSNE) is a *trendy* new type of multidimensional scaling approach akin to a PCA.
+```{r}
+tsne <- Rtsne(t(normcounts), perplexity = 1, check_duplicates = FALSE)
+tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
+
+ggplot(data = tsne.df, aes(tsne.1, tsne.2)) + 
+  geom_point(size = 6, pch = 20, colour = cond_colours) +
+  geom_text(size = 2, vjust=2, aes(label=colnames(vstcounts))) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
+  theme_minimal() +
+  ylab("tSNE 1") +
+  xlab("tSNE 2") 
+```
 ## Initial Biological Analysis of the data
 Here are the top10 microRNAs.
 ```{r}
