@@ -28,14 +28,15 @@ The codebase describes the small RNA analysis and was authored by Anton Enright 
 * The [final table](mouse_results.txt) (tab-delimited) of normalised miRNA counts and statistical results for each miR
 
 ### Initial Data
-* [The raw count-table derived from the chimiRa mapping tool](mouse_counts_mar_2017.txt)
+* [The raw count-table derived from a full bowtie mappign](mouse_counts_mar_2017.txt)
 * [The experimental design (pdata) file](pdata_mar_2017.txt)
 * [An accessory table containing small RNA lengths extracted from the chimiRa mapping tool](length_tables_mouse_mar_2017.txt)
 
 ## Version Information
 
-[ChimiRa](http://www.ebi.ac.uk/research/enright/software/chimira) was used to trim adapters and map reads to microRNA precursors<br>
-R version used was: _R 3.3.1_ (2016-06-21) -- "Bug in Your Hair"<br>
+Bowtie2 was used (version 2.5.1) 
+miRBase (release 22.1)
+R version used was: _R 4.1.1 (2021-08-10) (2016-06-21)_  -- "Kick Things"<br>
 BioConductor version used was: _Bioconductor version 3.4_<br><br>
 
-Dependencies: *RColorBrewer, gplots, DESeq2, reshape2, ggplot2*<br>
+Dependencies: *RColorBrewer, gplots, DESeq2, reshape2, ggplot2, rtsne*<br>
