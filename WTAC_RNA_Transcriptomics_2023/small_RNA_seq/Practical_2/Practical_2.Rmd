@@ -50,6 +50,7 @@ library(gplots)
 library(DESeq2)
 library(reshape2)
 library(ggplot2)
+library(Rtsne)
 hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
 spectral <- colorRampPalette(rev(brewer.pal(11, "Spectral")), space="Lab")(100)
 
@@ -135,7 +136,7 @@ heatmap.2(cor(rawcounts),trace="none",col=hmcol,main="Sample to Sample Correlati
 heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours,margins=c(9,7))
 
 ```
-
+# Principal Componenet Analysis
 PCA of the first two Principal Components.
 ```{r}
 pca2=prcomp(t(normcounts),center=TRUE)
@@ -157,7 +158,7 @@ plot(pca2$x[,2],pca2$x[,3], col=cond_colours,  pch=19, cex=2, main="Sample to Sa
 text(pca2$x[,2],pca2$x[,3], as.vector(colnames(mircounts)), pos=3, cex=0.4)
 ```
 
-#tSNE Analysis
+# tSNE Analysis
 
 t-Stochastic Neighbour Embedding (tSNE) is a *trendy* new type of multidimensional scaling approach akin to a PCA.
 ```{r}
@@ -196,7 +197,7 @@ barplot(t(vstcounts[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))]
 legend("topright",rownames(pdata),fill=cond_colours,cex=0.4)
 ```
 
-## Statistical Analysis
+# Statistical Analysis
 Run the statistical contrast on the count data
 ```{r}
 p_threshold=0.05
