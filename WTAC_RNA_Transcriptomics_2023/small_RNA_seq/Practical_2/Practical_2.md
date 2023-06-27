@@ -261,6 +261,8 @@ cds <- nbinomWaldTest(dds)
 res=results(cds,contrast=c("treatment","wt","mut"))
 res <- res[order(res$padj),]
 res
+
+sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
 ```
 
                ## log2 fold change (MLE): treatment wt vs mut 
@@ -293,9 +295,6 @@ res
                ## mmu-mir-804-3p            NA
                ## mmu-mir-142-5p            NA
 
-``` r
-sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
-```
 
 Volcanoplots of Significant Hits
 
