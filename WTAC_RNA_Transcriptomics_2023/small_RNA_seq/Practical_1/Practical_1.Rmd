@@ -341,9 +341,3 @@ Let's now peek at the top hits in each file using the *head* command:
 head *.counts.txt
 ```
 
-
-```{r}
-
-
-
-```

@@ -222,11 +222,8 @@ Reaper is started by passing it our samples table and telling it which
 “mode” to run in, in this case the mode is set to: **no-bc**.
 
 ``` r
-# For the sake of time we'll only run on the first 100000 reads
-reaper(pdata,"no-bc",c("do"="10000"));
-
-# This is the command to do all reads
-# reaper(pdata,"no-bc"); We comment it out here
+# Run REAPER on the reads to strip adapters
+reaper(pdata,"no-bc"); 
 ```
 
 Cleaning many millions of reads will take some time, the method
