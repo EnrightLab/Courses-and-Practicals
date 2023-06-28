@@ -1,7 +1,7 @@
 Nanopore Direct RNA Seq - Practical
 ================
-Anton Enright & Jack Monahan
-'28 June, 2023'
+Anton Enright & Steph Wenlock
+'29 June, 2023'
 
 - <a href="#analysis-of-nanopore-direct-rna-counts"
   id="toc-analysis-of-nanopore-direct-rna-counts">Analysis of Nanopore
