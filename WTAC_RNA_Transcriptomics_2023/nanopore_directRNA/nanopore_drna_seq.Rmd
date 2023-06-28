@@ -1,5 +1,5 @@
 ---
-title: "Nanopore Direct RNA Seq - Practical 2"
+title: "Nanopore Direct RNA Seq - Practical"
 author: "Anton Enright & Jack Monahan"
 date: \'`r format(Sys.time(), '%d %B, %Y')`\'
 always_allow_html: yes
@@ -32,11 +32,6 @@ list.files()
 Will will use the PycoQC tool to make a QC summary for each set of Nanopore reads by group
 ```{}
 pycoQC -f summaries/group_1_summary.txt -o group_1_summary.html
-pycoQC -f summaries/group_2_summary.txt -o group_2_summary.html
-pycoQC -f summaries/group_3_summary.txt -o group_3_summary.html
-pycoQC -f summaries/group_4_summary.txt -o group_4_summary.html
-pycoQC -f summaries/group_5_summary.txt -o group_5_summary.html
-pycoQC -f summaries/group_6_summary.txt -o group_6_summary.html
 ```
 
 # Mapping of Reads
@@ -77,9 +72,20 @@ minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.pr
 
 # IGV
 
-We will now use the Integrated Genome Viewer (IGV) from the Broad Institute (MIT) to look at our samples. Start up IGV from your desktop and then make sure the mouse genome is selected.
-We will then load in the BAM files one at a time and explore.
+We will now use the Integrated Genome Viewer (IGV) from the Broad Institute (MIT) to look at our samples. 
+We will then load in the BAM files one at a time  in IGV and explore but we need to make an INDEX file for each genome bam first.
 
+```{}
+samtools index scr1_genome.bam
+samtools index scr2_genome.bam
+samtools index scr3_genome.bam
+
+samtools index wt1_genome.bam
+samtools index wt2_genome.bam
+samtools index wt3_genome.bam
+```
+
+Now we can launch IGV. Start up IGV from your desktop and then make sure the mouse genome is selected.
 
 # Creating counts
 ```{}
@@ -122,11 +128,15 @@ barplot(mapped,col="darkblue",las=2,cex.axis=0.6,main="Total Mapped per Group")
 library(DESeq2)
 library(RColorBrewer)
 library(gplots)
+library(Rtsne)
+library(ggplot2)
+
 conds=c("scr","scr","scr","wt","wt","wt")
 coldata = as.data.frame(conds)
 rownames(coldata)=colnames(drna_counts)
 colnames(coldata)='treatment'
 coldata
+
 dds <- DESeqDataSetFromMatrix(countData = drna_counts, colData = coldata, design = ~ treatment)
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
@@ -154,9 +164,8 @@ plot(pca2$x, col=c("red","red","red","darkblue","darkblue","darkblue"),  pch=19,
 text(pca2$x, as.vector(colnames(drna_counts)), pos=3, cex=0.4)
 ```
 
+## tSNE plot
 ```{r}
-library(Rtsne)
-library(ggplot2)
 tsne <- Rtsne(t(normcounts), perplexity = 1, check_duplicates = FALSE)
 tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
 

@@ -1,4 +1,4 @@
-Nanopore Direct RNA Seq - Practical 2
+Nanopore Direct RNA Seq - Practical
 ================
 Anton Enright & Jack Monahan
 '28 June, 2023'
@@ -16,6 +16,7 @@ Anton Enright & Jack Monahan
 - <a href="#creating-counts" id="toc-creating-counts">Creating counts</a>
 - <a href="#count-level-analysis" id="toc-count-level-analysis">Count
   Level Analysis</a>
+  - <a href="#tsne-plot" id="toc-tsne-plot">tSNE plot</a>
 - <a href="#statistical-analysis"
   id="toc-statistical-analysis">Statistical Analysis</a>
 
@@ -44,11 +45,6 @@ Will will use the PycoQC tool to make a QC summary for each set of
 Nanopore reads by group
 
     pycoQC -f summaries/group_1_summary.txt -o group_1_summary.html
-    pycoQC -f summaries/group_2_summary.txt -o group_2_summary.html
-    pycoQC -f summaries/group_3_summary.txt -o group_3_summary.html
-    pycoQC -f summaries/group_4_summary.txt -o group_4_summary.html
-    pycoQC -f summaries/group_5_summary.txt -o group_5_summary.html
-    pycoQC -f summaries/group_6_summary.txt -o group_6_summary.html
 
 # Mapping of Reads
 
@@ -105,9 +101,20 @@ splice*).
 # IGV
 
 We will now use the Integrated Genome Viewer (IGV) from the Broad
-Institute (MIT) to look at our samples. Start up IGV from your desktop
-and then make sure the mouse genome is selected. We will then load in
-the BAM files one at a time and explore.
+Institute (MIT) to look at our samples. We will then load in the BAM
+files one at a time in IGV and explore but we need to make an INDEX file
+for each genome bam first.
+
+    samtools index scr1_genome.bam
+    samtools index scr2_genome.bam
+    samtools index scr3_genome.bam
+
+    samtools index wt1_genome.bam
+    samtools index wt2_genome.bam
+    samtools index wt3_genome.bam
+
+Now we can launch IGV. Start up IGV from your desktop and then make sure
+the mouse genome is selected.
 
 # Creating counts
 
@@ -285,6 +292,18 @@ library(gplots)
                ##     lowess
 
 ``` r
+library(Rtsne)
+```
+
+               ## Warning: package 'Rtsne' was built under R version 4.1.2
+
+``` r
+library(ggplot2)
+```
+
+               ## Warning: package 'ggplot2' was built under R version 4.1.2
+
+``` r
 conds=c("scr","scr","scr","wt","wt","wt")
 coldata = as.data.frame(conds)
 rownames(coldata)=colnames(drna_counts)
@@ -355,17 +374,7 @@ text(pca2$x, as.vector(colnames(drna_counts)), pos=3, cex=0.4)
 
 ![](nanopore_drna_seq_files/figure-gfm/unnamed-chunk-5-3.png)<!-- -->
 
-``` r
-library(Rtsne)
-```
-
-               ## Warning: package 'Rtsne' was built under R version 4.1.2
-
-``` r
-library(ggplot2)
-```
-
-               ## Warning: package 'ggplot2' was built under R version 4.1.2
+## tSNE plot
 
 ``` r
 tsne <- Rtsne(t(normcounts), perplexity = 1, check_duplicates = FALSE)
