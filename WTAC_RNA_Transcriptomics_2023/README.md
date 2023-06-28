@@ -37,24 +37,14 @@ List of Practicals:
 1. [Introduction to R/BioConductor](Intro_R/Intro_R_Practical.md)
 
 2. Basics of SmallRNA Sequencing Data Analysis
-<!--
    * [SmallRNA Sequencing - Basic Analysis and QC](small_RNA_seq/Practical_1/Practical_1.md)
    * [SmallRNA Sequencing - Mapping and Statistical analysis of count data](small_RNA_seq/Practical_2/Practical_2.md)
--->
+   * [SmallRNA Sequencing - Analysing the Course Data](course_smallrna_seq/course_smallrna.md)
 
-3. Worked Example for microRNA Analysis - MiR-210 in Breast Cancer
-<!--
-   * [SmallRNA Sequencing - Breast Cancer miR210 Samples - Participant Driven](miR_210_Experiment/small_RNASeq/small_RNASeq.md)
-   * [Mini mapping practical using HISAT2](miR_210_Experiment/mini_mapping/)
-   * [mRNA Sequencing - Breast Cancer miR210 Samples](miR_210_Experiment/mRNA_Seq/mRNA_Seq.md)
--->
-   
-5. Nanopore Direct RNA Analysis
-<!--
-   * [IGV Browsing of DirectRNA mappings](Nanopore_dRNA_Seq/igv_drna_seq.md)
-   * [Guppy Basecalling and Mapping](Nanopore_dRNA_Seq/README.md)
-   * [Count analysis of Nanopore DirectRNA ](Nanopore_dRNA_Seq/nanopore_drna_seq.md)
--->
+3. Nanopore Direct RNA Analysis
+   * [Mapping and QC and analysis of Nanopore DirectRNA ](nanopore_directRNA/nanopore_drna_seq.md)
+   * [Basecalling Nanopore Data]()
+
 <!--
 6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
 
