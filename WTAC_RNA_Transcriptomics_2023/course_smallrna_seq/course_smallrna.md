@@ -425,7 +425,7 @@ We want to do the following
 - After this you probably want to run the same statistical test as last
   time, i.e. scr vs wt and create a statistical list of hits.
 - Make a volcano plot and save your result table to a file.
-
+<!--
 # Removing bad samples
 
 ``` r
@@ -458,7 +458,7 @@ dds <- estimateDispersions(dds)
 plotDispEsts(dds)
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-12-1.png)
 
 ``` r
 normcounts <- counts(dds, normalized=TRUE)
@@ -473,13 +473,13 @@ plot(pca2$x, col=cond_colours,  pch=19, cex=2, main="Sample to Sample PCA (VST)"
 text(pca2$x, as.vector(colnames(mircounts)), pos=3, cex=0.4)
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-13-1.png)
 
 ``` r
 heatmap.2(cor(log2counts),trace="none",col=hmcol,main="Sample to Sample Correlation (Log2 Counts)",cexRow=0.5,cexCol=0.5,RowSideColors=cond_colours, margins=c(9,7))
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-13-2.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-13-2.png)
 
 ``` r
 library(Rtsne)
@@ -502,7 +502,7 @@ ggplot(data = tsne.df, aes(tsne.1, tsne.2)) +
 
                ## Warning: Using alpha for a discrete variable is not advised.
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-13-3.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-13-3.png)
 
 ``` r
 top10=apply(mircounts,1,sum)[1:10]
@@ -511,14 +511,14 @@ names(top10)[11]="other"
 pie(top10,col=brewer.pal(11,"Set3"),main="Top10 microRNAs")
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-14-1.png)
 
 ``` r
 barplot(t(log2counts[rownames(mircounts)[grep("mir-29[a-z]",rownames(mircounts))],]),beside=T,las=2,cex.names=0.5,col=cond_colours,main="miR-29 levels (VST)")
 legend("topright",rownames(pdata),fill=cond_colours,cex=0.4)
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-14-2.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-14-2.png)
 
 ``` r
 p_threshold=0.05
@@ -573,8 +573,9 @@ abline(v=-lfc_threshold,lty=3)
 abline(v=lfc_threshold,lty=3) 
 ```
 
-![](course_smallrna_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](course_smallrna_files/figure-gfm/unnamed-chunk-15-1.png)
 
 ``` r
 write.table(cbind(as.matrix(counts(dds,normalized=T)[rownames(res),]),as.matrix(res)),"mouse_results.txt",quote=F,sep="\t")
 ```
+-->
