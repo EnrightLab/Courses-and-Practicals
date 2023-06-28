@@ -48,9 +48,7 @@ List of Practicals:
    * [Basecalling Nanopore Data]()
 
 <!--
-6.  [MicroRNA Target Analysis using mRNASeq and smallRNA Seq combined](Sylamer_microRNA_targets)
-
-7.  [_de novo_ prediction of microRNAs from sequencing data](mirnovo)
+4. Nanopore cDNA Analysis
 -->
 
 ***
@@ -62,7 +60,4 @@ Useful resources:
 * [R Studio](http://www.rstudio.com/)
 * [BioConductor](http://www.bioconductor.org)
 * [DESeq2 Manual](http://bioconductor.org/packages/release/bioc/html/DESeq2.html)
-* [ChimiRa Webserver](http://wwwdev.ebi.ac.uk/enright-dev/chimira/)
-* [miRnovo Webserver](http://wwwdev.ebi.ac.uk/enright-dev/mirnovo/)
 * [miRBase](http://www.mirbase.org)
-* [Legacy Course Material, pre 2017](http://wwwdev.ebi.ac.uk/enright-srv/courses)
