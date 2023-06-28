@@ -1,0 +1,115 @@
+---
+title: "Nanopore Direct RNA Seq - Practical 2"
+author: "Anton Enright & Jack Monahan"
+date: \'`r format(Sys.time(), '%d %B, %Y')`\'
+always_allow_html: yes
+output:
+  github_document:
+    toc: true
+---
+
+
+```{r setup, results='hide',message=F, warning=F, echo=F}
+require(knitr)
+opts_knit$set(root.dir = '~/Desktop/course_data/direct_rna')
+opts_chunk$set(dev="png", 
+               dev.args=list(type="cairo"),
+               comment='           ##',
+               dpi=300)
+```
+
+# Analysis of Nanopore Direct RNA counts
+
+
+First we should change directory to where the data is
+
+```{r}
+setwd("~/Desktop/course_data/direct_rna")
+list.files()
+```
+# Analysis of Reads - Basic QC of sequencing runs
+```{bash}
+pycoQC -f summaries/group_1_summary.txt -o group_1_summary.html
+pycoQC -f summaries/group_2_summary.txt -o group_2_summary.html
+pycoQC -f summaries/group_3_summary.txt -o group_3_summary.html
+pycoQC -f summaries/group_4_summary.txt -o group_4_summary.html
+pycoQC -f summaries/group_5_summary.txt -o group_5_summary.html
+pycoQC -f summaries/group_6_summary.txt -o group_6_summary.html
+```
+
+# Mapping of Reads
+
+We will map reads directly to the transcriptome first to obtain accurate count data. Because we are mapping to cDNA we don't need to account for splicing and run minimap2
+in the *map-ont* mode for long noisy reads. The reference data was obtained from Ensembl FTP. We use samtools to convert the text output (SAM) to a more efficient 
+binary format (BAM) and also sort the BAM files to create efficient result files.
+
+The mapping mode is *-ax map-ont* and we ask for two CPUs per job *-t 2*. We use *samtools* to help formatting the BAM files.
+```{bash}
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr1drna.fq.gz | samtools view -bh | samtools sort -o scr1drna.bam
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr2drna.fq.gz | samtools view -bh | samtools sort -o scr2drna.bam
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr3drna.fq.gz | samtools view -bh | samtools sort -o scr3drna.bam
+
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/wt1drna.fq.gz | samtools view -bh | samtools sort -o wt1drna.bam
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/wt2drna.fq.gz | samtools view -bh | samtools sort -o wt2drna.bam
+minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/wt3drna.fq.gz | samtools view -bh | samtools sort -o wt3drna.bam
+```
+
+
+```{bash}
+samtools view wt1drna.bam | head
+```
+
+# Genome Mapping
+
+Typically genome browsers are useful to explore our sequences and see how they align to transcripts. However genome-browsers require data mapped to the entire mouse genome.
+So we will also generate BAM files with a full splice-aware mapping of our direct RNA sequences to the mouse genome. Minimap2 will run in the splicing mode for this (*-ax splice*).
+```{bash}
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr1drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr1_genome.bam
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr2drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr2_genome.bam
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr3drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr3_genome.bam
+
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/wt1drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o wt1_genome.bam
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/wt2drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o wt2_genome.bam
+minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/wt3drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o wt3_genome.bam
+```
+
+# IGV
+
+We will now use the Integrated Genome Viewer (IGV) from the Broad Institute (MIT) to look at our samples. Start up IGV from your desktop and then make sure the mouse genome is selected.
+We will then load in the BAM files one at a time and explore.
+
+
+# Creating counts
+```{bash}
+samtools view wt1drna.bam | cut -f 3 | uniq -c | sort -k1n > wt1.counts.txt
+samtools view wt2drna.bam | cut -f 3 | uniq -c | sort -k1n > wt2.counts.txt
+samtools view wt3drna.bam | cut -f 3 | uniq -c | sort -k1n > wt3.counts.txt
+
+samtools view scr1drna.bam | cut -f 3 | uniq -c | sort -k1n > scr1.counts.txt
+samtools view scr2drna.bam | cut -f 3 | uniq -c | sort -k1n > scr2.counts.txt
+samtools view scr3drna.bam | cut -f 3 | uniq -c | sort -k1n > scr3.counts.txt
+```
+
+
+# Count Level Analysis
+
+```{r}
+
+# Load in the combined count tables
+drna_counts = read.table("direct_rna_counts.txt",header=TRUE,row.names=1)
+head(drna_counts)
+
+# Remove '.counts.txt" from the end of the column names with gsub
+colnames(drna_counts)=gsub(".counts.txt","",colnames(drna_counts))
+
+# Generate counts for different categories
+enolase=drna_counts["Enolase_ENO2_YHR174W_mRNA",]
+unmapped=drna_counts["unmapped_read_mouse",]
+mapped = apply(drna_counts[3:nrow(drna_counts),],2,sum)
+
+# Plot the combined information as a stacked barplot
+barplot(as.matrix(rbind(mapped,unmapped,enolase)),col=c("darkblue","grey","red"),las=2,cex.axis=0.6,main="Mapping Status")
+legend("topright",legend = c("mapped","unmapped","Enolase"),fill=c("darkblue","grey","red"),cex=0.6)
+
+barplot(mapped,col="darkblue",las=2,cex.axis=0.6,main="Total Mapped per Group")
+```
