@@ -28,9 +28,9 @@ Presentation:
 ------------
 Course Presentations (PPT) will be available here.
 
-1. [Anton's Overview Presentation](WTAC_RNA_TRANSCRIPTOMICS_2023.pdf)
-2. [Anton's Overview on DirectRNA Seq Experiment](WTAC_RNA_NANOPORE.pdf)
-3. [Anton's smallRNA Seq Presentation](WTAC_RNA_SMALLRNASEQ.pdf)
+1. [Anton's Overview Presentation](presentations/WTAC_RNA_TRANSCRIPTOMICS_2023.pdf)
+2. [Anton's Overview on DirectRNA Seq Experiment](presentations/WTAC_RNA_NANOPORE.pdf)
+3. [Anton's smallRNA Seq Presentation](presentations/WTAC_RNA_SMALLRNASEQ.pdf)
 
 
 List of Practicals:
