@@ -28,7 +28,9 @@ setwd("~/Desktop/course_data/direct_rna")
 list.files()
 ```
 # Analysis of Reads - Basic QC of sequencing runs
-```{bash}
+
+Will will use the PycoQC tool to make a QC summary for each set of Nanopore reads by group
+```{}
 pycoQC -f summaries/group_1_summary.txt -o group_1_summary.html
 pycoQC -f summaries/group_2_summary.txt -o group_2_summary.html
 pycoQC -f summaries/group_3_summary.txt -o group_3_summary.html
@@ -44,7 +46,7 @@ in the *map-ont* mode for long noisy reads. The reference data was obtained from
 binary format (BAM) and also sort the BAM files to create efficient result files.
 
 The mapping mode is *-ax map-ont* and we ask for two CPUs per job *-t 2*. We use *samtools* to help formatting the BAM files.
-```{bash}
+```{}
 minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr1drna.fq.gz | samtools view -bh | samtools sort -o scr1drna.bam
 minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr2drna.fq.gz | samtools view -bh | samtools sort -o scr2drna.bam
 minimap2 -ax map-ont -L -t 2 mouse_genome/Mus_musculus.GRCm39.cdna.all.fa.gz fastq/scr3drna.fq.gz | samtools view -bh | samtools sort -o scr3drna.bam
@@ -63,7 +65,7 @@ samtools view wt1drna.bam | head
 
 Typically genome browsers are useful to explore our sequences and see how they align to transcripts. However genome-browsers require data mapped to the entire mouse genome.
 So we will also generate BAM files with a full splice-aware mapping of our direct RNA sequences to the mouse genome. Minimap2 will run in the splicing mode for this (*-ax splice*).
-```{bash}
+```{}
 minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr1drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr1_genome.bam
 minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr2drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr2_genome.bam
 minimap2 -ax splice -uf -k 14 -L -t 4 mouse_genome/Mus_musculus.GRCm39.dna_rm.primary_assembly.fa.gz fastq/scr3drna.fq.gz | samtools view -bh -F 2308 | samtools sort -o scr3_genome.bam
@@ -80,7 +82,7 @@ We will then load in the BAM files one at a time and explore.
 
 
 # Creating counts
-```{bash}
+```{}
 samtools view wt1drna.bam | cut -f 3 | uniq -c | sort -k1n > wt1.counts.txt
 samtools view wt2drna.bam | cut -f 3 | uniq -c | sort -k1n > wt2.counts.txt
 samtools view wt3drna.bam | cut -f 3 | uniq -c | sort -k1n > wt3.counts.txt
@@ -112,4 +114,80 @@ barplot(as.matrix(rbind(mapped,unmapped,enolase)),col=c("darkblue","grey","red")
 legend("topright",legend = c("mapped","unmapped","Enolase"),fill=c("darkblue","grey","red"),cex=0.6)
 
 barplot(mapped,col="darkblue",las=2,cex.axis=0.6,main="Total Mapped per Group")
+```
+
+
+```{r}
+
+library(DESeq2)
+library(RColorBrewer)
+library(gplots)
+conds=c("scr","scr","scr","wt","wt","wt")
+coldata = as.data.frame(conds)
+rownames(coldata)=colnames(drna_counts)
+colnames(coldata)='treatment'
+coldata
+dds <- DESeqDataSetFromMatrix(countData = drna_counts, colData = coldata, design = ~ treatment)
+dds <- estimateSizeFactors(dds)
+dds <- estimateDispersions(dds)
+plotDispEsts(dds)
+```
+
+```{r}
+normcounts <- counts(dds, normalized=TRUE)
+rawcounts=counts(dds,normalized=FALSE)
+log2counts=log2(normcounts+1)
+vsd <- varianceStabilizingTransformation(dds)
+vstcounts <- assay(vsd)
+vstcounts <- vstcounts[order(apply(vstcounts,1,sum),decreasing =TRUE),]
+
+hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
+
+
+barplot(apply(normcounts,2,sum), las=2,col=c("red","red","red","darkblue","darkblue","darkblue"),main="Post-Normalised Counts",cex.names=0.4)
+legend("topright",levels(as.factor(conds)),cex=0.6,fill=c("red","darkblue"))
+
+heatmap.2(cor(vstcounts),trace="none",col=hmcol,main="Sample to Sample Correlation (VST)",cexRow=0.5,cexCol=0.5,RowSideColors=c("red","red","red","darkblue","darkblue","darkblue"),margins=c(9,7))
+
+pca2=prcomp(t(normcounts),center=TRUE)
+plot(pca2$x, col=c("red","red","red","darkblue","darkblue","darkblue"),  pch=19, cex=2, main="Sample to Sample PCA (VST)")
+text(pca2$x, as.vector(colnames(drna_counts)), pos=3, cex=0.4)
+```
+
+```{r}
+library(Rtsne)
+library(ggplot2)
+tsne <- Rtsne(t(normcounts), perplexity = 1, check_duplicates = FALSE)
+tsne.df <- data.frame(tsne.1 = tsne$Y[,1], tsne.2 = tsne$Y[,2])
+
+ggplot(data = tsne.df, aes(tsne.1, tsne.2)) + 
+  geom_point(size = 6, pch = 20, colour = c("red","red","red","darkblue","darkblue","darkblue")) +
+  geom_text(size = 2, vjust=2, aes(label=colnames(vstcounts))) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
+  theme_minimal() +
+  ylab("tSNE 1") +
+  xlab("tSNE 2") 
+```
+
+# Statistical Analysis
+
+```{r}
+
+p_threshold=0.05
+lfc_threshold=0.75
+
+cds <- nbinomWaldTest(dds)
+
+res=results(cds,contrast=c("treatment","wt","scr"))
+res <- res[order(res$padj),]
+res
+
+sig = rownames(res[(abs(res$log2FoldChange) > lfc_threshold) & (res$padj < p_threshold) & !is.na(res$padj),])
+
+plot(res$log2FoldChange,-log(res$padj,10),ylab="-log10(Adjusted P)",xlab="Log2 FoldChange",main=paste("Volcano Plot","WT v Scr"),pch=19,cex=0.4)      
+points(res[sig,"log2FoldChange"],-log(res[sig,"padj"],10),pch=19,cex=0.4,col="red")
+abline(h=-log10(p_threshold),lty=3)
+abline(v=-lfc_threshold,lty=3)
+abline(v=lfc_threshold,lty=3)   
+
 ```
