@@ -1,5 +1,0 @@
-SampleName	fileName	condition
-m210_1	hisat.merged_1_16.fq.27197.bam.counts.merged	mir210
-m210_2	hisat.merged_1_24.fq.27197.bam.counts.merged	mir210
-cont_1	hisat.merged_1_32.fq.27197.bam.counts.merged	ctrl
-cont_2	hisat.merged_1_40.fq.27197.bam.counts.merged	ctrl
