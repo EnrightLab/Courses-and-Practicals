@@ -68,8 +68,8 @@ kable(pdata)
 | wt6        | Group-6-WT_S11_L001_R1_001.fastq.gz  | wt       | AACTGTAGGCACCATCAA | NA   |
 
 ## Tapestation Results		
-|group|sample|indices|number|conc new|tapestation|
-|-----|------|-------|------|--------|-----------|
+|group|sample|index number|conc new|tapestation|
+|-----|------|------------|--------|-----------|
 |1|Nrep wt clone #13|IDP1|0,874|lost |
 |1|Nrep 3' scramble clone #112|IDP2|1,59|peak at 176|
 |2|Nrep wt clone #3|IDP6|0,56|peak at 177 but wide peak
