@@ -161,6 +161,58 @@ Init time: 2252 ms
 
 ```
 
+# Guppy Kit Selection
+
+You can see the list of kits that your version of Guppy supports by running:
+
+``` r
+../../ont-guppy-cpu/bin/guppy_basecaller --print_workflows
+```
+
+```
+Loading model version information, please wait .......................
+Available flowcell + kit combinations are:
+flowcell   kit             barcoding config_name                    model version
+FLO-MIN110 SQK-CAS109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-CS9109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-DCS108                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-DCS109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LRK001                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LSK108                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LSK109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LSK109-XL             dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LSK110                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LSK110-XL             dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LWP001                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PCS108                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PCS109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PCS110                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PRC109                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PSK004                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAD002                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAD003                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAD004                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAS201                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RLI001                dna_r10_450bps_hac             unknown
+FLO-MIN110 VSK-VBK001                dna_r10_450bps_hac             unknown
+FLO-MIN110 VSK-VSK001                dna_r10_450bps_hac             unknown
+FLO-MIN110 VSK-VSK002                dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-16S024      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PCB109      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PCB110      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RBK001      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RBK004      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RLB001      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-LWB001      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-PBK004      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAB201      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RAB204      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 SQK-RPB004      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 VSK-VMK001      included  dna_r10_450bps_hac             unknown
+FLO-MIN110 VSK-VMK002      included  dna_r10_450bps_hac             unknown
+.....
+```
+
 # Running GPU Accellerated Guppy
 
 First you can check if your GPU is installed and ready using the *nvidia-smi* command.
