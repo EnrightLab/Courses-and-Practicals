@@ -67,6 +67,23 @@ kable(pdata)
 | wt5        | Group-5-WT_S9_L001_R1_001.fastq.gz   | wt       | AACTGTAGGCACCATCAA | NA   |
 | wt6        | Group-6-WT_S11_L001_R1_001.fastq.gz  | wt       | AACTGTAGGCACCATCAA | NA   |
 
+## Tapestation Results		
+|group|sample|indices|number|conc new|tapestation|
+|-----|------|-------|------|--------|-----------|
+|1|Nrep wt clone #13|IDP1|0,874|lost |
+|1|Nrep 3' scramble clone #112|IDP2|1,59|peak at 176|
+|2|Nrep wt clone #3|IDP6|0,56|peak at 177 but wide peak
+|2|Nrep 3' scramble clone #105|IDP12|2,88|peaks at 182 and 229|
+|3|Nrep wt clone #1|IDP5|5,22|peaks at 181, 230 and 317
+|3|Nrep 3' scramble clone #1|IDP10|7,64|peaks at 181, 230 and 317
+|4|Nrep wt clone #3|IDP4|0,566|adapter dimer|
+|4|Nrep 3' scramble clone #105|IDP7|13,5|peaks at 183 and 230|okayish
+|5|Nrep wt clone #13|IDP3|10,5|peaks at 183 and 229|
+|5|Nrep 3' scramble clone #112|IDP8|12|peaks at 183 and 229 and 321
+|6|Nrep wt clone #1|IDP9|0,42|lost|
+|6|Nrep 3' scramble clone #1|IDP11|1,66|peaks at 176 and 218|
+
+
 ## Setup
 
 Lets load some libraries to get started
