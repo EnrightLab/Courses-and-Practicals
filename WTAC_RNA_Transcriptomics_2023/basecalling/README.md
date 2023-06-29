@@ -72,7 +72,7 @@ First we want to open up a terminal on our computer and navigate to where our FA
 
 ``` r
 cd /home/manager/Desktop/course_data/basecalling/fast5/group1
-ls 
+ls  
 ```
 
 This should now display the folder where the minION results are stored:
@@ -80,4 +80,60 @@ This should now display the folder where the minION results are stored:
 20230625_1833_MN38030_FAX28374_68a4d9b2
 ```
 
+# Folder contents
+lets ask to list all files in that folder and its subfolders:
+``` r
+ls -Ral 20230625_1833_MN38030_FAX28374_68a4d9b2
+
+```
+
+
+```
+total 17120
+drwxrwxrwx  13 aje  staff      416 27 Jun 09:02 .
+drwxrwxrwx   4 aje  staff      128 28 Jun 07:45 ..
+-rwxrwxrwx   1 aje  staff      233 26 Jun 12:53 barcode_alignment_FAX28374_68a4d9b2_0c72d8dd.tsv
+drwxrwxrwx  10 aje  staff      320 27 Jun 09:02 fast5
+-rwxrwxrwx   1 aje  staff      618 26 Jun 12:53 final_summary_FAX28374_68a4d9b2_0c72d8dd.txt
+drwxrwxrwx   3 aje  staff       96 27 Jun 09:02 other_reports
+-rwxrwxrwx   1 aje  staff   412975 26 Jun 12:53 pore_activity_FAX28374_68a4d9b2_0c72d8dd.csv
+-rwxrwxrwx   1 aje  staff  1131588 26 Jun 12:53 report_FAX28374_20230625_1836_68a4d9b2.html
+-rwxrwxrwx   1 aje  staff   326937 26 Jun 12:53 report_FAX28374_20230625_1836_68a4d9b2.json
+-rwxrwxrwx   1 aje  staff   467401 26 Jun 12:53 report_FAX28374_20230625_1836_68a4d9b2.md
+-rwxrwxrwx   1 aje  staff      169 26 Jun 12:53 sample_sheet_FAX28374_20230625_1836_68a4d9b2.csv
+-rwxrwxrwx   1 aje  staff  6352484 26 Jun 12:53 sequencing_summary_FAX28374_68a4d9b2_0c72d8dd.txt
+-rwxrwxrwx   1 aje  staff    53004 26 Jun 12:53 throughput_FAX28374_68a4d9b2_0c72d8dd.csv
+
+20230625_1833_MN38030_FAX28374_68a4d9b2/fast5:
+total 3831984
+drwxrwxrwx  10 aje  staff        320 27 Jun 09:02 .
+drwxrwxrwx  13 aje  staff        416 27 Jun 09:02 ..
+-rwxrwxrwx   1 aje  staff  180067860 25 Jun 19:55 FAX28374_68a4d9b2_0c72d8dd_0.fast5
+-rwxrwxrwx   1 aje  staff  205274607 25 Jun 21:05 FAX28374_68a4d9b2_0c72d8dd_1.fast5
+-rwxrwxrwx   1 aje  staff  283476842 25 Jun 22:20 FAX28374_68a4d9b2_0c72d8dd_2.fast5
+-rwxrwxrwx   1 aje  staff  213899906 25 Jun 23:47 FAX28374_68a4d9b2_0c72d8dd_3.fast5
+-rwxrwxrwx   1 aje  staff  311989482 26 Jun 01:41 FAX28374_68a4d9b2_0c72d8dd_4.fast5
+-rwxrwxrwx   1 aje  staff  238818340 26 Jun 04:59 FAX28374_68a4d9b2_0c72d8dd_5.fast5
+-rwxrwxrwx   1 aje  staff  435969939 26 Jun 12:06 FAX28374_68a4d9b2_0c72d8dd_6.fast5
+-rwxrwxrwx   1 aje  staff   92466960 26 Jun 12:53 FAX28374_68a4d9b2_0c72d8dd_7.fast5
+
+20230625_1833_MN38030_FAX28374_68a4d9b2/other_reports:
+total 9504
+drwxrwxrwx   3 aje  staff       96 27 Jun 09:02 .
+drwxrwxrwx  13 aje  staff      416 27 Jun 09:02 ..
+-rwxrwxrwx   1 aje  staff  4864891 26 Jun 11:49 pore_scan_data_FAX28374_68a4d9b2_0c72d8dd.csv
+```
+
+You should see 8 FAST5 files that contain the compressed raw signal data. Each of these files contains 4000 reads. A big nanopore experiment may produce many thousands of these files. This will be the input for guppy.
+
+# Running Guppy
+
+``` r
+../../ont-guppy-cpu/bin/guppy_basecaller -i 20230625_1833_MN38030_FAX28374_68a4d9b2/fast5 -s basecalled --kit SQK-RNA002 --flowcell FLO-MIN106
+
+```
+
+This will detect the FAST5 files and apply basecalling according to our kit **SQK-RNA002** and the flowcell type **FLO-MIN106**.
+
+Finished sequences will be placed in the *basecalled* folder that we specified.
 
