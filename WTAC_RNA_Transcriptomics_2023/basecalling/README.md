@@ -30,8 +30,11 @@ Guppy is a basecaller that turns raw signal data from a MinION or PromethION or 
 
 Because running guppy on a CPU is extremely low, many people find it easier to use the very fast instruction set and processing power (matrix compute) of a high-end graphics card. To do this you need a computer with a proper installation of a fast card with a CUDA instruction set version >6.1.
 
+GPU Prices range from $10,000 for a commercial A100 GPU to £150 for a low-end cuda compatible GPU.
+
 Compatible GPUs include:
 
+* A100 Data Centre GPU  8.9
 * GeForce RTX 4090	8.9
 * GeForce RTX 4080	8.9
 * GeForce RTX 4070 Ti	8.9
@@ -59,7 +62,7 @@ Compatible GPUs include:
 * GeForce GTX 1060	6.1
 * GeForce GTX 1050	6.1
 
-Running guppy on a compatible gpu will make it 1000s of times faster.
+Running guppy on a compatible gpu will make it 1000s of times faster even on a relatively inexpensive GPU, e.g. GTX1080 Ti.
 
 # Obtaining Guppy 
 
