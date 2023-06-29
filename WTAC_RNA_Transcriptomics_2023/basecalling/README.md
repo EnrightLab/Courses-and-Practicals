@@ -132,8 +132,67 @@ You should see 8 FAST5 files that contain the compressed raw signal data. Each o
 ../../ont-guppy-cpu/bin/guppy_basecaller -i 20230625_1833_MN38030_FAX28374_68a4d9b2/fast5 -s basecalled --kit SQK-RNA002 --flowcell FLO-MIN106
 
 ```
+# 
 
 This will detect the FAST5 files and apply basecalling according to our kit **SQK-RNA002** and the flowcell type **FLO-MIN106**.
 
 Finished sequences will be placed in the *basecalled* folder that we specified.
+
+```
+ONT Guppy basecalling software version 5.0.11+2b6dbff
+config file:        /home/aje/ont-guppy/data/rna_r9.4.1_70bps_hac.cfg
+model file:         /home/aje/ont-guppy/data/template_rna_r9.4.1_70bps_hac.jsn
+input path:         fast5
+save path:          basecalled
+chunk size:         2000
+chunks per runner:  512
+minimum qscore:     7
+records per file:   4000
+num basecallers:    4
+gpu device:         cuda:0
+kernel path:        
+runners per device: 4
+Found 96 fast5 files to process.
+Init time: 2252 ms
+
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+*************************
+
+```
+
+# Running GPU Accellerated Guppy
+
+First you can check if your GPU is installed and ready using the *nvidia-smi* command.
+``` r
+nvidia-smi
+```
+
+```
+Thu Jun 29 09:33:41 2023       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  On   | 00000000:01:00.0 Off |                  N/A |
+| 24%   22C    P8     2W / 250W |      1MiB / 11019MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+```
+
+To run Guppy using the GPU we add the *--device* option. If you have multiple GPUs you may need to select which one, cuda:0 is the first card and cuda:1 the second and so on.
+``` r
+../../ont-guppy-cpu/bin/guppy_basecaller -i 20230625_1833_MN38030_FAX28374_68a4d9b2/fast5 -s basecalled --kit SQK-RNA002 --flowcell FLO-MIN106 --device cuda:0
+```
 
