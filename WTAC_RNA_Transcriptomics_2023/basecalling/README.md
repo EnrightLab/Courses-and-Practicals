@@ -1,9 +1,9 @@
 Wellcome Trust Advanced Courses - RNA Transcriptomics
 ===============================
-![WTAC](/images/acsc_logo.png)
+![WTAC](../../images/acsc_logo.png)
 
-![Wellcome](/images/wellcome_logo.png)
-![Cambridge](/images/cambridge.jpg)
+![Wellcome](../../images/wellcome_logo.png)
+![Cambridge](../../images/cambridge.jpg)
 
 Basecalling Nanopore Data with Guppy
 -------------------------------------------------------------------
@@ -12,11 +12,11 @@ Basecalling Nanopore Data with Guppy
 
 |Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk)|
 |---------------------------|------------------------------------|
-|<img src="../images/anton.jpg" height="150">|<img src="../images/steph.png" height="150">|
+|<img src="../../images/anton.jpg" height="150">|<img src="../images/steph.png" height="150">|
 
 ***
 
-<img src="../images/cambridge.jpg" align="right" width="150">
+<img src="../../images/cambridge.jpg" align="right" width="150">
 
 _Department of Pathology,  
 Tennis Court Road,  
@@ -61,6 +61,23 @@ Compatible GPUs include:
 
 Running guppy on a compatible gpu will make it 1000s of times faster.
 
-# CPU Version
+# Obtaining Guppy 
 
+Guppy is downloaded from the Oxford Nanopore Community Site (https://community.nanoporetech.com)
 We will be using the CPU version of guppy today.
+
+# Running Guppy on Direct RNA Sequencing Data.
+
+First we want to open up a terminal on our computer and navigate to where our FAST5 output folder is stored. We will be working with Group1s data in this section.
+
+``` r
+cd /home/manager/Desktop/course_data/basecalling/fast5/group1
+ls 
+```
+
+This should now display the folder where the minION results are stored:
+```
+20230625_1833_MN38030_FAX28374_68a4d9b2
+```
+
+
