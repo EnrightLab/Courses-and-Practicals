@@ -251,3 +251,11 @@ To run Guppy using the GPU we add the *--device* option. If you have multiple GP
 ../../ont-guppy-cpu/bin/guppy_basecaller -i 20230625_1833_MN38030_FAX28374_68a4d9b2/fast5 -s basecalled --kit SQK-RNA002 --flowcell FLO-MIN106 --device cuda:0
 ```
 
+# Time needed to basecall
+
+We usually do **High Accuracy** basecalling. For the course data this was run on 4x A100 commercial GPUs.
+
+* directRNA - 40 minutes total basecalling time (5M reads).
+* cDNA single cell - 6hours 40 minutes for approximately 50M reads.
+
+The modern MinKNOW software client may allow you to basecall as you sequence but you will need a very powerful GPU to be able to keep up with the sequencer.
