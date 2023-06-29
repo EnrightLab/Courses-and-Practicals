@@ -12,7 +12,7 @@ Basecalling Nanopore Data with Guppy
 
 |Anton Enright (aje39@cam.ac.uk) | Stephanie Wenlock (scw65@cam.ac.uk)|
 |---------------------------|------------------------------------|
-|<img src="../../images/anton.jpg" height="150">|<img src="../images/steph.png" height="150">|
+|<img src="../../images/anton.jpg" height="150">|<img src="../../images/steph.png" height="150">|
 
 ***
 
